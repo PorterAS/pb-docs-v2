@@ -1,12 +1,30 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Gatsby x MDX x TypeScript`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
+    `@chakra-ui/gatsby-plugin`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `apiReference`,
+        path: `${__dirname}/src/docs/api-reference`
+      }
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          apiReference: require.resolve("./src/components/layout.tsx"),
+          default: require.resolve("./src/components/layout.tsx"),
+        },
+        extensions: [`.mdx`, `.md`],
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -31,6 +49,6 @@ module.exports = {
     `gatsby-plugin-gatsby-cloud`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }
