@@ -12,7 +12,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `apiReference`,
-        path: `${__dirname}/src/docs/api-reference`
+        path: `${__dirname}/src/docs`
       }
     },
     {

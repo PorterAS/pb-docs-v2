@@ -19,8 +19,12 @@
     color: #9d348a;
 }
 
-.blog-content p {
+.blog-content p, .blog-content pre  {
     margin-bottom: 3%;
+}
+
+.blog-content ol, .blog-content ul {
+    margin-left: 3%;
 }
 
 

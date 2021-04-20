@@ -29,18 +29,20 @@ const BlogPostMdx = ({ data }: any) => {
       <Text my={5} fontSize={"3xl"} fontWeight={"bold"}>
         {doc.frontmatter.title}
       </Text>
-      <Box mb={10}>
+      
+      {/* <Box mb={10}>
         <Center>
           <HStack spacing={5} mt={3}>
             <Text color={"gray.400"} fontSize={"xs"}>
               {doc.timeToRead} {doc.timeToRead > 1 ? "mins read" : "min read"}
             </Text>
             <Text color={"gray.400"} fontSize={"xs"}>
-              {/*{post.frontmatter.publishBy}*/}
+              {post.frontmatter.publishBy}
             </Text>
           </HStack>
         </Center>
-      </Box>
+      </Box> */}
+
       {/*handle MDX content*/}
       <Box className={'blog-content'}>
         <MDXRenderer>{doc.body}</MDXRenderer>

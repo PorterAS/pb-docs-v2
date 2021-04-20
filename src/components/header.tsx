@@ -1,6 +1,7 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import {Badge} from '@chakra-ui/react'
 
 const Header = ({ siteTitle }) => (
   <header
@@ -27,6 +28,7 @@ const Header = ({ siteTitle }) => (
         >
           Porterbuddy Developers
         </Link>
+        <Badge ml="2">beta</Badge>
       </h1>
     </div>
   </header>
