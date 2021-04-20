@@ -10,7 +10,7 @@ To run the project locally, you need to install gatsby.js globally using the CLI
 npm install -g gatsby-cli
 ```
 
-Once you clone the repository, install all required dependences in the project and start a new development server with
+Once you clone the repository, install all required dependences in the project and start a new development server with:
 
 ```bash
 npm install && gatsby develop
