@@ -23,3 +23,7 @@ npm run build
 ```
 
 Go on to [Gatsby.js](https://gatsbyjs.org) to learn more on development with Gatsby and React.js.
+
+### Deployment 
+
+App deployment is done on Heroku, using Heroku Static Build pack.
