@@ -74,7 +74,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Find answers to frequently asked questions regarding integrations"
           }
-          link="/api-reference/get-delivery-window/"
+          link="/faqs/"
           actionText="Learn more"
         />
         <FeatureCard
@@ -82,7 +82,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Discover awesome technical content created to help you build better"
           }
-          link="/api-reference/get-delivery-window/"
+          link="/blog/"
           actionText="Learn more"
         />
       </SimpleGrid>

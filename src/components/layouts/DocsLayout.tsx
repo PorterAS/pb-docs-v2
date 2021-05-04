@@ -2,6 +2,7 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Box, Grid, GridItem, Text } from "@chakra-ui/react"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import { sidebarRoutes } from "../../routes"
 
 import Header from "./header"
 import "./layout.css"
@@ -45,19 +46,27 @@ const Layout = ({ children }: any) => {
                 Docs
               </Text>
 
-              {slugs.map((slug: any, index: number) => {
-                // const [parent, root] = slug.node.fields.slug
-                //   .split("/")
-                //   .filter(function (el: any) {
-                //     return el != ""
-                //   })
-
+              {/* {slugs.map((slug: any, index: number) => {
                 return (
                   <Link to={slug.node.fields.slug} key={index}>
                     <Text>{slug.node.frontmatter.title}</Text>
                   </Link>
                 )
-              })}
+              })} */}
+              {sidebarRoutes.map((route, index) => (
+                <Box key="index">
+                  <Text fontWeight="500" mb={2}>
+                    <Link to={route.parentPath}>{route.label}</Link>
+                  </Text>
+                  <Box mb={5} ml={2}>
+                    {route.children.map((childRoute, index) => (
+                      <Link to={childRoute.routePath}>
+                        <Text>{childRoute.label}</Text>
+                      </Link>
+                    ))}
+                  </Box>
+                </Box>
+              ))}
             </Box>
           </GridItem>
 
