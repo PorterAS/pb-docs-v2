@@ -1,13 +1,12 @@
 import * as React from "react"
-import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import {Badge} from '@chakra-ui/react'
+import { Badge } from "@chakra-ui/react"
 
-const Header = ({ siteTitle }) => (
+const Header = (props: HeaderProps) => (
   <header
     style={{
       background: `#661AFF`,
-      marginBottom: `1.45rem`,
+      // marginBottom: `1.45rem`,
     }}
   >
     <div
@@ -23,7 +22,7 @@ const Header = ({ siteTitle }) => (
           style={{
             color: `white`,
             textDecoration: `none`,
-            fontSize: '1.6em'
+            fontSize: "1.6em",
           }}
         >
           Porterbuddy Developers
@@ -34,12 +33,8 @@ const Header = ({ siteTitle }) => (
   </header>
 )
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+type HeaderProps = {
+  siteTitle?: string
 }
 
 export default Header

@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
+import Layout from "../components/layouts/DocsLayout"
 import SEO from "../components/seo"
 import { Box, Center, HStack, Text } from "@chakra-ui/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -8,7 +8,7 @@ import "./docs-template.css"
 
 export const query = graphql`
   query($slug: String!) {
-    mdx(fields: {slug: {eq: $slug}}) {
+    mdx(fields: { slug: { eq: $slug } }) {
       frontmatter {
         title
       }
@@ -29,7 +29,7 @@ const BlogPostMdx = ({ data }: any) => {
       <Text my={5} fontSize={"3xl"} fontWeight={"bold"}>
         {doc.frontmatter.title}
       </Text>
-      
+
       {/* <Box mb={10}>
         <Center>
           <HStack spacing={5} mt={3}>
@@ -44,7 +44,7 @@ const BlogPostMdx = ({ data }: any) => {
       </Box> */}
 
       {/*handle MDX content*/}
-      <Box className={'blog-content'}>
+      <Box className={"blog-content"}>
         <MDXRenderer>{doc.body}</MDXRenderer>
       </Box>
     </Layout>

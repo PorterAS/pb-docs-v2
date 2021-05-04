@@ -11,19 +11,19 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `apiReference`,
-        path: `${__dirname}/src/docs`
-      }
+        name: `docs`,
+        path: `${__dirname}/src/docs`,
+      },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: {
-          apiReference: require.resolve("./src/components/layout.tsx"),
-          default: require.resolve("./src/components/layout.tsx"),
+          docs: require.resolve("./src/components/layouts/DocsLayout.tsx"),
+          default: require.resolve("./src/components/layouts/HomeLayout.tsx"),
         },
         extensions: [`.mdx`, `.md`],
-      }
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
