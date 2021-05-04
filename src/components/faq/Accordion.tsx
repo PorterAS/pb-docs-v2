@@ -7,7 +7,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react"
-import { FAQType } from "../faqContent"
+import { FAQType } from "../../faqContent"
 
 export function AccordionElement({ question, answer }: FAQType) {
   return (

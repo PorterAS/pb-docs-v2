@@ -5,24 +5,7 @@ import { faqContent, FAQType } from "../faqContent"
 
 import Layout from "../components/layouts/HomeLayout"
 import SEO from "../components/seo"
-import { AccordionElement } from "./Accordion"
-
-// export const query = graphql`
-//   query {
-//     allMdx {
-//       edges {
-//         node {
-//           fields {
-//             slug
-//           }
-//           frontmatter {
-//             title
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
+import { AccordionElement } from "../components/faq/Accordion"
 
 const FAQ = ({ data }: any) => {
   return (
