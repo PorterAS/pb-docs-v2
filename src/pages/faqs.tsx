@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
-import { Text, SimpleGrid, Center, Box, Accordion } from "@chakra-ui/react"
+
+import { Text, Center, Box, Accordion } from "@chakra-ui/react"
 import { faqContent, FAQType } from "../faqContent"
 
 import Layout from "../components/layouts/HomeLayout"
@@ -10,7 +10,10 @@ import { AccordionElement } from "../components/faq/Accordion"
 const FAQ = ({ data }: any) => {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO
+        title="Frequently asked questions"
+        description="Find answers to frequently asked questions on Porterbuddy's integration and technology"
+      />
       <Box my={10}>
         <Center>
           <Text fontSize="4xl">FAQs</Text>
