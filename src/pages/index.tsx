@@ -43,7 +43,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Integrate Porterbuddy's product card widget, Checkout widget and Universal shipping module"
           }
-          link="/api-reference/get-delivery-window/"
+          link="/api-reference/"
           actionText="Learn more"
         />
         <FeatureCard
@@ -51,7 +51,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Utilize the robust Porterbuddy API reference to build your own custom integration"
           }
-          link="/api-reference/get-delivery-window/"
+          link="/api-reference/"
           actionText="Learn more"
         />
         <FeatureCard
@@ -59,7 +59,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Discover our library of existing integrations with musltiple systems to get started quickly"
           }
-          link="/api-reference/get-delivery-window/"
+          link="/api-reference/"
           actionText="Learn more"
         />
         <FeatureCard

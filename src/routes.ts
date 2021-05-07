@@ -60,6 +60,17 @@ export const sidebarRoutes: SidebarRouteType[] = [
       },
     ],
   },
+  // {
+  //   group: "Integrations",
+  //   label: "Integrations",
+  //   parentPath: "/integrations/",
+  //   children: [
+  //     {
+  //       routePath: "/integrations/shopify-integration/",
+  //       label: "",
+  //     },
+  //   ],
+  // },
   {
     group: "guides",
     label: "Guides",
