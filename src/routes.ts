@@ -5,8 +5,16 @@ export const sidebarRoutes: SidebarRouteType[] = [
     parentPath: "/api-reference/",
     children: [
       {
-        routePath: "/api-reference/get-delivery-window/",
-        label: "Get delivery window",
+        routePath: "/api-reference/availability-api/",
+        label: "Delivery availability",
+      },
+      {
+        routePath: "/api-reference/order-api/",
+        label: "Plaing an order",
+      },
+      {
+        routePath: "/api-reference/errors/",
+        label: "Errors",
       },
     ],
   },

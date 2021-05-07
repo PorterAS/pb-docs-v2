@@ -1,0 +1,214 @@
+# Availability API
+
+To verify that PorterBuddy can deliver according to your preferences you need to do an availability request. This will verify address details and return possible delivery windows. Note that even when the endpoint returns statuscode OK (200), the delivery windows array could be empty due to no delivery being possible with the specified pickup windows, or no more capacity being available.
+
+```bash
+POST https://api.porterbuddy.com/availability
+```
+
+Example Request:
+
+```bash
+curl \
+  -X POST 'https://api.porterbuddy.com/availability' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: <your_api_key>' \
+  -d '{
+        "pickupWindows": [
+            {"start": "2023-02-13T10:00+01:00", "end": "2023-02-13T18:00+01:00"},
+            {"start": "2023-02-14T10:00+01:00", "end": "2023-02-14T18:00+01:00"}
+        ],
+        "originAddress": {
+            "streetName": "Keysers Gate",
+            "streetNumber": "3",
+            "postalCode": "0165",
+            "city": "Oslo",
+            "country": "Norway"
+        },
+        "destinationAddress": {
+            "streetName": "Høyenhallveien",
+            "streetNumber": "25",
+            "postalCode": "0678",
+            "city": "Oslo",
+            "country": "Norway"
+        },
+        "recipient": {
+            "email": "testemail+recipient@porterbuddy.com",
+            "phoneCountryCode": "+47",
+            "phoneNumber": "65127865"
+        },
+        "products": [ "delivery" ],
+        "parcels": [
+            {
+                "widthCm": 1,
+                "heightCm": 40,
+                "depthCm": 1,
+                "weightGrams": 2000
+            }
+        ]
+    }'
+```
+
+Example response:
+
+```json
+{
+  "originResolvedAddress": {
+    "streetName": "Keysers Gate",
+    "streetNumber": "3",
+    "postalCode": "0165",
+    "city": "Oslo",
+    "country": "Norway",
+    "position": {
+      "latitude": 59.9169844,
+      "longitude": 10.7411912
+    }
+  },
+  "destinationResolvedAddress": {
+    "streetName": "Høyenhallveien",
+    "streetNumber": "25",
+    "postalCode": "0678",
+    "city": "Oslo",
+    "country": "Norway",
+    "position": {
+      "latitude": 59.9032646,
+      "longitude": 10.811598
+    }
+  },
+  "deliveryWindows": [
+    {
+      "product": "delivery",
+      "start": "2023-02-13T17:30:00+01:00",
+      "end": "2023-02-13T19:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-13T13:00:13+01:00",
+      "token": "20hRsgz8AovrLjeOldJ2Wg==:yhr85il4/swdgiEP/DG2wg==:2hBoFcmyTNLp/CTfX3sTGslOJr9sXAMxHggqq/h6tGmUuCEB2Vfy8uyNIWfg3qf6d7nj84Aj2sbwMLK2hETe14L4qgnlZHVSkBcktYPc6VCp9vEZhXErpQS3HoSyRU+mVcF2SNGP4s5TI5x7S6oq4Q==",
+      "consolidated": false
+    },
+    {
+      "product": "delivery",
+      "start": "2023-02-13T19:30:00+01:00",
+      "end": "2023-02-13T21:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-13T13:00:11+01:00",
+      "token": "lDQ+BXxkKR9qHwv5naf6CQ==:zpR8F/PUK3YlhUkVspoQ/w==:eV5fTEQmv/6We+KaK32ji31FHHHKaG4/GFQO8s/BX9dLKQ4QlV6gLZYtXOCQU+WfbYe+x9pJOfdjaXRfC2M4oNq+bHtNHSQKY7rfjAV3IoG2DSqvT9a+z4Lp8yuFOvonEUlzWlEiT2inTcnju+JlYQ==",
+      "consolidated": false
+    },
+    {
+      "product": "delivery",
+      "start": "2023-02-14T17:30:00+01:00",
+      "end": "2023-02-14T19:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-14T13:00:27+01:00",
+      "token": "SW23FPWVYkyV+xJuFfJ76w==:wZl92j141aX8vBtU/bzgtQ==:kBZeBgu+JoYMaasgk+Y+F4Bsd6ntn3Q8hkbGX9/ysfnppPTmqe24ZZeBdtDwh2364DMUhc+hpyK2Aau8jW7FC/gl4E3Q84j+7OnX3CNYuRzoNlYsXI749XGr86YbVU6wt8olw8pNkkLsyF17oNDA3g==",
+      "consolidated": false
+    },
+    {
+      "product": "delivery",
+      "start": "2023-02-14T19:30:00+01:00",
+      "end": "2023-02-14T21:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-14T13:00:04+01:00",
+      "token": "Kj1q+VlVFG4LX3ZAwbMPPg==:t6BkqFpGFzVnpqoTqEyKgA==:GGrsm1gUTetg8ux9sTs0/+X7mQiG/9a4y67BZoXPRjB3g8F+OK4NVyaYZAdIsLcdbO36jNta8hEyyCDxVee2qi7+95RJXBP/7wuH4Ik/S2/fq+8gHBQhISm0ba9TyO4ujytN5eAlXmoZgSQSXFG2tg==",
+      "consolidated": false
+    }
+  ],
+  "flags": ["CONSOLIDATION_ENABLED"]
+}
+```
+
+**_Arguments_**
+
+| Parameter          | Required | Type                                                                                                  | Default      | Description                                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | -------- | ----------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| originAddress      | Yes      | [Address](https://developer.porterbuddy.com/#address)                                                 | none         | The pick up location for the merchandise                                                                                                                                                                                                                                                                                                            |
+| destinationAddress | Yes      | [AvailabilityDestinationAddress](https://developer.porterbuddy.com/#availability-destination-address) | none         | The destination for the merchandise                                                                                                                                                                                                                                                                                                                 |
+| recipient          | No       | [AvailabilityRecipient](https://developer.porterbuddy.com/#availability-recipient)                    | none         | The contact details of the delivery recipient                                                                                                                                                                                                                                                                                                       |
+| pickupWindows      | Yes      | List<[Window](https://developer.porterbuddy.com/#window)>                                             | none         | The windows when the package is available for pick-up. We recommend sending wide windows and for multiple days. Ex: If the package is ready for pick up from 3pm on monday and the store closes at 7pm, the first window will be 3pm-7pm the first day, and the following windows should probably be the opening hours for the store the next days. |
+| products           | No       | List                                                                                                  | [ delivery ] | The name of the product needed. Currently, only the product "delivery" is available. Multiple products here will result in windows in the list for each product. Each window has a 'product' attribute which signals which product this is for.                                                                                                     |
+| parcels            | Yes      | List<[Parcel](https://developer.porterbuddy.com/#parcel)>                                             | none         | The list of parcels that you want to transport. This will affect which couriers can fulfill the delivery. A smaller car cannot drive packages that won't fit in it's trunk.                                                                                                                                                                         |
+| additionalInfo     | no       | Object                                                                                                | null         | Object reserved for additional information. This argument is intended to be provided by the checkout widget and needs to be passed-through as is, without further modifications.                                                                                                                                                                    |
+
+**Availability Destination Address**
+
+| Parameter    | Required | Type   | Default | Description                                          |
+| ------------ | -------- | ------ | ------- | ---------------------------------------------------- |
+| streetName   | No       | String | none    | Name of the street                                   |
+| streetNumber | No       | String | none    | Number of the street. Including any letters. Ex: 10d |
+| postalCode   | Yes      | String | none    | The postal code of the address                       |
+| city         | No       | String | none    | The city of the address                              |
+| country      | Yes      | String | none    | The country of the address                           |
+
+**Availability Recipient**
+
+| Parameter        | Required | Type   | Default | Description                       |
+| ---------------- | -------- | ------ | ------- | --------------------------------- |
+| email            | No       | String | none    | Email                             |
+| phoneCountryCode | No       | String | +47     | Country code for the phone number |
+| phoneNumber      | No       | String | none    | Phone number                      |
+
+**_Response_**
+
+| Parameter                  | Type                                                                                          | Description                                                                                                                                                                                |
+| -------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| originResolvedAddress      | [Resolved Address](https://developer.porterbuddy.com/#resolved-address)                       | Resolved origin. We will resolve the origin against Google\'s APIs. The exact details we find will be returned here.                                                                       |
+| destinationResolvedAddress | [Resolved Address](https://developer.porterbuddy.com/#resolved-address)                       | Resolved destination. Like with the origin, we will try to resolve the exact details. The result will be returned here.                                                                    |
+| deliveryWindows            | List<[DeliveryWindow](https://developer.porterbuddy.com/#delivery-window)>                    | The available windows for the destination. This is tied to the pick up windows given in the request, so any changes to those will affect these windows as well.                            |
+| consolidatedWindow         | [ConsolidatedDeliveryWindow](https://developer.porterbuddy.com/#consolidated-delivery-window) | Available window for the destination. Present if the recipient field was present in the request and the customer has already placed one or more orders within one of the delivery windows. |
+| flags                      | List                                                                                          | A list of flags indicating if certain features are enabled in the shop configuration. Mainly used for our own checkout widgets. This property will be omitted if the list would be empty.  |
+
+**Resolved Address**
+
+| Parameter    | Required | Type                | Default | Description                                             |
+| ------------ | -------- | ------------------- | ------- | ------------------------------------------------------- |
+| streetName   | Yes      | String              | none    | Name of the street                                      |
+| streetNumber | Yes      | String              | none    | Number of the street. Including any letters. Ex: 10d    |
+| postalCode   | Yes      | String              | none    | The postal code of the address                          |
+| city         | Yes      | String              | none    | The city of the address                                 |
+| country      | Yes      | String              | none    | The country of the address                              |
+| position     | Yes      | Position (lat/long) | none    | The exact position of the address in longitude/latitude |
+
+**Delivery Window**
+
+| Parameter    | Type                                              | Description                                                                                                                                                                                                                                |
+| ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| start        | DateTime                                          | The start of the window                                                                                                                                                                                                                    |
+| end          | DateTime                                          | The end of the window                                                                                                                                                                                                                      |
+| product      | String                                            | The product type this window is for. Example: delivery or express                                                                                                                                                                          |
+| price        | [Price](https://developer.porterbuddy.com/#price) | The price given for the specific window                                                                                                                                                                                                    |
+| displayPrice | [Price](https://developer.porterbuddy.com/#price) | The display price given for the specific window, calculated based the store's configured base display price. Used to show the end customer a price different from the actual price. Only returned when a base display price is configured. |
+| expiresAt    | DateTime                                          | After this time this window should not be shown as an option. Either remove the window or do a full refresh of the availability.                                                                                                           |
+| token        | String                                            | The token is to be sent back when placing and order. It makes sure that the window and price that was offered for availability at that specific point in time is what is registered on the order.                                          |
+| consolidated | Boolean                                           | If true, there is another order present for the same customer with that window, so the orders can be consolidated.                                                                                                                         |
+
+**Consolidated Delivery Window**
+
+| Parameter    | Type                                              | Description                                                                                                                                                                                                                                |
+| ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| start        | DateTime                                          | The start of the window, may be omitted if anonymous consolidation is used.                                                                                                                                                                |
+| end          | DateTime                                          | The end of the window, may be omitted if anonymous consolidation is used.                                                                                                                                                                  |
+| product      | String                                            | The product type this window is for. Example: delivery or express                                                                                                                                                                          |
+| price        | [Price](https://developer.porterbuddy.com/#price) | The price given for the specific window                                                                                                                                                                                                    |
+| displayPrice | [Price](https://developer.porterbuddy.com/#price) | The display price given for the specific window, calculated based the store's configured base display price. Used to show the end customer a price different from the actual price. Only returned when a base display price is configured. |
+| expiresAt    | DateTime                                          | After this time this window should not be shown as an option. Either remove the window or do a full refresh of the availability.                                                                                                           |
+| token        | String                                            | The token is to be sent back when placing and order. It makes sure that the window and price that was offered for availability at that specific point in time is what is registered on the order.                                          |
+| consolidated | Boolean                                           | If true, there is another order present for the same customer with that window, so the orders can be consolidated.                                                                                                                         |
+
+**Price**
+
+| Parameter              | Type    | Description                                                                          |
+| ---------------------- | ------- | ------------------------------------------------------------------------------------ |
+| fractionalDenomination | Integer | The price in the lowest denominator. Ex: 8.32kr = 100 fractionalDenomination (cents) |
+| currency               | String  | The currency specified. Usually "NOK".                                               |

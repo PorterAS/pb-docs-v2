@@ -5,12 +5,12 @@ author: "William Imoh"
 ---
 
 ## Current integrations workflow
+
 1. The partner’s implementation calls the availability api using the customer address / postcode
 2. If delivery windows are returned
-    1. The `window.porterbuddy` configuration variable is initialized with the passed delivery windows
-    2. A visual element (radio button, list entry, etc.) is added to the delivery options as Porterbuddy delivery option, showing the checkout grid
+   1. The `window.porterbuddy` configuration variable is initialized with the passed delivery windows
+   2. A visual element (radio button, list entry, etc.) is added to the delivery options as Porterbuddy delivery option, showing the checkout grid
 3. For periodic refresh, the widget calls a callback method specified by the partner implementation in the widget configuration, this callback function has a function accepting `deliveryWindows` as call parameter. By calling this function, the partner implementation can set the updated delivery windows.
-
 
 ![](https://paper-attachments.dropbox.com/s_C11AE9BD13A6106842672DB9A949299CDF3DC0D59731542FB655D54F9C5B8EDB_1618814599220_image.png)
 
@@ -21,6 +21,7 @@ To show consolidation availability, we need the following information about the 
 - Full address
 - Email
 - Phone number
+
 ## Generic changes required for all integrations
 
 The checkout widget needs to be changed to handle the full availability response (instead of only the delivery windows) from the availability call performed by the partner integration.
@@ -36,101 +37,110 @@ window.porterbuddy = {
   token: "...", // your public token
   view: "checkout",
   availabilityResponse: {
-          "originResolvedAddress": {
-                  "streetName": "Haraldrudveien",
-                  "streetNumber": "11",
-                  "postalCode": "0581",
-                  "city": "Oslo",
-                  "country": "Norge",
-                  "location": {
-                          "latitude": 59.93022998178418,
-                          "longitude": 10.824324998724737
-                  },
-                  "norwegian": true,
-                  "locationLookup": false
-          },
-          "destinationResolvedAddress": {
-                  "streetName": "Høyenhallveien",
-                  "streetNumber": "25",
-                  "postalCode": "0678",
-                  "city": "OSLO",
-                  "country": "Norway",
-                  "location": null,
-                  "norwegian": true,
-                  "locationLookup": false
-          },
-          "deliveryWindows": [{
-                  "product": "delivery",
-                  "start": "2021-04-20T17:30:00+02:00",
-                  "end": "2021-04-20T19:30:00+02:00",
-                  "price": {
-                          "fractionalDenomination": 14900,
-                          "currency": "NOK"
-                  },
-                  "displayPrice": {
-                          "fractionalDenomination": 12900,
-                          "currency": "NOK"
-                  },
-                  "expiresAt": "2021-04-20T13:00:17+02:00",
-                  "token": "tT6D28ny2y19O4cOWWUg+A==:q5qtsr/CrLoWE1untXTi1w==:q2pKxAC+f1GB6ZnmCMyoEqlxFjc9JVarxkZLizPyJj/IzXz5P0W5iCuL1MzMyX+0scNwBBewzMd8DO/I8KRJeJ4kLy5boFHJSD4l3uWgC06UFYQgHRlpRzTHedUi5Zlc6mgbbiS017FMaYu2ZqmYXA==",
-                  "consolidated": false
-          }, {
-                  "product": "delivery",
-                  "start": "2021-04-20T19:30:00+02:00",
-                  "end": "2021-04-20T21:30:00+02:00",
-                  "price": {
-                          "fractionalDenomination": 14900,
-                          "currency": "NOK"
-                  },
-                  "displayPrice": {
-                          "fractionalDenomination": 12900,
-                          "currency": "NOK"
-                  },
-                  "expiresAt": "2021-04-20T13:00:02+02:00",
-                  "token": "zzGEBKbdWaFDwQKXUNTaHw==:bfZ0PhJja5KNFC+pPBz3RQ==:++CI7nJRUwRr6FWHdgkhPaTnipWtbCQHqi2TyC4Sqxf4vV92ho3DAuusmhh0Y/BhUAe61DYZuLRxZBzUty88c+q0HK+msDMiUnv+i+HD3vrkCDfXI7JCmkfizVZHb/vEMuC2YBFyej3ZNLAkjfbAFA==",
-                  "consolidated": false
-          }, {
-                  "product": "delivery",
-                  "start": "2021-04-21T17:30:00+02:00",
-                  "end": "2021-04-21T19:30:00+02:00",
-                  "price": {
-                          "fractionalDenomination": 14900,
-                          "currency": "NOK"
-                  },
-                  "displayPrice": {
-                          "fractionalDenomination": 12900,
-                          "currency": "NOK"
-                  },
-                  "expiresAt": "2021-04-21T13:00:22+02:00",
-                  "token": "jRaUQgfxpJ2lqpZJqKobkA==:geDmrrpv6jH8knSfKLBe8Q==:Qy/tNAvI/gqOQw3GGtpBAGOGoC6wEZ88+GUvI4nf/rygz7uHb8l1OnPkzsPG/jfePDqHQ10Zp/mAWXnbinmhNL4Uf6sCeigIZeYYiJQ+FuUqrJMzPSuMNAzHiLRpA4JJMcs46sRANSJUUgHPTUms9w==",
-                  "consolidated": false
-          }, {
-                  "product": "delivery",
-                  "start": "2021-04-21T19:30:00+02:00",
-                  "end": "2021-04-21T21:30:00+02:00",
-                  "price": {
-                          "fractionalDenomination": 14900,
-                          "currency": "NOK"
-                  },
-                  "displayPrice": {
-                          "fractionalDenomination": 12900,
-                          "currency": "NOK"
-                  },
-                  "expiresAt": "2021-04-21T13:00:20+02:00",
-                  "token": "kEnswbRBsaW2DlzC07PS5w==:jxWc9sjBb4htEYFXFHlmCA==:fe/LRCkj+xXkFdU0okAeVvsiztUGWDrgCE3sv/wR9Q82h75A9LoXyf2vWP+dhq1zcFcVkcQV9AG1Z67uDeoaA+AbRnGbm3D8asRPB02Nzw9+4t9VeNyNl4Qola7YSE6pTKVqZX3J3fxTBye7kHjO/g==",
-                  "consolidated": false
-          }],
-          "flags": ["CONSOLIDATION_ENABLED"]
+    originResolvedAddress: {
+      streetName: "Haraldrudveien",
+      streetNumber: "11",
+      postalCode: "0581",
+      city: "Oslo",
+      country: "Norge",
+      location: {
+        latitude: 59.93022998178418,
+        longitude: 10.824324998724737,
+      },
+      norwegian: true,
+      locationLookup: false,
+    },
+    destinationResolvedAddress: {
+      streetName: "Høyenhallveien",
+      streetNumber: "25",
+      postalCode: "0678",
+      city: "OSLO",
+      country: "Norway",
+      location: null,
+      norwegian: true,
+      locationLookup: false,
+    },
+    deliveryWindows: [
+      {
+        product: "delivery",
+        start: "2021-04-20T17:30:00+02:00",
+        end: "2021-04-20T19:30:00+02:00",
+        price: {
+          fractionalDenomination: 14900,
+          currency: "NOK",
+        },
+        displayPrice: {
+          fractionalDenomination: 12900,
+          currency: "NOK",
+        },
+        expiresAt: "2021-04-20T13:00:17+02:00",
+        token:
+          "tT6D28ny2y19O4cOWWUg+A==:q5qtsr/CrLoWE1untXTi1w==:q2pKxAC+f1GB6ZnmCMyoEqlxFjc9JVarxkZLizPyJj/IzXz5P0W5iCuL1MzMyX+0scNwBBewzMd8DO/I8KRJeJ4kLy5boFHJSD4l3uWgC06UFYQgHRlpRzTHedUi5Zlc6mgbbiS017FMaYu2ZqmYXA==",
+        consolidated: false,
+      },
+      {
+        product: "delivery",
+        start: "2021-04-20T19:30:00+02:00",
+        end: "2021-04-20T21:30:00+02:00",
+        price: {
+          fractionalDenomination: 14900,
+          currency: "NOK",
+        },
+        displayPrice: {
+          fractionalDenomination: 12900,
+          currency: "NOK",
+        },
+        expiresAt: "2021-04-20T13:00:02+02:00",
+        token:
+          "zzGEBKbdWaFDwQKXUNTaHw==:bfZ0PhJja5KNFC+pPBz3RQ==:++CI7nJRUwRr6FWHdgkhPaTnipWtbCQHqi2TyC4Sqxf4vV92ho3DAuusmhh0Y/BhUAe61DYZuLRxZBzUty88c+q0HK+msDMiUnv+i+HD3vrkCDfXI7JCmkfizVZHb/vEMuC2YBFyej3ZNLAkjfbAFA==",
+        consolidated: false,
+      },
+      {
+        product: "delivery",
+        start: "2021-04-21T17:30:00+02:00",
+        end: "2021-04-21T19:30:00+02:00",
+        price: {
+          fractionalDenomination: 14900,
+          currency: "NOK",
+        },
+        displayPrice: {
+          fractionalDenomination: 12900,
+          currency: "NOK",
+        },
+        expiresAt: "2021-04-21T13:00:22+02:00",
+        token:
+          "jRaUQgfxpJ2lqpZJqKobkA==:geDmrrpv6jH8knSfKLBe8Q==:Qy/tNAvI/gqOQw3GGtpBAGOGoC6wEZ88+GUvI4nf/rygz7uHb8l1OnPkzsPG/jfePDqHQ10Zp/mAWXnbinmhNL4Uf6sCeigIZeYYiJQ+FuUqrJMzPSuMNAzHiLRpA4JJMcs46sRANSJUUgHPTUms9w==",
+        consolidated: false,
+      },
+      {
+        product: "delivery",
+        start: "2021-04-21T19:30:00+02:00",
+        end: "2021-04-21T21:30:00+02:00",
+        price: {
+          fractionalDenomination: 14900,
+          currency: "NOK",
+        },
+        displayPrice: {
+          fractionalDenomination: 12900,
+          currency: "NOK",
+        },
+        expiresAt: "2021-04-21T13:00:20+02:00",
+        token:
+          "kEnswbRBsaW2DlzC07PS5w==:jxWc9sjBb4htEYFXFHlmCA==:fe/LRCkj+xXkFdU0okAeVvsiztUGWDrgCE3sv/wR9Q82h75A9LoXyf2vWP+dhq1zcFcVkcQV9AG1Z67uDeoaA+AbRnGbm3D8asRPB02Nzw9+4t9VeNyNl4Qola7YSE6pTKVqZX3J3fxTBye7kHjO/g==",
+        consolidated: false,
+      },
+    ],
+    flags: ["CONSOLIDATION_ENABLED"],
   },
   onUpdateDeliveryWindows: (callback, additionalInfo) => {
-          // call the availability API again with the additionalInfo object passed, called that "fetchAvailability" here
-          fetchAvailability(additionalInfo).then(availabilityResponse =>
-                  callback(availabilityResponse)
-          );
+    // call the availability API again with the additionalInfo object passed, called that "fetchAvailability" here
+    fetchAvailability(additionalInfo).then(availabilityResponse =>
+      callback(availabilityResponse)
+    )
   },
-  onSelectDeliveryWindow: (deliveryWindow) => {
-          // use window data to display shipping costs, selected option, etc....
-  }
+  onSelectDeliveryWindow: deliveryWindow => {
+    // use window data to display shipping costs, selected option, etc....
+  },
 }
 ```
 
@@ -138,53 +148,51 @@ window.porterbuddy = {
 
 For customers with a checkout flow where this information is entered beforehand or known e.g. by user login, this information needs to be sent in the initial availability call. These changes need to be done in addition to 1).
 
-
 ![](https://paper-attachments.dropbox.com/s_C11AE9BD13A6106842672DB9A949299CDF3DC0D59731542FB655D54F9C5B8EDB_1618814619598_image.png)
-
 
 **Required addition**
 Provide the additional data by setting new properties (phone number, email address and post address) in availability request to Porterbuddy.
 
 Here’s a sample availability request to PorterBuddy containing the recipient email.
 
-```js
+```json
 {
-    "pickupWindows": [
-        {"start": "2023-02-13T10:00+01:00", "end": "2023-02-13T18:00+01:00"},
-        {"start": "2023-02-14T10:00+01:00", "end": "2023-02-14T18:00+01:00"}
-    ],
-    "originAddress": {
-        "streetName": "Keysers Gate",
-        "streetNumber": "3",
-        "postalCode": "0165",
-        "city": "Oslo",
-        "country": "Norway"
-    },
-    "destinationAddress": {
-        "streetName": "Høyenhallveien",
-        "streetNumber": "25",
-        "postalCode": "0678",
-        "city": "Oslo",
-        "country": "Norway"
-    },
-    "recipient": {
-        "email": "testemail+recipient@porterbuddy.com"
-    },
-    "products": [ "delivery" ],
-    "parcels": [
-        {
-            "widthCm": 1,
-            "heightCm": 40,
-            "depthCm": 1,
-            "weightGrams": 2000
-        }
-    ]
+  "pickupWindows": [
+    { "start": "2023-02-13T10:00+01:00", "end": "2023-02-13T18:00+01:00" },
+    { "start": "2023-02-14T10:00+01:00", "end": "2023-02-14T18:00+01:00" }
+  ],
+  "originAddress": {
+    "streetName": "Keysers Gate",
+    "streetNumber": "3",
+    "postalCode": "0165",
+    "city": "Oslo",
+    "country": "Norway"
+  },
+  "destinationAddress": {
+    "streetName": "Høyenhallveien",
+    "streetNumber": "25",
+    "postalCode": "0678",
+    "city": "Oslo",
+    "country": "Norway"
+  },
+  "recipient": {
+    "email": "testemail+recipient@porterbuddy.com"
+  },
+  "products": ["delivery"],
+  "parcels": [
+    {
+      "widthCm": 1,
+      "heightCm": 40,
+      "depthCm": 1,
+      "weightGrams": 2000
+    }
+  ]
 }
 ```
 
 A sample response with a consolidated window for the customer looks like this:
 
-```js
+```json
 {
   "originResolvedAddress": {
     "streetName": "Haraldrudveien",
@@ -209,37 +217,40 @@ A sample response with a consolidated window for the customer looks like this:
     "norwegian": true,
     "locationLookup": false
   },
-  "deliveryWindows": [{
-    "product": "delivery",
-    "start": "2021-04-20T17:30:00+02:00",
-    "end": "2021-04-20T21:30:00+02:00",
-    "price": {
-      "fractionalDenomination": 14900,
-      "currency": "NOK"
+  "deliveryWindows": [
+    {
+      "product": "delivery",
+      "start": "2021-04-20T17:30:00+02:00",
+      "end": "2021-04-20T21:30:00+02:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "displayPrice": {
+        "fractionalDenomination": 12900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2021-04-20T13:00:26+02:00",
+      "token": "FvhvpPc3qmNDX6zPpCs00A==:fkJoBndonUSxbtyHcDEgQQ==:lTNbxu0MO2ptHO3gctGSW5kS4hn3SNzoBCz1FgKBVq6IzAWZT4PHtL5IVGSeubQDE6w1T3bQODm9WzIYyfAiob8Zgy3L9i3DNZAKPjZAYFSufidTAi0LDchN1GP811qI5Kp5XW0hFiV0EWfBodIiYQ==",
+      "consolidated": false
     },
-    "displayPrice": {
-      "fractionalDenomination": 12900,
-      "currency": "NOK"
-    },
-    "expiresAt": "2021-04-20T13:00:26+02:00",
-    "token": "FvhvpPc3qmNDX6zPpCs00A==:fkJoBndonUSxbtyHcDEgQQ==:lTNbxu0MO2ptHO3gctGSW5kS4hn3SNzoBCz1FgKBVq6IzAWZT4PHtL5IVGSeubQDE6w1T3bQODm9WzIYyfAiob8Zgy3L9i3DNZAKPjZAYFSufidTAi0LDchN1GP811qI5Kp5XW0hFiV0EWfBodIiYQ==",
-    "consolidated": false
-  }, {
-    "product": "delivery",
-    "start": "2021-04-21T17:30:00+02:00",
-    "end": "2021-04-21T21:30:00+02:00",
-    "price": {
-      "fractionalDenomination": 14900,
-      "currency": "NOK"
-    },
-    "displayPrice": {
-      "fractionalDenomination": 12900,
-      "currency": "NOK"
-    },
-    "expiresAt": "2021-04-21T13:00:04+02:00",
-    "token": "QgQVCp+g7zgKLuMlHlBY6A==:5ahVfJZBZ0PaNleEmIRpPQ==:djmo+cNKI2Jx/zx0LlgGVWN34IjhTvhL9PA4XB8eP7S2isyr/gs0Np4WRg185RG+3yNOB8iUU9s9npTPlbyd/E8PiG8/9bAVnNGsGaLGfhrwGZtan/Fqb3IXIgU9f7Nam29L2JgsLC70vRdyktnNJQ==",
-    "consolidated": false
-  }],
+    {
+      "product": "delivery",
+      "start": "2021-04-21T17:30:00+02:00",
+      "end": "2021-04-21T21:30:00+02:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "displayPrice": {
+        "fractionalDenomination": 12900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2021-04-21T13:00:04+02:00",
+      "token": "QgQVCp+g7zgKLuMlHlBY6A==:5ahVfJZBZ0PaNleEmIRpPQ==:djmo+cNKI2Jx/zx0LlgGVWN34IjhTvhL9PA4XB8eP7S2isyr/gs0Np4WRg185RG+3yNOB8iUU9s9npTPlbyd/E8PiG8/9bAVnNGsGaLGfhrwGZtan/Fqb3IXIgU9f7Nam29L2JgsLC70vRdyktnNJQ==",
+      "consolidated": false
+    }
+  ],
   "consolidatedWindow": {
     "product": "delivery",
     "start": null,
@@ -261,20 +272,18 @@ A sample response with a consolidated window for the customer looks like this:
 
 ## Call to action in checkout widget
 
-For customers without a checkout flow that supports getting the required data in advance, a call to action (email input) needs to be added to the widget. Data from user input within this call to action needs to be added to the availability request as an own property accepting an arbitrary object. 
-As the checkout widget is currently not able to perform calls to the Porterbuddy API on it’s own, additional changes (in addition to 1) are required to support this. For security reasons, it’s preferable to run these calls through the partners’ backend to be protected against client-side manipulation. 
+For customers without a checkout flow that supports getting the required data in advance, a call to action (email input) needs to be added to the widget. Data from user input within this call to action needs to be added to the availability request as an own property accepting an arbitrary object.
+As the checkout widget is currently not able to perform calls to the Porterbuddy API on it’s own, additional changes (in addition to 1) are required to support this. For security reasons, it’s preferable to run these calls through the partners’ backend to be protected against client-side manipulation.
 To achieve this, partners need to provide a callback function that gets called by the checkout widget with the cta input data, and returns the availability response returned by the Porterbuddy api.
 
-
 ![](https://paper-attachments.dropbox.com/s_C11AE9BD13A6106842672DB9A949299CDF3DC0D59731542FB655D54F9C5B8EDB_1618814635524_image.png)
-
 
 **Required addition**
 Implement callback function that sends an availability request with the added cta input data object (parsing of this by partner implementations is not required), and returns the availability response as it came back from the Porterbuddy API.
 
 ## Placing the order
 
-When setting up the request for the order creation endpoint, a different property must be used when the user chose the consolidated (“Samlevert”) delivery option. Instead of specifying the delivery window data in the property `deliveryWindow`, the property `consolidatedWindow` needs to be set with the window data. A consolidated delivery window can be identified by having the property `consolidated` set to `true`. 
+When setting up the request for the order creation endpoint, a different property must be used when the user chose the consolidated (“Samlevert”) delivery option. Instead of specifying the delivery window data in the property `deliveryWindow`, the property `consolidatedWindow` needs to be set with the window data. A consolidated delivery window can be identified by having the property `consolidated` set to `true`.
 Summed up, the logic needs to be changed to be
 
 - If `consolidated === true` on the selected delivery window, set property `consolidatedWindow` on the order request
@@ -282,54 +291,56 @@ Summed up, the logic needs to be changed to be
 
 Here’s a sample request payload to create an order with consolidated delivery.
 
-```js
+```json
 {
   "origin": {
     "name": "Nils Johansen (Sender)",
     "address": {
-        "streetName": "Keysers Gate",
-        "streetNumber": "3",
-        "postalCode": "0165",
-        "city": "Oslo",
-        "country": "Norway"
+      "streetName": "Keysers Gate",
+      "streetNumber": "3",
+      "postalCode": "0165",
+      "city": "Oslo",
+      "country": "Norway"
     },
     "email": "testemail+sender@porterbuddy.com",
     "phoneCountryCode": "+47",
     "phoneNumber": "65127865",
-    "pickupWindows":[{"start":"2021-04-20T10:00+02:00", "end":"2021-04-20T20:00+02:00"}]
+    "pickupWindows": [
+      { "start": "2021-04-20T10:00+02:00", "end": "2021-04-20T20:00+02:00" }
+    ]
   },
   "destination": {
-      "name": "Roger Olsen (Recipient)",
-      "address": {
-          "streetName": "Høyenhallveien",
-          "streetNumber": "25",
-          "postalCode": "0678",
-          "city": "Oslo",
-          "country": "Norway"
-      },
-      "email": "testemail+recipient@porterbuddy.com",
-      "phoneCountryCode": "+47",
-      "phoneNumber": "65789832",
-      "consolidatedWindow":{
-          "token": "oDzvZ65Oy/66AtDlG1v1eA==:BLsBVBuHPsecawj0hkwNIg==:XJ2f9BsOSPEmwxzaq37ZFMgLZeCHuQmLQa4CnitoRoSL5AVw/oIYc8uvjDYw0dy8M9PTPobBcBh7gE0unlpWwJoHietNXoB8DWe9lNv3h/ZjJ8YsBvOYUvgD5IqVvk4h8p6JO86pgJvcfTcBg7igHg==",
-      },
-      "verifications": {
-          "minimumAgeCheck": 16,
-          "leaveAtDoorstep": false,
-          "idCheck": true,
-          "requireSignature": false,
-          "onlyToRecipient": true
-      }
+    "name": "Roger Olsen (Recipient)",
+    "address": {
+      "streetName": "Høyenhallveien",
+      "streetNumber": "25",
+      "postalCode": "0678",
+      "city": "Oslo",
+      "country": "Norway"
+    },
+    "email": "testemail+recipient@porterbuddy.com",
+    "phoneCountryCode": "+47",
+    "phoneNumber": "65789832",
+    "consolidatedWindow": {
+      "token": "oDzvZ65Oy/66AtDlG1v1eA==:BLsBVBuHPsecawj0hkwNIg==:XJ2f9BsOSPEmwxzaq37ZFMgLZeCHuQmLQa4CnitoRoSL5AVw/oIYc8uvjDYw0dy8M9PTPobBcBh7gE0unlpWwJoHietNXoB8DWe9lNv3h/ZjJ8YsBvOYUvgD5IqVvk4h8p6JO86pgJvcfTcBg7igHg=="
+    },
+    "verifications": {
+      "minimumAgeCheck": 16,
+      "leaveAtDoorstep": false,
+      "idCheck": true,
+      "requireSignature": false,
+      "onlyToRecipient": true
+    }
   },
-  "parcels" : [
-      {
-          "description": "Shoes",
-          "widthCm": 1,
-          "heightCm": 40,
-          "depthCm": 1,
-          "weightGrams": 2000,
-          "parcelShipmentIdentifier": "12345"
-      }
+  "parcels": [
+    {
+      "description": "Shoes",
+      "widthCm": 1,
+      "heightCm": 40,
+      "depthCm": 1,
+      "weightGrams": 2000,
+      "parcelShipmentIdentifier": "12345"
+    }
   ],
   "product": "delivery",
   "courierInstructions": "Test",
@@ -338,4 +349,3 @@ Here’s a sample request payload to create an order with consolidated delivery.
 ```
 
 The `consolidatedWindow` field is required and must contain the `token` field with a valid token obtained from the availability API call.
-
