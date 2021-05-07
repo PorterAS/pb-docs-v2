@@ -1,13 +1,6 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
-import {
-  Text,
-  UnorderedList,
-  ListItem,
-  SimpleGrid,
-  Center,
-  Box,
-} from "@chakra-ui/react"
+import { graphql } from "gatsby"
+import { Text, SimpleGrid, Center, Box } from "@chakra-ui/react"
 import { FeatureCard } from "../components/home/FeatureCard"
 
 import Layout from "../components/layouts/HomeLayout"
