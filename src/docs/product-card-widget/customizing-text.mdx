@@ -1,0 +1,119 @@
+# Customizing text
+
+All texts in the widget can be customized by setting the new text to use in the "text" property of the configuration object.
+
+## Default values
+
+| **Key**                                | **Default value**                                                                                                                                    |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| asap                                   | Express levering                                                                                                                                     |
+| availabilityEnterPostalCode            | Kan jeg få varen levert hjem **idag**?                                                                                                               |
+| availabilityEnterPostalCodePlaceholder | Postnummer                                                                                                                                           |
+| availabilityStart                      | Kan jeg få denne varen levert **hjem i dag**?                                                                                                        |
+| availabilityClickToSee                 | Klikk for å sjekke                                                                                                                                   |
+| availabilityDeliveryNoDate             | Beklager, levering samme dag er ikke mulig                                                                                                           |
+| availabilityDeliveryOutOfStock         | Beklager, dette produktet er utsolgt                                                                                                                 |
+| availabilityDetectingLocation          | Finner din posisjon...                                                                                                                               |
+| availabilityFetching                   | Henter leveransealternativer...                                                                                                                      |
+| availabilityPostcodeSuccess            | **Hjem {{delivery}} fra {{price_lowest_price}}**                                                                                                     |
+| availabilitySuccessCountdown           | **Bestill innen {{remaining}}**                                                                                                                      |
+| availabilitySuccessConsolidatedInfo    | Gratis frakt med Samlevert                                                                                                                           |
+| availabilityPostcodeError              | Beklager, Porterbuddy leverer ikke til ditt postnummer ennå!<br/>Vi utvider stadig, se <a href='https://www.porterbuddy.com'>www.porterbuddy.com</a> |
+| availabilityServiceNotAvailable        | Beklager, tjenesten er ikke tilgjenglig for øyeblikket                                                                                               |
+| alwaysFirst                            | Alltid først!                                                                                                                                        |
+| availabilityPostCodeText               | Hjemlevert allerede i kveld?                                                                                                                         |
+| tryAgainButton                         | Prøv igjen                                                                                                                                           |
+| searchLocationButton                   | Søk                                                                                                                                                  |
+| changeLocationButton                   | Endre                                                                                                                                                |
+| comment                                | Hjelpende forklaring til budet…                                                                                                                      |
+| deliveryInfo                           | Vi legger pakken på døren. Du kan likevel velge personlig levering om ønskelig.                                                                      |
+| helpInfo                               | Pakken leveres kontaktløst. På sporingssiden man mottar på SMS kan man be om personlig overlevering.                                                 |
+| consolidatedDeliveryInfo               | Har du en leveranse med Porterbuddy på vei? Velg Samlevert i checkout og få alt levert samtidig uten å betale ekstra fraktkostnader!                 |
+| leaveDoorstep                          | Budet kan legge pakken utenfor døren på leveranseadressen                                                                                            |
+| locationLink                           | Levering til deg ({{location}})                                                                                                                      |
+| subTitle                               | Levering hjem når du ønsker det                                                                                                                      |
+| title                                  | Ekspresslevering med Porterbuddy                                                                                                                     |
+| yourPostalCode                         | Ditt postnummer: **{{postcode}}**                                                                                                                    |
+| selectedPrice                          | {{selected_price}}                                                                                                                                   |
+| sundayDelivery                         | Nå også på SØNDAGER!                                                                                                                                 |
+| availabilityPostboxCode                | Beklager, Porterbuddy leverer ikke til postbokser!                                                                                                   |
+| availabilityUnknownPostcode            | Beklager, dette er ikke et gyldig postnummer!                                                                                                        |
+| availabilityTryAnother                 | Prøv et annet postnummer.                                                                                                                            |
+| deliveryInfoButtonText                 | Kontaktløs levering                                                                                                                                  |
+| consolidatedInfoButtonText             | Les mer om Samlevert                                                                                                                                 |
+| today                                  | i dag                                                                                                                                                |
+| tomorrow                               | i morgen                                                                                                                                             |
+| conjunction                            | om                                                                                                                                                   |
+| days                                   | dager                                                                                                                                                |
+| separator                              | og                                                                                                                                                   |
+| close                                  | lukk                                                                                                                                                 |
+| clockSeparator                         | kl                                                                                                                                                   |
+| hour                                   | time                                                                                                                                                 |
+| hourPlural                             | timer                                                                                                                                                |
+| hourShort                              | t                                                                                                                                                    |
+| minute                                 | minutt                                                                                                                                               |
+| minutePlural                           | minutter                                                                                                                                             |
+| minuteShort                            | min                                                                                                                                                  |
+| second                                 | sekund                                                                                                                                               |
+| secondPlural                           | sekunder                                                                                                                                             |
+| secondShort                            | s                                                                                                                                                    |
+| from                                   | fra                                                                                                                                                  |
+| checkoutTitle                          | Når du vil ha pakken levert?                                                                                                                         |
+| checkoutTitleSelectedPrefix            | Sees                                                                                                                                                 |
+| between                                | mellom                                                                                                                                               |
+| matrixCountdownPrefix                  | frist                                                                                                                                                |
+| free                                   | gratis                                                                                                                                               |
+| prevDays                               | Forrige dager                                                                                                                                        |
+| nextDays                               | Neste dager                                                                                                                                          |
+| consolidatedItemTitle                  | Allerede noe på vei med Porterbuddy? Slå sammen til en litt grønnere leveranse her!                                                                  |
+| pickWindowItemTitle                    | Velg selv når du du vi ha varen levert med Porterbuddy                                                                                               |
+| consolidatedSuccessGreeting            | Hei, vi ser at du har allerede en levering på vei!                                                                                                   |
+| consolidatedSuccessInfo                | Varen legges til med din kommende leveranse.                                                                                                         |
+| consolidatedPhoneInputLabel            | Legg inn telefonnummer for å finne kommende leveranser                                                                                               |
+| consolidatedCodeInputLabel             | Tast inn kode du mottar på SMS                                                                                                                       |
+| startingFromPrice                      | fra {{price_lowest_overall}}                                                                                                                         |
+| consolidatedEmailInputLabel            | Legg inn epost for å finne kommende leveranser                                                                                                       |
+| consolidationFailureGreeting           | Oisann, vi finner ingen kommende leveranser...                                                                                                       |
+| consolidationRetry                     | prøv igjen                                                                                                                                           |
+| consolidationFailureInfo               | Vi har derfor forhåndsvalgt en leveringstid for deg (endre ved å velge det andre Porterbuddy-alternativet).                                          |
+
+Values set to `null` or `undefined` will be ignored and the default / previous value will be used for that particular text. If a text should be stopped from displaying, an emtpy string can be passed.
+Variables can be used in text replacements to display changing values within the texts.
+
+| **Key**                  | **Description**                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------- |
+| remaining                | Countdown for last window of first day being available                                      |
+| delivery                 | Delivery day for last window of first day being available                                   |
+| postcode                 | Selected postcode                                                                           |
+| location                 | Customer location                                                                           |
+| price                    | Price of last delivery window of the first day                                              |
+| countdown                | Countdown for last window of first day being available                                      |
+| price_first              | Price of first delivery window                                                              |
+| countdown_first          | Countdown for first window being available                                                  |
+| delivery_first           | Delivery day for first delivery window                                                      |
+| price_lowest_overall     | Price of cheapest delivery window over all windows                                          |
+| countdown_lowest_overall | Countdown for cheapest delivery window over all windows being available                     |
+| delivery_lowest_overall  | Delivery day for cheapest delivery window over all windows                                  |
+| price_lowest_price       | Price of cheapest delivery window of first day                                              |
+| countdown_lowest_price   | Countdown for cheapest delivery window of first day being available                         |
+| delivery_lowest_price    | Delivery day for cheapest delivery window of first day                                      |
+| selected_price           | Price of the currently selected window when available, otherwise the lowest available price |
+
+## Example
+
+> INSERT WIDGET
+
+```html
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    postalCode: "0278",
+    language: "NO",
+    text: {
+      availabilitySuccessCountdown:
+        "**{{remaining}}** remaining for this offer",
+    },
+  }
+</script>
+```

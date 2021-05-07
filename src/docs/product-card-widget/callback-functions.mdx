@@ -1,0 +1,53 @@
+# Callback Functions - Product card widget
+
+The Porterbuddy widget provides callback function references to trigger actions in the widget from external sources. To access the callback function references, a function is defined for the configuration option "onSetCallbacks". This function gets called by the widget after initialization, the argument passed is an object containing references to the callback functions. These references can be stored and used to trigger actions in the widget from external sources.
+
+## Supported callback functions
+
+| **Name**     | **Signature**         | **Description**                                                                                                                                                                                                   |
+| ------------ | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| forceRefresh | `() => Promise<void>` | Forces a refresh of the widget by resetting to the current option values and fetching new availability information when in availability view. Returns a promise that gets resolved after the refresh is complete. |
+
+## Usage example
+
+Manually triggering a refresh for the availability information
+
+> INSERT WIDGET with postcode input
+
+Javascript code
+
+```html
+<script>
+  let forceRefreshReference
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    postalCode: "0153",
+    language: "NO",
+    onSetCallbacks: function (callbacks) {
+      window.forceRefreshReference = callbacks.forceRefresh
+    },
+  }
+  window.refresh = function () {
+    window.porterbuddy.postalCode = document.getElementById(
+      "postCodeInput"
+    ).value
+    forceRefreshReference().then(function () {
+      console.log("refreshed")
+    })
+  }
+</script>
+```
+
+HTML code
+
+```html
+<div>
+  <span>Postcode</span>
+  <input id="postCodeInput" type="text" value="0153"></input>
+  <button onClick="window.refresh()">Refresh</button>
+</div>
+<div>
+  <div data-border id="porterbuddy-widget"></div>
+</div>
+```

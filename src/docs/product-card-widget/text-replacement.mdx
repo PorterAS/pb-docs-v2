@@ -1,0 +1,61 @@
+# Text replacement
+
+Texts can also be replaced outside of the widget on elements with the data attribute `**porterbuddy-text**`**.**
+
+## Example
+
+> INSERT WIDGET
+
+```html
+<p>
+  Custom text:
+  <span data-porterbuddy-text="availabilityPostcodeSuccess">Placeholder</span>
+</p>
+<p>
+  Custom text without pattern:
+  <span
+    data-porterbuddy-customtext="Custom text with postcode **{{postcode}}**"
+  >
+    Placeholder
+  </span>
+</p>
+<script>
+  setTimeout(function () {
+    window.porterbuddy = {
+      token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+      view: "checkout",
+      postalCode: "0153",
+      now: "2019-05-29T15:30:00+02:00",
+      availabilityResponse: {
+        deliveryWindows: [
+          {
+            product: "delivery",
+            start: "2019-05-30T17:30:00+02:00",
+            end: "2019-05-30T19:30:00+02:00",
+            expiresAt: "2019-05-30T14:30:00+02:00",
+            price: {
+              fractionalDenomination: 14900,
+              currency: "NOK",
+            },
+          },
+        ],
+        destinationResolvedAddress: {
+          streetName: null,
+          streetNumber: null,
+          postalCode: "0278",
+          city: "Oslo",
+          country: "Norway",
+          precision: null,
+          location: null,
+          locationTypes: [],
+        },
+      },
+      language: "NO",
+      text: {
+        availabilityPostcodeSuccess:
+          "Bestill innen **{{remaining}}** levert **{{delivery}}**",
+      },
+    }
+  }, 1000)
+</script>
+```

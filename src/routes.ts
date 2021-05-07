@@ -13,11 +13,31 @@ export const sidebarRoutes: SidebarRouteType[] = [
   {
     group: "product_card",
     label: "Product Card",
-    parentPath: "/product-card/",
+    parentPath: "/product-card-widget/",
     children: [
       {
-        routePath: "",
-        label: "",
+        routePath: "/product-card-widget/configuration-options/",
+        label: "Configuration options",
+      },
+      {
+        routePath: "/product-card-widget/text-replacement/",
+        label: "Text replacement",
+      },
+      {
+        routePath: "/product-card-widget/origin-addresses/",
+        label: "Origin addresses",
+      },
+      {
+        routePath: "/product-card-widget/multiple-discounts/",
+        label: "Multiple discounts",
+      },
+      {
+        routePath: "/product-card-widget/customizing-text/",
+        label: "Customizing text",
+      },
+      {
+        routePath: "/product-card-widget/callback-functions/",
+        label: "Callback functions",
       },
     ],
   },
@@ -49,7 +69,7 @@ interface SidebarRouteType {
   group: string
   label: string
   parentPath?: string
-  children: RouteProps[]
+  children: RouteType[]
 }
 
 type RouteType = {

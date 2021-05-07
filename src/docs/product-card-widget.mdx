@@ -1,0 +1,48 @@
+# Product Card Widget
+
+The product card widget is used on product pages to inform if a delivery with porterbuddy is available to a customer's postcode.
+
+### INSERT PORTERBUDDY WIDGET
+
+## Usage
+
+Add the configuration and script tag anywhere in `<head>` or `<body>`.
+
+```html
+<link
+  href="https://widget.porterbuddy.com/porterbuddy-widget.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<script
+  async
+  src="https://widget.porterbuddy.com/porterbuddy-widget.js"
+></script>
+```
+
+The async attribute is optional, but recommended for better performance.
+
+Configure the widget to show the "availability" view by defining the global variable.
+`window.porterbuddy` in a script tag. If `window.porterbuddy` is not defined when the script loads it will delay execution for up to 10 seconds until it finds the configuration.
+
+```html
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    language: "NO",
+  }
+</script>
+```
+
+Add a `div` in `body` with the id `**porterbuddy-widget**` where you want the widget to appear on the page
+
+```html
+<div id="porterbuddy-widget"></div>
+```
+
+By default the widget is displayed without border or padding, but this can be added by setting **data-border**:
+
+```html
+<div id="porterbuddy-widget" data-border></div>
+```

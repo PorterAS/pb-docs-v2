@@ -1,0 +1,53 @@
+# Multiple Discounts
+
+The Porterbuddy widget supports text replacement for multiple discounts, e.g. scenarios where higher discounts on shipping are offered depending on the order value.
+
+## Usage
+
+The standard discount is configured by setting the configuration option "discount". This value is used for calculating the regular shipping price, displayed as "Hjem ... fra kr xxx,-" in the product card view and as price for the delivery window in checkout view.
+
+Further discounts can be configured in the configuration option "additionalDiscounts". This option expects an dictionary where each key represents a name for a discount and each value is the value to subtract from the standard price for this discount. If additional discounts are specified, the widget will generate price variables for each discount, using a pattern `variablename_discountname` for the variable names. These variables can be used in the text replacement functions both inside and outside the widget. All variables starting with the word "price" are available for each additional discount.
+
+E.g., if there is an additional discount named "largeOrder" defined, the regular price for the cheapest delivery window on the first day will be "price_lowest_price", and this price including the additional discount will be named "price_lowest_price_largeOrder".
+
+## Example
+
+> INSERT WIDGET
+
+| **Variable**         | **Replacement value** | **Variable**                    | **Replacement value** |
+| -------------------- | --------------------- | ------------------------------- | --------------------- |
+| price                | kr 99,-               | price_largeOrder                | kr 49,-               |
+| price_first          | kr 99,-               | price_first_largeOrder          | kr 49,-               |
+| price_lowest_price   | kr 99,-               | price_lowest_price_largeOrder   | kr 49,-               |
+| price_lowest_overall | kr 99,-               | price_lowest_overall_largeOrder | kr 49,-               |
+
+```html
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    postalCode: "0153",
+    discount: 5000,
+    additionalDiscounts: {
+      largeOrder: 10000,
+    },
+    language: "NO",
+    text: {
+      availabilityPostcodeSuccess:
+        "Hjem {{delivery}} med Porterbuddy fra **{{price_lowest_price}}** eller kun **{{price_lowest_price_largeOrder}}** om du handler for over 1000,-",
+    },
+    onSetCallbacks: function (callbacks) {
+      window.forceRefreshReference = callbacks.forceRefresh
+    },
+  }
+  window.setDiscounts = function () {
+    window.porterbuddy.discount = Number(
+      document.getElementById("standardDiscountInput").value
+    )
+    window.porterbuddy.additionalDiscounts.largeOrder = Number(
+      document.getElementById("largeDiscountInput").value
+    )
+    window.forceRefreshReference()
+  }
+</script>
+```

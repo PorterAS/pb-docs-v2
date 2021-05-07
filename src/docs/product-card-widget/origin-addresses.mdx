@@ -1,0 +1,83 @@
+# Product Card Widget - Origin addresses
+
+The product card widget provides configuration options to specify a general origin address where merchandise is to be picked up, as well as an option to change the origin address based on the postcode of the recipient. The second option is intended for scenarios with multiple stores or warehouses, and the choice of warehouse depends on the recipient's postcode, or stock at the different warehouses.
+
+# Setting the general origin address
+
+The general origin address is set as the configuration option "originAddress" in the widget configuration object. If not specified, the widget will assume your store's pickup address is within Oslo, and use an Oslo address.
+
+```html
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    language: "NO",
+    originAddress: {
+      streetName: "Kanalveien",
+      streetNumber: "50",
+      postalCode: "5068",
+      city: "Bergen",
+      country: "Norway",
+    },
+  }
+</script>
+```
+
+# Changing the origin address based on recipient postcode
+
+The origin address can be set specifically for a recipient postcode by implementing the callback function "onStartFetchAvailability". This function gets called on each availability fetch with the entered postcode and a callback reference as arguments. The callback reference needs to be called with the updated origin address. It can also be used to skip the availability call and display a custom message instead. In this case, instead of calling the callback with an address, an object containing a property "message" with the custom message needs to be passed. If the argument of the callback is null, the availability call is executed with the currently stored origin request. NOTE: The widget will show a loading indicator until the callback is called. If the callback is never called, the widget will appear to be blocked, so make sure to call the callback.
+
+> INSERT WIDGET
+
+## Sample Code
+
+```html
+<script>
+  var osloAddress = {
+    streetName: "Karenslyst Allé",
+    streetNumber: "16D",
+    postalCode: "0278",
+    city: "Oslo",
+    country: "Norway",
+  }
+  var bergenAddress = {
+    streetName: "Kanalveien",
+    streetNumber: "50",
+    postalCode: "5068",
+    city: "Bergen",
+    country: "Norway",
+  }
+  var trondheimAddress = {
+    streetName: "Kongens gate",
+    streetNumber: "9",
+    postalCode: "7013",
+    city: "Trondheim",
+    country: "Norway",
+  }
+
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    language: "NO",
+    originAddress: osloAddress,
+    onStartFetchAvailability: function (postCode, callback) {
+      // timeout to simulate asynchronous behaviour
+      window.setTimeout(function () {
+        var result
+        if (Number(postCode) >= 9000) {
+          result = {
+            message: `Beklager, vi levere ikke på postnummer ${postCode}!`,
+          }
+        } else if (Number(postCode) >= 7000) {
+          result = trondheimAddress
+        } else if (Number(postCode) >= 5000) {
+          result = bergenAddress
+        } else {
+          result = osloAddress
+        }
+        callback(result)
+      }, 500)
+    },
+  }
+</script>
+```
