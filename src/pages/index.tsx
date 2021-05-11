@@ -43,7 +43,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Integrate Porterbuddy's product card widget, Checkout widget and Universal shipping module"
           }
-          link="/api-reference/"
+          link="/getting-started/"
           actionText="Learn more"
         />
         <FeatureCard
@@ -59,7 +59,7 @@ const IndexPage = ({ data }: any) => {
           content={
             "Discover our library of existing integrations with musltiple systems to get started quickly"
           }
-          link="/api-reference/"
+          link="/integrations/"
           actionText="Learn more"
         />
         <FeatureCard

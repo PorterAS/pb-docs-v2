@@ -52,6 +52,25 @@ const Layout = ({ children }: any) => {
               >
                 Docs
               </Text>
+              <Box
+                mb={5}
+                backgroundColor={
+                  url.includes("getting-started") ? "purple.200" : "white"
+                }
+                borderRadius={url.includes("getting-started") ? 3 : 0}
+                p={1}
+              >
+                <Link to={"/getting-started"}>
+                  <Text
+                    color={
+                      url.includes("getting-started") ? "black" : "gray.600"
+                    }
+                    fontSize={"sm"}
+                  >
+                    Getting started
+                  </Text>
+                </Link>
+              </Box>
 
               {/* {slugs.map((slug: any, index: number) => {
                 return (
@@ -90,7 +109,14 @@ const Layout = ({ children }: any) => {
                         key={`route_${index}`}
                       >
                         <Link to={childRoute.routePath}>
-                          <Text color={"gray.600"} fontSize={"sm"}>
+                          <Text
+                            color={
+                              url.includes(childRoute.routePath)
+                                ? "black"
+                                : "gray.600"
+                            }
+                            fontSize={"sm"}
+                          >
                             {childRoute.label}
                           </Text>
                         </Link>

@@ -1,22 +1,17 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { Badge } from "@chakra-ui/react"
+import { Badge, Box, Text } from "@chakra-ui/react"
 
 const Header = (props: HeaderProps) => (
-  <header
-    style={{
-      background: `#661AFF`,
-      // marginBottom: `1.45rem`,
-    }}
-  >
-    <div
+  <Box as="header" backgroundColor="#661AFF">
+    <Box
       style={{
         margin: `0 auto`,
-        maxWidth: 960,
+        maxWidth: 1700,
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <Text as="h1" style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
@@ -28,9 +23,9 @@ const Header = (props: HeaderProps) => (
           Porterbuddy Developers
         </Link>
         <Badge ml="2">beta</Badge>
-      </h1>
-    </div>
-  </header>
+      </Text>
+    </Box>
+  </Box>
 )
 
 type HeaderProps = {
