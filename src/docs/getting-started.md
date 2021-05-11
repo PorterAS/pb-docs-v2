@@ -1,3 +1,8 @@
+---
+meta_title: "Porterbuddy integration summary"
+meta_description: "Get started with integrating with Porterbuddy"
+---
+
 # Porterbuddy Integration Summary
 
 This page covers a summary of integrating with Porterbuddy and where to find relevant documentation on each process.

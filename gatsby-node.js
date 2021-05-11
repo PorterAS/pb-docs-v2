@@ -14,7 +14,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       node,
       name: `slug`,
-      value: slug
+      value: slug,
     })
   }
 }
@@ -25,7 +25,7 @@ exports.createPages = async ({ graphql, actions }) => {
     query {
       allMdx {
         edges {
-          node{
+          node {
             fields {
               slug
             }
@@ -44,8 +44,8 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve("./src/templates/docs-template-mdx.tsx"),
       context: {
         slug: node.fields.slug,
-        title: node.frontmatter.title
-      }
+        title: node.frontmatter.title,
+      },
     })
   })
 }

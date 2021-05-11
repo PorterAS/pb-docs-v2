@@ -12,6 +12,8 @@ export const query = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       frontmatter {
         title
+        meta_title
+        meta_description
       }
       timeToRead
       wordCount {
@@ -26,7 +28,11 @@ const BlogPostMdx = ({ data }: any) => {
   const doc = data.mdx
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO
+        title={doc.frontmatter.meta_title}
+        description={doc.frontmatter.meta_description}
+        lang="en"
+      />
       <Text my={5} fontSize={"3xl"} fontWeight={"bold"}>
         {doc.frontmatter.title}
       </Text>

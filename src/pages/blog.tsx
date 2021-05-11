@@ -27,7 +27,7 @@ const Blog = ({ data }: any) => {
   const slugs = data.allMdx.edges
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Porterbuddy Blog" lang="en" />
       <Box my={10}>
         <Center>
           <Text fontSize="4xl">Blog</Text>

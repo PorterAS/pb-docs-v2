@@ -13,6 +13,7 @@ const FAQ = ({ data }: any) => {
       <SEO
         title="Frequently asked questions"
         description="Find answers to frequently asked questions on Porterbuddy's integration and technology"
+        lang={"en"}
       />
       <Box my={10}>
         <Center>
