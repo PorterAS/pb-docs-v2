@@ -54,23 +54,12 @@ export const sidebarRoutes: SidebarRouteType[] = [
     label: "Checkout Widget",
     parentPath: "/checkout_widget/",
     children: [
-      {
-        routePath: "",
-        label: "",
-      },
+      // {
+      //   routePath: "",
+      //   label: "",
+      // },
     ],
   },
-  // {
-  //   group: "Integrations",
-  //   label: "Integrations",
-  //   parentPath: "/integrations/",
-  //   children: [
-  //     {
-  //       routePath: "/integrations/shopify-integration/",
-  //       label: "",
-  //     },
-  //   ],
-  // },
   {
     group: "guides",
     label: "Guides",
@@ -87,7 +76,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
 interface SidebarRouteType {
   group: string
   label: string
-  parentPath?: string
+  parentPath: string
   children: RouteType[]
 }
 

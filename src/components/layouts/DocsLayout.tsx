@@ -30,6 +30,8 @@ const Layout = ({ children }: any) => {
     }
   `)
   const slugs = data.allMdx.edges
+  const url = typeof window !== "undefined" ? window.location.href : ""
+  console.log(url)
 
   return (
     <>
@@ -42,7 +44,12 @@ const Layout = ({ children }: any) => {
         >
           <GridItem colSpan={1} borderRightWidth={2} px={5} py={5}>
             <Box as="aside">
-              <Text fontSize={"xl"} fontWeight="bold">
+              <Text
+                fontSize={"lg"}
+                fontWeight="bold"
+                textTransform="uppercase"
+                mb={5}
+              >
                 Docs
               </Text>
 
@@ -56,13 +63,38 @@ const Layout = ({ children }: any) => {
               {sidebarRoutes.map((route, index) => (
                 <Box key="index">
                   <Text fontWeight="500" mb={2}>
-                    <Link to={route.parentPath}>{route.label}</Link>
+                    <Link to={route.parentPath} textTransform="uppercase">
+                      {route.label}
+                    </Link>
                   </Text>
                   <Box mb={5} ml={2}>
                     {route.children.map((childRoute, index) => (
-                      <Link to={childRoute.routePath}>
-                        <Text>{childRoute.label}</Text>
-                      </Link>
+                      <Box
+                        mb={1}
+                        _hover={{
+                          backgroundColor: url.includes(childRoute.routePath)
+                            ? "purple.200"
+                            : "purple.50",
+                          borderRadius: 3,
+                          transitionDuration: "300ms",
+                        }}
+                        p={1}
+                        backgroundColor={
+                          url.includes(childRoute.routePath)
+                            ? "purple.200"
+                            : "white"
+                        }
+                        borderRadius={
+                          url.includes(childRoute.routePath) ? 3 : 0
+                        }
+                        key={`route_${index}`}
+                      >
+                        <Link to={childRoute.routePath}>
+                          <Text color={"gray.600"} fontSize={"sm"}>
+                            {childRoute.label}
+                          </Text>
+                        </Link>
+                      </Box>
                     ))}
                   </Box>
                 </Box>
