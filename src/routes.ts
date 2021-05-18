@@ -20,7 +20,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
   },
   {
     group: "product_card",
-    label: "Product Card",
+    label: "Product Card Widget",
     parentPath: "/product-card-widget/",
     children: [
       {

@@ -2,12 +2,12 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { Badge, Box, Text } from "@chakra-ui/react"
 
-const Header = (props: HeaderProps) => (
-  <Box as="header" backgroundColor="#661AFF">
+const Header = ({ ...rest }: HeaderProps) => (
+  <Box as="header" backgroundColor="#661AFF" width="100%" {...rest}>
     <Box
       style={{
         margin: `0 auto`,
-        maxWidth: 1700,
+        maxWidth: 1700 ,
         padding: `1.45rem 1.0875rem`,
       }}
     >

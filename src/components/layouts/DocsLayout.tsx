@@ -35,15 +35,18 @@ const Layout = ({ children }: any) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <Box>
+      <Header
+        siteTitle={data.site.siteMetadata?.title || `Title`}
+        position="fixed"
+      />
+      <Box pt={20}>
         <Grid
           gap={5}
           templateRows="repeat(1, 1fr)"
           templateColumns="repeat(5, 1fr)"
         >
           <GridItem colSpan={1} borderRightWidth={2} px={5} py={5}>
-            <Box as="aside">
+            <Box as="aside" position="fixed" scroll="auto">
               <Text
                 fontSize={"lg"}
                 fontWeight="bold"
@@ -81,10 +84,13 @@ const Layout = ({ children }: any) => {
               })} */}
               {sidebarRoutes.map((route, index) => (
                 <Box key="index">
-                  <Text fontWeight="500" mb={2}>
-                    <Link to={route.parentPath} textTransform="uppercase">
-                      {route.label}
-                    </Link>
+                  <Text
+                    fontWeight="500"
+                    mb={2}
+                    textTransform="uppercase"
+                    fontSize="sm"
+                  >
+                    <Link to={route.parentPath}>{route.label}</Link>
                   </Text>
                   <Box mb={5} ml={2}>
                     {route.children.map((childRoute, index) => (
