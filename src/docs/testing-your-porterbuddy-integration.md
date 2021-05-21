@@ -1,8 +1,9 @@
 ---
 title: "Testing your Porterbuddy Integration"
+meta_title: "Testing your Porterbuddy Integration"
 publishBy: "21-05-2021"
 author: "William Imoh"
-description: "Test your Porterbuddy integration to mitigate errors in production"
+meta_description: "Test your Porterbuddy integration to mitigate errors in production"
 ---
 
 After integrating Porterbuddy into your e-commerce platform, it is vital to test your systems end-to-end to ensure its effectiveness.
