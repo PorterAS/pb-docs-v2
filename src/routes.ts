@@ -69,6 +69,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
         routePath: "/samlevert-upgrade-guide/",
         label: "Samlevert upgrade guide",
       },
+      {
+        routePath: "/testing-your-porterbuddy-integration/",
+        label: "Testing your integration",
+      },
     ],
   },
 ]
