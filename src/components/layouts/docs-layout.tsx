@@ -29,16 +29,13 @@ const Layout = ({ children }: any) => {
       }
     }
   `)
-  const slugs = data.allMdx.edges
+  // const slugs = data.allMdx.edges
   const url = typeof window !== "undefined" ? window.location.href : ""
   console.log(url)
 
   return (
     <>
-      <Header
-        siteTitle={data.site.siteMetadata?.title || `Title`}
-        position="fixed"
-      />
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <Box pt={20}>
         <Grid
           gap={5}
@@ -46,7 +43,7 @@ const Layout = ({ children }: any) => {
           templateColumns="repeat(5, 1fr)"
         >
           <GridItem colSpan={1} borderRightWidth={2} px={5} py={5}>
-            <Box as="aside" position="fixed" scroll="auto">
+            <Box as="aside" position="fixed" overscroll={"auto"}>
               <Text
                 fontSize={"lg"}
                 fontWeight="bold"
@@ -83,7 +80,7 @@ const Layout = ({ children }: any) => {
                 )
               })} */}
               {sidebarRoutes.map((route, index) => (
-                <Box key="index">
+                <Box key={index}>
                   <Text
                     fontWeight="500"
                     mb={2}

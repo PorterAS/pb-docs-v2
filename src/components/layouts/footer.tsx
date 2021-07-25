@@ -1,0 +1,114 @@
+import { Box, Stack, StackDivider } from "@chakra-ui/react"
+import * as React from "react"
+import { Link } from "gatsby"
+import { SubscribeForm } from "./subscribe-form"
+// @ts-ignore
+import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
+import {
+  Text,
+  TextProps,
+  Heading,
+  HeadingProps,
+  useColorModeValue,
+  SimpleGrid,
+  SimpleGridProps,
+  Image,
+  ButtonGroup,
+  ButtonGroupProps,
+  IconButton,
+} from "@chakra-ui/react"
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
+import { Container } from "./container"
+
+export const SocialMediaLinks = (props: ButtonGroupProps) => (
+  <ButtonGroup variant="ghost" color="gray.600" {...props}>
+    <IconButton
+      as="a"
+      href="#"
+      aria-label="LinkedIn"
+      icon={<FaLinkedin fontSize="20px" />}
+    />
+    <IconButton
+      as="a"
+      href="#"
+      aria-label="GitHub"
+      icon={<FaGithub fontSize="20px" />}
+    />
+    <IconButton
+      as="a"
+      href="#"
+      aria-label="Twitter"
+      icon={<FaTwitter fontSize="20px" />}
+    />
+  </ButtonGroup>
+)
+
+export const Copyright = (props: TextProps) => (
+  <Text fontSize="sm" {...props}>
+    &copy; {new Date().getFullYear()} Porter AS. All rights reserved.
+  </Text>
+)
+
+export const LinkGrid = (props: SimpleGridProps) => (
+  <SimpleGrid columns={2} {...props}>
+    <Box minW="130px">
+      <FooterHeading mb="4">Product</FooterHeading>
+      <Stack>
+        <Link to={"/api-reference/"}>API Reference</Link>
+        <Link to={"/guides/"}>Integrations</Link>
+        <Link to={"/guides/"}>Guides</Link>
+      </Stack>
+    </Box>
+    <Box minW="130px">
+      <FooterHeading mb="4">Support</FooterHeading>
+      <Stack>
+        <Link to={"/guides/"}>FAQs</Link>
+        <Link to={"/guides/"}>Porterbuddy Community</Link>
+        <Link to={"/guides/"}>Careers</Link>
+        <Link to={"/guides/"}>Customer Support</Link>
+      </Stack>
+    </Box>
+  </SimpleGrid>
+)
+export const FooterHeading = (props: HeadingProps) => (
+  <Heading
+    as="h4"
+    color={useColorModeValue("#661AFF", "gray.400")}
+    fontSize="sm"
+    fontWeight="semibold"
+    textTransform="uppercase"
+    letterSpacing="wider"
+    {...props}
+  />
+)
+export const Footer = () => (
+  <Container>
+    <Box as="footer" role="contentinfo" maxW={1700} py="12" mt={30}>
+      <Stack spacing="10" divider={<StackDivider />}>
+        <Stack
+          direction={{ base: "column", lg: "row" }}
+          spacing={{ base: "10", lg: "28" }}
+        >
+          <Box flex="1">
+            <Image src={PorterbuddyLogo} borderRadius={5} />
+          </Box>
+          <Stack
+            direction={{ base: "column", md: "row" }}
+            spacing={{ base: "10", md: "20" }}
+          >
+            <LinkGrid spacing={{ base: "10", md: "20", lg: "28" }} flex="1" />
+            <SubscribeForm width={{ base: "full", md: "sm" }} />
+          </Stack>
+        </Stack>
+        <Stack
+          direction={{ base: "column-reverse", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Copyright />
+          <SocialMediaLinks />
+        </Stack>
+      </Stack>
+    </Box>
+  </Container>
+)

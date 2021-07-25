@@ -1,10 +1,11 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Box } from "@chakra-ui/react"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 import { Container } from "./container"
+import { Footer } from "./footer"
 
 const Layout = ({ children }: any) => {
   const data = useStaticQuery(graphql`
@@ -23,6 +24,7 @@ const Layout = ({ children }: any) => {
       <Container>
         <Box as="main">{children}</Box>
       </Container>
+      <Footer />
     </Box>
   )
 }
