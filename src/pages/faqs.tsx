@@ -1,13 +1,11 @@
 import * as React from "react"
-
-import { Text, Center, Box, Accordion } from "@chakra-ui/react"
+import { Accordion, Box, Center, Text } from "@chakra-ui/react"
 import { faqContent, FAQType } from "../faqContent"
-
-import Layout from "../components/layouts/HomeLayout"
+import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
-import { AccordionElement } from "../components/faq/Accordion"
+import { AccordionElement } from "../components/faq/accordion"
 
-const FAQ = ({ data }: any) => {
+const FAQ = ({}: any) => {
   return (
     <Layout>
       <SEO

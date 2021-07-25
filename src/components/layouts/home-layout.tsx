@@ -2,9 +2,9 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Box } from "@chakra-ui/react"
 import { useStaticQuery, graphql } from "gatsby"
-
 import Header from "./header"
 import "./layout.css"
+import { Container } from "./container"
 
 const Layout = ({ children }: any) => {
   const data = useStaticQuery(graphql`
@@ -18,18 +18,12 @@ const Layout = ({ children }: any) => {
   `)
 
   return (
-    <>
+    <Box>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <Box
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
+      <Container>
         <Box as="main">{children}</Box>
-      </Box>
-    </>
+      </Container>
+    </Box>
   )
 }
 

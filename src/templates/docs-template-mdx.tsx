@@ -1,14 +1,14 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layouts/DocsLayout"
+import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
-import { Box, Center, HStack, Text } from "@chakra-ui/react"
+import { Box, Text } from "@chakra-ui/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import "./docs-template.css"
 import "highlight.js/styles/github.css"
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       frontmatter {
         title

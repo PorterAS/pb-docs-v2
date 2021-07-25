@@ -1,9 +1,8 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { Text, SimpleGrid, Center, Box } from "@chakra-ui/react"
-import { FeatureCard } from "../components/home/FeatureCard"
-
-import Layout from "../components/layouts/HomeLayout"
+import { FeatureCard } from "../components/home/feature-card"
+import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
 
 export const query = graphql`
@@ -23,8 +22,8 @@ export const query = graphql`
   }
 `
 
-const IndexPage = ({ data }: any) => {
-  const slugs = data.allMdx.edges
+const IndexPage = ({}: any) => {
+  // const slugs = data.allMdx.edges
   return (
     <Layout>
       <SEO title="Home" />
@@ -37,7 +36,7 @@ const IndexPage = ({ data }: any) => {
         </Text>
       </Box>
 
-      <SimpleGrid columns="3" spacing="10" my={5}>
+      <SimpleGrid columns={3} spacing="10" my={5}>
         <FeatureCard
           title={"Get Started"}
           content={

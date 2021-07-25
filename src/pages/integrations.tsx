@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { Text, Center, Box } from "@chakra-ui/react"
 
-import Layout from "../components/layouts/HomeLayout"
+import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
 
 // export const query = graphql`

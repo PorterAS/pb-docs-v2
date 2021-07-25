@@ -1,9 +1,7 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
-import { Text, SimpleGrid, Center, Box } from "@chakra-ui/react"
-import { FeatureCard } from "../components/home/FeatureCard"
-
-import Layout from "../components/layouts/HomeLayout"
+import { graphql } from "gatsby"
+import { Box, Center, Text } from "@chakra-ui/react"
+import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
 
 export const query = graphql`
@@ -23,8 +21,8 @@ export const query = graphql`
   }
 `
 
-const Blog = ({ data }: any) => {
-  const slugs = data.allMdx.edges
+const Blog = ({}: any) => {
+  // const slugs = data.allMdx.edges
   return (
     <Layout>
       <SEO title="Porterbuddy Blog" lang="en" />
