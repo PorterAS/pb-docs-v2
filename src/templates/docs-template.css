@@ -1,6 +1,7 @@
 /*Add all custom styles for the blog content here*/
 .blog-content {
     line-height: 2;
+    font-size: 0.9rem;
 }
 
 .blog-content h1,

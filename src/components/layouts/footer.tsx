@@ -44,7 +44,7 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => (
 )
 
 export const Copyright = (props: TextProps) => (
-  <Text fontSize="sm" {...props}>
+  <Text fontSize="xs" {...props}>
     &copy; {new Date().getFullYear()} Porter AS. All rights reserved.
   </Text>
 )
@@ -81,34 +81,36 @@ export const FooterHeading = (props: HeadingProps) => (
     {...props}
   />
 )
-export const Footer = () => (
-  <Container mt={"10"}>
-    <Box as="footer" role="contentinfo" maxW={1700} py="12" mt={30}>
-      <Stack spacing="5" divider={<StackDivider />}>
-        <Stack
-          direction={{ base: "column", lg: "row" }}
-          spacing={{ base: "10", lg: "28" }}
-        >
-          <Box flex="1">
-            <Image src={PorterbuddyLogo} borderRadius={5} />
-          </Box>
+export const Footer = ({ ...rest }: any) => (
+  <Box borderWidth={0.5} {...rest} backgroundColor={"white"}>
+    <Container>
+      <Box as="footer" role="contentinfo" maxW={1700} pt={12} mt={5}>
+        <Stack spacing="5" divider={<StackDivider />}>
           <Stack
-            direction={{ base: "column", md: "row" }}
-            spacing={{ base: "10", md: "20" }}
+            direction={{ base: "column", lg: "row" }}
+            spacing={{ base: "10", lg: "28" }}
           >
-            <LinkGrid spacing={{ base: "10", md: "20", lg: "28" }} flex="1" />
-            <SubscribeForm width={{ base: "full", md: "sm" }} />
+            <Box flex="1">
+              <Image src={PorterbuddyLogo} borderRadius={5} />
+            </Box>
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              spacing={{ base: "10", md: "20" }}
+            >
+              <LinkGrid spacing={{ base: "10", md: "20", lg: "28" }} flex="1" />
+              <SubscribeForm width={{ base: "full", md: "sm" }} />
+            </Stack>
+          </Stack>
+          <Stack
+            direction={{ base: "column-reverse", md: "row" }}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Copyright />
+            <SocialMediaLinks />
           </Stack>
         </Stack>
-        <Stack
-          direction={{ base: "column-reverse", md: "row" }}
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Copyright />
-          <SocialMediaLinks />
-        </Stack>
-      </Stack>
-    </Box>
-  </Container>
+      </Box>
+    </Container>
+  </Box>
 )
