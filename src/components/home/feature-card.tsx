@@ -1,5 +1,5 @@
 import React from "react"
-import { chakra, Box, Text, useColorModeValue } from "@chakra-ui/react"
+import { chakra, Box, Text, useColorModeValue, Flex } from "@chakra-ui/react"
 import { Link } from "gatsby"
 
 type FeatureCardProps = {
@@ -8,6 +8,7 @@ type FeatureCardProps = {
   children?: React.ReactElement
   link: string
   actionText?: string
+  icon?: React.ReactElement
 }
 const FeatureCard = ({
   title,
@@ -15,6 +16,7 @@ const FeatureCard = ({
   link,
   actionText,
   children,
+  icon,
 }: FeatureCardProps) => {
   return (
     <Box
@@ -22,17 +24,23 @@ const FeatureCard = ({
       py={4}
       px={5}
       bg={useColorModeValue("white", "gray.800")}
-      shadow="lg"
+      // boxShadow={"0px 0px 10px 0px grey"}
+      shadow={"md"}
       rounded="lg"
     >
-      <chakra.h3
-        color={useColorModeValue("gray.800", "white")}
-        fontSize={{ base: "xl", md: "xl" }}
-        mt={{ base: 2, md: 0 }}
-        fontWeight="bold"
-      >
-        {title}
-      </chakra.h3>
+      <Flex alignItems={"center"}>
+        <Box width={"10%"} color={"#661AFF"}>
+          {icon}
+        </Box>
+        <chakra.h3
+          color={useColorModeValue("gray.800", "white")}
+          fontSize={{ base: "xl", md: "xl" }}
+          mt={{ base: 2, md: 0 }}
+          fontWeight="bold"
+        >
+          {title}
+        </chakra.h3>
+      </Flex>
 
       <chakra.p mt={2} color={useColorModeValue("gray.600", "gray.200")}>
         {content}

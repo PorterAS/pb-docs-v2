@@ -51,7 +51,7 @@ export const Copyright = (props: TextProps) => (
 
 export const LinkGrid = (props: SimpleGridProps) => (
   <SimpleGrid columns={2} {...props}>
-    <Box minW="130px">
+    <Box minW="130px" fontSize={"sm"}>
       <FooterHeading mb="4">Product</FooterHeading>
       <Stack>
         <Link to={"/api-reference/"}>API Reference</Link>
@@ -59,7 +59,7 @@ export const LinkGrid = (props: SimpleGridProps) => (
         <Link to={"/guides/"}>Guides</Link>
       </Stack>
     </Box>
-    <Box minW="130px">
+    <Box minW="130px" fontSize={"sm"}>
       <FooterHeading mb="4">Support</FooterHeading>
       <Stack>
         <Link to={"/guides/"}>FAQs</Link>
@@ -82,9 +82,9 @@ export const FooterHeading = (props: HeadingProps) => (
   />
 )
 export const Footer = () => (
-  <Container>
+  <Container mt={"10"}>
     <Box as="footer" role="contentinfo" maxW={1700} py="12" mt={30}>
-      <Stack spacing="10" divider={<StackDivider />}>
+      <Stack spacing="5" divider={<StackDivider />}>
         <Stack
           direction={{ base: "column", lg: "row" }}
           spacing={{ base: "10", lg: "28" }}
