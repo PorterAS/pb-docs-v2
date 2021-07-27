@@ -30,8 +30,10 @@ export const SubscribeForm = (props: HTMLChakraProps<"form">) => {
               opacity: 1,
               color: useColorModeValue("gray.500", "whiteAlpha.700"),
             }}
+            disabled
           />
           <Button
+            disabled
             fontSize={"sm"}
             type="submit"
             bgColor="#661AFF"

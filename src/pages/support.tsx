@@ -21,13 +21,13 @@ import SEO from "../components/seo"
 //   }
 // `
 
-const IntegrationsPage = () => {
+const SupportPage = () => {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Porterbuddy Developer support" />
       <Box>
         <Center>
-          <Text fontSize="2xl">Integrations</Text>
+          <Text fontSize="2xl">Developer Support</Text>
         </Center>
         <Text textAlign="center">
           This page wil be filled with content soon.
@@ -36,4 +36,4 @@ const IntegrationsPage = () => {
     </Layout>
   )
 }
-export default IntegrationsPage
+export default SupportPage

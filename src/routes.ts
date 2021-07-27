@@ -61,7 +61,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
     group: "checkout_widget",
     label: "Checkout Widget",
     icon: "FaShoppingCart",
-    parentPath: "/checkout_widget/",
+    parentPath: "/checkout-widget/",
     children: [
       // {
       //   routePath: "",
@@ -122,7 +122,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
   {
     group: "pb_community",
     label: "PB Community",
-    parentPath: "/faqs/",
+    parentPath: "/community/",
     icon: "FaPeopleCarry",
   },
   {

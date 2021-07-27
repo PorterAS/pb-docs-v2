@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Accordion, Box, Center, Text } from "@chakra-ui/react"
 import { faqContent, FAQType } from "../faqContent"
-import Layout from "../components/layouts/home-layout"
+import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { AccordionElement } from "../components/faq/accordion"
 
@@ -13,9 +13,9 @@ const FAQ = ({}: any) => {
         description="Find answers to frequently asked questions on Porterbuddy's integration and technology"
         lang={"en"}
       />
-      <Box my={10}>
+      <Box>
         <Center>
-          <Text fontSize="4xl">FAQs</Text>
+          <Text fontSize="2xl">FAQs</Text>
         </Center>
         <Text textAlign="center">
           Frequently asked questions and their answers

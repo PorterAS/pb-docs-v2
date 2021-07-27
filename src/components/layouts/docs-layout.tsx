@@ -232,14 +232,14 @@ const DocsLayout = ({ children }: any) => {
                   borderRadius={5}
                   bgColor={"green.200"}
                   color={"black"}
-                  minH={"7%"}
+                  minH={"100px"}
                   pos={"fixed"}
                 >
                   <Text fontWeight={"bold"} fontSize={"md"}>
                     Green Deliveries
                   </Text>
                   <Text fontSize={"sm"}>Register to get green deliveries</Text>
-                  <Center mt={"5%"}>
+                  <Center mt={"20px"} pos={"relative"}>
                     <Button
                       bgColor={"#661AFF"}
                       _hover={{ bgColor: "#661AFF", opacity: 0.8 }}

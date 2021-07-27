@@ -153,7 +153,7 @@ const IndexPage = ({}: any) => {
           content={
             "Discover awesome technical content created to help you build better"
           }
-          link="/blog/"
+          link="/guides/"
           actionText="Learn more"
         />
         <FeatureCard
@@ -162,7 +162,7 @@ const IndexPage = ({}: any) => {
           content={
             "Discover awesome technical content created to help you build better"
           }
-          link="/blog/"
+          link="/community/"
           actionText="Learn more"
         />
       </SimpleGrid>
@@ -207,7 +207,7 @@ const IndexPage = ({}: any) => {
                 bgColor={"#3a118e"}
                 _hover={{ bgColor: "#3a118e", opacity: 0.8 }}
               >
-                <a href={"https://google.com"}>Work with us</a>
+                <a href={"mailto:dev@porterbuddy.com"}>Work with us</a>
               </Button>
             </Center>
           </Box>
