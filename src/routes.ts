@@ -1,7 +1,14 @@
 export const sidebarRoutes: SidebarRouteType[] = [
   {
+    group: "getting_started",
+    label: "Get started",
+    parentPath: "/getting-started/",
+    icon: "FaPlay",
+  },
+  {
     group: "api_reference",
     label: "API Reference",
+    icon: "FaBook",
     parentPath: "/api-reference/",
     children: [
       {
@@ -10,7 +17,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
       },
       {
         routePath: "/api-reference/order-api/",
-        label: "Plaing an order",
+        label: "Planing an order",
       },
       {
         routePath: "/api-reference/errors/",
@@ -21,6 +28,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
   {
     group: "product_card",
     label: "Product Card Widget",
+    icon: "GiClothJar",
     parentPath: "/product-card-widget/",
     children: [
       {
@@ -52,6 +60,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
   {
     group: "checkout_widget",
     label: "Checkout Widget",
+    icon: "FaShoppingCart",
     parentPath: "/checkout_widget/",
     children: [
       // {
@@ -61,9 +70,38 @@ export const sidebarRoutes: SidebarRouteType[] = [
     ],
   },
   {
+    group: "integrations",
+    label: "Integrations",
+    parentPath: "/integrations/",
+    icon: "GrIntegration",
+    children: [
+      {
+        routePath: "/integrations/shopify-integration/",
+        label: "Shopify",
+      },
+      {
+        routePath: "/",
+        label: "WooCommerce",
+      },
+      {
+        routePath: "/",
+        label: "Magento 2",
+      },
+      {
+        routePath: "/",
+        label: "Episerver",
+      },
+      {
+        routePath: "/",
+        label: "Dynamics 365",
+      },
+    ],
+  },
+  {
     group: "guides",
     label: "Guides",
     parentPath: "/guides/",
+    icon: "FaBookOpen",
     children: [
       {
         routePath: "/samlevert-upgrade-guide/",
@@ -75,13 +113,32 @@ export const sidebarRoutes: SidebarRouteType[] = [
       },
     ],
   },
+  {
+    group: "faqs",
+    label: "Frequently asked questions",
+    parentPath: "/faqs/",
+    icon: "FaInfoCircle",
+  },
+  {
+    group: "pb_community",
+    label: "PB Community",
+    parentPath: "/faqs/",
+    icon: "FaPeopleCarry",
+  },
+  {
+    group: "changelog",
+    label: "Changelog",
+    parentPath: "/changelog/",
+    icon: "FaCodeBranch",
+  },
 ]
 
 interface SidebarRouteType {
   group: string
   label: string
   parentPath: string
-  children: RouteType[]
+  icon?: string
+  children?: RouteType[]
 }
 
 type RouteType = {

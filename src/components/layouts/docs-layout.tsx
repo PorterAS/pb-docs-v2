@@ -1,11 +1,11 @@
 import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-// import { sidebarRoutes } from "../../routes"
+import { graphql, Link, useStaticQuery } from "gatsby"
+import { sidebarRoutes } from "../../routes"
 import {
   Box,
+  BoxProps,
   Button,
   Center,
-  Collapse,
   Drawer,
   DrawerContent,
   DrawerOverlay,
@@ -17,20 +17,52 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react"
-import { FaClipboardCheck, FaRss } from "react-icons/fa"
-import { AiFillGift } from "react-icons/ai"
-import { BsGearFill } from "react-icons/bs"
-import { HiCode, HiCollection } from "react-icons/hi"
-import { MdHome, MdKeyboardArrowRight } from "react-icons/md"
+import {
+  FaBook,
+  FaBookOpen,
+  FaCodeBranch,
+  FaInfoCircle,
+  FaPeopleCarry,
+  FaPlay,
+  FaShoppingCart,
+} from "react-icons/fa"
 // @ts-ignore
 import Logo from "../../images/porterbuddy-logo.png"
-
 import Header from "./header"
 import "./layout.css"
 import { Container } from "./container"
-import { Footer } from "./footer"
+import { GrCatalog, GrIntegration } from "react-icons/gr"
+import { GiClothJar } from "react-icons/gi"
 
+interface NavItemType extends BoxProps {
+  icon: React.ReactNode | any
+  navLink: string
+  children: React.ReactNode
+}
 const DocsLayout = ({ children }: any) => {
+  // Get page URl on layout mount to be used in updating styles
+  // const [pageURL, setPageURL] = useState("")
+  //
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setPageURL(window.location.href)
+  //   }
+  // }, [])
+  const pageURL = typeof window !== "undefined" ? window.location.href : ""
+
+  const iconMap = {
+    FaPlay: FaPlay,
+    FaBook: FaBook,
+    FaInfoCircle: FaInfoCircle,
+    FaShoppingCart: FaShoppingCart,
+    FaPeopleCarry: FaPeopleCarry,
+    FaCodeBranch: FaCodeBranch,
+    FaBookOpen: FaBookOpen,
+    GrCatalog: GrCatalog,
+    GrIntegration: GrIntegration,
+    GiClothJar: GiClothJar,
+  }
+
   const data = useStaticQuery(graphql`
     query DocsSiteTitleQuery {
       site {
@@ -54,55 +86,43 @@ const DocsLayout = ({ children }: any) => {
   `)
   // const slugs = data.allMdx.edges
 
-  // const url = typeof window !== "undefined" ? window.location.href : ""
   const sidebar = useDisclosure()
-  const integrations = useDisclosure()
+  const integrationsCollapse = useDisclosure()
 
-  const NavItem = ({ icon, children, ...rest }: any) => {
+  const NavItem = ({ icon, navLink, children, ...rest }: NavItemType) => {
     return (
-      <Flex
-        align="center"
-        px="4"
-        pl="4"
-        py="3"
-        cursor="pointer"
-        color={useColorModeValue("inherit", "gray.400")}
-        _hover={{
-          bg: useColorModeValue("gray.100", "gray.900"),
-          color: useColorModeValue("gray.900", "gray.200"),
-        }}
-        role="group"
-        fontWeight="semibold"
-        transition=".15s ease"
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mr="2"
-            boxSize="4"
-            _groupHover={{
-              color: useColorModeValue("gray.600", "gray.300"),
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
+      <Link to={navLink}>
+        <Flex
+          align="center"
+          _hover={{ color: "#661AFF", opacity: 0.8 }}
+          transition={"0.5s"}
+          cursor="pointer"
+          color={
+            pageURL.includes(navLink)
+              ? useColorModeValue("#661AFF", "gray.400")
+              : "gray.600"
+          }
+          role="group"
+          fontWeight="semibold"
+          {...rest}
+        >
+          {icon && <Icon mr="2" boxSize="4" as={icon} />}
+          {children}
+        </Flex>
+      </Link>
     )
   }
 
   const SidebarContent = (props: any) => (
     <Box
       as="nav"
-      // zIndex="sticky"
-      // h="full"
       pb="10"
       overflowX="hidden"
       overflowY="auto"
       bg={useColorModeValue("white", "gray.800")}
-      borderColor={useColorModeValue("inherit", "gray.700")}
       w="60"
       pos={"fixed"}
+      height={"calc(100vh - 8.125rem)"}
       {...props}
     >
       <Flex
@@ -112,29 +132,52 @@ const DocsLayout = ({ children }: any) => {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <NavItem icon={MdHome}>Home</NavItem>
-        <NavItem icon={FaRss}>Articles</NavItem>
-        <NavItem icon={HiCollection}>Collections</NavItem>
-        <NavItem icon={FaClipboardCheck}>Checklists</NavItem>
-        <NavItem icon={HiCode} onClick={integrations.onToggle}>
-          Integrations
-          <Box ml="auto" transform={integrations.isOpen && "rotate(90deg)"}>
-            <MdKeyboardArrowRight />
-          </Box>
-        </NavItem>
-        <Collapse in={integrations.isOpen}>
-          <NavItem pl="12" py="2">
-            Shopify
-          </NavItem>
-          <NavItem pl="12" py="2">
-            Slack
-          </NavItem>
-          <NavItem pl="12" py="2">
-            Zapier
-          </NavItem>
-        </Collapse>
-        <NavItem icon={AiFillGift}>Changelog</NavItem>
-        <NavItem icon={BsGearFill}>Settings</NavItem>
+        {sidebarRoutes &&
+          sidebarRoutes.map(route => {
+            return (
+              <Box mb={5}>
+                <NavItem
+                  navLink={route.parentPath}
+                  key={route.group}
+                  icon={iconMap[route.icon]}
+                  onClick={route.children && integrationsCollapse.onToggle}
+                >
+                  {route.label}
+                </NavItem>
+                {route.children &&
+                  route.children.map(childRoute => (
+                    <Link to={childRoute.routePath}>
+                      <Box
+                        pl={6}
+                        fontSize={"14px"}
+                        py={2}
+                        fontWeight={"500"}
+                        transition={"0.5s"}
+                        color={
+                          pageURL.includes(childRoute.routePath) &&
+                          childRoute.routePath !== "/"
+                            ? useColorModeValue("#661AFF", "gray.400")
+                            : "gray.600"
+                        }
+                        _hover={{
+                          borderRadius: 3,
+                          backgroundColor:
+                            pageURL.includes(childRoute.routePath) &&
+                            childRoute.routePath !== "/"
+                              ? useColorModeValue(
+                                  "rgba(194,170,245,0.25)",
+                                  "gray.400"
+                                )
+                              : "rgba(194,170,245,0.25)",
+                        }}
+                      >
+                        {childRoute.label}
+                      </Box>
+                    </Link>
+                  ))}
+              </Box>
+            )
+          })}
       </Flex>
     </Box>
   )
@@ -163,7 +206,6 @@ const DocsLayout = ({ children }: any) => {
 
           <Box as="section" pos={"relative"}>
             <Grid
-              // h="200px"
               templateRows="repeat(1, 1fr)"
               templateColumns="repeat(5, 1fr)"
               gap={2}
@@ -178,6 +220,9 @@ const DocsLayout = ({ children }: any) => {
                 <Box as={"main"} py={5} px={3}>
                   {children}
                 </Box>
+                {/*<Box>*/}
+                {/*  <Footer />*/}
+                {/*</Box>*/}
               </GridItem>
 
               <GridItem colSpan={1}>
@@ -185,8 +230,8 @@ const DocsLayout = ({ children }: any) => {
                   m={5}
                   p={3}
                   borderRadius={5}
-                  bgColor={"purple.900"}
-                  color={"white"}
+                  bgColor={"green.200"}
+                  color={"black"}
                   minH={"7%"}
                   pos={"fixed"}
                 >
@@ -211,9 +256,9 @@ const DocsLayout = ({ children }: any) => {
         </Container>
       </Box>
 
-      <Box>
-        <Footer />
-      </Box>
+      {/*<Box>*/}
+      {/*  <Footer />*/}
+      {/*</Box>*/}
     </Box>
   )
 }

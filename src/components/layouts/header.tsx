@@ -1,6 +1,15 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { Badge, Box, Text, Image, HStack, Flex, Input } from "@chakra-ui/react"
+import {
+  Badge,
+  Box,
+  Text,
+  Image,
+  HStack,
+  Flex,
+  Input,
+  BoxProps,
+} from "@chakra-ui/react"
 // @ts-ignore
 import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
 import { Container } from "./container"
@@ -51,7 +60,7 @@ const Header = ({ ...rest }: HeaderProps) => {
   )
 }
 
-type HeaderProps = {
+interface HeaderProps extends BoxProps {
   siteTitle?: string
 }
 
