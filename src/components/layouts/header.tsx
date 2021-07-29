@@ -16,7 +16,7 @@ import { Container } from "./container"
 
 const Header = ({ ...rest }: HeaderProps) => {
   return (
-    <Box as="header" backgroundColor="#661AFF" py={2} maxWidth={1700} {...rest}>
+    <Box as="header" backgroundColor="#661AFF" py={2} {...rest}>
       <Container>
         <Flex
           alignItems={"center"}
@@ -45,10 +45,11 @@ const Header = ({ ...rest }: HeaderProps) => {
               placeholder={"Search docs"}
               backgroundColor={"whiteAlpha.900"}
               focusBorderColor={"purple.50"}
+              disabled
             />
           </Box>
           <Box textColor={"white"} fontWeight={"500"}>
-            <HStack spacing={10}>
+            <HStack spacing={10} fontSize={"sm"}>
               <Link to={"/support/"}>Support</Link>
               <Link to={"/api-reference/"}>API Reference</Link>
               <Link to={"/integrations/"}>Integrations</Link>
