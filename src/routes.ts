@@ -104,11 +104,11 @@ export const sidebarRoutes: SidebarRouteType[] = [
     icon: "FaBookOpen",
     children: [
       {
-        routePath: "/samlevert-upgrade-guide/",
+        routePath: "/guides/samlevert-upgrade-guide/",
         label: "Samlevert upgrade guide",
       },
       {
-        routePath: "/testing-your-porterbuddy-integration/",
+        routePath: "/guides/testing-your-porterbuddy-integration/",
         label: "Testing your integration",
       },
     ],
