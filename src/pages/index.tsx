@@ -1,29 +1,28 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import {
-  Text,
-  SimpleGrid,
-  Center,
   Box,
+  Button,
+  Center,
   Flex,
   Image,
-  Button,
+  SimpleGrid,
+  Text,
 } from "@chakra-ui/react"
 import { FeatureCard } from "../components/home/feature-card"
 import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
 import {
-  FaPlay,
-  FaTimes,
   FaBook,
+  FaBookOpen,
   FaHandshake,
   FaInfoCircle,
-  FaBookOpen,
   FaPeopleCarry,
+  FaPlay,
 } from "react-icons/all"
-import { useState } from "react"
 // @ts-ignore
 import CoWorking from "../images/co-working.jpeg"
+import { InfoBanner } from "../components/global/InfoBanner"
 
 export const query = graphql`
   query {
@@ -41,51 +40,6 @@ export const query = graphql`
     }
   }
 `
-type InfoBannerPropType = {
-  title?: string
-  children: React.ReactNode
-  bannerLink?: string | "#"
-  canClose?: boolean
-}
-export const InfoBanner = ({
-  title,
-  children,
-  bannerLink = "#",
-  canClose = false,
-}: InfoBannerPropType) => {
-  const [closeBanner, setCloseBanner] = useState(false)
-  return (
-    <>
-      {!closeBanner && (
-        <Link to={bannerLink}>
-          <Box
-            p={5}
-            minH={"10%"}
-            bgColor={"#661AFF"}
-            borderRadius={5}
-            color={"white"}
-            my={"5%"}
-            boxShadow={"2px 2px 10px 1px gray"}
-          >
-            <Flex justifyContent={"space-between"} width={"100%"}>
-              <Box>
-                <Text fontSize={"xl"} mb={3} fontWeight={"600"}>
-                  {title}
-                </Text>
-                <Text width={"85%"}>{children}</Text>
-              </Box>
-              {canClose && (
-                <Box onClick={() => setCloseBanner(true)}>
-                  <FaTimes fontSize={"20px"} />
-                </Box>
-              )}
-            </Flex>
-          </Box>
-        </Link>
-      )}
-    </>
-  )
-}
 
 const IndexPage = ({}: any) => {
   // const slugs = data.allMdx.edges

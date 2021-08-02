@@ -55,17 +55,17 @@ export const LinkGrid = (props: SimpleGridProps) => (
       <FooterHeading mb="4">Product</FooterHeading>
       <Stack>
         <Link to={"/api-reference/"}>API Reference</Link>
-        <Link to={"/guides/"}>Integrations</Link>
+        <Link to={"/integrations/"}>Integrations</Link>
         <Link to={"/guides/"}>Guides</Link>
       </Stack>
     </Box>
     <Box minW="130px" fontSize={"sm"}>
       <FooterHeading mb="4">Support</FooterHeading>
       <Stack>
-        <Link to={"/guides/"}>FAQs</Link>
-        <Link to={"/guides/"}>Porterbuddy Community</Link>
-        <Link to={"/guides/"}>Careers</Link>
-        <Link to={"/guides/"}>Customer Support</Link>
+        <Link to={"/faqs/"}>FAQs</Link>
+        <Link to={"/community/"}>Porterbuddy Community</Link>
+        <Link to={"/"}>Careers</Link>
+        <Link to={"/changelog/"}>Changelog</Link>
       </Stack>
     </Box>
   </SimpleGrid>

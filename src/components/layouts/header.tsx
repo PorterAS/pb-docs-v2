@@ -50,9 +50,9 @@ const Header = ({ ...rest }: HeaderProps) => {
           </Box>
           <Box textColor={"white"} fontWeight={"500"}>
             <HStack spacing={10} fontSize={"sm"}>
-              <Link to={"/support/"}>Support</Link>
               <Link to={"/api-reference/"}>API Reference</Link>
               <Link to={"/integrations/"}>Integrations</Link>
+              <Link to={"/changelog/"}>Changelog</Link>
             </HStack>
           </Box>
         </Flex>

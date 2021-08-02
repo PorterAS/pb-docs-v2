@@ -2,10 +2,10 @@ import * as React from "react"
 import { Box, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
-import { InfoBanner } from "./index"
 import { graphql, useStaticQuery, Link } from "gatsby"
 // @ts-ignore
 import porterbuddyImage from "../images/porterbuddy-image.png"
+import { InfoBanner } from "../components/global/InfoBanner"
 
 const GuidesPage = (): any => {
   const {
