@@ -101,10 +101,17 @@ const GuidesPage = (): any => {
                           }
                           alt={guide.node.frontmatter.title}
                           objectFit={"cover"}
+                          h={"7em"}
+                          w={"full"}
                         />
                       </Box>
                       <Box p={2}>
-                        <Text fontSize={"md"} fontWeight={"500"} mb={2}>
+                        <Text
+                          fontSize={"sm"}
+                          fontWeight={"500"}
+                          mb={2}
+                          textTransform={"uppercase"}
+                        >
                           {guide.node.frontmatter.title}
                         </Text>
                         <Text fontSize={"sm"} mb={2}>

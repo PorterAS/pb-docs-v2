@@ -1,5 +1,5 @@
 ---
-title: "Testing your Porterbuddy Integration"
+title: "Testing Porterbuddy"
 meta_title: "Testing your Porterbuddy Integration"
 publishBy: "21-05-2021"
 author: "William Imoh"
