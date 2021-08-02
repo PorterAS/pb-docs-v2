@@ -118,7 +118,7 @@ const GuidesPage = (): any => {
                           {guide.node.frontmatter.meta_description}
                         </Text>
                         <Text
-                          fontSize={"sm"}
+                          fontSize={"xs"}
                           textAlign={"right"}
                           color={"gray.600"}
                         >
