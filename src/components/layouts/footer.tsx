@@ -84,13 +84,13 @@ export const FooterHeading = (props: HeadingProps) => (
 export const Footer = ({ ...rest }: any) => (
   <Box borderWidth={0.5} {...rest} backgroundColor={"white"}>
     <Container>
-      <Box as="footer" role="contentinfo" maxW={1700} pt={12} mt={5}>
+      <Box as="footer" role="contentinfo" maxW={1700} pt={[0, 10, 12]} mt={5}>
         <Stack spacing="5" divider={<StackDivider />}>
           <Stack
             direction={{ base: "column", lg: "row" }}
             spacing={{ base: "10", lg: "28" }}
           >
-            <Box flex="1">
+            <Box flex="1" display={["none", "flex", "flex"]}>
               <Image src={PorterbuddyLogo} borderRadius={5} />
             </Box>
             <Stack

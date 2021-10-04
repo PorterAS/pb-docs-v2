@@ -3,16 +3,17 @@ import { Link } from "gatsby"
 import {
   Badge,
   Box,
-  Text,
-  Image,
-  HStack,
-  Flex,
-  Input,
   BoxProps,
+  Flex,
+  HStack,
+  Image,
+  Input,
+  Text,
 } from "@chakra-ui/react"
 // @ts-ignore
 import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
 import { Container } from "./container"
+import { MenuDrawer } from "./menu-drawer"
 
 const Header = ({ ...rest }: HeaderProps) => {
   return (
@@ -40,7 +41,7 @@ const Header = ({ ...rest }: HeaderProps) => {
               </Link>
             </Text>
           </Box>
-          <Box width={"40%"}>
+          <Box width={"40%"} display={{ base: "none", md: "block" }}>
             <Input
               placeholder={"Search docs"}
               backgroundColor={"whiteAlpha.900"}
@@ -48,13 +49,18 @@ const Header = ({ ...rest }: HeaderProps) => {
               disabled
             />
           </Box>
-          <Box textColor={"white"} fontWeight={"500"}>
+          <Box
+            textColor={"white"}
+            fontWeight={"500"}
+            display={{ base: "none", md: "block" }}
+          >
             <HStack spacing={10} fontSize={"sm"}>
               <Link to={"/api-reference/"}>API Reference</Link>
               <Link to={"/integrations/"}>Integrations</Link>
               <Link to={"/changelog/"}>Changelog</Link>
             </HStack>
           </Box>
+          <MenuDrawer />
         </Flex>
       </Container>
     </Box>

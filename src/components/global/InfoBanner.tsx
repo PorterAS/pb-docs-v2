@@ -24,7 +24,7 @@ export const InfoBanner = ({
       {!closeBanner && (
         <Link to={bannerLink}>
           <Box
-            p={5}
+            p={[3, 3, 5]}
             minH={"10%"}
             bgColor={bgColor}
             borderRadius={5}
@@ -37,7 +37,7 @@ export const InfoBanner = ({
                 <Text fontSize={"xl"} mb={3} fontWeight={"600"}>
                   {title}
                 </Text>
-                <Text width={"85%"}>{children}</Text>
+                <Text width={["100%", "100%", "85%"]}>{children}</Text>
               </Box>
               {canClose && (
                 <Box onClick={() => setCloseBanner(true)}>

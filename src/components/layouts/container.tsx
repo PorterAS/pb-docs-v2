@@ -7,7 +7,12 @@ interface ContainerPropType extends BoxProps {
 export const Container = (props: ContainerPropType) => {
   const { children, ...rest } = props
   return (
-    <Box {...rest} width={"80%"} mx={"auto"} maxWidth={1700}>
+    <Box
+      {...rest}
+      width={{ base: "95%", md: "80%", lg: "80%" }}
+      mx={"auto"}
+      maxWidth={1700}
+    >
       {children}
     </Box>
   )
