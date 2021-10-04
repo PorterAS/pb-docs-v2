@@ -41,7 +41,10 @@ const Header = ({ ...rest }: HeaderProps) => {
               </Link>
             </Text>
           </Box>
-          <Box width={"40%"} display={{ base: "none", md: "block" }}>
+          <Box
+            width={{ base: "0%", md: "0%", lg: "30%" }}
+            display={{ base: "none", md: "block" }}
+          >
             <Input
               placeholder={"Search docs"}
               backgroundColor={"whiteAlpha.900"}
