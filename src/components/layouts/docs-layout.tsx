@@ -6,13 +6,11 @@ import {
   BoxProps,
   Button,
   Center,
-  Drawer,
-  DrawerContent,
-  DrawerOverlay,
   Flex,
   Grid,
   GridItem,
   Icon,
+  Stack,
   Text,
   useColorModeValue,
   useDisclosure,
@@ -33,6 +31,8 @@ import "./layout.css"
 import { Container } from "./container"
 import { GrCatalog, GrIntegration } from "react-icons/gr"
 import { GiClothJar } from "react-icons/gi"
+import { MenuDrawer } from "./menu-drawer"
+import { Copyright, SocialMediaLinks } from "./footer"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any
@@ -86,7 +86,6 @@ const DocsLayout = ({ children }: any) => {
   `)
   // const slugs = data.allMdx.edges
 
-  const sidebar = useDisclosure()
   const integrationsCollapse = useDisclosure()
 
   const NavItem = ({ icon, navLink, children, ...rest }: NavItemType) => {
@@ -193,31 +192,30 @@ const DocsLayout = ({ children }: any) => {
 
       <Box mt={"5em"}>
         <Container>
-          <Drawer
-            isOpen={sidebar.isOpen}
-            onClose={sidebar.onClose}
-            placement="left"
-          >
-            <DrawerOverlay />
-            <DrawerContent>
+          <Box display={["none", "block", "block"]}>
+            <MenuDrawer>
               <SidebarContent w="full" borderRight="none" />
-            </DrawerContent>
-          </Drawer>
+            </MenuDrawer>
+          </Box>
 
           <Box as="section" pos={"relative"}>
             <Grid
               templateRows="repeat(1, 1fr)"
-              templateColumns="repeat(5, 1fr)"
+              templateColumns={[
+                "repeat(1, 1fr)",
+                "repeat(5, 1fr)",
+                "repeat(5, 1fr)",
+              ]}
               gap={2}
             >
-              <GridItem colSpan={1}>
+              <GridItem colSpan={1} display={["none", "block", "block"]}>
                 <Box py={5}>
-                  <SidebarContent display={{ base: "none", md: "unset" }} />
+                  <SidebarContent />
                 </Box>
               </GridItem>
 
               <GridItem colSpan={3}>
-                <Box as={"main"} py={5} px={3}>
+                <Box as={"main"} py={[2, 5, 5]} px={[1, 2, 3]}>
                   {children}
                 </Box>
                 {/*<Box>*/}
@@ -225,7 +223,7 @@ const DocsLayout = ({ children }: any) => {
                 {/*</Box>*/}
               </GridItem>
 
-              <GridItem colSpan={1}>
+              <GridItem colSpan={1} display={["none", "block", "block"]}>
                 <Box
                   m={5}
                   p={3}
@@ -256,9 +254,16 @@ const DocsLayout = ({ children }: any) => {
         </Container>
       </Box>
 
-      {/*<Box>*/}
-      {/*  <Footer />*/}
-      {/*</Box>*/}
+      <Box>
+        <Stack
+          direction={{ base: "column-reverse", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Copyright />
+          <SocialMediaLinks />
+        </Stack>
+      </Box>
     </Box>
   )
 }

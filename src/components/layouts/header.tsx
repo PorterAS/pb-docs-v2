@@ -9,6 +9,7 @@ import {
   Image,
   Input,
   Text,
+  VStack,
 } from "@chakra-ui/react"
 // @ts-ignore
 import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
@@ -63,7 +64,18 @@ const Header = ({ ...rest }: HeaderProps) => {
               <Link to={"/changelog/"}>Changelog</Link>
             </HStack>
           </Box>
-          <MenuDrawer />
+          <MenuDrawer>
+            <VStack
+              spacing={8}
+              fontSize={["lg", "lg", "sm"]}
+              mt={5}
+              // divider={<StackDivider />}
+            >
+              <Link to={"/api-reference/"}>API Reference</Link>
+              <Link to={"/integrations/"}>Integrations</Link>
+              <Link to={"/changelog/"}>Changelog</Link>
+            </VStack>
+          </MenuDrawer>
         </Flex>
       </Container>
     </Box>
@@ -72,6 +84,7 @@ const Header = ({ ...rest }: HeaderProps) => {
 
 interface HeaderProps extends BoxProps {
   siteTitle?: string
+  drawerPlacement?: boolean
 }
 
 export default Header

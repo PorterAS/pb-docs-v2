@@ -1,13 +1,5 @@
 import * as React from "react"
-import {
-  Box,
-  Center,
-  Flex,
-  HStack,
-  Image,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Center, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { Link } from "gatsby"
@@ -29,9 +21,15 @@ type PBIntegrationCardType = {
 const PBIntegrationCard = ({ title, link }: PBIntegrationCardType) => {
   return (
     <Link to={link}>
-      <Center borderRadius={7} p={5} bgColor={"gray.100"} minH={"100px"}>
+      <Flex
+        borderRadius={7}
+        p={[2, 4, 5]}
+        bgColor={"gray.100"}
+        minH={"100px"}
+        alignItems={"center"}
+      >
         <Text fontWeight={"500"}>{title}</Text>
-      </Center>
+      </Flex>
     </Link>
   )
 }
@@ -50,7 +48,7 @@ const EcomIntegrationCard = ({
 }: EcomIntegrationCardType) => {
   return (
     <Link to={link}>
-      <Center borderRadius={7} p={5} bgColor={cardColor} minH={"100px"}>
+      <Center borderRadius={7} p={[2, 4, 5]} bgColor={cardColor} minH={"100px"}>
         <Flex alignItems={"center"}>
           <Box mr={2}>
             {logo && (
@@ -102,7 +100,7 @@ const IntegrationsPage = () => {
             </Text>
           </Box>
           <Box>
-            <HStack spacing={10}>
+            <SimpleGrid columns={[2, 3, 3]} spacing={5}>
               <PBIntegrationCard
                 link={"/product-card-widget/"}
                 title={"Product Card Widget"}
@@ -115,7 +113,7 @@ const IntegrationsPage = () => {
                 link={"/checkout-widget/"}
                 title={"Unified shipping module"}
               />
-            </HStack>
+            </SimpleGrid>
           </Box>
         </Box>
 
@@ -136,7 +134,7 @@ const IntegrationsPage = () => {
           </Box>
 
           <Box>
-            <SimpleGrid columns={3} spacing={5}>
+            <SimpleGrid columns={[2, 3, 3]} spacing={5}>
               <EcomIntegrationCard
                 title={"Shopify"}
                 link={"/integrations/shopify-integration/"}
@@ -183,7 +181,7 @@ const IntegrationsPage = () => {
           </Box>
 
           <Box>
-            <SimpleGrid columns={3} spacing={5}>
+            <SimpleGrid columns={[2, 3, 3]} spacing={5}>
               <EcomIntegrationCard
                 title={"Unifaun"}
                 link={"/integrations/"}

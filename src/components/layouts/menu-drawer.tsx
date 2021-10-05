@@ -7,12 +7,10 @@ import {
   DrawerContent,
   DrawerOverlay,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react"
-import { Link } from "gatsby"
 import { FiMenu } from "react-icons/fi"
 
-export const MenuDrawer = () => {
+export const MenuDrawer = ({ children }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box display={["block", "none", "none"]}>
@@ -23,18 +21,7 @@ export const MenuDrawer = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerBody>
-            <VStack
-              spacing={8}
-              fontSize={["lg", "lg", "sm"]}
-              mt={5}
-              // divider={<StackDivider />}
-            >
-              <Link to={"/api-reference/"}>API Reference</Link>
-              <Link to={"/integrations/"}>Integrations</Link>
-              <Link to={"/changelog/"}>Changelog</Link>
-            </VStack>
-          </DrawerBody>
+          <DrawerBody>{children}</DrawerBody>
         </DrawerContent>
       </Drawer>
     </Box>
