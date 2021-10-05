@@ -9,14 +9,13 @@ import {
   Image,
   Input,
   Text,
-  VStack,
 } from "@chakra-ui/react"
 // @ts-ignore
 import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
 import { Container } from "./container"
 import { MenuDrawer } from "./menu-drawer"
 
-const Header = ({ navComponent, ...rest }: any) => {
+const Header = ({ navComponent, ...rest }: HeaderProps) => {
   return (
     <Box as="header" backgroundColor="#661AFF" py={2} {...rest}>
       <Container>
@@ -64,19 +63,7 @@ const Header = ({ navComponent, ...rest }: any) => {
               <Link to={"/changelog/"}>Changelog</Link>
             </HStack>
           </Box>
-          <MenuDrawer>
-            {/*<VStack*/}
-            {/*  spacing={8}*/}
-            {/*  fontSize={["lg", "lg", "sm"]}*/}
-            {/*  mt={5}*/}
-            {/*  // divider={<StackDivider />}*/}
-            {/*>*/}
-            {/*  <Link to={"/api-reference/"}>API Reference</Link>*/}
-            {/*  <Link to={"/integrations/"}>Integrations</Link>*/}
-            {/*  <Link to={"/changelog/"}>Changelog</Link>*/}
-            {/*</VStack>*/}
-            {navComponent}
-          </MenuDrawer>
+          <MenuDrawer>{navComponent}</MenuDrawer>
         </Flex>
       </Container>
     </Box>
@@ -86,6 +73,7 @@ const Header = ({ navComponent, ...rest }: any) => {
 interface HeaderProps extends BoxProps {
   siteTitle?: string
   drawerPlacement?: boolean
+  navComponent?: React.ReactNode
 }
 
 export default Header
