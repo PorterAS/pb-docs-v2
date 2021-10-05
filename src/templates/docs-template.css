@@ -33,5 +33,9 @@
 .blog-content ul {
     margin-left: 3%;
 }
+/*.blog-content table{*/
+/*    border: 1px solid mediumpurple;*/
+/*    border-radius: 5px;*/
+/*}*/
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: rgba(102, 51, 153, 0.1)}

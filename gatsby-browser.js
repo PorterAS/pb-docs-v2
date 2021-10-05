@@ -10,7 +10,15 @@ import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
 
 const MyTable = ({ children, ...rest }) => (
-  <div style={{ overflowX: "auto" }} {...rest}>
+  <div
+    style={{
+      overflowX: "auto",
+      borderRadius: "5px",
+      border: "1px solid rgba(102, 51, 153, 0.2)",
+      padding: "3px 3px",
+    }}
+    {...rest}
+  >
     <table>{children}</table>
   </div>
 )
