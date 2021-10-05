@@ -24,7 +24,12 @@ export const MenuDrawer = () => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerBody>
-            <VStack spacing={10} fontSize={["lg", "lg", "sm"]} mt={5}>
+            <VStack
+              spacing={8}
+              fontSize={["lg", "lg", "sm"]}
+              mt={5}
+              // divider={<StackDivider />}
+            >
               <Link to={"/api-reference/"}>API Reference</Link>
               <Link to={"/integrations/"}>Integrations</Link>
               <Link to={"/changelog/"}>Changelog</Link>
