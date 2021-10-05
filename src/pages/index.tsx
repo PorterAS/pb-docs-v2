@@ -19,7 +19,7 @@ import {
   FaInfoCircle,
   FaPeopleCarry,
   FaPlay,
-} from "react-icons/Fa"
+} from "react-icons/fa"
 // @ts-ignore
 import CoWorking from "../images/co-working.jpeg"
 import { InfoBanner } from "../components/global/InfoBanner"
