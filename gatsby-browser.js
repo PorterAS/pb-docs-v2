@@ -15,7 +15,7 @@ const MyTable = ({ children, ...rest }) => (
       overflowX: "auto",
       borderRadius: "5px",
       border: "1px solid rgba(102, 51, 153, 0.2)",
-      padding: "3px 3px",
+      padding: "5px 5px",
     }}
     {...rest}
   >
