@@ -8,6 +8,12 @@
 import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
+
+const MyTable = ({ children, ...rest }) => (
+  <div style={{ overflowX: "auto" }} {...rest}>
+    <table>{children}</table>
+  </div>
+)
 /* eslint-disable */
 const component = {
   pre: props => {
@@ -37,6 +43,7 @@ const component = {
       </Highlight>
     )
   },
+  table: MyTable,
 }
 export const wrapRootElement = ({ element }) => {
   return <MDXProvider components={component}>{element}</MDXProvider>
