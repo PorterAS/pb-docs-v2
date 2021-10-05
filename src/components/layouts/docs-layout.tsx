@@ -39,6 +39,7 @@ interface NavItemType extends BoxProps {
   navLink: string
   children: React.ReactNode
 }
+
 const DocsLayout = ({ children }: any) => {
   // Get page URl on layout mount to be used in updating styles
   // const [pageURL, setPageURL] = useState("")
@@ -48,8 +49,6 @@ const DocsLayout = ({ children }: any) => {
   //     setPageURL(window.location.href)
   //   }
   // }, [])
-  const pageURL = typeof window !== "undefined" ? window.location.href : ""
-
   const iconMap = {
     FaPlay: FaPlay,
     FaBook: FaBook,
@@ -87,6 +86,7 @@ const DocsLayout = ({ children }: any) => {
   // const slugs = data.allMdx.edges
 
   const integrationsCollapse = useDisclosure()
+  const pageURL = typeof window !== "undefined" ? window.location.href : ""
 
   const NavItem = ({ icon, navLink, children, ...rest }: NavItemType) => {
     return (
@@ -115,12 +115,13 @@ const DocsLayout = ({ children }: any) => {
   const SidebarContent = (props: any) => (
     <Box
       as="nav"
-      pb="10"
+      pb={[0, 10, 10]}
+      mt={[20, 0, 0]}
       overflowX="hidden"
       overflowY="auto"
       bg={useColorModeValue("white", "gray.800")}
-      w="60"
-      pos={"fixed"}
+      w={[null, 60, 60]}
+      pos={["inherit", "fixed", "fixed"]}
       height={"calc(100vh - 8.125rem)"}
       {...props}
     >
@@ -188,6 +189,7 @@ const DocsLayout = ({ children }: any) => {
         top={0}
         width={"100%"}
         zIndex={1000}
+        navComponent={<SidebarContent />}
       />
 
       <Box mt={"5em"}>
@@ -254,7 +256,7 @@ const DocsLayout = ({ children }: any) => {
         </Container>
       </Box>
 
-      <Box>
+      <Box display={["block", "none", "none"]}>
         <Stack
           direction={{ base: "column-reverse", md: "row" }}
           justifyContent="space-between"

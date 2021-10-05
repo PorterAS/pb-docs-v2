@@ -16,7 +16,7 @@ import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
 import { Container } from "./container"
 import { MenuDrawer } from "./menu-drawer"
 
-const Header = ({ ...rest }: HeaderProps) => {
+const Header = ({ navComponent, ...rest }: any) => {
   return (
     <Box as="header" backgroundColor="#661AFF" py={2} {...rest}>
       <Container>
@@ -65,16 +65,17 @@ const Header = ({ ...rest }: HeaderProps) => {
             </HStack>
           </Box>
           <MenuDrawer>
-            <VStack
-              spacing={8}
-              fontSize={["lg", "lg", "sm"]}
-              mt={5}
-              // divider={<StackDivider />}
-            >
-              <Link to={"/api-reference/"}>API Reference</Link>
-              <Link to={"/integrations/"}>Integrations</Link>
-              <Link to={"/changelog/"}>Changelog</Link>
-            </VStack>
+            {/*<VStack*/}
+            {/*  spacing={8}*/}
+            {/*  fontSize={["lg", "lg", "sm"]}*/}
+            {/*  mt={5}*/}
+            {/*  // divider={<StackDivider />}*/}
+            {/*>*/}
+            {/*  <Link to={"/api-reference/"}>API Reference</Link>*/}
+            {/*  <Link to={"/integrations/"}>Integrations</Link>*/}
+            {/*  <Link to={"/changelog/"}>Changelog</Link>*/}
+            {/*</VStack>*/}
+            {navComponent}
           </MenuDrawer>
         </Flex>
       </Container>
