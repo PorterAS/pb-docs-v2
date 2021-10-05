@@ -72,7 +72,7 @@ const GuidesPage = () => {
               alignItems={"center"}
             >
               <Box>
-                <Text fontSize={"xl"} mb={3} fontWeight={"600"}>
+                <Text fontSize={["lg", "lg", "xl"]} mb={3} fontWeight={"600"}>
                   Porterbuddy Developers on Discord
                 </Text>
                 <Text width={"95%"}>
@@ -113,7 +113,7 @@ const GuidesPage = () => {
           </Box>
         </Box>
 
-        <Box>
+        <Box display={["none", "block", "block"]}>
           <Box mb={4}>
             <Text fontSize={"xl"} fontWeight={"600"} mb={5}>
               Find us on social media

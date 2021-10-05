@@ -68,7 +68,7 @@ const GuidesPage = (): any => {
               Latest guides
             </Text>
           </Box>
-          <SimpleGrid columns={3} spacing={5}>
+          <SimpleGrid columns={[1, 2, 3]} spacing={5}>
             {guides &&
               guides.map(
                 (guide: {
@@ -108,7 +108,7 @@ const GuidesPage = (): any => {
                       <Box p={2}>
                         <Text
                           fontSize={"sm"}
-                          fontWeight={"500"}
+                          fontWeight={"600"}
                           mb={2}
                           textTransform={"uppercase"}
                         >
