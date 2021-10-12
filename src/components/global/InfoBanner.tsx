@@ -30,7 +30,7 @@ export const InfoBanner = ({
             borderRadius={5}
             color={"white"}
             my={"5%"}
-            boxShadow={"2px 2px 10px 1px gray"}
+            // boxShadow={"2px 2px 10px 1px gray"}
           >
             <Flex justifyContent={"space-between"} width={"100%"}>
               <Box>

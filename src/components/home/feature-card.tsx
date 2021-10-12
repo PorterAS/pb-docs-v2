@@ -42,7 +42,7 @@ const FeatureCard = ({
         </chakra.h3>
       </Flex>
 
-      <chakra.p mt={2} color={useColorModeValue("gray.600", "gray.200")}>
+      <chakra.p mt={3} color={useColorModeValue("gray.600", "gray.200")}>
         {content}
       </chakra.p>
       <Link to={link}>
@@ -50,6 +50,7 @@ const FeatureCard = ({
           mt={3}
           color={useColorModeValue("purple.600", "gray.200")}
           fontSize={"sm"}
+          textDecoration={"underline"}
         >
           {actionText}
         </Text>
