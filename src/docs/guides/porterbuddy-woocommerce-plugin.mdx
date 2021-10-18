@@ -1,0 +1,220 @@
+---
+title: "Porterbuddy WooCommerce Plugin v2"
+publishBy: "18-10-2021"
+author: "Stefan Liden"
+coverPhoto: "https://res.cloudinary.com/chuloo/image/upload/v1634558219/porterbuddy/Pb_wordpress.png"
+meta_description: "Install and configure the Porterbuddy WooCommerce Plugin"
+---
+
+## Overview
+
+This page contains information about the Porterbuddy WooCommerce plugin developed by Maksimer. This plugin is to be installed in WooCommerce powered stores, enabling customers place orders using Porterbuddy as a selected shipping option.
+Once a customer places a purchase order in a webshop, a Porterbuddy order is created. This starts the process of delivering the order with Porterbudddy.
+
+## Download
+
+The plugin can be installed through the following means:
+
+1. Downloading/forking the repository from GitHub. This is currently a private repo. Contact your key account manager at Porterbuddy to access it. Alternatively, your account manager will provide a zip file containing the plugin.
+
+## Installation
+
+### Plugin requirements
+
+- WordPress (tested with 5.8.1)
+- WooCommerce (tested with 5.2.2)
+- PHP >= 7.4
+### FTP Installation
+1. Clone the plugin repo from Github and copy the content into a new directory porterbuddy-for-woocommerce. Move this folder into your plugins folder /wp-content/plugins/.
+2. From the WordPress admin, navigate to *Plugins* and *activate* "Porterbuddy for WooCommerce".
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634042094766_image.png)
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634042391443_chrome-capture+20.gif)
+
+
+## Installation from Wordpress
+1. Log in to your Wordpress administration panel.
+2.  Navigate to the *Plugins* menu, *Add New,* then upload the zip file containing the plugin
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634042255684_chrome-capture+19.gif)
+
+3. Once the installation is complete, navigate to *Plugins* and click on *activate* "PorterBuddy for WooCommerce".
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634042396055_chrome-capture+20.gif)
+
+
+## Porterbuddy Settings
+
+Next, we will configure the plugin.
+Navigate to WooCommerce → Settings → Shipping → Porterbuddy,
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634040450381_chrome-capture+2.gif)
+
+
+### API Key & Token
+
+In this configuration, enter the API keys and token of your Porterbuddy account, both for test and production. Use the *Environment* setting to toggle between the test and production environments.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634042654361_chrome-capture+21.gif)
+
+
+> Find your API key and token in your Porterbuddy partner portal by navigating to the profile tab and click on the button “Hent API-Nøkler” . 
+> Test credentials : https://retailers.porterbuddy-test.com/
+> Production credentials: https://retailers.porterbuddy.com/
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634045436902_image.png)
+
+
+### Debug Logging
+
+If enabled, debug messages are saved to the WooCommerce status log that are found at WooCommerce -> Status -> logs. You can also find more useful debug feedback if you enable WooCommerce shipping debug mode in WooCommerce -> Settings -> Shipping -> Shipping options.
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634040702848_chrome-capture+5.gif)
+
+
+### Checkout Template
+
+Choose between two checkout templates, Porterbuddy Unified Shipping Module (USM) and the Checkout Widget. Porterbuddy recommends the USM to offer the best possible user experience with Porterbuddy.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634040789484_chrome-capture+6.gif)
+
+![USUnified Shipping module V2](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634045948721_image.png)
+
+![Checkout Widget](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634046351450_image.png)
+
+
+### Pickup Options
+
+These are the store pickup time windows. Specifying this allows for fine-grained control of the number of delivery days. Ex: If the package is ready for pick up from 3pm on Monday and the store closes at 7pm, the first window will be 3pm-7pm the first day, and the following windows should probably be the opening hours for the store the next days.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634040945438_chrome-capture+7.gif)
+
+
+### Enable Product Card Widget
+
+This configuration controls the display of the Porterbuddy product card widget on product pages.
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634041033960_chrome-capture+8.gif)
+
+![Product Widget](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634045326194_chrome-capture+37.gif)
+
+
+### Hide Porterbuddy Widgets
+
+The plugin provides an option to hide Porterbuddy in checkout if an item in the order is a backorder and an option to hide the product card widget on a product page if the item is out of stock.
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634041413991_chrome-capture+13.gif)
+
+
+### Product Dimensions
+
+Porterbuddy requires information on the product’s dimension to be shipped. You can set a global default dimension value for products. This data will be used for any product whose size or weight is unknown.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634041253173_chrome-capture+12.gif)
+
+
+### Discount Table
+
+Use this table to setup price discounts on the display price returned from Porterbuddy. The discount table provides the ability to specify a minimum cart size and an amount to be applied to it.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634041897033_chrome-capture+17.gif)
+
+
+### Customize Product Widget Text
+
+The text shown on Porterbuddy’s widgets can be customized by providing a key-value pair with the following pattern: customTextValue: “Updated custom text”. 
+Each text customization should be entered in a new line. 
+
+Find more information about what text can be customized, their keys, and default values at https://widget.porterbuddy.com/.
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634041998704_chrome-capture+18.gif)
+
+![Product Widget customized text](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634045357682_image.png)
+
+## Activate Porterbuddy in WooCommerce Checkout.
+
+Once the plugin setup is complete, you’ll need to add Porterbuddy as a shipping option in a specific shipping zone of WooCommerce.
+
+
+1. Navigate to WooCommerce → Settings → Shipping and add Porterbuddy as a shipping method to any desired shipping zone. 
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634042885409_chrome-capture+22.gif)
+
+2. Set up the store address in WooCommerce → Settings → General. The plugin uses the store address in all communications with Porterbuddy.
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634043982465_image.png)
+
+3.   Enable “*Hide shipping costs until an address is entered*” in WooCommerce → Settings → Shipping → Shipping options. (Strongly recommended)
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634044048672_image.png)
+
+4. Ensure the Wordpress Admin has the correct Timezone and Site Name:
+    1.  Timezone set up is at in Wordpress → Admin → General → Timezone = Oslo (GMT+2). 
+    2. Ensure the Site Name is correctly set up in Wordpress → Admin → General → Site Name. Porterbuddy uses this name on the origin address of the shipping label.
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634044241385_image.png)
+
+
+
+5. If individual products require delivery verification you can set this on the edit product screen in the Porterbuddy tab.
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634044451525_chrome-capture+32.gif)
+
+    
+## Manage Porterbuddy orders in the Order Management System
+
+After payment is resolved for an order and the Porterbuddy order is created, you’ll find all information on the order in WooCommerce’s order management system. 
+Navigate to → WooCommerce → Orders and click on the order to see all information.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634044790407_chrome-capture+33.gif)
+
+
+Here’s a breakdown of the provided information:
+
+
+- **Porterbuddy Delivery**: The type of delivery. This can be Porterbuddy Delivery or Consolidated Delivery
+- **Tracking**: The order’s Porterbuddy tracking link 
+- **Print label**: Link to Porterbuddy’s shipping label for that order
+- **Pickup Date**: The date that Porterbuddy will pickup the parcel from the warehouse or designated pickup point.
+- **Porterbuddy order status**: The status of the Porterbuddy order
+- **Porterbuddy Start & End**: The start and end delivery times that the customer had chosen with Porterbuddy during checkout.
+
+
+![Created order with Porterbuddy as delivery option](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634044706837_image.png)
+
+## Activate delivery option in Porterbuddy USM.
+
+To activate other WooCommerce shipping options in the USM,  navigate to → WooCommerce → Shipping → Shipping Zone → Selected Delivery Option → Edit.
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634043462023_chrome-capture+24.gif)
+
+
+Create a Porterbuddy Setting for each shipping option and specify the matching type of delivery. This adds the shipping option to the correct section in the unified shipping module.
+
+
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634043657501_chrome-capture+29.gif)
+
+
+### Min & Max delivery days
+
+Select which shipping interval to display for the shipping option. 
+
+- Minimum number of days the delivery needs to reach destination, if 0 is specified, same-day delivery is assumed. 
+- Maximum number of delivery days. If this is specified, the delivery time will be displayed as "x to y days".
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634043761761_chrome-capture+31.gif)
+
+
+### Logo URL
+
+This is the public URL to the logo image of a shipping option. Maximum displayable logo size is 70x37 px. The logo url can be specified as relative to the embedded host, or absolute.
+https://widget.porterbuddy.com/new-usm-logos
+****
+![](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634043721504_chrome-capture+30.gif)
+
+![Unified Shipping module V2](https://paper-attachments.dropbox.com/s_6B9E90B92A80533E037DAB80158734E9987BF245A4BF2F104D0627E70957C175_1634045948721_image.png)
+
+
+Once you complete these settings, you are able to see the correctly configured Porterbuddy option on a product page and/or in checkout.
+

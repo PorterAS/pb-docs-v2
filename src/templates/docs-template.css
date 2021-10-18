@@ -18,10 +18,12 @@
 
 .blog-content h2 {
     font-size: 1.2em;
+    margin-top: 5%;
 }
 
 .blog-content a {
     color: #9d348a;
+    text-decoration: underline;
 }
 
 .blog-content p,
