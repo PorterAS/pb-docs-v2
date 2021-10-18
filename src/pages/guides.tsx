@@ -47,8 +47,8 @@ const GuidesPage = (): any => {
           </Text>
           <Text as={"h2"} lineHeight={7}>
             Add Porterbuddy to your e-commerce system by following the guides
-            below. The guides below aim to provide step by step requirements to
-            using Porterbuddy, possibly demonstrated on a live application.
+            below. The guides aim to provide step by step requirements to using
+            Porterbuddy, possibly demonstrated on a live application.
           </Text>
         </Box>
 

@@ -2,6 +2,8 @@ import * as React from "react"
 import { useEffect } from "react"
 import { Helmet } from "react-helmet"
 
+const isBrowser = () => typeof window !== "undefined"
+
 declare global {
   interface Window {
     porterbuddy: any
@@ -36,10 +38,10 @@ type PBProductCardPropType = {
 
 export const PBProductCard = ({ options, ...rest }: PBProductCardPropType) => {
   useEffect(() => {
-    if (window) {
+    if (isBrowser()) {
       window.porterbuddy = options
     }
-  }, [window.porterbuddy])
+  }, [])
   return (
     <div {...rest}>
       <Helmet>

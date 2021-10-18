@@ -18,6 +18,7 @@ type PBIntegrationCardType = {
   title: string
   link: string
 }
+
 const PBIntegrationCard = ({ title, link }: PBIntegrationCardType) => {
   return (
     <Link to={link}>
