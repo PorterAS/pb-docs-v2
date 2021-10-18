@@ -148,7 +148,7 @@ const IntegrationsPage = () => {
               />
               <EcomIntegrationCard
                 title={"WooCommerce"}
-                link={"/integrations/"}
+                link={"/integrations/woocommerce"}
                 logo={WooCommerceLogo}
               />
               <EcomIntegrationCard
