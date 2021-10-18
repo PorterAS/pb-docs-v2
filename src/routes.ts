@@ -80,7 +80,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "Shopify",
       },
       {
-        routePath: "/",
+        routePath: "/integrations/woocommerce/",
         label: "WooCommerce",
       },
       {
