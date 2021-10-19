@@ -185,7 +185,7 @@ const IntegrationsPage = () => {
             <SimpleGrid columns={[2, 3, 3]} spacing={5}>
               <EcomIntegrationCard
                 title={"Unifaun"}
-                link={"/integrations/"}
+                link={"/integrations/unifaun"}
                 logo={UnifaunLogo}
                 cardColor={"green.100"}
               />

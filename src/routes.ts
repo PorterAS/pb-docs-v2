@@ -84,16 +84,8 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "WooCommerce",
       },
       {
-        routePath: "/",
-        label: "Magento 2",
-      },
-      {
-        routePath: "/",
-        label: "Episerver",
-      },
-      {
-        routePath: "/",
-        label: "Dynamics 365",
+        routePath: "/integrations/unifaun/",
+        label: "nShift - Unifaun",
       },
     ],
   },

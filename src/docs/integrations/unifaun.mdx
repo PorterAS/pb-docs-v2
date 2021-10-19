@@ -1,0 +1,65 @@
+---
+title: "Integrating Porterbuddy and nShift (Unifaun)"
+publishBy: "19-10-2021"
+author: "William Imoh"
+coverPhoto: "https://res.cloudinary.com/chuloo/image/upload/v1627831612/samlevert-logo_oi1oue.png"
+meta_description: "Integrate Porterbuddy, Unifaun and Klarna Shipping Assistant"
+---
+## Overview
+
+In this post, we’ll go over steps to add Porterbuddy as a sender in Unifaun Online. With this, a user  can create Porterbuddy shipments manually in Unifaun and have Porterbuddy as a delivery option when using Klarna Checkout with Klarna Shipping Assistant and Unifaun.
+
+## Requirements
+
+The following are required to complete this integration.
+
+1. A Unifaun account. This account could be online or on-prem, and you can obtain it from the Unifaun team.
+2. Adding Porterbuddy as a Carrier in Unifaun. This addition is set up by the Unifaun team and adds Porterbuddy as a carrier option.
+3. Porterbuddy API key. This is obtained from the Porterbuddy retailer dashboard. Contact your account manager if you need access to a retailer dashboard or API Keys.
+## Adding Porterbuddy as a Sender
+
+To create a shipment with Porterbuddy, you need to add Porterbuddy as a sender in Unifaun. Follow these steps to achieve that:
+
+
+1. Login to your account using your Unifaun credentials on https://www.unifaunonline.se/jsapp/uo/start
+2. Click on the menu options; Maintenance > Senders > New Sender button
+3. Enter the required sender delivery info: Name, Address, Post Code, and City
+4. Enter the contact information of the sender, particularly the phone number and email
+5. Click on *Add Carrier*, select *Porterbuddy* and add your Porterbuddy API key, in the carrier section.
+6. Click on the *Save* button at the bottom of the page.
+
+After completing this setup, Unifaun creates a new Sender, and you can book shipments right in Unifaun.
+
+
+## Testing the integration
+
+To test the integration, we will create a new booking right in Unifaun with the following steps:
+
+1. We go to the *Shipments* menu and select *Standard printing*. A *Porterbuddy* option is also available and can be used if configured by Unifaun.
+2. On the displayed page, we select the preferred sender, in this case, the Porterbuddy sender created in the first part.
+3. We proceed to select a receiver or create a new receiver with accurate information.
+4. We select a service type as *Normal* and services as *Porterbuddy.*
+5. Next, we enter a pickup date and time.
+6. Additional service options specific to Porterbuddy are available. These include a signature requirement, contactless delivery, etc.
+7. We enter parcel information for each parcel and click *Add* to save the parcel data added.
+8. Lastly, we click *Print PDF,* which creates a Porterbuddy shipment/order and opens a new page containing the generated label of the shipment. Here’s an example-generated label below.
+
+![](https://paper-attachments.dropbox.com/s_A3C051FC0E85418A6E295BF81B9E509BCA3A5A7D7D95F4AF773C2A73EFA63924_1634642735068_image.png)
+
+## Integrating Unifaun in Klarna Checkout using Klarna Shipping Assistant (KSA)
+
+With Porterbuddy active as a carrier in Unifaun, you may want to display shipping options in Klarna checkout using the KSA. 
+
+This integration is achievable by setting up Unifaun as a profile in Klarna. To do this, you require a key and identifier from Unifaun. The identifier and key are a mix of Unifaun’s API keys and a Unifaun delivery checkout ID. 
+
+1. **Identifier**: API-Key - Unifaun delivery checkout ID ie ER5BEWG777MM2SXS-396fd46d-8461-4560-9dea-2cde18e40bfa
+2. **Key**: Unifaun Secret ID
+
+
+> To utilize this KSA integration, you must have specified Porterbuddy as a carrier and sender on Unifaun.
+
+Here’s how to obtain each credential:
+
+- **API-Key and Secret ID**: In Unifaun, login and navigate to *Maintenance > API keys,* then click the search button to return all configured API Keys. Click on the Edit icon for an API key entry to see the associated Secret ID. 
+- **Delivery checkout ID**: In Unifaun, navigate to *Maintenance > Delivery Checkout,* then click the search button to return all checkout instances. Each listed item contains a delivery checkout ID.
+
