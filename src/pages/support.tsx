@@ -1,38 +1,35 @@
 import * as React from "react"
 import { Box, Center, Text } from "@chakra-ui/react"
-
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
+import { PBProductCard } from "../components/porterbuddy/pb-product-card-widget"
+import { PBCheckoutWidget } from "../components/porterbuddy/pb-checkout-widget"
+import { pbAvailabilityData } from "../components/porterbuddy/sample-data"
 import {
-  PBProductCard,
-  PBProductCardType,
-} from "../components/porterbuddy/pb-product-card-widget"
+  IPBWidget,
+  PBCheckoutWidgetType,
+} from "../components/porterbuddy/types"
 
-// export const query = graphql`
-//   query {
-//     allMdx {
-//       edges {
-//         node {
-//           fields {
-//             slug
-//           }
-//           frontmatter {
-//             title
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
-
-const porterbuddyOptions: PBProductCardType = {
-  token: "7cDRiTIsB89nKJzwMJfuLLqEfF9Sw9ImkJnneoAm",
-  view: "availability",
-  language: "NO",
-  apiMode: "test",
-  hideIfUnavailable: false,
-}
 const SupportPage = () => {
+  const pbProductCardOptions: IPBWidget = {
+    token: "7cDRiTIsB89nKJzwMJfuLLqEfF9Sw9ImkJnneoAm",
+    view: "availability",
+    language: "NO",
+    apiMode: "test",
+    hideIfUnavailable: false,
+  }
+
+  const pbCheckoutWidgetOptions: PBCheckoutWidgetType = {
+    token: "7cDRiTIsB89nKJzwMJfuLLqEfF9Sw9ImkJnneoAm",
+    view: "checkout",
+    language: "NO",
+    apiMode: "test",
+    hideIfUnavailable: false,
+    availabilityResponse: pbAvailabilityData,
+    onSelectDeliveryWindow: window => {
+      console.log(window)
+    },
+  }
   return (
     <Layout>
       <SEO title="Porterbuddy Developer support" />
@@ -43,7 +40,8 @@ const SupportPage = () => {
         <Text textAlign="center">
           This page wil be filled with content soon.
         </Text>
-        <PBProductCard options={porterbuddyOptions} />
+        <PBProductCard options={pbProductCardOptions} />
+        <PBCheckoutWidget options={pbCheckoutWidgetOptions} />
       </Box>
     </Layout>
   )

@@ -1,45 +1,29 @@
 import * as React from "react"
 import { useEffect } from "react"
 import { Helmet } from "react-helmet"
+import { DeliveryWindowType, IPBWidget } from "./types"
 
 const isBrowser = () => typeof window !== "undefined"
 
 declare global {
   interface Window {
     porterbuddy: any
+    unselectDeliveryWindow: () => void
+    setSelectedDeliveryWindow: (
+      deliveryWindow: DeliveryWindowType | null,
+      selectDefault?: boolean
+    ) => void
   }
 }
-export type PBProductCardType = {
-  token: string
-  view: "availability" | "checkout" | "deliveryInfo"
-  language: "NO" | "EN"
-  apiMode: "test" | "development" | "stage" | "production"
-  apiBaseUrl?: string
-  resetContext?: boolean
-  allowStorage?: boolean
-  allowGeoLocation?: boolean
-  postalCode?: string
-  cssClassPrefix?: string
-  hideIfUnavailable: boolean
-  alternateAvailabilityView?: boolean
-  text?: object
-  discount?: number
-  onUpdateDeliveryWindows?: void
-  updateDeliveryWindowsInterval?: number
-  availabilityCacheTTL?: number
-  now?: string
-  originAddress?: boolean
-  onStartFetchAvailability?: void
-  onSetCallback?: void
-}
+
 type PBProductCardPropType = {
-  options: PBProductCardType
+  options: IPBWidget
 }
 
 export const PBProductCard = ({ options, ...rest }: PBProductCardPropType) => {
   useEffect(() => {
     if (isBrowser()) {
-      window.porterbuddy = options
+      window.porterbuddy = { ...window.porterbuddy, ...options }
     }
   }, [])
   return (
