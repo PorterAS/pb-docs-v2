@@ -17,6 +17,7 @@ const SupportPage = () => {
     language: "NO",
     apiMode: "test",
     hideIfUnavailable: false,
+    alternateAvailabilityView: true,
   }
 
   const pbCheckoutWidgetOptions: PBCheckoutWidgetType = {
@@ -25,6 +26,7 @@ const SupportPage = () => {
     language: "NO",
     apiMode: "test",
     hideIfUnavailable: false,
+    alternateAvailabilityView: true,
     availabilityResponse: pbAvailabilityData,
     onSelectDeliveryWindow: window => {
       console.log(window)
@@ -40,7 +42,7 @@ const SupportPage = () => {
         <Text textAlign="center">
           This page wil be filled with content soon.
         </Text>
-        <PBProductCard options={pbProductCardOptions} />
+        {/*<PBProductCard options={pbProductCardOptions} />*/}
         <PBCheckoutWidget options={pbCheckoutWidgetOptions} />
       </Box>
     </Layout>
