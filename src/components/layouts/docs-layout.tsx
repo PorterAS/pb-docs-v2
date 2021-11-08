@@ -216,8 +216,8 @@ const DocsLayout = ({ children }: any) => {
                 </Box>
               </GridItem>
 
-              <GridItem colSpan={3}>
-                <Box as={"main"} py={[2, 5, 5]} px={[1, 2, 3]}>
+              <GridItem colSpan={4}>
+                <Box as={"main"} py={[2, 3, 3]} px={[1, 2, 3]} mx={[0, "5.3em", "5.3em"]}>
                   {children}
                 </Box>
                 {/*<Box>*/}
@@ -225,7 +225,7 @@ const DocsLayout = ({ children }: any) => {
                 {/*</Box>*/}
               </GridItem>
 
-              <GridItem colSpan={1} display={["none", "block", "block"]}>
+              <GridItem colSpan={0} display={["none", "block", "block"]}>
                 <Box
                   m={5}
                   p={3}
