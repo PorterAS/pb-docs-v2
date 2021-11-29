@@ -225,7 +225,7 @@ const DocsLayout = ({ children }: any) => {
                 {/*</Box>*/}
               </GridItem>
 
-              <GridItem colSpan={0} display={["none", "block", "block"]}>
+              <GridItem colSpan={0} display={["none", "none", "none"]}>
                 <Box
                   m={5}
                   p={3}
