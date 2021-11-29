@@ -6,6 +6,7 @@ author: "William Imoh"
 meta_description: "Test your Porterbuddy integration to mitigate errors in production"
 ---
 
+## Overview
 After integrating Porterbuddy into your e-commerce platform, it is vital to test your systems end-to-end to ensure its effectiveness.
 
 This testing process aims at mitigating any technical or process issues that could occur during a live operation of your store.

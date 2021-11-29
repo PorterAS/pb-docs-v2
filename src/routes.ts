@@ -87,6 +87,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
         routePath: "/integrations/unifaun/",
         label: "nShift - Unifaun",
       },
+      {
+        routePath: "/integrations/ksa-proxy/",
+        label: "Klarna KSA",
+      },
     ],
   },
   {
