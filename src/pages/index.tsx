@@ -61,7 +61,7 @@ const IndexPage = ({}: any) => {
         </Text>
       </Box>
       <InfoBanner title={"Porterbuddy Samlevert v1"}>
-        All new Porterbuddy Samlevert product launch. Learn to upgrade your
+        The all new Porterbuddy Samlevert product launch. Learn to upgrade your
         existing Porterbuddy integration to use Samlevert. Samlevert lets your
         customers purchase items from multiple stores and receive all the orders
         within the same delivery window.
