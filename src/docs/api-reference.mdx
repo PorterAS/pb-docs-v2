@@ -1,9 +1,15 @@
-# API Reference
+---
+title: "API Reference"
+meta_title: "Porterbuddy API reference"
+publishBy: "29-11-2021"
+author: "William Imoh"
+meta_description: "Discover Porterbuddy's APIs"
+---
+
+## Overview
 
 **Please note, this documentation is not exhaustive, and other optional values may be returned in responses.**
 If you have questions or found errors, get in touch at [dev@porterbuddy.com](mailto:dev@porterbuddy.com).
-
-## **Overview**
 
 Porterbuddy is a last mile delivery service platform. Customers of Porterbuddy can place delivery orders using this api.
 The following describes the necessary steps to do a delivery using Porterbuddy:
@@ -13,23 +19,23 @@ The following describes the necessary steps to do a delivery using Porterbuddy:
 3. _Your retailer solution:_ Place delivery `order`
 4. _Porterbuddy:_ Deliver the parcels at the requested time
 
-## **Time**
+## Time
 
 All timestamps requires timezone to avoid ambiguity.
 
-## **Availability**
+## Availability
 
 An `availability` object is an entity that combines pickup address, delivery address, and delivery time. To be able to guarantee our ability to fulfill an order, you first need to obtain an `availability` entity before submitting an order for the requested time.
 
-## **Order**
+## Order
 
 The `order` contains all information needed to deliver to the end user. This includes addresses and delivery time, but also the availability for the package for pick up and requirements for identification, etc.
 
-## **Testing the API**
+## Testing the API
 
 If you want to test the API, you can send a request to [dev@porterbuddy.com](mailto:dev@porterbuddy.com) to receive a test API key.
 
-## **Get an API key**
+## Get an API key
 
 To get an API key for use in production, you first have to register as a user and customer at Porterbuddy. Currently, we only support payment by invoice. As a result the process of getting access is as follows:
 
@@ -37,7 +43,7 @@ To get an API key for use in production, you first have to register as a user an
 2. Contact [dev@porterbuddy.com](mailto:dev@porterbuddy.com) to enable payment by invoice
 3. Receive your API key
 
-## **Implementation Hints**
+## Implementation Hints
 
 We try to keep this API as stable as possible. However, implementing new services or features sometimes make changes necessary, for example adding new properties to API objects. To lower the risk of such a change breaking your integration, we advise to only define the properties of API responses your integration needs and always ignore unknown properties in received json objects. This is the default behaviour in Javascript (due to Javascript not being typed anyway) and Typescript when representing received API responses via interfaces. When using Jackson to implement JSON APIs in Java, the easiest way to achieve this is to use the annotation `@JsonIgnoreProperties(ignoreUnknown=true)`on classes representing API response data.
 

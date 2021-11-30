@@ -1,4 +1,12 @@
-# Availability API
+---
+title: "Availability API"
+meta_title: "Porterbuddy Availability API"
+publishBy: "29-11-2021"
+author: "William Imoh"
+meta_description: "Check Porterbuddy's availability to deliver a parcel"
+---
+
+## Overview
 
 To verify that PorterBuddy can deliver according to your preferences you need to do an availability request. This will verify address details and return possible delivery windows. Note that even when the endpoint returns statuscode OK (200), the delivery windows array could be empty due to no delivery being possible with the specified pickup windows, or no more capacity being available.
 
@@ -6,7 +14,7 @@ To verify that PorterBuddy can deliver according to your preferences you need to
 POST https://api.porterbuddy.com/availability
 ```
 
-Example Request:
+**Example Request**
 
 ```bash
 curl \
@@ -49,7 +57,7 @@ curl \
     }'
 ```
 
-Example response:
+**Example response**
 
 ```json
 {
@@ -136,10 +144,13 @@ Example response:
 | originAddress      | Yes      | [Address](https://developer.porterbuddy.com/#address)                                                 | none         | The pick up location for the merchandise                                                                                                                                                                                                                                                                                                            |
 | destinationAddress | Yes      | [AvailabilityDestinationAddress](https://developer.porterbuddy.com/#availability-destination-address) | none         | The destination for the merchandise                                                                                                                                                                                                                                                                                                                 |
 | recipient          | No       | [AvailabilityRecipient](https://developer.porterbuddy.com/#availability-recipient)                    | none         | The contact details of the delivery recipient                                                                                                                                                                                                                                                                                                       |
-| pickupWindows      | Yes      | List<[Window](https://developer.porterbuddy.com/#window)>                                             | none         | The windows when the package is available for pick-up. We recommend sending wide windows and for multiple days. Ex: If the package is ready for pick up from 3pm on monday and the store closes at 7pm, the first window will be 3pm-7pm the first day, and the following windows should probably be the opening hours for the store the next days. |
+| pickupWindows      | No       | List<[Window](https://developer.porterbuddy.com/#window)>                                             | none         | The windows when the package is available for pick-up. We recommend sending wide windows and for multiple days. Ex: If the package is ready for pick up from 3pm on monday and the store closes at 7pm, the first window will be 3pm-7pm the first day, and the following windows should probably be the opening hours for the store the next days. |
 | products           | No       | List                                                                                                  | [ delivery ] | The name of the product needed. Currently, only the product "delivery" is available. Multiple products here will result in windows in the list for each product. Each window has a 'product' attribute which signals which product this is for.                                                                                                     |
-| parcels            | Yes      | List<[Parcel](https://developer.porterbuddy.com/#parcel)>                                             | none         | The list of parcels that you want to transport. This will affect which couriers can fulfill the delivery. A smaller car cannot drive packages that won't fit in it's trunk.                                                                                                                                                                         |
-| additionalInfo     | no       | Object                                                                                                | null         | Object reserved for additional information. This argument is intended to be provided by the checkout widget and needs to be passed-through as is, without further modifications.                                                                                                                                                                    |
+| parcels            | (*)      | List<[Parcel](https://developer.porterbuddy.com/#parcel)>                                             | none         | The list of parcels that you want to transport. This will affect which couriers can fulfill the delivery. A smaller car cannot drive packages that won't fit in it's trunk.                                                                                                                                                                         |
+| additionalInfo     | No       | Object                                                                                                | null         | Object reserved for additional information. This argument is intended to be provided by the checkout widget and needs to be passed-through as is, without further modifications.                                                                                                                                                                    |
+| items              | No       | List<[Item](https://developer.porterbuddy.com/#item)>                                                 | none         | A list of items you want to transport. Will be used to determine size and weight if no parcels are specified.                                                                                                                                                                   |
+
+> (*) At least one of the properties "items" or "parcels" must be specified for a valid request. If only items are specified, each item must have the "weightGrams" property specified as >= 0.
 
 **Availability Destination Address**
 
@@ -186,7 +197,7 @@ Example response:
 | ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | start        | DateTime                                          | The start of the window                                                                                                                                                                                                                    |
 | end          | DateTime                                          | The end of the window                                                                                                                                                                                                                      |
-| product      | String                                            | The product type this window is for. Example: delivery or express                                                                                                                                                                          |
+| product      | String                                            | The product type this window is for. Example: "delivery" or "large"                                                                                                                                                                        |
 | price        | [Price](https://developer.porterbuddy.com/#price) | The price given for the specific window                                                                                                                                                                                                    |
 | displayPrice | [Price](https://developer.porterbuddy.com/#price) | The display price given for the specific window, calculated based the store's configured base display price. Used to show the end customer a price different from the actual price. Only returned when a base display price is configured. |
 | expiresAt    | DateTime                                          | After this time this window should not be shown as an option. Either remove the window or do a full refresh of the availability.                                                                                                           |
@@ -197,9 +208,9 @@ Example response:
 
 | Parameter    | Type                                              | Description                                                                                                                                                                                                                                |
 | ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| start        | DateTime                                          | The start of the window, may be omitted if anonymous consolidation is used.                                                                                                                                                                |
-| end          | DateTime                                          | The end of the window, may be omitted if anonymous consolidation is used.                                                                                                                                                                  |
-| product      | String                                            | The product type this window is for. Example: delivery or express                                                                                                                                                                          |
+| start        | DateTime                                          | The start of the window                                                                                                                                                                                                                    |
+| end          | DateTime                                          | The end of the window                                                                                                                                                                                                                      |
+| product      | String                                            | The product type this window is for. Example: "delivery" or "large"                                                                                                                                                                        |
 | price        | [Price](https://developer.porterbuddy.com/#price) | The price given for the specific window                                                                                                                                                                                                    |
 | displayPrice | [Price](https://developer.porterbuddy.com/#price) | The display price given for the specific window, calculated based the store's configured base display price. Used to show the end customer a price different from the actual price. Only returned when a base display price is configured. |
 | expiresAt    | DateTime                                          | After this time this window should not be shown as an option. Either remove the window or do a full refresh of the availability.                                                                                                           |
@@ -210,5 +221,5 @@ Example response:
 
 | Parameter              | Type    | Description                                                                          |
 | ---------------------- | ------- | ------------------------------------------------------------------------------------ |
-| fractionalDenomination | Integer | The price in the lowest denominator. Ex: 8.32kr = 100 fractionalDenomination (cents) |
+| fractionalDenomination | Integer | The price in the lowest denominator. Ex: 1 USD = 100 fractionalDenomination (cents)  |
 | currency               | String  | The currency specified. Usually "NOK".                                               |
