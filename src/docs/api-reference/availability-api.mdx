@@ -137,7 +137,7 @@ curl \
 }
 ```
 
-**_Arguments_**
+## _Arguments_
 
 | Parameter          | Required | Type                                                                                                  | Default      | Description                                                                                                                                                                                                                                                                                                                                         |
 | ------------------ | -------- | ----------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -152,7 +152,7 @@ curl \
 
 > (*) At least one of the properties "items" or "parcels" must be specified for a valid request. If only items are specified, each item must have the "weightGrams" property specified as >= 0.
 
-**Availability Destination Address**
+## Type - Availability Destination Address
 
 | Parameter    | Required | Type   | Default | Description                                          |
 | ------------ | -------- | ------ | ------- | ---------------------------------------------------- |
@@ -162,7 +162,7 @@ curl \
 | city         | No       | String | none    | The city of the address                              |
 | country      | Yes      | String | none    | The country of the address                           |
 
-**Availability Recipient**
+## Type - Availability Recipient
 
 | Parameter        | Required | Type   | Default | Description                       |
 | ---------------- | -------- | ------ | ------- | --------------------------------- |
@@ -170,17 +170,17 @@ curl \
 | phoneCountryCode | No       | String | +47     | Country code for the phone number |
 | phoneNumber      | No       | String | none    | Phone number                      |
 
-**_Response_**
+## _Response_
 
 | Parameter                  | Type                                                                                          | Description                                                                                                                                                                                |
 | -------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | originResolvedAddress      | [Resolved Address](https://developer.porterbuddy.com/#resolved-address)                       | Resolved origin. We will resolve the origin against Google\'s APIs. The exact details we find will be returned here.                                                                       |
 | destinationResolvedAddress | [Resolved Address](https://developer.porterbuddy.com/#resolved-address)                       | Resolved destination. Like with the origin, we will try to resolve the exact details. The result will be returned here.                                                                    |
-| deliveryWindows            | List<[DeliveryWindow](https://developer.porterbuddy.com/#delivery-window)>                    | The available windows for the destination. This is tied to the pick up windows given in the request, so any changes to those will affect these windows as well.                            |
+| deliveryWindows            | List<[DeliveryWindow](https://developer.porterbuddy.com/#delivery-window)>                  | The available windows for the destination. This is tied to the pick up windows given in the request, so any changes to those will affect these windows as well.                            |
 | consolidatedWindow         | [ConsolidatedDeliveryWindow](https://developer.porterbuddy.com/#consolidated-delivery-window) | Available window for the destination. Present if the recipient field was present in the request and the customer has already placed one or more orders within one of the delivery windows. |
 | flags                      | List                                                                                          | A list of flags indicating if certain features are enabled in the shop configuration. Mainly used for our own checkout widgets. This property will be omitted if the list would be empty.  |
 
-**Resolved Address**
+## Type - Resolved Address
 
 | Parameter    | Required | Type                | Default | Description                                             |
 | ------------ | -------- | ------------------- | ------- | ------------------------------------------------------- |
@@ -191,7 +191,7 @@ curl \
 | country      | Yes      | String              | none    | The country of the address                              |
 | position     | Yes      | Position (lat/long) | none    | The exact position of the address in longitude/latitude |
 
-**Delivery Window**
+## Type - Delivery Window
 
 | Parameter    | Type                                              | Description                                                                                                                                                                                                                                |
 | ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -204,7 +204,7 @@ curl \
 | token        | String                                            | The token is to be sent back when placing and order. It makes sure that the window and price that was offered for availability at that specific point in time is what is registered on the order.                                          |
 | consolidated | Boolean                                           | If true, there is another order present for the same customer with that window, so the orders can be consolidated.                                                                                                                         |
 
-**Consolidated Delivery Window**
+## Type - Consolidated Delivery Window
 
 | Parameter    | Type                                              | Description                                                                                                                                                                                                                                |
 | ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -217,7 +217,7 @@ curl \
 | token        | String                                            | The token is to be sent back when placing and order. It makes sure that the window and price that was offered for availability at that specific point in time is what is registered on the order.                                          |
 | consolidated | Boolean                                           | If true, there is another order present for the same customer with that window, so the orders can be consolidated.                                                                                                                         |
 
-**Price**
+## Type - Price
 
 | Parameter              | Type    | Description                                                                          |
 | ---------------------- | ------- | ------------------------------------------------------------------------------------ |

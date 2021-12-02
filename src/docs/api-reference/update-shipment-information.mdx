@@ -1,0 +1,68 @@
+---
+title: "Update shipment information"
+meta_title: "Update a Porterbuddy shipment information"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "Update the parcel information of a Porterbuddy Order"
+---
+
+## Overview
+
+This update is supposed to be used whenever you need to update the packages and shipment information after placing the order. Note that the packages list needs to be complete, so any content here removes the information from the previous order.
+
+```bash
+PUT https://api.porterbuddy.com/order/<orderId>/update-shipment-details
+```
+
+Example request:
+
+```bash
+curl -X PUT \
+    https://api.porterbuddy-test.com/order/<orderId>/update-shipment-details \
+    -H 'x-api-key: <your_api_key>' \
+    -H 'Content-Type: application/json' \
+    -H 'Idempotency-Key: <your idempotency key>' \
+    -d '{
+        "parcels" : [
+            {
+                "description": "Shoes",
+                "widthCm": 1,
+                "heightCm": 40,
+                "depthCm": 1,
+                "weightGrams": 2000,
+                "parcelShipmentIdentifier": "12345"
+            }
+        ],
+        "shipmentIdentifier": "12345",
+        "orderReference": "order-#12345678"
+    }'
+```
+
+Example response:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.porterbuddy-test.com/order/3520"
+    },
+    "labelInfo": {
+      "href": "https://api.porterbuddy-test.com/order/3520/label"
+    }
+  }
+}
+```
+
+**_Arguments_**
+
+| Parameter          | Required | Type                                                        | Default | Description                                                                                                   |
+| ------------------ | -------- | ----------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| parcels            | Yes      | `List<[Parcel](https://developer.porterbuddy.com/#parcel)>` | none    | Information about the parcels.                                                                                |
+| shipmentIdentifier | No       | Digits[5-20]                                                | none    | Shipping identifier.                                                                                          |
+| orderReference     | No       | String                                                      | none    | Your internal order reference. If this parameter is not set, the current order reference will not be removed. |
+
+**_Response_**
+
+| Parameter | Type                                                                          | Description              |
+| --------- | ----------------------------------------------------------------------------- | ------------------------ |
+| \_links   | [OrderResponseLinks](https://developer.porterbuddy.com/#order-response-links) | Links for this resource. |

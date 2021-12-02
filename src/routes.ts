@@ -20,6 +20,38 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "Planing an order",
       },
       {
+        routePath: "/api-reference/place-a-consolidated-order/",
+        label: "Consolidated Order - Samlevert",
+      },
+      {
+        routePath: "/api-reference/fetching-order-data/",
+        label: "Fetch order data",
+      },
+      {
+        routePath: "/api-reference/update-shipment-information/",
+        label: "Update shipment information",
+      },
+      {
+        routePath: "/api-reference/fetch-labels/",
+        label: "Fetch labels",
+      },
+      {
+        routePath: "/api-reference/order-status/",
+        label: "Order status",
+      },
+      {
+        routePath: "/api-reference/order-status-webhook/",
+        label: "Order status webhook",
+      },
+      {
+        routePath: "/api-reference/confirmed-parcel-scan/",
+        label: "Confirmed parcel scan",
+      },
+      {
+        routePath: "/api-reference/implementation-notes/",
+        label: "Implementation notes",
+      },
+      {
         routePath: "/api-reference/errors/",
         label: "Errors",
       },

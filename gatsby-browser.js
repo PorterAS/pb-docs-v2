@@ -9,18 +9,32 @@ import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
 
-const MyTable = ({ children, ...rest }) => (
-  <div
-    style={{
-      overflowX: "auto",
-      borderRadius: "5px",
-      border: "1px solid rgba(102, 51, 153, 0.2)",
-      padding: "5px 5px",
-    }}
-    {...rest}
-  >
-    <table>{children}</table>
-  </div>
+const MyTable = ({ children, ...rest }) => {
+  return (
+    <div
+      style={{
+        overflowX: "auto",
+        borderRadius: "5px",
+        border: "1px solid rgba(102, 51, 153, 0.2)",
+        marginBottom: '10px',
+      }}
+      {...rest}
+    >
+      <table>{children}</table>
+    </div>
+  )
+}
+
+const TableData = ({children, ...rest}) => (
+  <td {...rest} style={{padding: '10px', fontSize: '0.9em'}}>
+    {children}
+  </td>
+)
+
+const TableHead = ({children, ...rest}) => (
+  <th {...rest} style={{padding: '10px', fontSize: '0.9em'}}>
+    {children}
+  </th>
 )
 /* eslint-disable */
 const component = {
@@ -52,6 +66,8 @@ const component = {
     )
   },
   table: MyTable,
+  td: TableData,
+  th: TableHead
 }
 export const wrapRootElement = ({ element }) => {
   return <MDXProvider components={component}>{element}</MDXProvider>

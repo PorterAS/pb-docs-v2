@@ -1,0 +1,45 @@
+---
+title: "Confirm parcel scan"
+meta_title: "Confirm parcel scan"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "Confirm a Porterbuddy parcel scan"
+---
+
+## Overview
+
+We provide a solution to scan outgoing parcels on our partner portal. This endpoint is only intended to be used when integrating scanning of outgoing parcels into an own solution.
+
+This endpoint confirms that the parcels with the specified parcel shipment identifiers belonging to the specified order have been scanned and are confirmed to be sent. The list of parcel shipment identifiers is matched against the parcel shipment identifiers specified in the parcel data of the order. In case unknown shipment identifiers are specified, the response contains a list of all unknown identifiers, and the HTTP Response code is 422.
+
+```txt
+PUT https://api.porterbuddy.com/order/<orderId>/confirmed-scan
+```
+
+Example request
+
+```bash
+curl -X PUT \
+ https://api.porterbuddy-test.com/order/{orderId}/confirmed-scan \
+  -H 'x-api-key: <your_api_key>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+         "parcelShipmentIds": ["12345", "67890"]
+      }'
+```
+
+Example response
+
+```bash
+{
+    "unknownIds": []
+}
+```
+
+## Arguments
+
+| Parameter         | Required | Type         | Default | Description                                                     |
+|-------------------|----------|--------------|---------|-----------------------------------------------------------------|
+| parcelShipmentIds | Yes      | List[String] | none    | The parcel shipment identifiers to confirm to have been scanned |
+
+

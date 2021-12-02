@@ -1,0 +1,64 @@
+---
+title: "Fetch Porterbuddy Labels"
+meta_title: "Fetch Porterbuddy labels"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "Fetch labels for a Porterbuddy order"
+---
+
+## Overview
+
+The order creation and update shipment information endpoints contain a URL to fetch label information from. This endpoint can be called to receive URLs for downloading label files.
+
+```txt
+GET https://api.porterbuddy-test.com/order/{orderId}/label
+```
+
+Example request
+```bash
+curl -X GET \
+  https://api.porterbuddy-test.com/order/3520/label \
+  -H 'x-api-key: <your_api_key>' \
+  -H 'Accept: application/json'
+```
+
+Example response
+```bash
+{
+  "shipmentLabelUrl": "https://api.porterbuddy-test.com/order/3520/label/4ZvwE4kloM3vyQN4tuO5UC",
+  "packages": [{
+    "labelUrl": "https://api.porterbuddy-test.com/order/3520/label/4ZvwE4kloM3vyQN4tuO5UC/5f6e4f5f-7ce4-4568-b7d1-5fc8c8c6af10",
+    "parcelShipmentIdentifier": "12345"
+  }]
+}
+```
+
+## Response
+
+| Parameter        | Type             | Description                                                                       |
+|------------------|------------------|-----------------------------------------------------------------------------------|
+| shipmentLabelUrl | URL              | Label document containing all labels for the order, one for each specified parcel |
+| packages         | PackageLabelInfo | List of label urls for each parcel                                                |
+
+## PackageLabelInfo
+
+| Parameter                | Type   | Description                                                                |
+|--------------------------|--------|----------------------------------------------------------------------------|
+| labelUrl                 | URL    | The label document for the parcel. This document contains exactly 1 label. |
+| parcelShipmentIdentifier | String | The shipment Identifier for the individual parcel.                         |
+
+The label documents can be retrieved by fetching the document from the URLs in this response. The label document endpoints do not require authentication, but contain a unique (per order) token as part of the URL to ensure they can only be used by authorized parties.
+
+## Label File Format
+Labels can be retrieved in various formats. The default format is PDF, and we recommend using PDFs for the labels due to the superior behavior when printing. Other label formats can be requested by setting the `Accept` header of the request to fetch the label content.
+
+PDF: This is the default label format. It can also be explicitly required by setting `Accept` to `application/pdf`.
+PNG: This is requested by setting `Accept` to `image/png`. The PNG image is created by internally converting the PDF label, so generating it will take a longer time than requesting a PDF.
+ZPL: This label is in the Zebra Printer Language. It is requested by setting `Accept` to `application/zpl`. The label will be returned as ZPL source in utf-8 encoding. The printer needs to be configured for the label size (see below) and 203 dpi print resolution.
+
+
+## Label Size
+The default size for a Porterbuddy label is 102mm\*192mm (width*height). Labels must be printed in 100% size. If smaller labels are necessary, Porterbuddy offers the following options:
+
+1. Porterbuddy can set a default smaller label size of 102mm\*102mm to be returned.
+2. The label size for each label can be influenced by adding a query parameter `size` to the request to fetch the label document. `size=REGULAR` will force the label(s) to be generated in the regular format of 102*192, `size=SMALL` will return the 102\*102 sized version. Calls to the label URLs without the query parameter will return the default size as configured.

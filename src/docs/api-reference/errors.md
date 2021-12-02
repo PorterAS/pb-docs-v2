@@ -1,4 +1,12 @@
-# Http errors
+---
+title: "Errors"
+meta_title: "Errors"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "Error handling in the Porterbuddy API"
+---
+
+## HTTP Errors
 
 | Http response code  | Reason                                                       |
 | ------------------- | ------------------------------------------------------------ |

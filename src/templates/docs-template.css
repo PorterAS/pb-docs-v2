@@ -40,4 +40,8 @@
 /*    border-radius: 5px;*/
 /*}*/
 
+table td {
+    /*padding: 10px;*/
+    /*display: table-cell;*/
+}
 tr:nth-child(even){background-color: rgba(102, 51, 153, 0.1)}

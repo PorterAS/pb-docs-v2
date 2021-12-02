@@ -1,0 +1,15 @@
+---
+title: "API implementation notes"
+meta_title: "Porterbuddy API Implementation notes"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "See various recommended notes to consider when implementing Porterbuddy's API"
+---
+
+## Idempotency Keys
+
+Requests to create orders use an idempotency key specified as header to identify duplicate requests. This is intended to prevent orders to be created twice in our system by an accidentally repeated request, e.g. in case the request was handled successfully on Porterbuddy's side, but too slow, so it would trigger a timeout on the integrator's side.
+
+Thus, the idempotency key should be chosen in a way that it corresponds to the order to be created with the request, e.g. your unique order reference, a hash value of the body data, or similar, the only requirement is that if the data is for the same order on your side, the idempotency key must be the same.
+
+If an order request is handled with an idempotency key already used on an existing order, the response returned contains the dataset for the existing order.
