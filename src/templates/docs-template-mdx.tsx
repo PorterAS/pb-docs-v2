@@ -33,7 +33,7 @@ const BlogPostMdx = ({ data }: any) => {
         description={doc.frontmatter.meta_description}
         lang="en"
       />
-      <Text as={'h1'} fontSize={"3xl"} fontWeight={"bold"}>
+      <Text as={'h1'} fontSize={"3xl"} fontWeight={"bold"} mb="10">
         {doc.frontmatter.title}
       </Text>
 

@@ -68,6 +68,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "Configuration options",
       },
       {
+        routePath: "/product-card-widget/callback-functions/",
+        label: "Callback functions",
+      },
+      {
         routePath: "/product-card-widget/text-replacement/",
         label: "Text replacement",
       },
@@ -82,10 +86,6 @@ export const sidebarRoutes: SidebarRouteType[] = [
       {
         routePath: "/product-card-widget/customizing-text/",
         label: "Customizing text",
-      },
-      {
-        routePath: "/product-card-widget/callback-functions/",
-        label: "Callback functions",
       },
     ],
   },

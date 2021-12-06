@@ -101,7 +101,17 @@ Variables can be used in text replacements to display changing values within the
 
 ## Example
 
-> INSERT WIDGET
+<PBProductCard options={{
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    language: "NO",
+    apiMode: "test",
+    hideIfUnavailable: false,
+    postalCode: "0278",
+    text: {
+      availabilitySuccessCountdown: "**{{remaining}}** remaining for this offer"
+    }
+  }} style={{maxWidth:"500px", marginBottom: "10px"}}/>
 
 ```html
 <script>
