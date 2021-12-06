@@ -1,8 +1,22 @@
-# Product Card Widget
+---
+title: "Product card widget"
+meta_title: "Porterbuddy Product card widget documentation"
+publishBy: "06-12-2021"
+author: "William Imoh"
+meta_description: "See Porterbuddy's availability in single product pages using the Product card widget"
+---
+
+## Overview
 
 The product card widget is used on product pages to inform if a delivery with porterbuddy is available to a customer's postcode.
 
-### INSERT PORTERBUDDY WIDGET
+<PBProductCard options={{
+    token: "7cDRiTIsB89nKJzwMJfuLLqEfF9Sw9ImkJnneoAm",
+    view: "availability",
+    language: "NO",
+    apiMode: "test",
+    hideIfUnavailable: false,
+  }} style={{maxWidth:"500px"}}/>
 
 ## Usage
 
@@ -22,8 +36,7 @@ Add the configuration and script tag anywhere in `<head>` or `<body>`.
 
 The async attribute is optional, but recommended for better performance.
 
-Configure the widget to show the "availability" view by defining the global variable.
-`window.porterbuddy` in a script tag. If `window.porterbuddy` is not defined when the script loads it will delay execution for up to 10 seconds until it finds the configuration.
+Configure the widget to show the "availability" view by defining the global variable `window.porterbuddy`, in a script tag. If `window.porterbuddy` is not defined, when the script loads it will delay execution for up to 10 seconds until it finds the configuration.
 
 ```html
 <script>
@@ -35,7 +48,7 @@ Configure the widget to show the "availability" view by defining the global vari
 </script>
 ```
 
-Add a `div` in `body` with the id `**porterbuddy-widget**` where you want the widget to appear on the page
+Add a `div` in `body` with the id `**porterbuddy-widget**` wherever you want the widget to appear on the page.
 
 ```html
 <div id="porterbuddy-widget"></div>

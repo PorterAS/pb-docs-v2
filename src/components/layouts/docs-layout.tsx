@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import { sidebarRoutes } from "../../routes"
+import { MDXProvider } from "@mdx-js/react"
 import {
   Box,
   BoxProps,
@@ -33,6 +34,7 @@ import { GrCatalog, GrIntegration } from "react-icons/gr"
 import { GiClothJar } from "react-icons/gi"
 import { MenuDrawer } from "./menu-drawer"
 import { Copyright, SocialMediaLinks } from "./footer"
+import { PBProductCard } from "../porterbuddy/pb-product-card-widget"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any
@@ -41,6 +43,7 @@ interface NavItemType extends BoxProps {
 }
 
 const DocsLayout = ({ children }: any) => {
+  const shortcodes: any = {PBProductCard}
   // Get page URl on layout mount to be used in updating styles
   // const [pageURL, setPageURL] = useState("")
   //
@@ -145,8 +148,8 @@ const DocsLayout = ({ children }: any) => {
                   {route.label}
                 </NavItem>
                 {route.children &&
-                  route.children.map(childRoute => (
-                    <Link to={childRoute.routePath}>
+                  route.children.map((childRoute, index) => (
+                    <Link to={childRoute.routePath} key={index}>
                       <Box
                         pl={6}
                         fontSize={"14px"}
@@ -182,6 +185,7 @@ const DocsLayout = ({ children }: any) => {
     </Box>
   )
   return (
+    <MDXProvider components={shortcodes}>
     <Box>
       <Header
         siteTitle={data.site.siteMetadata?.title || `Title`}
@@ -267,6 +271,7 @@ const DocsLayout = ({ children }: any) => {
         </Stack>
       </Box>
     </Box>
+    </MDXProvider>
   )
 }
 
