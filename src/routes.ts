@@ -4,6 +4,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
     label: "Get started",
     parentPath: "/getting-started/",
     icon: "FaPlay",
+    accordion: false,
   },
   {
     group: "api_reference",
@@ -143,30 +144,34 @@ export const sidebarRoutes: SidebarRouteType[] = [
   },
   {
     group: "faqs",
-    label: "Frequently asked questions",
+    label: "FAQs",
     parentPath: "/faqs/",
     icon: "FaInfoCircle",
+    accordion: false,
   },
   {
     group: "pb_community",
     label: "PB Community",
     parentPath: "/community/",
     icon: "FaPeopleCarry",
+    accordion: false,
   },
   {
     group: "changelog",
     label: "Changelog",
     parentPath: "/changelog/",
     icon: "FaCodeBranch",
+    accordion: false,
   },
 ]
 
-interface SidebarRouteType {
+export interface SidebarRouteType {
   group: string
   label: string
   parentPath: string
   icon?: string
   children?: RouteType[]
+  accordion?: boolean
 }
 
 type RouteType = {
