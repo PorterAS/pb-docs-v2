@@ -8,7 +8,7 @@ meta_description: "Update the parcel information of a Porterbuddy Order"
 
 ## Overview
 
-This update is supposed to be used whenever you need to update the packages and shipment information after placing the order. Note that the packages list needs to be complete, so any content here removes the information from the previous order.
+This update is supposed to be used whenever you need to update the packages and shipment information after placing the order. Note that the parcel list needs to be complete, including constraints, as any content here overwrites the existing information on the order.
 
 ```bash
 PUT https://api.porterbuddy.com/order/<orderId>/update-shipment-details
@@ -25,12 +25,18 @@ curl -X PUT \
     -d '{
         "parcels" : [
             {
-                "description": "Shoes",
-                "widthCm": 1,
-                "heightCm": 40,
-                "depthCm": 1,
-                "weightGrams": 2000,
-                "parcelShipmentIdentifier": "12345"
+              "description": "Shoes",
+              "widthCm": 1,
+              "heightCm": 40,
+              "depthCm": 1,
+              "weightGrams": 2000,
+              "parcelShipmentIdentifier": "12345",
+              "constraints": {
+                "temperature": {
+                  "maximumCelsius": 25.0,
+                  "minimumCelsius": 10.0
+                }
+              }
             }
         ],
         "shipmentIdentifier": "12345",
