@@ -66,7 +66,13 @@ https://api.porterbuddy-test.com/order \
             "heightCm": 40,
             "depthCm": 1,
             "weightGrams": 2000,
-            "parcelShipmentIdentifier": "12345"
+            "parcelShipmentIdentifier": "12345",
+            "constraints": {
+                "temperature": {
+                    "maximumCelsius": 25.0,
+                    "minimumCelsius": 10.0
+                }
+            }
         }
     ],
     "items": [
@@ -220,14 +226,30 @@ Some of the verifications will affect each other. In that case, the couriers wil
 
 ## Parcel
 
-| Parameter                | Required | Type         | Default | Description                                                                           |
-| ------------------------ | -------- | ------------ | ------- | ------------------------------------------------------------------------------------- |
-| description              | Yes      | String       | none    | A description of the parcel and its content                                           |
-| widthCm                  | Yes      | Int          | none    | The width of the parcel in cm                                                         |
-| heightCm                 | Yes      | Int          | none    | The height of the parcel in cm                                                        |
-| depthCm                  | Yes      | Int          | none    | The depth of the parcel in cm                                                         |
-| weightGrams              | Yes      | Int          | none    | The weight of the package in grams                                                    |
-| parcelShipmentIdentifier | No       | Digits[5-20] | none    | The shipping identifier for the package. This is usually the number for the bar code. |
+Parameter                | Required | Type                                    | Default | Description
+------------------------ | -------- | --------------------------------------- | ------- | ----------------------------------------------------
+description              | Yes      | String                                  | none    | Description of the parcel and contents
+widthCm                  | No       | Int                                     | none    | The width of the parcel in cm
+heightCm                 | No       | Int                                     | none    | The height of the parcel in cm
+depthCm                  | No       | Int                                     | none    | The depth of the parcel in cm
+weightGrams              | Yes      | Int                                     | none    | The weight of the package in grams
+parcelShipmentIdentifier | No       | Digits[5-20]                            | none    | The shipping identifier for the package. This is usually the number for the bar code.
+constraints              | No       | [ParcelConstraints](#parcelconstraints) | none    | Constraints for parcel delivery. <br/> &ast; Some api calls like `/update-shipment-information` will override the existing parcel data, including constraints. Make sure not to change the constraints after the labels for the order are printed.
+
+### ParcelConstraints
+Parameter                | Required | Type                                             | Default | Description
+------------------------ | -------- | ------------------------------------------------ | ------- | ----------------------------------------------------
+temperature              | no       | [TemperatureConstraints](#temperatureconstraints) | none | Temperature constraints for the parcel.
+
+### TemperatureConstraints
+Parameter                | Required | Type                                    | Default | Description
+------------------------ | -------- | --------------------------------------- | ------- | ----------------------------------------------------
+maximumCelsius           | yes      | double                                  | none    | maximum storage temperature in degrees Celsius
+minimumCelsius           | yes      | double                                  | none    | minimum storage temperature in degrees Celsius
+
+Temperature control requirements are specified per parcel. The information can either be passed during order creation, or when updating the shipment details / adding parcels. 
+Take care not to overwrite parcel constraints unintentionally. If the constraints are changed purposefully they should be done so as early as possible, and should not be changed 
+after the label(s) are printed.
 
 ## Item
 

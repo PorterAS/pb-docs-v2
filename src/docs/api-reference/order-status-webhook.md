@@ -62,7 +62,13 @@ Example order request body with the webhook
           "heightCm": 10,
           "depthCm": 35,
           "weightGrams": 600,
-          "parcelShipmentIdentifier": "12345"
+          "parcelShipmentIdentifier": "12345",
+          "constraints": {
+            "temperature": {
+              "maximumCelsius": 25.0,
+              "minimumCelsius": 10.0
+            }
+          }
         }
       ],
       "items": [
