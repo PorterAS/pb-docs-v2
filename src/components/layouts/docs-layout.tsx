@@ -94,7 +94,7 @@ const SidebarAccordion = ({ route, iconMap, pageURL }: SidebarType) => {
           <NavItem
             navLink={route.parentPath}
             key={route.group}
-            icon={iconMap[route.icon]}
+            icon={iconMap[route.icon!]}
             flex={1}
             pageURL={pageURL}
           >
@@ -145,7 +145,7 @@ const SidebarItem = ({ route, iconMap, pageURL }: SidebarType) => {
       <NavItem
         navLink={route.parentPath}
         key={route.group}
-        icon={iconMap[route.icon]}
+        icon={iconMap[route.icon!]}
         flex={1}
         pageURL={pageURL}
       >
@@ -192,7 +192,7 @@ const DocsLayout = React.memo(({ children }: any) => {
 
   const shortcodes: any = { PBProductCard, PBCheckoutWidget }
 
-  const iconMap = {
+  const iconMap: any = {
     FaPlay: FaPlay,
     FaBook: FaBook,
     FaInfoCircle: FaInfoCircle,
@@ -228,7 +228,7 @@ const DocsLayout = React.memo(({ children }: any) => {
   `)
   // const slugs = data.allMdx.edges
 
-  const SidebarContent = (props: any) => (
+  const SidebarContent = React.memo((props: any) => (
     <Box
       as="nav"
       pb={[0, 10, 10]}
@@ -270,7 +270,7 @@ const DocsLayout = React.memo(({ children }: any) => {
           })}
       </Flex>
     </Box>
-  )
+  ))
   return (
     <MDXProvider components={shortcodes}>
       <Box>

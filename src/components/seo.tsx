@@ -53,6 +53,10 @@ function SEO({ description, lang, meta, title }: any) {
           content: `website`,
         },
         {
+          property: `og:image`,
+          content: `https://res.cloudinary.com/chuloo/image/upload/v1639056238/porterbuddy/Porterbuddy_logo.png`,
+        },
+        {
           name: `twitter:card`,
           content: `summary`,
         },
