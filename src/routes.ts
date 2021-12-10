@@ -133,6 +133,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
     icon: "FaBookOpen",
     children: [
       {
+        routePath: "/guides/quite-big-box/",
+        label: "Quite Big Box™",
+      },
+      {
         routePath: "/guides/samlevert-upgrade-guide/",
         label: "Samlevert upgrade guide",
       },

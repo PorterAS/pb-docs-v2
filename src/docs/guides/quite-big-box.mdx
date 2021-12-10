@@ -1,0 +1,330 @@
+---
+title: "Quite big box™"
+publishBy: "10-12-2021"
+author: "William Imoh"
+meta_description: "Ship larger parcels using Porterbuddy's Quite Big Box product."
+---
+
+Parcels shipped with Porterbuddy currently fall within the weight limit of 21kg and dimension limit of 60cm x 60cm x 120cm.
+This threshold excludes larger parcels in orders from being delivered by Porterbuddy. To solve this, we introduced a new product called "Quite Big Box" (QBB) with an increased capacity to handle larger parcels.
+
+With QBB, we upgraded the parcel requirements to:
+
+- Dimensions: 140cm x 110cm x 7cm
+- Weight: 21kg per parcel
+- Maximum volume: 450 dm3
+- One dimension cannot be more than 70cm
+
+<ContentCallout title={"Maximum order weight 💡"}>While each parcel in an order is limited to 21kg, the total weight of all items in the order must not exceed 25kg.</ContentCallout> 
+
+QBB orders are also referred to as "large".
+
+## Placing a large order
+
+To place a large order using the Porterbuddy API, you take the following steps:
+
+1. Create an availability request data containing accurate product and parcel size data in `items` and `parcels`, respectively.
+2. Make a Porterbuddy availability call with a value of `large` specified in the `products` field. 
+3. Create a Porterbuddy order using a returned delivery window for a `large` product value with the Order API.
+
+Here's an example availability request with the `large` field specification.
+
+```bash
+curl \
+  -X POST 'https://api.porterbuddy.com/availability' \
+  -H 'Content-Type: application/json' \  
+  -H 'x-api-key: <your_api_key>' \
+  -d '{
+        "pickupWindows": [
+            {"start": "2023-02-13T10:00+01:00", "end": "2023-02-13T18:00+01:00"},
+            {"start": "2023-02-14T10:00+01:00", "end": "2023-02-14T18:00+01:00"}
+        ],
+        "originAddress": {
+            "streetName": "Keysers Gate",
+            "streetNumber": "3",
+            "postalCode": "0165",
+            "city": "Oslo",
+            "country": "Norway"
+        },
+        "destinationAddress": {
+            "streetName": "Høyenhallveien",
+            "streetNumber": "25",
+            "postalCode": "0678",
+            "city": "Oslo",
+            "country": "Norway"
+        },
+        "recipient": {
+            "email": "testemail+recipient@porterbuddy.com",
+            "phoneCountryCode": "+47",
+            "phoneNumber": "65127865"
+        },
+        "products": [ "large" ],
+        "parcels": [
+            {
+                "widthCm": 30,
+                "heightCm": 25,
+                "depthCm": 45,
+                "weightGrams": 2000
+            }
+        ],
+        "items": [
+            {
+                "name":"Fancy Sneakers",
+                "sku":"FANCYSNEAKER43",
+                "weightGrams":"600",
+                "widthCm":20,
+                "heightCm":10,
+                "depthCm":35,
+                "description":"Fancy sneakers (red/blue) in size 43",
+                "category":"shoes",
+                "brand":"Fancy Footwear Corp.",
+                "imageUrl":"https://awesomewebshop.com/images/5fd71d6f-b0be-4480-900f-f3d008a0bc62.png",
+                "price": {
+                    "fractionalDenomination":"79900",
+                    "currency":"NOK"
+                },
+                "barCode": {
+                    "value":"123-456-789",
+                    "type":"CODE128"
+                }
+            },
+            {
+                "name":"Heavy Boots",
+                "sku":"HEAVYBOOTS48",
+                "weightGrams":"1400",
+                "widthCm":30,
+                "heightCm":12,
+                "depthCm":45,
+                "description":"Heavy military boots, size 48",
+                "category":"shoes",
+                "brand":"Heavy Industries Inc.",
+                "imageUrl":"https://awesomewebshop.com/images/613c37e8-64be-4483-a216-9fb1b7f7e848.png",
+                "price": {
+                    "fractionalDenomination":"134900",
+                    "currency":"NOK"
+                },
+                "barCode": {
+                    "value":"999-888-765",
+                    "type":"CODE128"
+                }
+            }
+        ]
+    }'
+```
+
+A sample response looks like this.
+
+```json
+{
+  "originResolvedAddress": {
+    "streetName": "Keysers Gate",
+    "streetNumber": "3",
+    "postalCode": "0165",
+    "city": "Oslo",
+    "country": "Norway",
+    "position": {
+      "latitude": 59.9169844,
+      "longitude": 10.7411912
+    }
+  },
+  "destinationResolvedAddress": {
+    "streetName": "Høyenhallveien",
+    "streetNumber": "25",
+    "postalCode": "0678",
+    "city": "Oslo",
+    "country": "Norway",
+    "position": {
+      "latitude": 59.9032646,
+      "longitude": 10.811598
+    }
+  },
+  "deliveryWindows": [
+    {
+      "product": "large",
+      "start": "2023-02-13T17:30:00+01:00",
+      "end": "2023-02-13T19:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 19900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-13T13:00:13+01:00",
+      "token": "20hRsgz8AovrLjeOldJ2Wg==:yhr85il4/swdgiEP/DG2wg==:2hBoFcmyTNLp/CTfX3sTGslOJr9sXAMxHggqq/h6tGmUuCEB2Vfy8uyNIWfg3qf6d7nj84Aj2sbwMLK2hETe14L4qgnlZHVSkBcktYPc6VCp9vEZhXErpQS3HoSyRU+mVcF2SNGP4s5TI5x7S6oq4Q==",
+      "consolidated": false
+    },
+    {
+      "product": "large",
+      "start": "2023-02-13T19:30:00+01:00",
+      "end": "2023-02-13T21:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 19900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-13T13:00:11+01:00",
+      "token": "lDQ+BXxkKR9qHwv5naf6CQ==:zpR8F/PUK3YlhUkVspoQ/w==:eV5fTEQmv/6We+KaK32ji31FHHHKaG4/GFQO8s/BX9dLKQ4QlV6gLZYtXOCQU+WfbYe+x9pJOfdjaXRfC2M4oNq+bHtNHSQKY7rfjAV3IoG2DSqvT9a+z4Lp8yuFOvonEUlzWlEiT2inTcnju+JlYQ==",
+      "consolidated": false
+    },
+    {
+      "product": "large",
+      "start": "2023-02-14T17:30:00+01:00",
+      "end": "2023-02-14T19:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-14T13:00:27+01:00",
+      "token": "SW23FPWVYkyV+xJuFfJ76w==:wZl92j141aX8vBtU/bzgtQ==:kBZeBgu+JoYMaasgk+Y+F4Bsd6ntn3Q8hkbGX9/ysfnppPTmqe24ZZeBdtDwh2364DMUhc+hpyK2Aau8jW7FC/gl4E3Q84j+7OnX3CNYuRzoNlYsXI749XGr86YbVU6wt8olw8pNkkLsyF17oNDA3g==",
+      "consolidated": false
+    },
+    {
+      "product": "large",
+      "start": "2023-02-14T19:30:00+01:00",
+      "end": "2023-02-14T21:30:00+01:00",
+      "price": {
+        "fractionalDenomination": 14900,
+        "currency": "NOK"
+      },
+      "expiresAt": "2023-02-14T13:00:04+01:00",
+      "token": "Kj1q+VlVFG4LX3ZAwbMPPg==:t6BkqFpGFzVnpqoTqEyKgA==:GGrsm1gUTetg8ux9sTs0/+X7mQiG/9a4y67BZoXPRjB3g8F+OK4NVyaYZAdIsLcdbO36jNta8hEyyCDxVee2qi7+95RJXBP/7wuH4Ik/S2/fq+8gHBQhISm0ba9TyO4ujytN5eAlXmoZgSQSXFG2tg==",
+      "consolidated": false
+    }
+  ],
+}
+```
+
+Notice the `"product": "large"` returned in each delivery window. 
+
+You can find the complete API specification [here](/api-reference/availability-api/).
+
+Using a delivery window returned with a `large` product, you can specify the `product` and delivery window token in the order request that looks like this.
+
+```bash
+curl -X POST \
+  https://api.porterbuddy-test.com/order \
+  -H 'x-api-key: <your_api_key>' \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: <your idempotency key>' \
+  -d '{
+         "origin": {
+            "name": "Nils Johansen (Sender)",
+            "address": {
+                "streetName": "Keysers Gate",
+                "streetNumber": "3",
+                "postalCode": "0165",
+                "city": "Oslo",
+                "country": "Norway"
+            },
+            "email": "testemail+sender@porterbuddy.com",
+            "phoneCountryCode": "+47",
+            "phoneNumber": "65127865"
+        },
+        "destination": {
+            "name": "Roger Olsen (Recipient)",
+            "address": {
+                "streetName": "Høyenhallveien",
+                "streetNumber": "25",
+                "postalCode": "0678",
+                "city": "Oslo",
+                "country": "Norway"
+            },
+            "email": "testemail+recipient@porterbuddy.com",
+            "phoneCountryCode": "+47",
+            "phoneNumber": "65789832",
+            "deliveryWindow":{
+                "start": "2023-02-13T17:30:00+01:00",
+                "end": "2023-02-13T19:30:00+01:00",
+                "token": "20hRsgz8AovrLjeOldJ2Wg==:yhr85il4/swdgiEP/DG2wg==:2hBoFcmyTNLp/CTfX3sTGslOJr9sXAMxHggqq/h6tGmUuCEB2Vfy8uyNIWfg3qf6d7nj84Aj2sbwMLK2hETe14L4qgnlZHVSkBcktYPc6VCp9vEZhXErpQS3HoSyRU+mVcF2SNGP4s5TI5x7S6oq4Q=="
+            },
+            "verifications": {
+                "minimumAgeCheck": 0,
+                "leaveAtDoorstep": false,
+                "idCheck": false,
+                "requireSignature": false,
+                "onlyToRecipient": false
+            }
+        },
+        "parcels" : [
+            {
+                "description": "Shoes",
+                "widthCm": 30,
+                "heightCm": 25,
+                "depthCm": 45,
+                "weightGrams": 2000,
+                "parcelShipmentIdentifier": "12345"
+                "constraints": {
+                    "temperature": {
+                        "maximumCelsius": 25.0,
+                        "minimumCelsius": 10.0
+                    }
+                }
+            }
+        ],
+        "items": [
+            {
+                "name":"Fancy Sneakers",
+                "sku":"FANCYSNEAKER43",
+                "weightGrams":"600",
+                "widthCm":20,
+                "heightCm":10,
+                "depthCm":35,
+                "description":"Fancy sneakers (red/blue) in size 43",
+                "category":"shoes",
+                "brand":"Fancy Footwear Corp.",
+                "imageUrl":"https://awesomewebshop.com/images/5fd71d6f-b0be-4480-900f-f3d008a0bc62.png",
+                "price": {
+                    "fractionalDenomination":"79900",
+                    "currency":"NOK"
+                },
+                "barCode": {
+                    "value":"123-456-789",
+                    "type":"CODE128"
+                }
+            },
+            {
+                "name":"Heavy Boots",
+                "sku":"HEAVYBOOTS48",
+                "weightGrams":"1400",
+                "widthCm":30,
+                "heightCm":12,
+                "depthCm":45,
+                "description":"Heavy military boots, size 48",
+                "category":"shoes",
+                "brand":"Heavy Industries Inc.",
+                "imageUrl":"https://awesomewebshop.com/images/613c37e8-64be-4483-a216-9fb1b7f7e848.png",
+                "price": {
+                    "fractionalDenomination":"134900",
+                    "currency":"NOK"
+                },
+                "barCode": {
+                    "value":"999-888-765",
+                    "type":"CODE128"
+                }
+            }
+        ],
+        "product": "large",
+        "courierInstructions": "Test",
+        "shipmentIdentifier": "12345"
+    }'
+```
+
+This request creates a QBB order in Porterbuddy's systems.
+
+You can see the Order API information [here](/api-reference/order-api/).
+
+## Handling Delivery and Large parcels
+If items in an order contain small and large parcels, the `products` array can include both `delivery` and `large`. 
+We will evaluate the product and parcel data sent in the `items` and `parcels` fields to determine which type of window to return.
+
+Specifying only the `large` value returns only `large` delivery windows, regardless of if the order contains only small items.
+
+Omitting the `large` value in `products` and sending in parcel and product data containing large items will throw an error. 
+Also, sending in product/parcel data beyond the stated threshold will return an error in the availability request with the' large' value set.
+
+## Activating QBB
+To activate Quite Big Box, contact your key account manager, requesting to enable the product on your account.
+
+## Current plugin support
+The QBB product is currently supported in the following Porterbuddy plugins:
+
+- Magento 1
+
+We will update this list as we include the feature in other plugins.

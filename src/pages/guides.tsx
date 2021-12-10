@@ -14,7 +14,7 @@ const GuidesPage = (): any => {
     query GuidesQuery {
       allMdx(
         filter: { slug: { regex: "/guides/" } }
-        sort: { fields: frontmatter___publishBy, order: DESC }
+        sort: { fields: frontmatter___publishBy, order: ASC }
       ) {
         edges {
           node {

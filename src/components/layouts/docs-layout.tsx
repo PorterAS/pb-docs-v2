@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import { sidebarRoutes, SidebarRouteType } from "../../routes"
 import { MDXProvider } from "@mdx-js/react"
+import { ContentCallout } from "../global/ContentCallout"
+
 import {
   Accordion,
   AccordionButton,
@@ -190,7 +192,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     setPageURL(typeof window !== "undefined" ? window.location.href : "")
   }, [])
 
-  const shortcodes: any = { PBProductCard, PBCheckoutWidget }
+  const shortcodes: any = { PBProductCard, PBCheckoutWidget, ContentCallout }
 
   const iconMap: any = {
     FaPlay: FaPlay,

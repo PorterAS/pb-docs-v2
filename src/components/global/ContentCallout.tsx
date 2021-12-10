@@ -1,6 +1,5 @@
 import * as React from "react"
 import { useState } from "react"
-import { Link } from "gatsby"
 import { Box, Flex, Text } from "@chakra-ui/react"
 import { FaTimes } from "react-icons/all"
 
@@ -14,7 +13,6 @@ type ContentCalloutPropType = {
 export const ContentCallout = ({
   title,
   children,
-  bannerLink = "#",
   canClose = false,
   bgColor = "#661AFF",
 }: ContentCalloutPropType) => {
@@ -22,7 +20,7 @@ export const ContentCallout = ({
   return (
     <>
       {!closeBanner && (
-        <Link to={bannerLink}>
+        <Box as={"div"}>
           <Box
             p={3}
             minH={"10%"}
@@ -46,7 +44,7 @@ export const ContentCallout = ({
               )}
             </Flex>
           </Box>
-        </Link>
+        </Box>
       )}
     </>
   )
