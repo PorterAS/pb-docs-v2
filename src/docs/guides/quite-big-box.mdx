@@ -2,18 +2,17 @@
 title: "Quite big box™"
 publishBy: "10-12-2021"
 author: "William Imoh"
-meta_description: "Ship larger parcels using Porterbuddy's Quite Big Box product."
+meta_description: "Deliver larger parcels using Porterbuddy's Quite Big Box product."
 ---
 
-Parcels shipped with Porterbuddy currently fall within the weight limit of 21kg and dimension limit of 60cm x 60cm x 120cm.
+Parcels delivered with Porterbuddy currently fall within the weight limit of 21kg and dimension limit of 60cm x 60cm x 120cm.
 This threshold excludes larger parcels in orders from being delivered by Porterbuddy. To solve this, we introduced a new product called "Quite Big Box" (QBB) with an increased capacity to handle larger parcels.
 
 With QBB, we upgraded the parcel requirements to:
 
-- Dimensions: 140cm x 110cm x 7cm
+- Dimensions: 140cm x 110cm x 70cm
 - Weight: 21kg per parcel
 - Maximum volume: 450 dm3
-- Maximum order weight: 25kg
 
 <ContentCallout title={"Maximum order weight 💡"}>While each parcel in an order is limited to 21kg, the total weight of all items in the order must not exceed 25kg.</ContentCallout> 
 
@@ -61,20 +60,20 @@ curl \
         "products": [ "large" ],
         "parcels": [
             {
-                "widthCm": 30,
-                "heightCm": 25,
-                "depthCm": 45,
-                "weightGrams": 2000
+                "widthCm": 70,
+                "heightCm": 30,
+                "depthCm": 140,
+                "weightGrams": 2100
             }
         ],
         "items": [
             {
                 "name":"Fancy Sneakers",
                 "sku":"FANCYSNEAKER43",
-                "weightGrams":"600",
-                "widthCm":20,
-                "heightCm":10,
-                "depthCm":35,
+                "weightGrams":"700",
+                "widthCm":70,
+                "heightCm":100,
+                "depthCm":45,
                 "description":"Fancy sneakers (red/blue) in size 43",
                 "category":"shoes",
                 "brand":"Fancy Footwear Corp.",
@@ -244,28 +243,27 @@ curl -X POST \
         },
         "parcels" : [
             {
-                "description": "Shoes",
-                "widthCm": 30,
-                "heightCm": 25,
-                "depthCm": 45,
-                "weightGrams": 2000,
-                "parcelShipmentIdentifier": "12345"
-                "constraints": {
-                    "temperature": {
-                        "maximumCelsius": 25.0,
-                        "minimumCelsius": 10.0
-                    }
-                }
+              "widthCm": 70,
+              "heightCm": 30,
+              "depthCm": 140,
+              "weightGrams": 2100
+              "parcelShipmentIdentifier": "12345"
+              "constraints": {
+                  "temperature": {
+                      "maximumCelsius": 25.0,
+                      "minimumCelsius": 10.0
+                  }
+              }
             }
         ],
         "items": [
             {
                 "name":"Fancy Sneakers",
                 "sku":"FANCYSNEAKER43",
-                "weightGrams":"600",
-                "widthCm":20,
-                "heightCm":10,
-                "depthCm":35,
+                "weightGrams":"700",
+                "widthCm":70,
+                "heightCm":100,
+                "depthCm":45,
                 "description":"Fancy sneakers (red/blue) in size 43",
                 "category":"shoes",
                 "brand":"Fancy Footwear Corp.",
@@ -319,11 +317,13 @@ Specifying only the `large` value returns only `large` delivery windows, regardl
 Omitting the `large` value in `products` and sending in parcel and product data containing large items will throw an error. 
 Also, sending in product/parcel data beyond the stated threshold will return an error in the availability request with the' large' value set.
 
+<ContentCallout title={"Samlevert not supported 🚨"}>QBB orders are currently ineligible for Samlevert. i.e They cannot be consolidated with normal delivery orders.</ContentCallout> 
+
 ## Activating QBB
 To activate Quite Big Box, contact your key account manager, requesting to enable the product on your account.
 
 ## Current plugin support
-The QBB product is currently supported in the following Porterbuddy plugins:
+The QBB product is currently supported in the followi ng Porterbuddy plugins:
 
 - Magento 1
 
