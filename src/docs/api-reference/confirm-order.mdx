@@ -1,0 +1,26 @@
+---
+title: "Confirm order creation"
+meta_title: "Confirm Porterbuddy order"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "Confirm a Porterbuddy order creation"
+---
+
+This endpoint is a workaround for retailers using Klarna checkout, with the shipping assistant and Vipps payment. 
+Confirming an order with this endpoint essentially tells Porterbuddy the order is considered paid for, and should be processed. The earlier this call is made the better, as it avoids delayed cancellations. 
+
+In addition, it will trigger the sending of a confirmation and tracking link to the end user, in the cases where the order was not confirmed through the Klarna API (i.e Vipps payments).
+
+```bash
+PUT https://api.porterbuddy.com/order/<orderId>/confirm
+```
+
+Returns an empty `200 OK` if the call succeeded.
+
+Example request
+
+```bash
+curl -X PUT \
+  https://api.porterbuddy-test.com/order/<orderId>/confirm \
+  -H 'x-api-key: <your_api_key>'
+```

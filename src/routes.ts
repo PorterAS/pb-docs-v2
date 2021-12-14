@@ -53,6 +53,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "Implementation notes",
       },
       {
+        routePath: "/api-reference/confirm-order/",
+        label: "Confirm order",
+      },
+      {
         routePath: "/api-reference/errors/",
         label: "Errors",
       },
