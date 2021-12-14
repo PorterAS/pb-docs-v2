@@ -76,7 +76,7 @@ const GuidesPage = () => {
                   Porterbuddy Developers on Discord
                 </Text>
                 <Text width={"95%"}>
-                  Join our Discord community with over 1000+ creators
+                  Join our Discord community.
                 </Text>
               </Box>
 
@@ -103,12 +103,12 @@ const GuidesPage = () => {
             <List spacing={3}>
               <CommunityUpdateItem
                 content={
-                  "We're launching the Porterbuddy developer community and giving free AWS credits!!"
+                  "We're launching the Porterbuddy developer community!!"
                 }
               />
-              <CommunityUpdateItem
+              {/* <CommunityUpdateItem
                 content={"Join us this friday for drinks at our new office!"}
-              />
+              /> */}
             </List>
           </Box>
         </Box>
