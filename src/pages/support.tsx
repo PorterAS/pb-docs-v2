@@ -2,8 +2,8 @@ import * as React from "react"
 import { Box, Center, Text } from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
-import { PBProductCard } from "../components/porterbuddy/pb-product-card-widget"
-import { PBCheckoutWidget } from "../components/porterbuddy/pb-checkout-widget"
+import { PBProductCard } from "../components/porterbuddy/PBProductCardWidget"
+import { PBCheckoutWidget } from "../components/porterbuddy/PBCheckoutWidget"
 import { pbAvailabilityData } from "../components/porterbuddy/sample-data"
 import {
   IPBWidget,

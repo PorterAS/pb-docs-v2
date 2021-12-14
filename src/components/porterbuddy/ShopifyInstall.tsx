@@ -1,6 +1,6 @@
 import {Box, Button, Input, Flex } from "@chakra-ui/react";
 import React, {useState} from "react";
-import { isBrowser } from "./pb-script";
+import { isBrowser } from "./PBScript";
 
 export const ShopifyInstall = () => {
     const [storeName, setStoreName] = useState<string | undefined>(undefined)

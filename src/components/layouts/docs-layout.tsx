@@ -41,8 +41,8 @@ import { Container } from "./container"
 import { GrCatalog, GrIntegration } from "react-icons/gr"
 import { GiClothJar } from "react-icons/gi"
 import { Copyright, SocialMediaLinks } from "./footer"
-import { PBProductCard } from "../porterbuddy/pb-product-card-widget"
-import { PBCheckoutWidget } from "../porterbuddy/pb-checkout-widget"
+import { PBProductCard } from "../porterbuddy/PBProductCardWidget"
+import { PBCheckoutWidget } from "../porterbuddy/PBCheckoutWidget"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined

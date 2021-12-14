@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useEffect } from "react"
-import { isBrowser, PBScript } from "./pb-script"
+import { isBrowser, PBScript } from "./PBScript"
 import { PBCheckoutWidgetType } from "./types"
 
 type PBCheckoutWidgetPropType = {
