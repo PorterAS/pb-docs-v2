@@ -44,7 +44,7 @@ const IndexPage = ({}: any) => {
   // const slugs = data.allMdx.edges
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Porterbuddy Developer Portal" description="Build and integrate with Porterbuddy APIs and technology"/>
       <Box mt={"5%"} mb={{ base: "15%", sm: "15%", md: "10%", lg: "10%" }}>
           <Text
             fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl" }}
