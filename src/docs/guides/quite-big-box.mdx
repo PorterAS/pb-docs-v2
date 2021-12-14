@@ -1,14 +1,14 @@
 ---
-title: "Quite big box™"
+title: "POrterbuddy Large™"
 publishBy: "10-12-2021"
 author: "William Imoh"
-meta_description: "Deliver larger parcels using Porterbuddy's Quite Big Box product."
+meta_description: "Deliver larger parcels using Porterbuddy's Large product."
 ---
 
 Parcels delivered with Porterbuddy currently fall within the weight limit of 21kg and dimension limit of 60cm x 60cm x 120cm.
-This threshold excludes larger parcels in orders from being delivered by Porterbuddy. To solve this, we introduced a new product called "Quite Big Box" (QBB) with an increased capacity to handle larger parcels.
+This threshold excludes larger parcels in orders from being delivered by Porterbuddy. To solve this, we introduced a new feature called "Porterbuddy Large" (PL) with an increased capacity to handle larger parcels.
 
-With QBB, we upgraded the parcel requirements to:
+With PL, we upgraded the parcel requirements to:
 
 - Dimensions: 140cm x 110cm x 70cm
 - Weight: 21kg per parcel
@@ -16,7 +16,7 @@ With QBB, we upgraded the parcel requirements to:
 
 <ContentCallout title={"Maximum order weight 💡"}>While each parcel in an order is limited to 21kg, the total weight of all items in the order must not exceed 25kg.</ContentCallout> 
 
-QBB orders are also referred to as "large".
+PL orders are also referred to as "large".
 
 ## Placing a large order
 
@@ -304,7 +304,7 @@ curl -X POST \
     }'
 ```
 
-This request creates a QBB order in Porterbuddy's systems.
+This request creates a PL order in Porterbuddy's systems.
 
 You can see the Order API information [here](/api-reference/order-api/).
 
@@ -317,13 +317,13 @@ Specifying only the `large` value returns only `large` delivery windows, regardl
 Omitting the `large` value in `products` and sending in parcel and product data containing large items will throw an error. 
 Also, sending in product/parcel data beyond the stated threshold will return an error in the availability request with the' large' value set.
 
-<ContentCallout title={"Samlevert not supported 🚨"}>QBB orders are currently ineligible for Samlevert. i.e They cannot be consolidated with normal delivery orders.</ContentCallout> 
+<ContentCallout title={"Samlevert not supported 🚨"}>PL orders are currently ineligible for Samlevert. i.e They cannot be consolidated with normal delivery orders.</ContentCallout> 
 
-## Activating QBB
-To activate Quite Big Box, contact your key account manager, requesting to enable the product on your account.
+## Activating PL
+To activate POrterbuddy large, contact your key account manager, requesting to enable the product on your account.
 
 ## Current plugin support
-The QBB product is currently supported in the followi ng Porterbuddy plugins:
+The PL product is currently supported in the following Porterbuddy plugins:
 
 - Magento 1
 
