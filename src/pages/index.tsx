@@ -47,15 +47,13 @@ const IndexPage = ({}: any) => {
     <Layout>
       <SEO title="Home" />
       <Box mt={"5%"} mb={{ base: "15%", sm: "15%", md: "10%", lg: "10%" }}>
-        <Center>
           <Text
             fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl" }}
             fontWeight={"600"}
           >
             Porterbuddy Developers
           </Text>
-        </Center>
-        <Text textAlign="center">
+        <Text textAlign="left">
           Welcome to Porterbuddy Developers! Find information on building an
           efficient logistics experience with Porterbuddy
         </Text>
