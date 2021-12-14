@@ -19,3 +19,5 @@ export const PBScript = () => {
     </div>
   )
 }
+
+export const isBrowser = () => typeof window !== "undefined"

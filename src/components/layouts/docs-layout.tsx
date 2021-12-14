@@ -4,6 +4,7 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 import { sidebarRoutes, SidebarRouteType } from "../../routes"
 import { MDXProvider } from "@mdx-js/react"
 import { ContentCallout } from "../global/ContentCallout"
+import { ShopifyInstall } from "../porterbuddy/ShopifyInstall"
 
 import {
   Accordion,
@@ -192,7 +193,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     setPageURL(typeof window !== "undefined" ? window.location.href : "")
   }, [])
 
-  const shortcodes: any = { PBProductCard, PBCheckoutWidget, ContentCallout }
+  const shortcodes: any = { PBProductCard, PBCheckoutWidget, ContentCallout, ShopifyInstall }
 
   const iconMap: any = {
     FaPlay: FaPlay,

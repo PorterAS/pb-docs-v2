@@ -1,9 +1,8 @@
 import * as React from "react"
 import { useEffect } from "react"
 import { Helmet } from "react-helmet"
+import { isBrowser } from "./pb-script"
 import { DeliveryWindowType, IPBWidget } from "./types"
-
-const isBrowser = () => typeof window !== "undefined"
 
 declare global {
   interface Window {

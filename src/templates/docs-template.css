@@ -14,11 +14,13 @@
 
 .blog-content h1 {
     font-size: 1.4em;
+    color: #661AFF;
 }
 
 .blog-content h2 {
     font-size: 1.2em;
     margin-top: 5%;
+    color: #661AFF;
 }
 
 .blog-content a {

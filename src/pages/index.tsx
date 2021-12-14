@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 import {
   Box,
   Button,
-  Center,
   Flex,
   Image,
   SimpleGrid,
