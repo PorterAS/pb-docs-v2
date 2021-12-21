@@ -111,7 +111,7 @@ const IntegrationsPage = () => {
                 title={"Checkout Widget"}
               />
               <PBIntegrationCard
-                link={"/checkout-widget/"}
+                link={"/usm/"}
                 title={"Unified shipping module"}
               />
             </SimpleGrid>
