@@ -1,0 +1,102 @@
+---
+title: "Checkout widget - Integration example"
+meta_title: "Porterbuddy Checkout widget - Integration example"
+publishBy: "21-12-2021"
+author: "William Imoh"
+meta_description: "Configure periodic updates in the  checkout widget"
+---
+
+This page shows an example for the integration between the checkout widget and the [Porterbuddy API](/api-reference/). The shown features are:
+
+- Intial fetching of availability
+- Providing the update callback function, including passing additional info
+
+**Note**: In a real-world case, fetching availability should be done through the webshop backend, to avoid potential security risks by malicious users changing the client-side code.
+
+[INSERT CHECKOUT WIDGET]
+
+## Sample Code
+This sample code is using ES2015 language features and will not work in IE11. For a real-world integration, use a compiler using polyfills if IE 11 support is still required. 
+The sample code uses [dayjs](https://github.com/iamkun/dayjs) for date/time manipulation for easier readability.
+
+```html
+<script>
+function pickupWindows() {
+  // generating pickup windows for the next week starting today, 8-22 each day
+  const pickupWindows = [];
+  for (let i = 0; i < 7; i++) {
+    const start = dayjs().add(i, 'day').hour(8).minute(0).second(0).millisecond(0);
+    const end = start.hour(22).minute(0);
+    pickupWindows.push({
+      start: start.toISOString(),
+      end: end.toISOString()
+    });
+  }
+  return pickupWindows;
+}
+
+async function fetchAvailability(additionalInfo) {
+  const availabilityRequest = {
+    pickupWindows: pickupWindows(),
+    originAddress: {
+      streetName: "Keysers Gate",
+      streetNumber: "3",
+      postalCode: "0165",
+      city: "Oslo",
+      country: "Norway"
+    },
+    destinationAddress: {
+      streetName: "Høyenhallveien",
+      streetNumber: "25",
+      postalCode: "0678",
+      city: "Oslo",
+      country: "Norway"
+    },
+    products: [ "delivery" ],
+    parcels: [
+      {
+        widthCm: 1,
+        heightCm: 40,
+        depthCm: 1,
+        weightGrams: 2000,
+        description: "Awesome product"
+      }
+    ],
+    additionalInfo: additionalInfo
+  };
+  const headers = {
+    "content-type": "application/json",
+    "accept":"application/json",
+    "x-public-token": "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX"
+    // Public token must be sed on frontend side, for backend integration use your api key and header
+    // "x-api-key" as specified in the API documentation
+  }
+  // use test or production URL depending on environment
+  const response = await fetch('https://api.porterbuddy-test.com/availability', {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(availabilityRequest)
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    return undefined;
+  }
+}
+
+fetchAvailability().then(availabilityResponse => {
+  console.log(availabilityResponse);
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "checkout",
+    availabilityResponse: availabilityResponse,
+    updateDeliveryWindowsInterval: 30,
+    onUpdateDeliveryWindows: (callback, additionalInfo) => {
+      fetchAvailability(additionalInfo).then(availabilityResponse =>
+        callback(availabilityResponse)
+      );
+    }
+  }
+});
+</script>
+```

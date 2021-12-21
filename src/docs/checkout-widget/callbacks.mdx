@@ -1,0 +1,90 @@
+---
+title: "Checkout widget - callback functions"
+meta_title: "Porterbuddy Checkout widget - callback functions"
+publishBy: "21-12-2021"
+author: "William Imoh"
+meta_description: "Configure callback functions in the  checkout widget"
+---
+
+The Porterbuddy widget provides callback function references to trigger actions in the widget from external sources. To access the callback function references, a function is defined for the configuration option "onSetCallbacks". This function gets called by the widget after initialization, the argument passed is an object containing references to the callback functions. These references can be stored and used to trigger actions in the widget from external sources.
+
+The callback function to select a delivery window accepts a delivery window object and compares it taking into account the start and end time and the product type, all other field values are ignored on selection.
+
+## Supported callback functions
+| Name                      | Signature                                                                 | Description                                                                                                                                                                                                                                                 |
+|---------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| forceRefresh              | `() => Promise<void>`                                                     | Forces a refresh of the widget by resetting to the current option values and fetching new availability information when in availability view. Returns a promise that gets resolved after the refresh is complete.                                           |
+| unselectDeliveryWindow    | () => void                                                                | Unselects the currently selected delivery window                                                                                                                                                                                                            |
+| setSelectedDeliveryWindow | (deliveryWindow: DeliveryWindow, selectDefault?: boolean) => void         | Sets the currently selected delivery window to the one matching the value passed as the parameter for deliverywindow. If "selectDefault" is set to true and null or undefined is passed for the delivery window, the first delivery window will be selected |
+| updateDeliveryWindows     | (availabilityResponse: AvailabilityResponse \| DeliveryWindows[]) => void | Updates the delivery windows displayed in the checkout matrix. NOTE: passing delivery windows in this callback is deprecated, please pass the full availability response.                                                                                   |
+
+## Usage example
+Manually refreshing, selecting and unselecting the delivery window in the checkout matrix.
+
+[INSERT CHECKOUT WIDGET]
+
+### Javascript code
+
+```html
+<script>
+  window.porterbuddy = {
+    token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
+    view: 'checkout',
+    now: '2019-03-14T09:00:00+01:00',
+    language: 'NO',
+    availabilityResponse: {
+      deliveryWindows: [
+        {
+          product: 'delivery',
+          start: '2019-03-14T17:30:00+01:00',
+          end: '2019-03-14T19:30:00+01:00',
+          expiresAt: '2019-03-14T14:30:00+01:00',
+          price: {
+            fractionalDenomination: 14900,
+            currency: 'NOK'
+          }
+        },
+        // ...
+      ],
+      destinationResolvedAddress: {
+        postalCode: '0153',
+        // ...
+      }
+    },
+    initialSelectedWindow: {
+      product: 'delivery',
+      start: '2019-03-14T19:30:00+01:00',
+      end: '2019-03-14T21:30:00+01:00'
+    },
+    onSelectDeliveryWindow: function (deliveryWindow) {
+      if (deliveryWindow) {
+        window.selectedDeliveryWindow = deliveryWindow;
+      }
+    },
+    onSetCallbacks: function (callbacks) {
+      window.forceRefreshReference = callbacks.forceRefresh;
+      window.unselectDeliveryWindow = callbacks.unselectDeliveryWindow;
+      window.setSelectedDeliveryWindow = callbacks.setSelectedDeliveryWindow;
+    }
+  };
+  window.refresh = function () {
+    forceRefreshReference().then(function () {
+      console.log("refreshed")
+    });
+  }
+</script>
+```
+
+### HTML code
+
+```html
+<div>
+  <button onClick="window.unselectDeliveryWindow()">Unselect Window</button>
+  <button onClick="window.setSelectedDeliveryWindow(window.selectedDeliveryWindow)">Re-Select last selected</button>
+  <button onClick="window.setSelectedDeliveryWindow(null, true)">Select default</button>
+  <button onClick="window.forceRefreshReference()">Force refresh</button>
+</div>
+<div>
+  <div data-border id="porterbuddy-widget"></div>
+</div>
+```

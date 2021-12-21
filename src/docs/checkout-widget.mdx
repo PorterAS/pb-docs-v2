@@ -1,3 +1,71 @@
-# Checkout Widget
+---
+title: "Checkout widget"
+meta_title: "Porterbuddy Checkout Widget"
+publishBy: "21-12-2021"
+author: "William Imoh"
+meta_description: "Display delivery windows with Porterbuddy Shipping options in Checkout"
+---
 
-Coming soon
+The Checkout widget is used in the checkout section to offer customers a choice of delivery windows and enable them to pick one. It displays a matrix view of the available delivery windows.
+
+The available delivery windows must be fetched beforehand using the [Porterbuddy API](/api-reference/).
+
+[INSERT THE CHECKOUT WIDGET]
+
+## Usage
+Add the configuration and script tag anywhere in HEAD or BODY
+
+```html
+<link href="https://widget.porterbuddy.com/porterbuddy-widget.css" rel="stylesheet" type="text/css"/>
+<script async src="https://widget.porterbuddy.com/porterbuddy-widget.js"></script>
+```
+
+The async attribute is optional, but recommended for better performance
+
+Configure the widget to show the "checkout" view by defining the global variable "window.porterbuddy" in a script tag. If window.porterbuddy is not defined when the script loads it will delay execution for up to 10 seconds until it finds the configuration
+
+```html
+<script>
+  window.porterbuddy = {
+    token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
+    view: 'checkout',
+    discount: 10000,
+    availabilityResponse:
+    {
+      deliveryWindows: [
+        {
+          product: 'delivery',
+          start: '2019-03-14T17:30:00+01:00',
+          end: '2019-03-14T19:30:00+01:00',
+          expiresAt: '2019-03-14T14:30:00+01:00',
+          price: {
+            fractionalDenomination: 14900,
+            currency: 'NOK'
+          }
+        },
+      // ...
+      ],
+      destinationResolvedAdress: {
+        postalCode: '0153',
+        // ...
+      }
+    }, // from API call
+    onSelectDeliveryWindow: function (window) {
+      // show selected delivery window
+    },
+    onSetCallbacks: function (callbacks) {
+      // store the function reference to unselect the delivery window when selecting
+      // another delivery option
+      window.unselectDeliveryWindow = callbacks.unselectDeliveryWindow;
+    }
+  }
+</script>
+```
+
+Note: Price is changed for demo purposes by configuring a discount.
+
+Add a DIV in BODY with the id porterbuddy-widget where you want the widget to appear on the page
+
+```html
+<div id="porterbuddy-widget"></div>
+```

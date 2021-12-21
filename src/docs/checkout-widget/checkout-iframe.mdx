@@ -1,0 +1,399 @@
+---
+title: "Checkout widget in an iframe"
+meta_title: "Checkout widget in an iframe"
+publishBy: "21-12-2021"
+author: "William Imoh"
+meta_description: "Nest the checkout widget in an iframe"
+---
+
+For security-critical environments, the widget can also be nested in an iframe.
+
+[INSERT CHECKOUT WIDGET]
+
+## Usage
+### ADDING THE ELEMENT
+To integrate the widget as an iframe in a page, define an iframe loading the widget iframe integration page. The iframe needs an id to be able to reference it from JS in order to send messages to it. As sizing an iframe dynamically to it's content is not possible, width and height need to be set on the element.
+
+```html
+<iframe
+  title="widgetIFrame"
+  id="widgetIFrame"
+  style="width: 100%; height: 400px"
+  src="https://widget.porterbuddy.com/porterbuddy-widget-frame.html">
+</iframe>
+```
+
+### COMMUNICATION WITH THE IFRAME
+All communication with the iframe is performed via window events. To send events to the widget iframe, use the the function "window.postMessage" on the contentWindow property of the iframe element. The widget iframe will respond with events that can be received by registering an event listener for the event type "message".
+
+```js
+// send an event to the iframe
+iframeWindow = document.getElementById("widgetIFrame").contentWindow;
+
+iframeWindow.postMessage({
+  action: "pb-refresh",
+  payload: options
+}, "https://widget.porterbuddy.com");
+
+// ... other events in similar fashion
+
+// receive events from the iframe
+window.addEventListener("message", function(event) {
+  // verify that the event came from the iframe page to secure against potential event injections
+  if (event.origin = 'https://widget.porterbuddy.com' && event.data && event.data.action) {
+    switch(event.data.action) {
+      case 'pb-frame-ready': {
+        // iframe content has loaded, initialize widget.
+        iframeWindow = document.getElementById("checkoutIFrame").contentWindow;
+        iframeWindow.postMessage({
+          action: "pb-init",
+          payload: options
+        }, "https://widget.porterbuddy.com");
+        break;
+      }
+      case 'pb-window-selected': {
+        selectedWindow = event.data.payload;
+        break;
+      }
+      case 'pb-on-update-delivery-windows': {
+        var updatedAvailabilityResponse = await // ... fetch updated availability response
+        event.source.postMessage({
+          action: event.data.payload,
+          payload: updatedAvailabilityResponse
+        }, "https://widget.porterbuddy.com");
+        break;
+      }
+      default:
+        // nothing to do here
+    }
+  }
+});
+```
+
+### EVENTS
+All events to and from the widget iframe are using this interface:
+
+```json
+{
+  action: string;
+  payload: any;
+}
+```
+
+**Events to the iframe widget**
+
+| Event                                  | Payload Type                              | Description                                                                                                                                                                                        |
+|----------------------------------------|-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pb-init                                | options                                   | Initialized the widget in the iframe with the passed options. All properties that are not functions are available                                                                                  |
+| pb-refresh                             | null \| options                           | Sets the options to the new values and refreshes the whole widget context. If an option object is passed, it must be the whole object                                                              |
+| pb-set-default                         | no payload                                | Selects the default delivery windows, which is the first one in the list of delivery windows.                                                                                                      |
+| pb-unselect-window                     | no payload                                | Unselect the currently selected delivery window                                                                                                                                                    |
+| pb-select-window-by-payload            | DeliveryWindow                            | Select the delivery window matching the one in the payload. If no payload is passed, the default window is selected.                                                                               |
+| pb-update-delivery-windows             | AvailabilityResponse \| DeliveryWindow[]  | Updates the delivery window list: NOTE: passing a delivery windows array is deprecated, please pass the full availability response instead!                                                        |
+| pb-on-update-delivery-windows-callback | AvailabilityResponse \| DeliveryWindows[] | Response event to pb-on-update-delivery-windows, sets the updated availability response. NOTE: passing a delivery windows array is deprecated, please pass the full availability response instead! |
+
+**Events from the iframe widget**
+
+| Event                         | Payload Type           | Description                                                                                                                                                                                                                                                                |
+|-------------------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pb-frame-ready                | null                   | Event signalling that the iframe content has loaded and the widget is ready to receive events                                                                                                                                                                              |
+| pb-window-selected            | DeliveryWindow \| null | Event that is triggered when the delivery window selection changes                                                                                                                                                                                                         |
+| pb-on-update-delivery-windows | string                 | Event that is triggered when the periodic update of the delivery windows is called. When this event is received, the page should fetch the current delivery windows and send them back to the widget as an event using the action name passed in the payload of this event |
+
+## INTEGRATION HINTS
+### Initialization
+As the page in the iframe loads resources, sending the initialization event immediately is in danger of the page being not loaded completely and the event getting lost. To make sure the widget iframe is ready to receive events, the widget page sends the event "pb-frame-ready" to it's paraent once the event listener is registered. Best practice is to send the initialization event from the main page once this event is received.
+
+### Security
+As recommended by the documentation for "window.postMessage", the target origin for messages should be explicitly specified, and the origin of incoming messages should be verified to prevent data injection from other potentially malicious sources.
+
+**FULL EXAMPLE CODE - FOR REFERENCE**
+
+```html
+<script>
+  // in a real-world scenario, availability response must be fetched from the porterbuddy availability API
+  var availabilityResponse = {
+    deliveryWindows: [
+      {
+        product: 'delivery',
+        start: '2019-03-14T17:30:00+01:00',
+        end: '2019-03-14T19:30:00+01:00',
+        expiresAt: '2019-03-14T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 14900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-14T19:30:00+01:00',
+        end: '2019-03-14T21:30:00+01:00',
+        expiresAt: '2019-03-14T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 14900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-14T17:30:00+01:00',
+        end: '2019-03-14T21:30:00+01:00',
+        expiresAt: '2019-03-14T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-15T17:30:00+01:00',
+        end: '2019-03-15T19:30:00+01:00',
+        expiresAt: '2019-03-15T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-15T19:30:00+01:00',
+        end: '2019-03-15T21:30:00+01:00',
+        expiresAt: '2019-03-15T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-15T17:30:00+01:00',
+        end: '2019-03-15T21:30:00+01:00',
+        expiresAt: '2019-03-15T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 12900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-17T17:30:00+01:00',
+        end: '2019-03-17T21:30:00+01:00',
+        expiresAt: '2019-03-17T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 12900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-18T17:30:00+01:00',
+        end: '2019-03-18T19:30:00+01:00',
+        expiresAt: '2019-03-18T15:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-18T19:30:00+01:00',
+        end: '2019-03-18T21:30:00+01:00',
+        expiresAt: '2019-03-18T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-18T17:30:00+01:00',
+        end: '2019-03-18T21:30:00+01:00',
+        expiresAt: '2019-03-18T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 12900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-19T17:30:00+01:00',
+        end: '2019-03-19T19:30:00+01:00',
+        expiresAt: '2019-03-19T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-19T19:30:00+01:00',
+        end: '2019-03-19T21:30:00+01:00',
+        expiresAt: '2019-03-19T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-19T17:30:00+01:00',
+        end: '2019-03-19T21:30:00+01:00',
+        expiresAt: '2019-03-19T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 12900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-20T17:30:00+01:00',
+        end: '2019-03-20T19:30:00+01:00',
+        expiresAt: '2019-03-20T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-20T19:30:00+01:00',
+        end: '2019-03-20T21:30:00+01:00',
+        expiresAt: '2019-03-20T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-20T17:30:00+01:00',
+        end: '2019-03-20T21:30:00+01:00',
+        expiresAt: '2019-03-20T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 12900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-21T17:30:00+01:00',
+        end: '2019-03-21T19:30:00+01:00',
+        expiresAt: '2019-03-21T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-21T19:30:00+01:00',
+        end: '2019-03-21T21:30:00+01:00',
+        expiresAt: '2019-03-21T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 13900,
+          currency: 'NOK',
+        },
+      },
+      {
+        product: 'delivery',
+        start: '2019-03-21T17:30:00+01:00',
+        end: '2019-03-21T21:30:00+01:00',
+        expiresAt: '2019-03-21T14:30:00+01:00',
+        price: {
+          fractionalDenomination: 12900,
+          currency: 'NOK',
+        },
+      },
+    ],
+    destinationResolvedAddress: {
+      streetName: null,
+      streetNumber: null,
+      postalCode: '0278',
+      city: 'Oslo',
+      country: 'Norway',
+      precision: null,
+      location: null,
+      locationTypes: [],
+    }
+  };
+
+  var options = {
+    token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
+    view: 'checkout',
+    now: '2019-03-14T09:00:00+01:00',
+    apiMode: 'test',
+    language: 'NO',
+    resetContext: true,
+    updateDeliveryWindowsInterval: 30,
+    availabilityResponse: availabilityResponse
+  };
+  var iframeWindow = null;
+  window.addEventListener("message", function(event) {
+    // {{ url }} is replaced by the host url in this demo page.
+    if (event.origin === '{{ url }}' && event.data && event.data.action) {
+      let value = event.data.payload;
+      switch(event.data.action) {
+        case 'pb-window-selected': {
+          if (value) {
+            document
+              .getElementById('selecteddeliverywindow')
+              .value = JSON.stringify(value);
+            window.selectedDeliveryWindow = value;
+          } else {
+            document
+              .getElementById('selecteddeliverywindow')
+              .value = "";
+          }
+          break;
+        }
+        case 'pb-frame-ready': {
+          iframeWindow = document.getElementById("checkoutIFrame").contentWindow;
+          iframeWindow.postMessage({
+            action: "pb-init",
+            payload: options
+          }, "{{ url }}");
+          break;
+        }
+        case 'pb-on-update-delivery-windows': {
+          window.setTimeout(function() {
+            // simulate refresh after 1 second
+            event.source.postMessage({
+              action: event.data.payload,
+              payload: availabilityResponse
+            }, "{{ url }}");
+          }, 1000);
+        }
+        default: {
+          console.log('Unknown event ' + JSON.stringify(event));
+        }
+      }
+    }
+  }, true);
+
+  // functions to handle demo button clocks
+  function setDefaultWindow() {
+    iframeWindow.postMessage({
+      action: "pb-set-default"
+    }, "{{ url }}")
+  }
+  function reselectLastWindow() {
+    iframeWindow.postMessage({
+      action: "pb-select-window-by-payload",
+      payload: window.selectedDeliveryWindow
+    }, "{{ url }}")
+  }
+  function unSelectWindow() {
+    iframeWindow.postMessage({
+      action: "pb-unselect-window"
+    }, "{{ url }}")
+  }
+  function triggerRefresh() {
+    iframeWindow.postMessage({
+      action: "pb-refresh"
+    }, "{{ url }}");
+    document
+      .getElementById('selecteddeliverywindow')
+      .value = '';
+  }
+</script>
+```

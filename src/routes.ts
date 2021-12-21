@@ -100,10 +100,42 @@ export const sidebarRoutes: SidebarRouteType[] = [
     icon: "FaShoppingCart",
     parentPath: "/checkout-widget/",
     children: [
-      // {
-      //   routePath: "",
-      //   label: "",
-      // },
+      {
+        routePath: "/checkout-widget/configuration/",
+        label: "Configuration",
+      },
+      {
+        routePath: "/checkout-widget/callbacks/",
+        label: "Callbacks",
+      },
+      {
+        routePath: "/checkout-widget/periodic-updates/",
+        label: "Periodic updates",
+      },
+      {
+        routePath: "/checkout-widget/checkout-iframe/",
+        label: "Checkout iframe",
+      },
+      {
+        routePath: "/checkout-widget/customizing-text/",
+        label: "Customizing text",
+      },
+      {
+        routePath: "/checkout-widget/text-replacement/",
+        label: "Text replacement",
+      },
+      {
+        routePath: "/checkout-widget/integration-example/",
+        label: "Integration example",
+      },
+      {
+        routePath: "/checkout-widget/anonymous-consolidation/",
+        label: "Anonymous consolidation",
+      },
+      {
+        routePath: "/checkout-widget/consolidation-check/",
+        label: "Consolidation check",
+      },
     ],
   },
   {

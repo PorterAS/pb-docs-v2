@@ -1,0 +1,35 @@
+---
+title: "Checkout widget - Periodic updates"
+meta_title: "Porterbuddy Checkout widget - Periodic updates"
+publishBy: "21-12-2021"
+author: "William Imoh"
+meta_description: "Configure periodic updates in the checkout widget"
+---
+
+The checkout widget supports periodic refreshes for the displayed delivery windows. Update intervals can be configured via the configuration options and are performed by the widget executing a callback function. This callback functions is called with 2 parameters, the first one is a function that needs to be called to pass in the new availability response, and the second one being additional delivery infos which should be passed into the availability API call.
+
+The function set for the `onUpdateDeliveryWindows` will be called with the configured interval. Additional calls will be performed when a delivery window expires, or after user interaction for checking possible consolidation of deliveries.
+
+Periodic updates should be implemented to ensure delivery windows are up to date during checkout, as each delivery window has an expiration time associated with it, after this a delivery window cannot be booked anymore, as Porterbuddy cannot guarantee delivery in that window anymore. Furthermore, delivery window availability can change due to capacity limits or other logistic reasons.
+
+**Note**: Implementing the update callback function is mandatory to offer consolidation functionality!
+
+[INSERT CHECKOUT WIDGET]
+
+## Sample code
+
+```js
+function updateDeliveryWindows(callback, additionalInfo) {
+  var updatedAvailabilityResponse = // fetch from availability api with additionalInfo added to the request
+  callback(updatedAvailabilityResponse);
+}
+
+var availabilityResponse = // fetch from availability API
+window.porterbuddy = {
+  token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
+  view: 'checkout',
+  availabilityResponse: availabilityResponse,
+  updateDeliveryWindowsInterval: 30, // update every 30 secons
+  onUpdateDeliveryWindows: updateDeliveryWindows
+};
+```
