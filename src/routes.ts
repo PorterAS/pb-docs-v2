@@ -139,6 +139,14 @@ export const sidebarRoutes: SidebarRouteType[] = [
     ],
   },
   {
+    group: "usm",
+    label: "Unified Shipping Module",
+    parentPath: "/usm/",
+    icon: "FaCircle",
+    children:[],
+    accordion: false,
+  },
+  {
     group: "integrations",
     label: "Integrations",
     parentPath: "/integrations/",

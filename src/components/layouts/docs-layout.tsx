@@ -27,6 +27,7 @@ import {
 import {
   FaBook,
   FaBookOpen,
+  FaCircle,
   FaCodeBranch,
   FaInfoCircle,
   FaPeopleCarry,
@@ -206,6 +207,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     GrCatalog: GrCatalog,
     GrIntegration: GrIntegration,
     GiClothJar: GiClothJar,
+    FaCircle: FaCircle
   }
 
   const data = useStaticQuery(graphql`
