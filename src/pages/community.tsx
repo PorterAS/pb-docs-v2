@@ -82,7 +82,7 @@ const GuidesPage = () => {
 
               <Box>
                 <a href={"https://discord.gg/4XQfYHvQkF"} target={"_blank"}>
-                  <Button color={"purple.900"}>Join us</Button>
+                  <Button color={"purple.900"} disabled>Join us</Button>
                 </a>
               </Box>
             </Flex>

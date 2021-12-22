@@ -143,8 +143,53 @@ export const sidebarRoutes: SidebarRouteType[] = [
     label: "Unified Shipping Module",
     parentPath: "/usm/",
     icon: "FaCircle",
-    children:[],
-    accordion: false,
+    children:[
+      {
+        routePath: "/usm/integration/",
+        label: "Integration",
+      },
+      {
+        routePath: "/usm/configuration/",
+        label: "Configuration",
+      },
+      {
+        routePath: "/usm/data-model/",
+        label: "Data models",
+      },
+      {
+        routePath: "/usm/callbacks/",
+        label: "Callback functions",
+      },
+      {
+        routePath: "/usm/consolidation/",
+        label: "Consolidation",
+      },
+      {
+        routePath: "/usm/periodic-updates/",
+        label: "Periodic updates",
+      },
+      {
+        routePath: "/usm/text-replacement/",
+        label: "Text replacement",
+      },
+      {
+        routePath: "/usm/logos/",
+        label: "Shipping option logos",
+      },
+      {
+        routePath: "/usm/interoperation/",
+        label: "Interoperation",
+      },
+      {
+        routePath: "/usm/iframe-integration/",
+        label: "Iframe integration",
+      },
+      {
+        routePath: "/usm/html-descriptions/",
+        label: "HTML descriptions",
+      },
+    ],
+    accordion: true,
   },
   {
     group: "integrations",
