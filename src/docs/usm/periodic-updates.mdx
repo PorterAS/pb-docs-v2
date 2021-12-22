@@ -1,0 +1,98 @@
+---
+title: "USM - Periodic updates"
+meta_title: "Porterbuddy Unified Shipping Module - Periodic updates"
+publishBy: "22-12-2021"
+author: "William Imoh"
+meta_description: "Handle periodic updates in the Porterbuddy Unified Shipping Module"
+---
+
+The unified shipping module supports periodic update calls for each individual shipping option. It can be configured by specifying an update interval and providing a handler function for the update. The handler function gets passed a callback function as propery to support asynchronous fetching of updated data. 
+To avoid blocking the checkout for too long, a maximum time of 10 seconds is granted for an update call,
+
+All properties of a shipping option definition except for the id, update interval and update handler function can be changed in a periodic update. The callback function accepts a partial definition of the `ShippingOption` data, so that only the changed values need to be passed.
+
+## Example
+[INSERT USM]
+
+## Configuration
+Only relevant parts are shown, the complete configuration is as shown in the "integration" example.
+
+```html
+<script>
+  var exampleAvailabilityResponse = {
+    deliveryWindows: createDeliveryWindows(),
+    destinationResolvedAddress: {
+      streetName: null,
+      streetNumber: null,
+      postalCode: '0278',
+      city: 'Oslo',
+      country: 'Norway',
+      precision: null,
+      location: null,
+      locationTypes: [],
+    },
+    consolidatedWindow: null,
+  }
+  var discount = 10000;
+  var homeOptions = [
+    {
+      id: 'porterbuddy',
+      name: 'Levert hjem',
+      availabilityResponse: exampleAvailabilityResponse,
+      updateInterval: 30,
+      discount: discount,
+      onUpdateOption: function (callback) {
+        window.setTimeout(function () {
+          discount -= 500;
+          callback({
+            availabilityResponse: exampleAvailabilityResponse,
+            discount: discount
+          });
+        }, 2500);
+      }
+    },
+    {
+      id: 'postnord',
+      name: 'Levert hjemme',
+      price: {
+        fractionalDenomination: 9900,
+        currency: 'NOK',
+      },
+      description: 'Levering på dørmatte eller i postkasse',
+      deliveryTime: { format: 'rangeOfWeekdays', minDays: 2, maxDays: 5 },
+      logoUrl: hostUrl + '/logos/postnord.svg',
+    },
+  ];
+
+  var pickupMinDays = 1;
+  var pickupOptions = [
+    {
+      id: 'posten',
+      name: 'Hente på utleveringssted',
+      price: {
+        fractionalDenomination: 5900,
+        currency: 'NOK',
+      },
+      deliveryTime: {
+        format: 'rangeOfWeekdays',
+        minDays: pickupMinDays,
+        maxDays: pickupMinDays + 2,
+      },
+      locations: pickupLocations,
+      updateInterval: 60,
+      onUpdateOption: function (callback) {
+        window.setTimeout(function () {
+          pickupMinDays += 1;
+          callback({
+            deliveryTime: {
+              format: 'rangeOfWeekdays',
+              minDays: pickupMinDays,
+              maxDays: pickupMinDays + 2,
+            },
+          });
+        }, 2500);
+      }
+    },
+  ];
+</script>
+```
