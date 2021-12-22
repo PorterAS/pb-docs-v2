@@ -1,0 +1,490 @@
+---
+title: "Unified Shipping Module in an iframe"
+meta_title: "Porterbuddy Unified Shipping Module - iframe integration"
+publishBy: "22-12-2021"
+author: "William Imoh"
+meta_description: "Configure the Porterbuddy Unified Shipping Module"
+---
+
+For security-critical environments, the USM widget can also be nested in an iframe.
+
+[INSERT USM]
+
+## Usage
+### ADDING THE ELEMENT
+To integrate the consolidated checkout as an iframe in a page, define an iframe loading the widget iframe integration page. The iframe needs an id to be able to reference it from JS in order to send messages to it. As the height of the consolidated checkout can change dynamically during usage, an event is sent to the parent frame on height changes, so the iframe height can be adjusted accordingly.
+
+```html
+<iframe
+  title="checkoutIFrame"
+  id="checkoutIFrame"
+  style="width: 100%"
+  src="https://widget.porterbuddy.com/v2/porterbuddy-checkout-frame.html">
+</iframe>
+```
+
+### COMMUNICATION WITH THE IFRAME
+All communication with the iframe is performed via window events. To send events to the widget iframe, use the the function "window.postMessage" on the contentWindow property of the iframe element. The unified shipping module iframe will respond with events that can be received by registering an event listener for the event type "message".
+
+```js
+// send an event to the iframe
+iframeWindow = document.getElementById("checkoutIFrame").contentWindow;
+
+iframeWindow.postMessage({
+  action: "pb-force-refresh",
+  payload: options
+}, "https://widget.porterbuddy.com");
+
+// ... other events in similar fashion
+
+// receive events from the iframe
+window.addEventListener("message", function(event) {
+// verify that the event came from the iframe page to secure against potential event injections
+  if (event.origin = 'https://widget.porterbuddy.com' && event.data && event.data.action) {
+    switch(event.data.action) {
+      case 'pb-frame-ready': {
+        // iframe content has loaded, initialize checkout.
+        iframeWindow = document.getElementById("checkoutIFrame").contentWindow;
+        iframeWindow.postMessage({
+          action: "pb-checkout-init",
+          payload: options
+        }, "https://widget.porterbuddy.com");
+        break;
+      }
+      case 'pb-on-selection-changed': {
+        shippingSelection = event.data.payload;
+        // ... e.g. store changed shipping selection
+        break;
+      }
+      case 'pb-on-height-changed': {
+        // change iframe height to render height from iframe content + margins
+        document.getElementById('checkoutIFrame').style.height = (value + 30) + 'px';
+        break;
+      }
+      // handle more events in similar fashion
+      default:
+      // nothing to do here
+    }
+  }
+});
+```
+
+## EVENTS
+All events to and from the consolidated checkout iframe are using this interface:
+
+```json
+{
+  action: string;
+  payload: any;
+}
+```
+
+### Events to the consolidated checkout iframe
+
+| Event                          | Payload Type                                           | Description                                                                                                                                                                                                                                                                        |
+|--------------------------------|--------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **pb-checkout-init**           | checkoutOptions                                        | Initialized the consolidated checkout in the iframe with the passed options. Available are all properties that are not functions or the "selectionPropertyChangeListener" property. To provide a similar functionality, an additional property "monitoredProperties" is supported. |
+| **pb-force-refresh**           | null \| checkoutOptions                                | Sets the options to the new values and refreshes the whole widget context. If an option object is passed, it must be the whole object                                                                                                                                              |
+| **pb-set-recipient-info**      | RecipientInfo                                          | Sets the recipient info (postCode and optional email) for the checkout                                                                                                                                                                                                             |
+| **pb-update-shipping-options** | all shipping option arrays + postCodeEditable property | Updates the shipping options displayed and optionally enables / disables the postcode input                                                                                                                                                                                        |
+
+### Events from the consolidated checkout iframe
+
+| Event                               | Payload Type                                                                        | Description                                                                                                                                                     |
+|-------------------------------------|-------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **pb-on-selection-changed**         | { 	selectedCategory: ShippingCategory, 	selectedShipping: SelectedShipping }          | Event that indicates that the shipping selection has changed                                                                                                    |
+| **pb-on-unselect-shipping**         | null                                                                                | Event to indicate that no shipping option is currently selected                                                                                                 |
+| **pb-on-postcode-entered**          | string                                                                              | Event to indicate that a postcode was entered. Contains the postcode as payload                                                                                 |
+| **pb-on-selected-property-changed** | { 	optionId: string, 	propertyPath: string 	value: any (type of the changed prperty) } | Event to indicate that a property from the monitoredProperties list has changed                                                                                 |
+| **pb-on-height-changed**            | number                                                                              | Event that is thrown when the rendered height of the consolidated checkout widget changes. The payload contains the height in pixes without any outside margins |
+
+## INTEGRATION HINTS
+### Initialization
+As the page in the iframe loads resources, sending the initialization event immediately is in danger of the page being not loaded completely and the event getting lost. To make sure the widget iframe is ready to receive events, the widget page sends the event "pb-frame-ready" to it's paraent once the event listener is registered. Best practice is to send the initialization event from the main page once this event is received.
+
+### Security
+As recommended by the documentation for "window.postMessage", the target origin for messages should be explicitly specified, and the origin of incoming messages should be verified to prevent data injection from other potentially malicious sources.
+
+### Layout Considerations 
+As an iframe cannot be sized to it's content's requirements per se, and the consolidated checkout changes it's rendered height depending on the number of available shipping options and selected categories, height changes will trigger an event "pb-on-height-changed" that can be used to change the height of the iframe element in the parent window. The event payload is the height of the unified shipping module in pixels without any margins, so be sure to add any present margins to the value before using it as the iframe size.
+
+```js
+// in event handler function
+case 'pb-on-height-changed': {
+  // change iframe height to render height from iframe content + margins
+  document.getElementById('checkoutIFrame').style.height = (value + 30) + 'px';
+  break;
+}
+// ...
+```
+
+### FULL EXAMPLE PAGE CODE - FOR REFERENCE
+
+```html
+<script>
+  // url is replaced with the host url in the documentation template system
+  var hostUrl = '{{ url }}';
+
+  // in a real-world scenario, porterbuddy delivery windows have to be fetched from
+  // the porterbuddy availability api
+  var deliveryWindows = [
+    {
+      product: 'delivery',
+      start: '2019-03-14T17:30:00+01:00',
+      end: '2019-03-14T19:30:00+01:00',
+      expiresAt: '2019-03-14T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 14900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-14T19:30:00+01:00',
+      end: '2019-03-14T21:30:00+01:00',
+      expiresAt: '2019-03-14T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 14900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-14T17:30:00+01:00',
+      end: '2019-03-14T21:30:00+01:00',
+      expiresAt: '2019-03-14T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-15T17:30:00+01:00',
+      end: '2019-03-15T19:30:00+01:00',
+      expiresAt: '2019-03-15T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-15T19:30:00+01:00',
+      end: '2019-03-15T21:30:00+01:00',
+      expiresAt: '2019-03-15T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-15T17:30:00+01:00',
+      end: '2019-03-15T21:30:00+01:00',
+      expiresAt: '2019-03-15T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 12900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-18T17:30:00+01:00',
+      end: '2019-03-18T19:30:00+01:00',
+      expiresAt: '2019-03-18T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-18T19:30:00+01:00',
+      end: '2019-03-18T21:30:00+01:00',
+      expiresAt: '2019-03-18T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-18T17:30:00+01:00',
+      end: '2019-03-18T21:30:00+01:00',
+      expiresAt: '2019-03-18T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 12900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-19T17:30:00+01:00',
+      end: '2019-03-19T19:30:00+01:00',
+      expiresAt: '2019-03-19T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-19T19:30:00+01:00',
+      end: '2019-03-19T21:30:00+01:00',
+      expiresAt: '2019-03-19T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-19T17:30:00+01:00',
+      end: '2019-03-19T21:30:00+01:00',
+      expiresAt: '2019-03-19T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 12900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-20T17:30:00+01:00',
+      end: '2019-03-20T19:30:00+01:00',
+      expiresAt: '2019-03-20T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-20T19:30:00+01:00',
+      end: '2019-03-20T21:30:00+01:00',
+      expiresAt: '2019-03-20T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 13900,
+        currency: 'NOK',
+      },
+    },
+    {
+      product: 'delivery',
+      start: '2019-03-20T17:30:00+01:00',
+      end: '2019-03-20T21:30:00+01:00',
+      expiresAt: '2019-03-20T14:30:00+01:00',
+      price: {
+        fractionalDenomination: 12900,
+        currency: 'NOK',
+      },
+    },
+  ];
+
+  var exampleAvailabilityResponse = {
+    deliveryWindows: deliveryWindows,
+    destinationResolvedAddress: {
+      streetName: null,
+      streetNumber: null,
+      postalCode: '0278',
+      city: 'Oslo',
+      country: 'Norway',
+      precision: null,
+      location: null,
+      locationTypes: [],
+    },
+    consolidatedWindow: null,
+  };
+  // delivery options should be fetched from the offered shipping services
+  var homeOptions = [
+    {
+      id: 'porterbuddy',
+      name: 'Levert hjem',
+      availabilityResponse: exampleAvailabilityResponse,
+      discount: 5000,
+      default: true,
+    },
+    {
+      id: 'postnord',
+      name: 'Levert hjemme',
+      price: {
+        fractionalDenomination: 9900,
+        currency: 'NOK',
+      },
+      deliveryTime: { format: 'rangeOfWeekdays', minDays: 2, maxDays: 5 },
+      logoUrl: hostUrl + '/logos/postnord.svg',
+      additionalData: {
+        product: 'Standard Insured Parcel',
+      }
+    },
+    {
+      id: 'postenhome',
+      name: 'Posten på døren',
+      logoUrl: hostUrl + '/logos/posten.svg',
+      levels: [
+        {
+          id: 'bedrift',
+          name: 'Posten Bedriftspakke',
+          deliveryTime: { format: 'rangeOfWeekdays', minDays: 1, maxDays: 3 },
+          price: {
+            fractionalDenomination: 29900,
+            currency: 'NOK',
+          },
+          description: 'Direkte til din bedrift med sporing',
+        },
+        {
+          id: 'express',
+          name: 'Posten Expresspakke',
+          deliveryTime: { format: 'exactNumberOfWeekdays', days: 1 },
+          price: {
+            fractionalDenomination: 49900,
+            currency: 'NOK',
+          },
+          description: 'Levering innen kl. 09:00 eller kl. 11:30 neste morgen, mandag til fredag'
+        }
+      ]
+    }
+  ];
+
+  var pickupOptions = [
+    {
+      id: 'posten',
+      name: 'Hente på utleveringssted',
+      price: {
+        fractionalDenomination: 5900,
+        currency: 'NOK',
+      },
+      deliveryTime: { format: 'rangeOfWeekdays', minDays: 1, maxDays: 3 },
+      locations: [
+        {
+          id: 'location_1',
+          name: 'Coop Mega Sjølyst',
+          address: 'Karenslyst Allé 58, 0277 Oslo',
+          openingHours: 'Man - Fre: 08:00 - 22:00, Lør: 08:00 - 20:00',
+          logoUrl: hostUrl + '/logos/posten.svg',
+          description: 'Coop Mega er supermarkedet med stort utvalg',
+        },
+        {
+          id: 'location_2',
+          name: 'Hoff Post i Butikk',
+          address: 'Hoffsveien 10 E, 0275 Oslo',
+          openingHours: 'Man - Lør: 06:00 - 23:59',
+          logoUrl: hostUrl + '/logos/posten.svg',
+        },
+        {
+          id: 'location_3',
+          name: 'Elisenberg postkontor',
+          address: 'Balchens Gate 7, 0265 Oslo',
+          openingHours: 'Man - Fre: 09:00 - 18:00, Lør: 10:00 - 15:00',
+          logoUrl: hostUrl + '/logos/postnord.svg',
+        },
+      ],
+    },
+  ];
+
+  var storeOptions = [
+    {
+      id: 'pickup',
+      name: 'Store pickup',
+      deliveryTime: { format: 'exactNumberOfWeekdays', days: 0 },
+      locations: [
+        {
+          id: 'shop',
+          name: 'Butikken på Skøyen',
+          address: 'Karenslyst Allé 16, 0278 Oslo',
+          openingHours: 'Man - Fre: 09:00 - 17:00, Lør: stengt',
+        },
+        {
+          id: 'shop2',
+          name: 'Butikken på Drammen',
+          address: 'Tollbugata 4, 3040 Drammen',
+          openingHours: 'Man - Fre: 09:00 - 17:00, Lør: stengt',
+        },
+      ],
+      logoUrl: hostUrl + '/logos/webshop-logo.svg',
+    },
+  ];
+
+  // the configuration object for the consolidated checkout
+  var options = {
+    homeDeliveryOptions: [],
+    pickupPointOptions: [],
+    storeOptions: [],
+    resetContext: true,
+    showPostCodeInput: true,
+    language: 'NO',
+    now: '2019-03-14T12:30:00+01:00',
+  };
+
+  var iframeWindow = null;
+  window.addEventListener("message", function(event) {
+    if (event.origin === '{{ url }}' && event.data && event.data.action) {
+      let value = event.data.payload;
+      switch(event.data.action) {
+        case 'pb-frame-ready': {
+          iframeWindow = document.getElementById("checkoutIFrame").contentWindow;
+          iframeWindow.postMessage({
+            action: "pb-checkout-init",
+            payload: options
+          }, "{{ url }}");
+          break;
+        }
+        case 'pb-on-selection-changed': {
+          console.log('Selection changed');
+          document.getElementById("selectedType")
+            .value = value.category;
+          document.getElementById("selectedShippingData")
+            .value = JSON.stringify(value.selectedShipping, null, 2);
+          break;
+        }
+        case 'pb-on-selected-property-changed': {
+          handlePropertyChange(value);
+          break;
+        }
+        case 'pb-on-full-address-entered': {
+          document.getElementById('emailData').value = value.email;
+          document.getElementById('postCodeData').value = value.postCode;
+          document.getElementById('streetAddressData').value = value.streetAddress;
+          iframeWindow.postMessage({
+            action: 'pb-update-shipping-options',
+            payload: {
+              homeDeliveryOptions: homeOptions,
+              pickupPointOptions: pickupOptions,
+              storeOptions: storeOptions,
+            }
+          }, '{{ url }}');
+          break;
+        }
+        case 'pb-on-height-changed': {
+          document.getElementById('checkoutIFrame').style.height = (value + 30) + 'px';
+          break;
+        }
+        default: {
+          console.log('Unknown event ' + JSON.stringify(event.data));
+        }
+      }
+    }
+  });
+
+  function refreshCheckout() {
+    iframeWindow.postMessage({
+      action: 'pb-force-refresh',
+      payload: options,
+    }, '{{ url }}');
+  }
+
+  function setUserData() {
+    var email = document.getElementById('emailInput').value;
+    var postCode = document.getElementById('postCodeInput').value;
+    var streetAddress = document.getElementById('streetAddressInput').value;
+    iframeWindow.postMessage({
+      action: 'pb-set-recipient-info',
+      payload: {
+        email,
+        postCode,
+        streetAddress,
+      }
+    }, '{{ url }}');
+  }
+
+</script>
+```

@@ -1,0 +1,41 @@
+---
+title: "USM - Configuration"
+meta_title: "Porterbuddy Unified Shipping Module - Configuration"
+publishBy: "21-12-2021"
+author: "William Imoh"
+meta_description: "Configure the Porterbuddy Unified Shipping Module"
+---
+
+The unified shipping module offers optional support for HTML tags in description texts for shipping options. These can be used to style the description texts in order to offer more information about a shipping service. If this feature is enabled, all values passed to the description properties of shipping items, locations in shipping items with a location selecter and levels in shipping items with level selector will be interpreted as HTML content.
+
+<ContentCallout title={"💡 Warning"}>This feature is -in essence- HTML injection. There is a serious risk of html tags in descriptions breaking the layout of the unified shipping module or other unwanted side effects. Only use this feature in production when you have made sure all content in the unified shipping module is displayed as expected, and the integration is thoroughly tested in all relevant browsers. There are no internal precautions taken against malicious tags injected by this, so usage of this feature happens at your own risk!</ContentCallout>
+
+
+## Configuration
+HTML description support is disabled per default. To enable HTML description texts, the property "enableHtmlDescriptions" in the configuration object needs to be set to true. HTML tags in any property named "description" will then be interpreted as HTML content instead of plain text.
+
+```html
+<script>
+  //... see integration example
+  var homeOptions = [
+    {
+      id: 'porterbuddy',
+      name: 'Levert hjem',
+      availabilityResponse: availabilityResponse,
+      discount: 5000,
+      default: true,
+      description: '<span style="font-weight: bold; color: #661AFF;">Porterbuddy</span> is a convenient option to get deliveries right to your doorstep'
+    },
+    // ...
+  ]
+
+  window.porterbuddy = {
+    homeOptions: homeOptions,
+    //... see integration examples,
+    enableHtmlDescriptions: true
+  }
+</script>
+```
+
+### Example
+[INSERT USM]
