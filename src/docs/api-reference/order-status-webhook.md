@@ -6,7 +6,6 @@ author: "William Imoh"
 meta_description: "Receive a webhook from Porterbuddy when an order changes"
 ---
 
-## Overview
 To receive notifications when the order status or pickup date changes, a webhook URL can be specified in the order request as property `statusWebhookUrl`. This URL gets called with HTTP POST every time the status or pickup date changes, and contains the same body as the [Order Status Endpoint](https://developer.porterbuddy.com/#fetch-order-status). The target endpoint must be reachable from the internet without authentication and respond within 10 seconds. If a status outside the [200..299] range is returned, or the endpoint is unreachable, the call will be retried 2 times with a rising interval. The response body will be ignored by our backend.
 
 ## Webhook call body

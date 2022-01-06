@@ -6,8 +6,6 @@ author: "William Imoh"
 meta_description: "Fetch a Porterbuddy order's status"
 ---
 
-## Overview
-
 The order status can be retrieved using the URL returned from the Create Order call.
 The order status contains the pickup date, which is updated in case the recipient changes the delivery day, so it should be fetched regularly.
 

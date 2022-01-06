@@ -6,8 +6,6 @@ author: "William Imoh"
 meta_description: "Confirm a Porterbuddy parcel scan"
 ---
 
-## Overview
-
 We provide a solution to scan outgoing parcels on our partner portal. This endpoint is only intended to be used when integrating scanning of outgoing parcels into an own solution.
 
 This endpoint confirms that the parcels with the specified parcel shipment identifiers belonging to the specified order have been scanned and are confirmed to be sent. The list of parcel shipment identifiers is matched against the parcel shipment identifiers specified in the parcel data of the order. In case unknown shipment identifiers are specified, the response contains a list of all unknown identifiers, and the HTTP Response code is 422.
