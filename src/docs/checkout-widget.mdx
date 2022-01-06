@@ -10,14 +10,22 @@ The Checkout widget is used in the checkout section to offer customers a choice 
 
 The available delivery windows must be fetched beforehand using the [Porterbuddy API](/api-reference/).
 
-[INSERT THE CHECKOUT WIDGET]
+<CheckoutWithBackgroundData />
 
 ## Usage
+
 Add the configuration and script tag anywhere in HEAD or BODY
 
 ```html
-<link href="https://widget.porterbuddy.com/porterbuddy-widget.css" rel="stylesheet" type="text/css"/>
-<script async src="https://widget.porterbuddy.com/porterbuddy-widget.js"></script>
+<link
+  href="https://widget.porterbuddy.com/porterbuddy-widget.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<script
+  async
+  src="https://widget.porterbuddy.com/porterbuddy-widget.js"
+></script>
 ```
 
 The async attribute is optional, but recommended for better performance
@@ -27,28 +35,27 @@ Configure the widget to show the "checkout" view by defining the global variable
 ```html
 <script>
   window.porterbuddy = {
-    token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-    view: 'checkout',
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "checkout",
     discount: 10000,
-    availabilityResponse:
-    {
+    availabilityResponse: {
       deliveryWindows: [
         {
-          product: 'delivery',
-          start: '2019-03-14T17:30:00+01:00',
-          end: '2019-03-14T19:30:00+01:00',
-          expiresAt: '2019-03-14T14:30:00+01:00',
+          product: "delivery",
+          start: "2019-03-14T17:30:00+01:00",
+          end: "2019-03-14T19:30:00+01:00",
+          expiresAt: "2019-03-14T14:30:00+01:00",
           price: {
             fractionalDenomination: 14900,
-            currency: 'NOK'
-          }
+            currency: "NOK",
+          },
         },
-      // ...
+        // ...
       ],
       destinationResolvedAdress: {
-        postalCode: '0153',
+        postalCode: "0153",
         // ...
-      }
+      },
     }, // from API call
     onSelectDeliveryWindow: function (window) {
       // show selected delivery window
@@ -56,8 +63,8 @@ Configure the widget to show the "checkout" view by defining the global variable
     onSetCallbacks: function (callbacks) {
       // store the function reference to unselect the delivery window when selecting
       // another delivery option
-      window.unselectDeliveryWindow = callbacks.unselectDeliveryWindow;
-    }
+      window.unselectDeliveryWindow = callbacks.unselectDeliveryWindow
+    },
   }
 </script>
 ```

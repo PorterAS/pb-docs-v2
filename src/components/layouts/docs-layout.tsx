@@ -46,6 +46,7 @@ import { PBProductCard } from "../porterbuddy/PBProductCardWidget"
 import { PBCheckoutWidget } from "../porterbuddy/PBCheckoutWidget"
 import { ProductCardWithRefresh } from "../global/product-card/product-callback-refresh"
 import { ProductCardWithMultiDiscounts } from "../global/product-card/product-multi-discounts"
+import { CheckoutWithBackgroundData } from "../global/checkout-widget/checkout-overview"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -203,6 +204,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     ShopifyInstall,
     ProductCardWithRefresh,
     ProductCardWithMultiDiscounts,
+    CheckoutWithBackgroundData,
   }
 
   const iconMap: any = {
