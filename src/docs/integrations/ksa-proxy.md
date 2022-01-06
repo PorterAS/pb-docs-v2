@@ -6,8 +6,6 @@ author: "William Imoh"
 meta_description: "Integrate Porterbuddy TMS in Klarna using KSA"
 ---
 
-## Overview
-
 Multiple Transport Management Systems (TMS) abound, each having different data requirements and API specifications. Businesses run into issues integrating their existing systems with these TMSs.
 
 Klarna is a robust e-commerce solution widely used in the region to manage payment. Subsequently, Klarna Shipping Service/Assistant (KSS or KSA) operates and presents shipping options during client checkout on an e-commerce store.

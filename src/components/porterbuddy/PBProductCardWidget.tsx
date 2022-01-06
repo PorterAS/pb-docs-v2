@@ -12,6 +12,7 @@ declare global {
       deliveryWindow: DeliveryWindowType | null,
       selectDefault?: boolean
     ) => void
+    forceRefreshReference: () => Promise<void>
   }
 }
 

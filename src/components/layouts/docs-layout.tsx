@@ -44,6 +44,8 @@ import { GiClothJar } from "react-icons/gi"
 import { Copyright, SocialMediaLinks } from "./footer"
 import { PBProductCard } from "../porterbuddy/PBProductCardWidget"
 import { PBCheckoutWidget } from "../porterbuddy/PBCheckoutWidget"
+import { ProductCardWithRefresh } from "../global/product-card/product-callback-refresh"
+import { ProductCardWithMultiDiscounts } from "../global/product-card/product-multi-discounts"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -194,7 +196,14 @@ const DocsLayout = React.memo(({ children }: any) => {
     setPageURL(typeof window !== "undefined" ? window.location.href : "")
   }, [])
 
-  const shortcodes: any = { PBProductCard, PBCheckoutWidget, ContentCallout, ShopifyInstall }
+  const shortcodes: any = {
+    PBProductCard,
+    PBCheckoutWidget,
+    ContentCallout,
+    ShopifyInstall,
+    ProductCardWithRefresh,
+    ProductCardWithMultiDiscounts,
+  }
 
   const iconMap: any = {
     FaPlay: FaPlay,
@@ -207,7 +216,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     GrCatalog: GrCatalog,
     GrIntegration: GrIntegration,
     GiClothJar: GiClothJar,
-    FaCircle: FaCircle
+    FaCircle: FaCircle,
   }
 
   const data = useStaticQuery(graphql`

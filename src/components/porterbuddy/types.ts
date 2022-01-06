@@ -31,14 +31,14 @@ export interface IPBWidget {
   token: string
   view: "availability" | "checkout" | "deliveryInfo"
   language: "NO" | "EN"
-  apiMode: "test" | "development" | "stage" | "production"
+  apiMode?: "test" | "development" | "stage" | "production"
   apiBaseUrl?: string
   resetContext?: boolean
   allowStorage?: boolean
   allowGeoLocation?: boolean
   postalCode?: string
   cssClassPrefix?: string
-  hideIfUnavailable: boolean
+  hideIfUnavailable?: boolean
   alternateAvailabilityView?: boolean
   text?: object
   discount?: number
@@ -47,6 +47,7 @@ export interface IPBWidget {
   availabilityCacheTTL?: number
   now?: string
   originAddress?: boolean
+  additionalDiscounts?: any
   onStartFetchAvailability?: void
   onSetCallbacks?: (callbacks: any) => void
 }

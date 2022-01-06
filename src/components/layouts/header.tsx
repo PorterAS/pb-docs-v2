@@ -15,7 +15,7 @@ import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
 import { Container } from "./container"
 import { MenuDrawer } from "./menu-drawer"
 
-const Header = ({ navComponent, ...rest }: HeaderProps) => {
+const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
   return (
     <Box as="header" backgroundColor="#661AFF" py={2} {...rest}>
       <Container>

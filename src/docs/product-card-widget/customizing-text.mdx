@@ -13,7 +13,7 @@ All texts in the widget can be customized by setting the new text to use in the 
 | **Key**                                | **Default value**                                                                                                                                    |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | asap                                   | Express levering                                                                                                                                     |
-| availabilityEnterPostalCode            | Kan jeg få varen levert hjem **idag**?                                                                                                               |
+| availabilityEnterPostalCode            | Kan jeg få varen levert hjem **i dag**?                                                                                                              |
 | availabilityEnterPostalCodePlaceholder | Postnummer                                                                                                                                           |
 | availabilityStart                      | Kan jeg få denne varen levert **hjem i dag**?                                                                                                        |
 | availabilityClickToSee                 | Klikk for å sjekke                                                                                                                                   |
@@ -107,7 +107,8 @@ Variables can be used in text replacements to display changing values within the
 
 ## Example
 
-<PBProductCard options={{
+<PBProductCard
+  options={{
     token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
     view: "availability",
     language: "NO",
@@ -115,9 +116,12 @@ Variables can be used in text replacements to display changing values within the
     hideIfUnavailable: false,
     postalCode: "0278",
     text: {
-      availabilitySuccessCountdown: "**{{remaining}}** remaining for this offer"
-    }
-  }} style={{maxWidth:"500px", marginBottom: "10px"}}/>
+      availabilitySuccessCountdown:
+        "**{{remaining}}** remaining for this offer",
+    },
+  }}
+  style={{ maxWidth: "500px", marginBottom: "10px" }}
+/>
 
 ```html
 <script>

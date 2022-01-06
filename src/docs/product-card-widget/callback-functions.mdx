@@ -1,5 +1,5 @@
 ---
-title: "Callback functions options - Product card widget"
+title: "Callback functions - Product card widget"
 meta_title: "Callback functions - Product card widget"
 publishBy: "06-12-2021"
 author: "William Imoh"
@@ -18,9 +18,9 @@ The Porterbuddy widget provides callback function references to trigger actions 
 
 Manually triggering a refresh for the availability information
 
-> INSERT WIDGET with postcode input
+<ProductCardWithRefresh />
 
-Javascript code
+### Javascript code
 
 ```html
 <script>
@@ -35,9 +35,8 @@ Javascript code
     },
   }
   window.refresh = function () {
-    window.porterbuddy.postalCode = document.getElementById(
-      "postCodeInput"
-    ).value
+    window.porterbuddy.postalCode =
+      document.getElementById("postCodeInput").value
     forceRefreshReference().then(function () {
       console.log("refreshed")
     })
@@ -45,7 +44,7 @@ Javascript code
 </script>
 ```
 
-HTML code
+### HTML code
 
 ```html
 <div>
