@@ -14,22 +14,21 @@ Periodic updates should be implemented to ensure delivery windows are up to date
 
 **Note**: Implementing the update callback function is mandatory to offer consolidation functionality!
 
-[INSERT CHECKOUT WIDGET]
+<CheckoutWithPeriodicUpdates />
 
 ## Sample code
 
 ```js
 function updateDeliveryWindows(callback, additionalInfo) {
-  var updatedAvailabilityResponse = // fetch from availability api with additionalInfo added to the request
-  callback(updatedAvailabilityResponse);
+  var updatedAvailabilityResponse = callback(updatedAvailabilityResponse) // fetch from availability api with additionalInfo added to the request
 }
 
-var availabilityResponse = // fetch from availability API
-window.porterbuddy = {
-  token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-  view: 'checkout',
+var availabilityResponse = (window.porterbuddy = {
+  // fetch from availability API
+  token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+  view: "checkout",
   availabilityResponse: availabilityResponse,
   updateDeliveryWindowsInterval: 30, // update every 30 secons
-  onUpdateDeliveryWindows: updateDeliveryWindows
-};
+  onUpdateDeliveryWindows: updateDeliveryWindows,
+})
 ```

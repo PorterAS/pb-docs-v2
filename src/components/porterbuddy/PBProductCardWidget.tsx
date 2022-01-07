@@ -9,10 +9,11 @@ declare global {
     porterbuddy: any
     unselectDeliveryWindow: () => void
     setSelectedDeliveryWindow: (
-      deliveryWindow: DeliveryWindowType | null,
+      deliveryWindow: DeliveryWindowType | null | undefined,
       selectDefault?: boolean
     ) => void
     forceRefreshReference: () => Promise<void>
+    selectedDeliveryWindow: DeliveryWindowType
   }
 }
 

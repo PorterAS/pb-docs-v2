@@ -1,4 +1,4 @@
-type AvailabilityResponseType = {
+export type AvailabilityResponseType = {
   originResolvedAddress: ResolvedAddressType
   destinationResolvedAddress: ResolvedAddressType
   deliveryWindows: DeliveryWindowType[]
@@ -6,7 +6,7 @@ type AvailabilityResponseType = {
   flags?: string[]
 }
 
-type ResolvedAddressType = {
+export type ResolvedAddressType = {
   streetName: string
   streetNumber: string
   postalCode: string
@@ -30,7 +30,7 @@ export type DeliveryWindowType = {
 export interface IPBWidget {
   token: string
   view: "availability" | "checkout" | "deliveryInfo"
-  language: "NO" | "EN"
+  language?: "NO" | "EN"
   apiMode?: "test" | "development" | "stage" | "production"
   apiBaseUrl?: string
   resetContext?: boolean
@@ -42,7 +42,10 @@ export interface IPBWidget {
   alternateAvailabilityView?: boolean
   text?: object
   discount?: number
-  onUpdateDeliveryWindows?: void
+  onUpdateDeliveryWindows?: (
+    callback: (arg0: AvailabilityResponseType) => void,
+    additionalInfo: any
+  ) => void
   updateDeliveryWindowsInterval?: number
   availabilityCacheTTL?: number
   now?: string

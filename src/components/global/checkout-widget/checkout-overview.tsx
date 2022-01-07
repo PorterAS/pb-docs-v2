@@ -27,7 +27,6 @@ export const CheckoutWithBackgroundData = () => {
             discount: 10000,
             availabilityResponse: pbAvailabilityData,
             onSelectDeliveryWindow: window => {
-              console.log(window, typeof window)
               setSelectedDeliveryWindow(JSON.stringify(window))
             },
             onSetCallbacks: function (callbacks) {
@@ -40,7 +39,7 @@ export const CheckoutWithBackgroundData = () => {
         <Text fontWeight="bold">Background data (selected delivery)</Text>
         <pre
           style={{
-            maxWidth: "500px",
+            maxWidth: "400px",
             wordWrap: "break-word",
             whiteSpace: "initial",
           }}
