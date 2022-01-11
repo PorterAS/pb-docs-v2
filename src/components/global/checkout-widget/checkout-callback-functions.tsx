@@ -4,6 +4,7 @@ import { PBCheckoutWidget } from "../../porterbuddy/PBCheckoutWidget"
 import { isBrowser } from "../../porterbuddy/PBScript"
 import { pbAvailabilityData } from "../../porterbuddy/sample-data"
 
+//  todo: check functions
 export const CheckoutWithCallbackFunctions = () => {
   function _unselectDeliveryWindow() {
     if (isBrowser()) {
@@ -71,19 +72,7 @@ export const CheckoutWithCallbackFunctions = () => {
             language: "NO",
             discount: 10000,
             availabilityResponse: pbAvailabilityData,
-            initialSelectedWindow: {
-              product: "delivery",
-              start: "2022-01-07T19:30:00+01:00",
-              end: "2022-01-07T21:30:00+01:00",
-              price: {
-                fractionalDenomination: 14900,
-                currency: "NOK",
-              },
-              expiresAt: "2022-01-07T14:30:25+01:00",
-              token:
-                "LuNJPPWnj/BlPtJFk8LvnQ==:1HE4K6dX2S1ZOGTMgTi/ew==:M5c3OMdcJHnc7Ufdc33dEPlTeF4hUBujUP4pFygMK9im128UjH02YiCgLSSFTsauwBkxe1S5lLxJtTXJhFaMlJx5wIB0Nx8y89LcN61vJgAvmdthT44+eYpU4+TJWGxxTnQSLfFcLGMSeT/r8rlvsw==",
-              consolidated: false,
-            },
+            initialSelectedWindow: pbAvailabilityData.deliveryWindows[0],
             onSelectDeliveryWindow: deliveryWindow => {
               if (isBrowser() && window) {
                 window.selectedDeliveryWindow = deliveryWindow

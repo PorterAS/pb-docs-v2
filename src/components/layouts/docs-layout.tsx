@@ -50,6 +50,7 @@ import { CheckoutWithBackgroundData } from "../global/checkout-widget/checkout-o
 import { CheckoutWithCallbackFunctions } from "../global/checkout-widget/checkout-callback-functions"
 import { CheckoutWithPeriodicUpdates } from "../global/checkout-widget/checkout-periodic-updates"
 import { CheckoutIntegrationExample } from "../global/checkout-widget/checkout-integration-example"
+import { CheckoutInIframe } from "../global/checkout-widget/checkout-iframe"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -211,6 +212,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     CheckoutWithCallbackFunctions,
     CheckoutWithPeriodicUpdates,
     CheckoutIntegrationExample,
+    CheckoutInIframe,
   }
 
   const iconMap: any = {
