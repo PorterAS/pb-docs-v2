@@ -26,13 +26,14 @@ export const CheckoutAnonConsolidation = () => {
 
   function _addConsolidation() {
     if (isBrowser()) {
-      window.forceRefreshReference()
+      setAvailabilityResponse(pbAvailabilityDataWithConsolidation)
     }
   }
   return (
     <Box display={["block", "block", "flex"]} mb={5}>
       <Box maxWidth="500px" mb={4} p="2">
         <PBCheckoutWidget
+          key={JSON.stringify(availabilityResponse)}
           options={{
             token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
             apiMode: "test",
