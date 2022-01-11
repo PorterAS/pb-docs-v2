@@ -14,6 +14,7 @@ GET https://api.porterbuddy-test.com/order/<orderId>/self
 ```
 
 Example request
+
 ```bash
 curl -X GET \
   https://api.porterbuddy-test.com/order/13218/self \
@@ -22,6 +23,7 @@ curl -X GET \
 ```
 
 Example response
+
 ```bash
 {
   "id": "13218",
@@ -90,7 +92,9 @@ Example response
     "leaveAtDoorstep": false,
     "idCheck": true,
     "requireSignature": false,
-    "onlyToRecipient": true
+    "onlyToRecipient": true,
+    "deliveryVerification": "CONTACTLESS",
+    "confirmCustomerReceipt": false
   },
   "orderReference": "c46e068c-a3bb-4429-ac12-f81ee3ce9e86",
   "statusUpdatedAt": "2021-05-31T07:13:41.525648Z",
@@ -110,7 +114,7 @@ Example response
 ## _Response fields_
 
 | Parameter                 | Type                                                                    | Description                                                                                                                              |
-|---------------------------|-------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | id                        | String                                                                  | The Porterbuddy order id                                                                                                                 |
 | created                   | DateTime                                                                | Order creation data                                                                                                                      |
 | deliverFrom               | DateTime                                                                | Start of the delivery window                                                                                                             |
@@ -147,6 +151,6 @@ Example response
 ## Order Info Links
 
 | Parameter       | Type | Description                           |
-|-----------------|------|---------------------------------------|
+| --------------- | ---- | ------------------------------------- |
 | labelInfo       | URL  | A link to the label info endpoint     |
 | userInformation | URL  | A link to the recipient tracking page |

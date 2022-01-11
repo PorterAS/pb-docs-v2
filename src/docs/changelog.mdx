@@ -1,29 +1,55 @@
 ---
-title: "Changelogs"
-meta_title: "Porterbuddy Changelogs"
+title: "Changelog"
+meta_title: "Porterbuddy Changelog"
 publishBy: "10-12-2021"
 author: "William Imoh"
-meta_description: "Find updates to our APIs and technologies."
+meta_description: "Find updates to Porterbuddy APIs and technologies."
 ---
 
 import { ContentCallout } from "../components/global/ContentCallout"
 
+<ContentCallout title="✍️ Deprecation timeline">
+  Deprecated artifacts including enpoints and data will only be supported for
+  six months from the date of deprecation.
+</ContentCallout>
+
+## 11th January 2022
+
+### 🛠 Updates and improvements
+
+- API - Added `confirmCustomerReceipt` to the order verifications field. See [Order](/api-reference/order-api/)
+- API - Added `deliveryVerification` to the order verification field. See [Order](/api-reference/order-api/)
+
+### 🚨 Deprecation
+
+- API - Removed `leaveAtDoorstep`, `idCheck`, and `onlyToRecipient` from the order verifications field.
+
 ## 5th January 2022
-### Updates and improvements
+
+### 🛠 Updates and improvements
+
 - API - Added `pickupTime` to the `/order/<orderId>/self` endpoint which fetches the data for an order.
 
-### Deprecation
-- API - Deprecated `pickupDate` in the fetch order data endpoint `/order/<orderId>/self`.
+### 🚨 Deprecation
+
+- API - Removed `pickupDate` in the fetch order data endpoint `/order/<orderId>/self`.
 
 ## 10th December 2021
-### Updates and improvements
+
+### 🛠 Updates and improvements
+
 - API - Added the `large` option in the `products` field when checking for Porterbuddy availability. This enables the provision of windows for oversized parcels. See [Porterbuddy large](/guides/porterbuddy-large).
-- API - Deprecating `pickupDate` in the order creation response in favor of `pickupTime`. 
+
+### 🚨 Deprecation
+
+- API - Removed `pickupDate` in the order creation response in favor of `pickupTime`.
 
 ## 2nd August, 2021
-### Updates and improvements
-- Added autoscroll to the Checkout widget
 
-### 🛠 Fixes
-- Removed `pickupWindows` as a required option in availability and order API calls
-<ContentCallout title={"💡 Note"}>You don't need to make any changes to your existing Porterbuddy system</ContentCallout>
+### 🛠 Updates and improvements
+
+- Checkout Widget - Added autoscroll
+
+### 🚨 Deprecation
+
+- API - Removed `pickupWindows` as a required option in availability and order API calls

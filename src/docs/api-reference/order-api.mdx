@@ -50,11 +50,10 @@ https://api.porterbuddy-test.com/order \
             "token": "20hRsgz8AovrLjeOldJ2Wg==:yhr85il4/swdgiEP/DG2wg==:2hBoFcmyTNLp/CTfX3sTGslOJr9sXAMxHggqq/h6tGmUuCEB2Vfy8uyNIWfg3qf6d7nj84Aj2sbwMLK2hETe14L4qgnlZHVSkBcktYPc6VCp9vEZhXErpQS3HoSyRU+mVcF2SNGP4s5TI5x7S6oq4Q==",
         },
         "verifications": {
-            "minimumAgeCheck": 16,
-            "leaveAtDoorstep": false,
-            "idCheck": true,
+            "minimumAgeCheck": null,
             "requireSignature": false,
-            "onlyToRecipient": true
+            "deliveryVerification": "CONTACTLESS",
+            "confirmCustomerReceipt": false
         }
     },
     "parcels" : [
@@ -147,66 +146,82 @@ https://api.porterbuddy-test.com/order \
 
 ## _Arguments_
 
-| Parameter           | Required | Type                                                          | Default | Description                                                                                              |
-| ------------------- | -------- | ------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------|
-| origin              | Yes      | [Origin](https://developer.porterbuddy.com/#origin)           | none    | Information about the origin location.                                                                   |
-| destination         | Yes      | [Destination](https://developer.porterbuddy.com/#destination) | none    | Information about the destination.                                                                       |
-| parcels             | (*)      | List<[Parcel](https://developer.porterbuddy.com/#parcel)>     | none    | Information about the parcels.                                                                           |
-| product             | Yes      | String                                                        | none    | The product associated with the window chosen. It should be taken from the delivery window's properties. |
-| orderReference      | No       | String                                                        | none    | Your internal order reference.                                                                           |
-| courierInstructions | No       | String                                                        | ""      | A message to the courier about the delivery.                                                             |
-| shipmentIdentifier  | No       | Digits[5-20]                                                  | none    | Shipping identifier. The 5 last digits will be used as a pickup pin if this is specified.                |
-| items               | (*)      | List<[Item](https://developer.porterbuddy.com/#item)>         | none    | Information about the items (goods) in the order.                                                        |
+| Parameter           | Required | Type                                                          | Default | Description                                                                                                                                                             |
+| ------------------- | -------- | ------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| origin              | Yes      | [Origin](https://developer.porterbuddy.com/#origin)           | none    | Information about the origin location.                                                                                                                                  |
+| destination         | Yes      | [Destination](https://developer.porterbuddy.com/#destination) | none    | Information about the destination.                                                                                                                                      |
+| parcels             | (\*)     | List<[Parcel](https://developer.porterbuddy.com/#parcel)>     | none    | Information about the parcels.                                                                                                                                          |
+| product             | Yes      | String                                                        | none    | The product associated with the window chosen. It should be taken from the delivery window's properties.                                                                |
+| orderReference      | No       | String                                                        | none    | Your internal order reference.                                                                                                                                          |
+| courierInstructions | No       | String                                                        | ""      | A message to the courier about the delivery.                                                                                                                            |
+| shipmentIdentifier  | No       | Digits[5-20]                                                  | none    | Shipping identifier. The 5 last digits will be used as a pickup pin if this is specified.                                                                               |
+| items               | (\*)     | List<[Item](https://developer.porterbuddy.com/#item)>         | none    | Information about the items (goods) in the order.                                                                                                                       |
 | statusWebhookUrl    | No       | URL                                                           | none    | The URL of a webhook that gets called when the pickup date or order status changes. See [Order Status Webhook](https://developer.porterbuddy.com/#order-status-webhook) |
 
-(*) At least one of the properties "items" or "parcels" must be specified for a valid request. If only items are specified, each item must have the "weightGrams" property specified as >= 0.
+(\*) At least one of the properties "items" or "parcels" must be specified for a valid request. If only items are specified, each item must have the "weightGrams" property specified as >= 0.
 
 ## Origin
 
-| Parameter        | Required | Type                                                        | Default | Description                                                                                                                                                 |
-| ---------------- | -------- | ----------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name             | Yes      | String                                                      | none    | Full name                                                                                                                                                   |
-| address          | Yes      | [Address](https://developer.porterbuddy.com/#address)       | none    | The address where the package will be collected                                                                                                             |
-| email            | Yes      | String                                                      | none    | Email                                                                                                                                                       |
-| phoneCountryCode | No       | String                                                      | +47     | Country code for the phone number                                                                                                                           |
-| phoneNumber      | Yes      | String                                                      | none    | Phone number                                                                                                                                                |
-| pickupWindows    | No       | List<[Window](https://developer.porterbuddy.com/#window)>   | none    | The available windows to pick up the package, only relevant if `destination.bestAvailableWindow` is set to true. If not specified in the best available case, the backend will try to chose a delivery window within the next 10 days. If a delivery window or consolidated window is specified, this property will be ignored. |
+| Parameter        | Required | Type                                                      | Default | Description                                                                                                                                                                                                                                                                                                                     |
+| ---------------- | -------- | --------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name             | Yes      | String                                                    | none    | Full name                                                                                                                                                                                                                                                                                                                       |
+| address          | Yes      | [Address](https://developer.porterbuddy.com/#address)     | none    | The address where the package will be collected                                                                                                                                                                                                                                                                                 |
+| email            | Yes      | String                                                    | none    | Email                                                                                                                                                                                                                                                                                                                           |
+| phoneCountryCode | No       | String                                                    | +47     | Country code for the phone number                                                                                                                                                                                                                                                                                               |
+| phoneNumber      | Yes      | String                                                    | none    | Phone number                                                                                                                                                                                                                                                                                                                    |
+| pickupWindows    | No       | List<[Window](https://developer.porterbuddy.com/#window)> | none    | The available windows to pick up the package, only relevant if `destination.bestAvailableWindow` is set to true. If not specified in the best available case, the backend will try to chose a delivery window within the next 10 days. If a delivery window or consolidated window is specified, this property will be ignored. |
 
 ## Destination
 
 | Parameter           | Required | Type                                                                        | Default | Description                                                                                                                                                                                                                                                                                                                                          |
-| ------------------- | -------- | --------------------------------------------------------------------------- | ------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | -------- | --------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name                | Yes      | String                                                                      | none    | The full name of the recipient                                                                                                                                                                                                                                                                                                                       |
 | address             | Yes      | [Address](https://developer.porterbuddy.com/#address)                       | none    | The address where the package will be delivered                                                                                                                                                                                                                                                                                                      |
 | email               | Yes      | String                                                                      | none    | The email address of the recipient                                                                                                                                                                                                                                                                                                                   |
 | phoneCountryCode    | No       | String                                                                      | +47     | The country code of the phone number                                                                                                                                                                                                                                                                                                                 |
 | phoneNumber         | Yes      | String                                                                      | none    | The phone number of the recipient                                                                                                                                                                                                                                                                                                                    |
 | bestAvailableWindow | No       | Boolean                                                                     | false   | If this is `true`, find the "best available" window. This might be today or tomorrow, or even the next day, if tomorrow is a holiday. To have some idea about when something can be delivered it is always best to verify availability through our API. If a delivery window or consolidated delivery window is specified, this property is ignored. |
-| deliveryWindow      | Yes*     | [Window](https://developer.porterbuddy.com/#window)                         | none    | The agreed upon window to deliver within. This should be a window fetched from the availability request. _ This is not required if bestAvailableWindow or consolidatedWindow is used._                                                                                                                                                               |
+| deliveryWindow      | Yes\*    | [Window](https://developer.porterbuddy.com/#window)                         | none    | The agreed upon window to deliver within. This should be a window fetched from the availability request. _ This is not required if bestAvailableWindow or consolidatedWindow is used._                                                                                                                                                               |
 | consolidatedWindow  | No       | [ConsolidatedWindow](https://developer.porterbuddy.com/#consolidatedwindow) | none    | If the user chose the consolidated delivery window, this field needs to be filled with the consolidated window data from the availability request.                                                                                                                                                                                                   |
 | verifications       | Yes      | [Verifications](https://developer.porterbuddy.com/#verifications)           | none    | The verifications to be performed by the courier.                                                                                                                                                                                                                                                                                                    |
 
 ## Address
 
-| Parameter    | Required | Type   | Default | Description                                          |
-| ------------ | -------- | ------ | ------- | ---------------------------------------------------- |
-| streetName   | Yes      | String | none    | The name of the street                               |
+| Parameter    | Required | Type   | Default | Description                                              |
+| ------------ | -------- | ------ | ------- | -------------------------------------------------------- |
+| streetName   | Yes      | String | none    | The name of the street                                   |
 | streetNumber | Yes      | String | none    | The number of the street. Including any letters. Ex: 10d |
-| postalCode   | Yes      | String | none    | The postal code of the address                       |
-| city         | Yes      | String | none    | The city of the address                              |
-| country      | Yes      | String | none    | The country of the address                           |
+| postalCode   | Yes      | String | none    | The postal code of the address                           |
+| city         | Yes      | String | none    | The city of the address                                  |
+| country      | Yes      | String | none    | The country of the address                               |
 
 ## Verifications
 
 Some of the verifications will affect each other. In that case, the couriers will check the strictest union of the requirements to make sure nothing is delivered to the wrong person.
 
-| Parameter        | Required | Type    | Default | Description                                                                                                                                                             |
-| ---------------- | -------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| leaveAtDoorstep  | Yes      | Boolean | none    | Can the courier leave the package at the doorstep if no one is at home?                                                                                                 |
-| requireSignature | Yes      | Boolean | none    | Should the recipient sign for the package?                                                                                                                              |
-| idCheck          | Yes      | Boolean | none    | Should the courier verify the identity of the recipient?                                                                                                                |
-| onlyToRecipient  | Yes      | Boolean | none    | Should the courier only deliver to the named recipient? This option implies an ID check.                                                                                |
-| minimumAgeCheck  | No       | Integer | none    | Should the courier verify if the age of the recipient is equal to or above this value? Package will not be delivered if the recipient is younger than the age provided. |
+| Parameter              | Required | Type                 | Default       | Description                                                                                                                                                      |
+| ---------------------- | -------- | -------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~leaveAtDoorstep~~    | No       | Boolean              | false         | Deprecated, use `deliveryVerification` property instead                                                                                                          |
+| requireSignature       | No       | Boolean              | null          | This indicates if the recipient should sign for the package                                                                                                      |
+| ~~idCheck~~            | No       | Boolean              | null          | Deprecated, use `deliveryVerification` property instead. Former usage: should the courier check the real identity of the recipient?                              |
+| ~~onlyToRecipient~~    | No       | Boolean              | null          | Deprecated, use `deliveryVerification` property instead. Former usage: should the courier only deliver to the named recipient? This option implies an ID check.  |
+| minimumAgeCheck        | No       | Integer              | null          | Should the courier verify the age of the recipient is equal to or above this value? Package will not be delivered if recipient is younger than the age provided. |
+| confirmCustomerReceipt | No       | Boolean              | false         | Should the recipient be asked to confirm that the parcel is received and taken inside (for contactless delivery)?                                                |
+| deliveryVerification   | No       | DeliveryVerification | CONTACTLESS\* | An enum to select the delivery verification mode.                                                                                                                |
+
+- If `requireSignature` is set to `true` or `minimumAgeCheck` has a positive value, the default value for `deliveryVerification` is `REQUIRE_PIN`.
+
+## DeliveryVerification
+
+An enum for the way a delivery is verified. In case of a consolidated delivery, the strictest delivery verification is performed for the whole delivery.
+
+| Value             | Description                                                                                                                                                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CONTACTLESS       | Delivery is performed contactless by placing parcels on the doorstep. Customers can choose to switch to personal delivery on their own accounts.                                  |
+| ALLOW_CONTACTLESS | Delivery is performed in person with pin verification. Customers can change to contactless delivery on their own accounts and responsibility                                      |
+| REQUIRE_PIN       | Delivery is performed in person with pin verification. Customers are not allowed to change to contactless delivery                                                                |
+| REQUIRE_ID        | Delivery is performed in person with id verification. The recipient is only required to show an id, but does not need to be the same person as the recipient named in order data. |
+| ONLY_TO_RECIPIENT | Delivery is performed in person with id verification. The recipient must be the same person as the named recipient in the order data.                                             |
 
 ## Window
 
@@ -224,36 +239,38 @@ Some of the verifications will affect each other. In that case, the couriers wil
 
 ## Parcel
 
-Parameter                | Required | Type                                    | Default | Description
------------------------- | -------- | --------------------------------------- | ------- | ----------------------------------------------------
-description              | Yes      | String                                  | none    | Description of the parcel and contents
-widthCm                  | No       | Int                                     | none    | The width of the parcel in cm
-heightCm                 | No       | Int                                     | none    | The height of the parcel in cm
-depthCm                  | No       | Int                                     | none    | The depth of the parcel in cm
-weightGrams              | Yes      | Int                                     | none    | The weight of the package in grams
-parcelShipmentIdentifier | No       | Digits[5-20]                            | none    | The shipping identifier for the package. This is usually the number for the bar code.
-constraints              | No       | [ParcelConstraints](#parcelconstraints) | none    | Constraints for parcel delivery. <br/> &ast; Some api calls like `/update-shipment-information` will override the existing parcel data, including constraints. Make sure not to change the constraints after the labels for the order are printed.
+| Parameter                | Required | Type                                    | Default | Description                                                                                                                                                                                                                                     |
+| ------------------------ | -------- | --------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| description              | Yes      | String                                  | none    | Description of the parcel and contents                                                                                                                                                                                                          |
+| widthCm                  | No       | Int                                     | none    | The width of the parcel in cm                                                                                                                                                                                                                   |
+| heightCm                 | No       | Int                                     | none    | The height of the parcel in cm                                                                                                                                                                                                                  |
+| depthCm                  | No       | Int                                     | none    | The depth of the parcel in cm                                                                                                                                                                                                                   |
+| weightGrams              | Yes      | Int                                     | none    | The weight of the package in grams                                                                                                                                                                                                              |
+| parcelShipmentIdentifier | No       | Digits[5-20]                            | none    | The shipping identifier for the package. This is usually the number for the bar code.                                                                                                                                                           |
+| constraints              | No       | [ParcelConstraints](#parcelconstraints) | none    | Constraints for parcel delivery. <br/> \* Some api calls like `/update-shipment-information` will override the existing parcel data, including constraints. Make sure not to change the constraints after the labels for the order are printed. |
 
 ### ParcelConstraints
-Parameter                | Required | Type                                             | Default | Description
------------------------- | -------- | ------------------------------------------------ | ------- | ----------------------------------------------------
-temperature              | no       | [TemperatureConstraints](#temperatureconstraints) | none | Temperature constraints for the parcel.
+
+| Parameter   | Required | Type                                              | Default | Description                             |
+| ----------- | -------- | ------------------------------------------------- | ------- | --------------------------------------- |
+| temperature | no       | [TemperatureConstraints](#temperatureconstraints) | none    | Temperature constraints for the parcel. |
 
 ### TemperatureConstraints
-Parameter                | Required | Type                                    | Default | Description
------------------------- | -------- | --------------------------------------- | ------- | ----------------------------------------------------
-maximumCelsius           | yes      | double                                  | none    | maximum storage temperature in degrees Celsius
-minimumCelsius           | yes      | double                                  | none    | minimum storage temperature in degrees Celsius
 
-Temperature control requirements are specified per parcel. The information can either be passed during order creation, or when updating the shipment details / adding parcels. 
-Take care not to overwrite parcel constraints unintentionally. If the constraints are changed purposefully they should be done so as early as possible, and should not be changed 
+| Parameter      | Required | Type   | Default | Description                                    |
+| -------------- | -------- | ------ | ------- | ---------------------------------------------- |
+| maximumCelsius | yes      | double | none    | maximum storage temperature in degrees Celsius |
+| minimumCelsius | yes      | double | none    | minimum storage temperature in degrees Celsius |
+
+Temperature control requirements are specified per parcel. The information can either be passed during order creation, or when updating the shipment details / adding parcels.
+Take care not to overwrite parcel constraints unintentionally. If the constraints are changed purposefully they should be done so as early as possible, and should not be changed
 after the label(s) are printed.
 
 ## Item
 
 | Parameter          | Required | Type                                                | Default | Description                                                                                                                                                                                                                                                                      |
-|--------------------|----------|-----------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| weightGrams        | (*)      | Int                                                 | none    | The weight of the item in grams. This is required if only items and no parcels are specified in the request.                                                                                                                                                                     |
+| ------------------ | -------- | --------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| weightGrams        | (\*)     | Int                                                 | none    | The weight of the item in grams. This is required if only items and no parcels are specified in the request.                                                                                                                                                                     |
 | widthCm            | no       | Int                                                 | none    | The width of the item in cm                                                                                                                                                                                                                                                      |
 | heightCm           | no       | Int                                                 | none    | The height of the item in cm                                                                                                                                                                                                                                                     |
 | depthCm            | no       | Int                                                 | none    | The depth of the item in cm                                                                                                                                                                                                                                                      |
@@ -271,23 +288,23 @@ after the label(s) are printed.
 ## BarCode
 
 | Parameter | Required | Type   | Default | Description                                                                                             |
-|-----------|----------|--------|---------|---------------------------------------------------------------------------------------------------------|
+| --------- | -------- | ------ | ------- | ------------------------------------------------------------------------------------------------------- |
 | value     | yes      | String | none    | The value encoded in the barcode. This is represented as a string to support different barcode formats. |
 | type      | yes      | String | none    | The barcode type, e.g. Code128, UPC, ...                                                                |
 
 # _Order Response_
 
 | Parameter      | Type               | Description                                                                                                      |
-|----------------|--------------------|------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | orderId        | String             | The id of the created order                                                                                      |
 | ~~pickupDate~~ | Date               | **Deprecated, use pickupTime instead!** Calculated date the order needs to be picked up to be delivered on time. |
 | pickupTime     | DateTime           | The calculated date and time in which the order needs to be picked up to be delivered on time.                   |
-| _links         | OrderResponseLinks | Links for this resource.                                                                                         |
+| \_links        | OrderResponseLinks | Links for this resource.                                                                                         |
 
 ## Order response links
 
 | Parameter       | Type                                                     | Description                                                                                                                                                                                     |
-| --------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | self            | [HrefLink](https://developer.porterbuddy.com/#href-link) | Link to the created order.                                                                                                                                                                      |
 | labelInfo       | [HrefLink](https://developer.porterbuddy.com/#href-link) | Link to information about the labels for this order. WARNING: The contents from this URL should not be stored. The addresses have limited existense because of security concerns.               |
 | status          | [HrefLink](https://developer.porterbuddy.com/#href-link) | Link to fetch the status of the order. Returns a [Order status](https://developer.porterbuddy.com/#order-status) on a GET request.                                                              |
@@ -296,7 +313,7 @@ after the label(s) are printed.
 ## Order status
 
 | Parameter       | Type                                              | Description                                                                                                                                                                                                       |
-|-----------------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | orderId         | String                                            | The id of the order.                                                                                                                                                                                              |
 | orderStatus     | String Examples: [received, delivered, cancelled] | The status of the order. This list is non exhaustive so please take care to display/handle any new statuses that is introduced.                                                                                   |
 | ~~pickupDate~~  | ~~Date~~                                          | **Deprecated, use pickupTime instead!** The date when the order parcels will be picked up by Porterbuddy. Depending on the delivery area, the parcels may be picked up one or more days before the delivery date. |
