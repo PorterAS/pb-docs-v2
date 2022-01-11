@@ -21,6 +21,7 @@ export const CheckoutWithPeriodicUpdates = () => {
             token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
             view: "checkout",
             availabilityResponse: pbAvailabilityData,
+            now: "2019-03-14T09:00:00+01:00",
             updateDeliveryWindowsInterval: 30,
             onUpdateDeliveryWindows: updateDeliveryWindows, // update every 30 secons
           }}

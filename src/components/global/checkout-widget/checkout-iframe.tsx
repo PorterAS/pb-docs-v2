@@ -4,7 +4,6 @@ import { PBCheckoutWidget } from "../../porterbuddy/PBCheckoutWidget"
 import { isBrowser } from "../../porterbuddy/PBScript"
 import { pbAvailabilityData } from "../../porterbuddy/sample-data"
 
-// todo: fix buttons and functions
 export const CheckoutInIframe = () => {
   const [selectedDeliveryWindow, setSelectedDeliveryWindow] = useState<
     undefined | string
@@ -12,24 +11,25 @@ export const CheckoutInIframe = () => {
 
   function _unselectDeliveryWindow() {
     if (isBrowser()) {
-      // window.unselectDeliveryWindow()
+      window.unselectDeliveryWindow()
     }
   }
 
   function _reselectLastWindow() {
     if (isBrowser()) {
-      // window.setSelectedDeliveryWindow(window.selectedDeliveryWindow)
+      window.setSelectedDeliveryWindow(window.selectedDeliveryWindow)
     }
   }
   function _selectDefault() {
     if (isBrowser()) {
-      // window.setSelectedDeliveryWindow(null, true)
+      window.setSelectedDeliveryWindow(null, true)
     }
   }
 
   function _forceRefresh() {
     if (isBrowser()) {
-      // window.forceRefreshReference()
+      window.forceRefreshReference()
+      setSelectedDeliveryWindow(undefined)
     }
   }
   return (
@@ -43,13 +43,16 @@ export const CheckoutInIframe = () => {
             postalCode: "0153",
             language: "NO",
             discount: 10000,
-            updateDeliveryWindowsInterval: 30,
+            now: "2019-03-14T09:00:00+01:00",
             availabilityResponse: pbAvailabilityData,
             onSelectDeliveryWindow: window => {
               setSelectedDeliveryWindow(JSON.stringify(window))
             },
             onSetCallbacks: function (callbacks) {
+              window.forceRefreshReference = callbacks.forceRefresh
               window.unselectDeliveryWindow = callbacks.unselectDeliveryWindow
+              window.setSelectedDeliveryWindow =
+                callbacks.setSelectedDeliveryWindow
             },
           }}
         />
@@ -57,6 +60,17 @@ export const CheckoutInIframe = () => {
       <Box ml={[0, 10, 10]}>
         <Box mb={5}>
           <Text fontWeight="bold">Functions</Text>
+          <Button colorScheme="purple" size="xs" onClick={_forceRefresh} mr={3}>
+            Refresh
+          </Button>
+          <Button
+            colorScheme="purple"
+            size="xs"
+            onClick={_selectDefault}
+            mr={3}
+          >
+            Select default
+          </Button>
           <Button
             mr={3}
             colorScheme="purple"
@@ -65,24 +79,8 @@ export const CheckoutInIframe = () => {
           >
             Unselect Window
           </Button>
-          <Button
-            mr={3}
-            colorScheme="purple"
-            size="xs"
-            onClick={_reselectLastWindow}
-          >
+          <Button colorScheme="purple" size="xs" onClick={_reselectLastWindow}>
             Reselect last selected
-          </Button>
-          <Button
-            mr={3}
-            colorScheme="purple"
-            size="xs"
-            onClick={_selectDefault}
-          >
-            Select default
-          </Button>
-          <Button colorScheme="purple" size="xs" onClick={_forceRefresh}>
-            Force refresh
           </Button>
         </Box>
         <Box>

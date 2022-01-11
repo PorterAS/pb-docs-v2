@@ -26,6 +26,7 @@ export const CheckoutWithBackgroundData = () => {
             language: "NO",
             discount: 10000,
             availabilityResponse: pbAvailabilityData,
+            now: "2019-03-14T09:00:00+01:00",
             onSelectDeliveryWindow: window => {
               setSelectedDeliveryWindow(JSON.stringify(window))
             },

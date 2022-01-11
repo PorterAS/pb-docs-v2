@@ -14,6 +14,7 @@ export const CheckoutIntegrationExample = () => {
             view: "checkout",
             postalCode: "0153",
             language: "NO",
+            now: "2019-03-14T09:00:00+01:00",
             availabilityResponse: pbAvailabilityData,
             onSelectDeliveryWindow: window => {},
             onSetCallbacks: function (callbacks) {},

@@ -72,6 +72,7 @@ export const CheckoutWithCallbackFunctions = () => {
             language: "NO",
             discount: 10000,
             availabilityResponse: pbAvailabilityData,
+            now: "2019-03-14T09:00:00+01:00",
             initialSelectedWindow: pbAvailabilityData.deliveryWindows[0],
             onSelectDeliveryWindow: deliveryWindow => {
               if (isBrowser() && window) {
