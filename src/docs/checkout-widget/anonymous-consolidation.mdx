@@ -6,13 +6,14 @@ author: "William Imoh"
 meta_description: "Configure anonymous consolidation in the  checkout widget"
 ---
 
-The checkout widget supports a special flow in cases a possible consolidation can be pre-determined by having logged-in users or querying email address and phone number beforehand. 
+The checkout widget supports a special flow in cases a possible consolidation can be pre-determined by having logged-in users or querying email address and phone number beforehand.
 
 This behaviour is enabled if either one delivery window in the list of delivery windows is marked as consolidated, or if the property "consolidatedWindow" of the availability response contains a value.
 
-[INSERT CHECKOUT WIDGET]
+<CheckoutAnonConsolidation />
 
 ## Code Examples
+
 The anonymous consolidation mode is visible when either the delivery window list contains a delivery window marked as consolidated or the property "consolidatedWindow" of the availability response is present.
 
 ### Delivery Windows variant
@@ -22,24 +23,25 @@ The anonymous consolidation mode is visible when either the delivery window list
   // this will be returned by the Porterbuddy API
   var deliveryWindows = [
     {
-      product: 'delivery',
-      start: '2019-03-14T17:30:00+01:00',
-      end: '2019-03-14T19:30:00+01:00',
-      expiresAt: '2019-03-14T14:30:00+01:00',
+      product: "delivery",
+      start: "2019-03-14T17:30:00+01:00",
+      end: "2019-03-14T19:30:00+01:00",
+      expiresAt: "2019-03-14T14:30:00+01:00",
       price: {
         fractionalDenomination: 14900,
-        currency: 'NOK'
-      }
-    }, {
-      product: 'delivery',
-      start: '2019-03-14T19:30:00+01:00',
-      end: '2019-03-14T21:30:00+01:00',
-      expiresAt: '2019-03-14T14:30:00+01:00',
+        currency: "NOK",
+      },
+    },
+    {
+      product: "delivery",
+      start: "2019-03-14T19:30:00+01:00",
+      end: "2019-03-14T21:30:00+01:00",
+      expiresAt: "2019-03-14T14:30:00+01:00",
       price: {
         fractionalDenomination: 0,
-        currency: 'NOK'
+        currency: "NOK",
       },
-      consolidated: true
+      consolidated: true,
     },
     // ... and so on
   ]
@@ -57,21 +59,23 @@ Note that a consolidated window is allowed not to specify a start or end time, a
     deliveryWindows: deliveryWindows,
     destinationResolvedAddress: destinationResolvedAddress,
     consolidatedWindow: {
-      product: 'delivery',
-      expiresAt: '2019-03-14T14:30:00+01:00',
+      product: "delivery",
+      expiresAt: "2019-03-14T14:30:00+01:00",
       price: {
         fractionalDenomination: 0,
-        currency: 'NOK'
+        currency: "NOK",
       },
       consolidated: true,
-      token: "..." // token from the backend
-    }
+      token: "...", // token from the backend
+    },
   }
 </script>
 ```
 
 ## Selection
+
 When the consolidated option or a delivery window is selected, the `onSelectDeliveryWindow` callback is called in the same fashion as the regular integration. A small change is that in case of a consolidated window, the start and end properties of the window data passed might be not present. To specify that consolidation should be used (if possible) when creating an order, the window token of the consolidated window should be set in the `destination.consolidatedWindow` property of the order request.
 
 ## Update behaviour
-When delivery windows are updated either via periodic updates or by using the callback function, a check is performed if the consolidated window is still available. If not, the widget will switch to the regular matrix view.  
+
+When delivery windows are updated either via periodic updates or by using the callback function, a check is performed if the consolidated window is still available. If not, the widget will switch to the regular matrix view.
