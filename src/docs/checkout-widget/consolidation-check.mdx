@@ -10,113 +10,129 @@ The checkout widget supports a special flow to allow shoppers to consolidate the
 
 ## Demo
 
-[INSERT CHECKOUT WIDGET]
+<CheckoutConsolidationCheck />
 
 In simulated API mode, availability response data is simulated, with a consolidated delivery available for the the email address "consolidated@porterbuddy.com". All other email addresses will show the error case when consolidation is not available.
 
 In real API mode, consolidation is available if there is already an open order for the entered email address and postcode stored in the Porterbuddy test environment. The code for the real API mode demo uses ES2015 language features and thus will not work as expected if tested in IE11.
 
 ## Integration
+
 General integration of the checkout widget to use consolidation is the same as described in the sections about integrating the checkout widget of this documentation. However, some specific requirements must be fulfilled in order to offer consolidation in the checkout. The consolidation option becomes available when the integration fulfills these requirements, and the consolidation feature is enabled for the store in Porterbuddy's infrastructure.
 
 If the user will select the consolidation option but won't do any further actions to check consolidated delivery such as filling input and sending it via button, our system will set by default the first possible window of Porterbuddy delivery.
 
 ## Requirements
+
 - A public token must be specified in the widget configuration object
 - The widget must be initialized by specifying a full availability response, including the flags property (see [API documentation](/api-reference/))
 - The function `onUpdateDeliveryWindows` must be implemented, and the passed argument `additionalInfo` must be used in the availability request sent to the Porterbuddy API. The response for this must be the full availability response.
 
 ## Code Examples
-<ContentCallout title={"💡 Security note"}>In a real-world case, fetching availability should be done through the webshop backend, to avoid potential security risks by malicious users changing the client-side code.</ContentCallout>
+
+<ContentCallout title={"💡 Security note"}>
+  In a real-world case, fetching availability should be done through the webshop
+  backend, to avoid potential security risks by malicious users changing the
+  client-side code.
+</ContentCallout>
 
 ```html
 <script>
-// this example uses dayjs to generate pickup windows
+  // this example uses dayjs to generate pickup windows
 
-function pickupWindows() {
-  // generating pickup windows for the next week starting today, 8-22 each day
-  const pickupWindows = [];
-  for (let i = 0; i < 7; i++) {
-    const start = dayjs().add(i, 'day').hour(8).minute(0).second(0).millisecond(0);
-    const end = start.hour(22).minute(0);
-    pickupWindows.push({
-      start: start.toISOString(),
-      end: end.toISOString()
-    });
+  function pickupWindows() {
+    // generating pickup windows for the next week starting today, 8-22 each day
+    const pickupWindows = []
+    for (let i = 0; i < 7; i++) {
+      const start = dayjs()
+        .add(i, "day")
+        .hour(8)
+        .minute(0)
+        .second(0)
+        .millisecond(0)
+      const end = start.hour(22).minute(0)
+      pickupWindows.push({
+        start: start.toISOString(),
+        end: end.toISOString(),
+      })
+    }
+    return pickupWindows
   }
-  return pickupWindows;
-}
 
-async function fetchAvailability(additionalInfo) {
-  const availabilityRequest = {
-    pickupWindows: pickupWindows(),
-    originAddress: {
-      streetName: "Keysers Gate",
-      streetNumber: "3",
-      postalCode: "0165",
-      city: "Oslo",
-      country: "Norway"
-    },
-    destinationAddress: {
-      streetName: null,
-      streetNumber: null,
-      postalCode: recipientPostCode, //assuming this is the variable for the recipient's postal code
-      city: null,
-      country: "Norway"
-    },
-    products: [ "delivery" ],
-    parcels: [
+  async function fetchAvailability(additionalInfo) {
+    const availabilityRequest = {
+      pickupWindows: pickupWindows(),
+      originAddress: {
+        streetName: "Keysers Gate",
+        streetNumber: "3",
+        postalCode: "0165",
+        city: "Oslo",
+        country: "Norway",
+      },
+      destinationAddress: {
+        streetName: null,
+        streetNumber: null,
+        postalCode: recipientPostCode, //assuming this is the variable for the recipient's postal code
+        city: null,
+        country: "Norway",
+      },
+      products: ["delivery"],
+      parcels: [
+        {
+          widthCm: 1,
+          heightCm: 40,
+          depthCm: 1,
+          weightGrams: 2000,
+          description: "Awesome product",
+        },
+      ],
+      additionalInfo: additionalInfo,
+    }
+    const headers = {
+      "content-type": "application/json",
+      accept: "application/json",
+      "x-public-token": "...", // your public token
+      // Public token must be sed on frontend side, for backend integration use your api key and header
+      // "x-api-key" as specified in the API documentation
+    }
+    // use test or production URL depending on environment
+    const response = await fetch(
+      "https://api.porterbuddy-test.com/availability",
       {
-        widthCm: 1,
-        heightCm: 40,
-        depthCm: 1,
-        weightGrams: 2000,
-        description: "Awesome product"
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(availabilityRequest),
       }
-    ],
-    additionalInfo: additionalInfo
-  };
-  const headers = {
-    "content-type": "application/json",
-    "accept":"application/json",
-    "x-public-token": "...", // your public token
-    // Public token must be sed on frontend side, for backend integration use your api key and header
-    // "x-api-key" as specified in the API documentation
-  }
-  // use test or production URL depending on environment
-  const response = await fetch('https://api.porterbuddy-test.com/availability', {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(availabilityRequest)
-  });
-  if (response.ok) {
-    return await response.json();
-  } else {
-    return undefined;
-  }
-}
-
-fetchAvailability().then(availabilityResponse => {
-  console.log(availabilityResponse);
-  window.porterbuddy = {
-    token: "...", // your public token
-    view: "checkout",
-    availabilityResponse: availabilityResponse,
-    updateDeliveryWindowsInterval: 30,
-    onUpdateDeliveryWindows: (callback, additionalInfo) => {
-      fetchAvailability(additionalInfo).then(availabilityResponse =>
-        callback(availabilityResponse)
-      );
-    },
-    onSelectDeliveryWindow: (deliveryWindow) => {
-      // use window data to display shipping costs, selected option, etc....
+    )
+    if (response.ok) {
+      return await response.json()
+    } else {
+      return undefined
     }
   }
-});
+
+  fetchAvailability().then(availabilityResponse => {
+    console.log(availabilityResponse)
+    window.porterbuddy = {
+      token: "...", // your public token
+      view: "checkout",
+      availabilityResponse: availabilityResponse,
+      updateDeliveryWindowsInterval: 30,
+      onUpdateDeliveryWindows: (callback, additionalInfo) => {
+        fetchAvailability(additionalInfo).then(availabilityResponse =>
+          callback(availabilityResponse)
+        )
+      },
+      onSelectDeliveryWindow: deliveryWindow => {
+        // use window data to display shipping costs, selected option, etc....
+      },
+    }
+  })
 </script>
 ```
 
 ## Hints
+
 - On every change of the delivery window, the `onSelectDeliveryWindow` callback is called. To find out if the consolidated window was chosen, the property `consolidated` of the window is set to `true` if the chosen window is the consolidated window.
-- The availability response should be passed on unchanged to the widget, as there are some optional properties needed, and the Porterbuddy availability API is subject to the frequent additions of new properties. 
+- The availability response should be passed on unchanged to the widget, as there are some optional properties needed, and the Porterbuddy availability API is subject to the frequent additions of new properties.
   Javascript / Typescript based implementations will have this as a default behaviour. For a Java-based implementation, a bit more effort is required. In case of Jackson-based JSON parsers, providing a mapping for not modelled properties via @JacksonAnyGetter and @JacksonAnySetter can replicate the behaviour of Javascript/Typescript when handling JSON API responses.

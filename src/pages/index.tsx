@@ -1,13 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Button, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import { FeatureCard } from "../components/home/feature-card"
 import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
@@ -44,14 +37,17 @@ const IndexPage = ({}: any) => {
   // const slugs = data.allMdx.edges
   return (
     <Layout>
-      <SEO title="Porterbuddy Developer Portal" description="Build and integrate with Porterbuddy APIs and technology"/>
+      <SEO
+        title="Porterbuddy Developer Portal"
+        description="Build and integrate with Porterbuddy APIs and technology"
+      />
       <Box mt={"5%"} mb={{ base: "15%", sm: "15%", md: "10%", lg: "10%" }}>
-          <Text
-            fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl" }}
-            fontWeight={"600"}
-          >
-            Porterbuddy Developers
-          </Text>
+        <Text
+          fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl" }}
+          fontWeight={"600"}
+        >
+          Porterbuddy Developers
+        </Text>
         <Text textAlign="left">
           Welcome to Porterbuddy Developers! Find information on building an
           efficient logistics experience with Porterbuddy
@@ -176,7 +172,9 @@ const IndexPage = ({}: any) => {
             </Box>
           </Box>
           <Image
-            src={CoWorking}
+            src={
+              "https://res.cloudinary.com/chuloo/image/upload/q_auto,f_auto,w_350/v1641985218/porterbuddy/co-working.jpg"
+            }
             width={[350, 300, 300]}
             borderRadius={5}
             my={"auto"}

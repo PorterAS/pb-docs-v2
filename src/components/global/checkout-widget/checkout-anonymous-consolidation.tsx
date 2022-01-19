@@ -8,7 +8,6 @@ import {
 } from "../../porterbuddy/sample-data"
 import { AvailabilityResponseType } from "../../porterbuddy/types"
 
-// todo: need to make two components here and re-render the widget when the pb availability window changes.
 export const CheckoutAnonConsolidation = () => {
   const [selectedDeliveryWindow, setSelectedDeliveryWindow] = useState<
     undefined | string
@@ -47,8 +46,6 @@ export const CheckoutAnonConsolidation = () => {
               setSelectedDeliveryWindow(JSON.stringify(window))
             },
             onSetCallbacks: function (callbacks) {
-              window.forceRefreshReference = callbacks.forceRefresh
-              window.unselectDeliveryWindow = callbacks.unselectDeliveryWindow
               window.setSelectedDeliveryWindow =
                 callbacks.setSelectedDeliveryWindow
             },
