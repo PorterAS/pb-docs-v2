@@ -1,16 +1,16 @@
 import * as React from "react"
 import { useEffect } from "react"
 import { isBrowser, PBScript } from "./PBScript"
-import { IPBCheckoutWidgetType } from "./types"
+import { IPBUnifiedShippingModule } from "./types"
 
-type PBCheckoutWidgetPropType = {
-  options: IPBCheckoutWidgetType
+type PBUnifiedShippingModulePropType = {
+  options: IPBUnifiedShippingModule
 }
 
-export const PBCheckoutWidget = ({
+export const PBUSM = ({
   options,
   ...rest
-}: PBCheckoutWidgetPropType) => {
+}: PBUnifiedShippingModulePropType) => {
   useEffect(() => {
     if (isBrowser()) {
       window.porterbuddy = { ...window.porterbuddy, ...options }
@@ -20,7 +20,7 @@ export const PBCheckoutWidget = ({
     <div {...rest}>
       <PBScript />
       <div>
-        <div id="porterbuddy-widget"></div>
+        <div id="porterbuddy-checkout"></div>
       </div>
     </div>
   )

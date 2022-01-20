@@ -14,7 +14,10 @@ With PL, we upgraded the parcel requirements to:
 - Weight: 21kg per parcel
 - Maximum volume: 450 dm3
 
-<ContentCallout title={"Maximum order weight 💡"}>While each parcel in an order is limited to 21kg, the total weight of all items in the order must not exceed 25kg.</ContentCallout> 
+<ContentCallout title={"Maximum order weight 💡"}>
+  While each parcel in an order is limited to 21kg, the total weight of all
+  items in the order must not exceed 25kg.
+</ContentCallout>{" "}
 
 PL orders are also referred to as "large".
 
@@ -23,7 +26,7 @@ PL orders are also referred to as "large".
 To place a large order using the Porterbuddy API, you take the following steps:
 
 1. Create an availability request data containing accurate product and parcel size data in `items` and `parcels`, respectively.
-2. Make a Porterbuddy availability call with a value of `large` specified in the `products` field. 
+2. Make a Porterbuddy availability call with a value of `large` specified in the `products` field.
 3. Create a Porterbuddy order using a returned delivery window for a `large` product value with the Order API.
 
 Here's an example availability request with the `large` field specification.
@@ -31,7 +34,7 @@ Here's an example availability request with the `large` field specification.
 ```bash
 curl \
   -X POST 'https://api.porterbuddy.com/availability' \
-  -H 'Content-Type: application/json' \  
+  -H 'Content-Type: application/json' \
   -H 'x-api-key: <your_api_key>' \
   -d '{
         "pickupWindows": [
@@ -186,11 +189,11 @@ A sample response looks like this.
       "token": "Kj1q+VlVFG4LX3ZAwbMPPg==:t6BkqFpGFzVnpqoTqEyKgA==:GGrsm1gUTetg8ux9sTs0/+X7mQiG/9a4y67BZoXPRjB3g8F+OK4NVyaYZAdIsLcdbO36jNta8hEyyCDxVee2qi7+95RJXBP/7wuH4Ik/S2/fq+8gHBQhISm0ba9TyO4ujytN5eAlXmoZgSQSXFG2tg==",
       "consolidated": false
     }
-  ],
+  ]
 }
 ```
 
-Notice the `"product": "large"` returned in each delivery window. 
+Notice the `"product": "large"` returned in each delivery window.
 
 You can find the complete API specification [here](/api-reference/availability-api/).
 
@@ -309,20 +312,26 @@ This request creates a PL order in Porterbuddy's systems.
 You can see the Order API information [here](/api-reference/order-api/).
 
 ## Handling Delivery and Large parcels
-If items in an order contain small and large parcels, the `products` array can include both `delivery` and `large`. 
+
+If items in an order contain small and large parcels, the `products` array can include both `delivery` and `large`.
 We will evaluate the product and parcel data sent in the `items` and `parcels` fields to determine which type of window to return.
 
 Specifying only the `large` value returns only `large` delivery windows, regardless of if the order contains only small items.
 
-Omitting the `large` value in `products` and sending in parcel and product data containing large items will throw an error. 
+Omitting the `large` value in `products` and sending in parcel and product data containing large items will throw an error.
 Also, sending in product/parcel data beyond the stated threshold will return an error in the availability request with the' large' value set.
 
-<ContentCallout title={"Samlevert not supported 🚨"}>PL orders are currently ineligible for Samlevert. i.e They cannot be consolidated with normal delivery orders.</ContentCallout> 
+<ContentCallout title={"Samlevert not supported 🚨"}>
+  PL orders are currently ineligible for Samlevert. i.e They cannot be
+  consolidated with normal delivery orders.
+</ContentCallout>{" "}
 
 ## Activating PL
-To activate POrterbuddy large, contact your key account manager, requesting to enable the product on your account.
+
+To activate Porterbuddy large, contact your key account manager, requesting to enable the product on your account.
 
 ## Current plugin support
+
 The PL product is currently supported in the following Porterbuddy plugins:
 
 - Magento 1
