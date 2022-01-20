@@ -8,9 +8,8 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { PBCheckoutWidget } from "../../porterbuddy/PBCheckoutWidget"
-import { isBrowser } from "../../porterbuddy/PBScript"
 import {
   pbAvailabilityData,
   pbAvailabilityDataWithConsolidation,
@@ -22,7 +21,7 @@ export const CheckoutConsolidationCheck = () => {
   const [selectedDeliveryWindow, setSelectedDeliveryWindow] = useState<
     undefined | string
   >(undefined)
-  const [postCode, setPostCode] = useState<string | undefined>("0678")
+  const [postCode, setPostCode] = useState<string>("0678")
   const [availabilityResponse, setAvailabilityResponse] = useState<
     AvailabilityResponseType | undefined
   >(pbAvailabilityDataWithFlag)
@@ -30,32 +29,13 @@ export const CheckoutConsolidationCheck = () => {
     "simulated"
   )
 
-  // function _removeConsolidation() {
-  //   if (isBrowser()) {
-  //     setAvailabilityResponse(pbAvailabilityData)
-  //     setSelectedDeliveryWindow(undefined)
-  //   }
-  // }
-
-  // function _addConsolidation() {
-  //   if (isBrowser()) {
-  //     setAvailabilityResponse(pbAvailabilityDataWithConsolidation)
-  //   }
-  // }
-  function savePostCode() {
-    if (isBrowser()) {
-      // let forceRefreshReference = window.forceRefreshReference
-      // window.porterbuddy.postalCode = postCode
-      // forceRefreshReference().then(function () {
-      //   console.log("Refreshed the product card widget!")
-      // })
+  useEffect(() => {
+    if (apiMode == "simulated") {
+      setAvailabilityResponse(pbAvailabilityDataWithFlag)
+    } else {
+      setAvailabilityResponse(pbAvailabilityData)
     }
-  }
-
-  function changeApiMode() {
-    // setAvailabilityResponse(pbAvailabilityData)
-    console.log("i ran")
-  }
+  }, [apiMode])
 
   return (
     <Box>
@@ -67,51 +47,62 @@ export const CheckoutConsolidationCheck = () => {
           maxWidth="300px"
           mx={5}
         />
-        <Button size="sm" onClick={savePostCode} colorScheme="purple">
+        <Button size="sm" colorScheme="purple">
           Set
         </Button>
       </Flex>
 
       <Text fontWeight="bold">Demo API Mode</Text>
-      {/* <Box>
-        <label>Simulated</label>
-        <input type="radio" value="simulated" name="mode" />
-
-        <label>Real</label>
-        <input type="radio" value="real" name="mode" />
-      </Box> */}
+      <Box>
+        <RadioGroup value={apiMode} onChange={setApiMode}>
+          <Stack direction="row">
+            <Radio value="simulated">Simulated</Radio>
+            <Radio value="real">Real</Radio>
+          </Stack>
+        </RadioGroup>
+      </Box>
 
       <Box display={["block", "block", "flex"]} mb={5}>
         <Box maxWidth="500px" mb={4} p="2">
           <PBCheckoutWidget
-            key={
-              availabilityResponse ? JSON.stringify(availabilityResponse) : ""
-            }
+            key={apiMode}
             options={{
               token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
               apiMode: "test",
               view: "checkout",
-              postalCode: "0153",
+              postalCode: postCode,
               language: "NO",
-              discount: 10000,
               now: "2019-03-14T09:00:00+01:00",
               availabilityResponse: availabilityResponse,
-              onSelectDeliveryWindow: window => {
-                setSelectedDeliveryWindow(JSON.stringify(window))
+              onSelectDeliveryWindow: selectedWindow => {
+                setSelectedDeliveryWindow(JSON.stringify(selectedWindow))
               },
               onSetCallbacks: function (callbacks) {
                 window.setSelectedDeliveryWindow =
                   callbacks.setSelectedDeliveryWindow
+                window.udpateDeliveryWindows = callbacks.updateDeliveryWindows
               },
-              onUpdateDeliveryWindows: async function (
-                callback,
-                additionalInfo
-              ) {
+              onUpdateDeliveryWindows: async function (_, additionalInfo) {
                 if (
                   apiMode == "simulated" &&
                   additionalInfo.email == "consolidated@porterbuddy.com"
                 ) {
                   setAvailabilityResponse(pbAvailabilityDataWithConsolidation)
+                  window.udpateDeliveryWindows(
+                    pbAvailabilityDataWithConsolidation
+                  )
+                }
+                if (
+                  apiMode == "simulated" &&
+                  additionalInfo.email !== "consolidated@porterbuddy.com"
+                ) {
+                  setAvailabilityResponse(pbAvailabilityDataWithFlag)
+                  window.udpateDeliveryWindows(pbAvailabilityDataWithFlag)
+                }
+
+                if (apiMode == "real") {
+                  setAvailabilityResponse(pbAvailabilityDataWithFlag)
+                  window.udpateDeliveryWindows(pbAvailabilityDataWithFlag)
                 }
               },
             }}

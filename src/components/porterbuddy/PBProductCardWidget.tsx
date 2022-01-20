@@ -2,11 +2,21 @@ import * as React from "react"
 import { useEffect } from "react"
 import { Helmet } from "react-helmet"
 import { isBrowser } from "./PBScript"
-import { DeliveryWindowType, IPBWidget } from "./types"
+import {
+  AvailabilityResponseType,
+  DeliveryWindowType,
+  IPBWidget,
+} from "./types"
 
 declare global {
   interface Window {
     porterbuddy: any
+    udpateDeliveryWindows: (
+      availabilityResponse:
+        | AvailabilityResponseType
+        | DeliveryWindowType[]
+        | undefined
+    ) => void
     unselectDeliveryWindow: () => void
     setSelectedDeliveryWindow: (
       deliveryWindow: DeliveryWindowType | null | undefined,
