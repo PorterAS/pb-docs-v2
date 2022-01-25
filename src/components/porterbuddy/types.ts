@@ -47,9 +47,9 @@ export type DeliveryWindowType = {
   product: string
   price: PriceType
   displayPrice?: PriceType
-  expiresAt: string
-  token: string
-  consolidated: boolean
+  expiresAt?: string
+  token?: string
+  consolidated?: boolean
 }
 export interface IPBWidget {
   token: string
@@ -79,7 +79,7 @@ export interface IPBWidget {
   onSetCallbacks?: (callbacks: any) => void
 }
 
-export interface IPBCheckoutWidgetType extends IPBWidget {
+export interface IPBCheckoutWidget extends IPBWidget {
   availabilityResponse?: AvailabilityResponseType
   initialSelectedWindow?: DeliveryWindowType
   onSelectDeliveryWindow?: (window: DeliveryWindowType) => void
@@ -88,9 +88,9 @@ export interface IPBCheckoutWidgetType extends IPBWidget {
 }
 
 export interface IPBUnifiedShippingModule {
-  homeDeliveryOptions: IShippingOption[]
-  pickupPointOptions: IShippingOption[]
-  storeOptions: IShippingOption[]
+  homeDeliveryOptions?: IShippingOption[] | undefined
+  pickupPointOptions?: IShippingOption[] | undefined
+  storeOptions?: IShippingOption[] | undefined
   resetContext?: boolean
   text?: object
   now?: string
@@ -118,14 +118,14 @@ export interface IPBUnifiedShippingModule {
   onUnselectedShipping?: () => void
   onFirstLineEntered?: (data: { email: string; postCode: string }) => void
   onRecipientInfoEntered?: (recipientInfo: RecipientInfoType) => void
-  selectionPropertyChangeListeners?: SelectionPropertyChangeListenerType[]
+  selectionPropertyChangeListeners?: SelectionPropertyChangeListenerType[] // Deprecated
   onSetCallbacks?: (callbacks: CheckoutCallbacksType) => void
   padding?: "none" | undefined
 }
 
-interface IShippingOption {
-  id?: string
-  name?: string
+export interface IShippingOption {
+  id: string
+  name: string
   price?: PriceType
   description?: string
   deliveryTime?: DeliveryTimeType
@@ -136,23 +136,27 @@ interface IShippingOption {
   default?: boolean
 }
 
-interface PickupShippingOptionType extends IShippingOption {
+// Obsolete
+export interface IPickupShippingOption extends IShippingOption {
   locations?: ShippingLocationType[]
 }
+// Obsolete
 
-interface ServiceLevelShippingOptionType extends IShippingOption {
+export interface IServiceLevelShippingOption extends IShippingOption {
   levels?: ShippingServiceLevelType[]
 }
-interface PorterbuddyShippingOptionType extends IShippingOption {
-  availabilityResponse: AvailabilityResponseType
+
+// Obsolete
+export interface IPorterbuddyShippingOption extends IShippingOption {
+  availabilityResponse?: AvailabilityResponseType
   discount?: number
 }
 
 type ShippingLocationType = {
-  id?: string
-  name?: string
-  address?: string
-  openingHours?: string
+  id: string
+  name: string
+  address: string
+  openingHours: string
   logoUrl?: string
   description?: string
 }
@@ -162,25 +166,26 @@ type ShippingServiceLevelType = {
   name?: string
   deliveryTime?: DeliveryTimeType
   price?: PriceType
+  description?: string
 }
 
-type DeliveryTimeType = {
-  text?: { format: "text"; line1: string; line2: string }
-  exactDate?: { format: "exactDate"; date: string }
-  estimatedDate?: { format: "estimatedDate"; date: string }
-  rangeOfWeekdays?: {
-    format: "rangeOfWeekdays"
-    minDays: number
-    maxDays: number
-  }
-  rangeOfDays?: { format: "rangeOfDays"; minDays: number; maxDays: number }
-  exactNumberOfWeekdays?: { format: "exactNumberOfWeekdays"; days: number }
-  exactNumberOfDays?: { format: "exactNumberOfDays"; days: number }
-  estimatedNumberOfWeekdays?: {
-    format: "estimatedNumberOfWeekdays"
-    days: number
-  }
-  estimatedNumberOfDays?: { format: "estimatedNumberOfDays"; days: number }
+type LocalDateType = string // "YYYY-MM-DD"
+export type DeliveryTimeType =
+  | { format: "text"; line1: string; line2: string } // e.g. "${line1}, ${line2}"
+  | { format: "exactDate"; date: LocalDateType } // e.g. "om 4 dg, 4. okt" / "I dag, 30. sept" / "I morgen, 1. okt"
+  | { format: "estimatedDate"; date: LocalDateType } // e.g. "ca 4 dg, forventet 4. okt" / "I dag, 30. sept" / "I morgen, forventet 1. okt"
+  | { format: "rangeOfWeekdays"; minDays: number; maxDays: number } // e.g. "1-4 dg, innen 4. okt"
+  | { format: "rangeOfDays"; minDays: number; maxDays: number } // e.g. "1-4 dg, innen 4. okt"
+  | { format: "exactNumberOfWeekdays"; days: number } // e.g. "4 dg, 4. okt"
+  | { format: "exactNumberOfDays"; days: number } // e.g. "4 dg, 4. okt"
+  | { format: "estimatedNumberOfWeekdays"; days: number } // e.g. "ca 4 dg, forventet 4. okt"
+  | { format: "estimatedNumberOfDays"; days: number } // e.g. "ca 4 dg, forventet 4. okt"
+export interface ISelectedPorterbuddyConsolidationOption {
+  deliveryWindow?: DeliveryWindowType
+  consolidatedWindow?: DeliveryWindowType
+  deliveryWindowIndex?: number
+  leaveAtDoorstep?: boolean
+  comment?: string
 }
 
 type SelectedShippingType = {
@@ -191,6 +196,7 @@ type SelectedShippingType = {
     | ShippingLocationType
     | ShippingServiceLevelType
     | SelectedPorterbuddyOptionType
+    | ISelectedPorterbuddyConsolidationOption
   additionalData?: any
 }
 
@@ -205,10 +211,10 @@ type SelectionPropertyChangeListenerType = {
   onChange: (value: any) => void
 }
 
-type RecipientInfoType = {
-  email?: string
-  postCode?: string
-  streetAddress?: string
+export type RecipientInfoType = {
+  email: string
+  postCode: string
+  streetAddress: string
 }
 
 type CheckoutCallbacksType = {

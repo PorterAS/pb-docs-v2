@@ -53,6 +53,8 @@ import { CheckoutIntegrationExample } from "../global/checkout-widget/checkout-i
 import { CheckoutInIframe } from "../global/checkout-widget/checkout-iframe"
 import { CheckoutAnonConsolidation } from "../global/checkout-widget/checkout-anonymous-consolidation"
 import { CheckoutConsolidationCheck } from "../global/checkout-widget/checkout-consolidation-check"
+import { PBUSM } from "../porterbuddy/PBUnifiedShippingModule"
+import { USMOverview } from "../global/usm/usm-overview"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -206,6 +208,7 @@ const DocsLayout = React.memo(({ children }: any) => {
   const shortcodes: any = {
     PBProductCard,
     PBCheckoutWidget,
+    PBUSM,
     ContentCallout,
     ShopifyInstall,
     ProductCardWithRefresh,
@@ -217,6 +220,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     CheckoutInIframe,
     CheckoutAnonConsolidation,
     CheckoutConsolidationCheck,
+    USMOverview,
   }
 
   const iconMap: any = {

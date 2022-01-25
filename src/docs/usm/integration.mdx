@@ -9,16 +9,25 @@ meta_description: "Display multiple shipping options with the Porterbuddy Unifie
 [INSERT USM]
 
 ## Usage
+
 Add the configuration and script tag anywhere in HEAD or BODY
 
 ```html
-<link href="https://widget.porterbuddy.com/v2/porterbuddy-checkout.css" rel="stylesheet" type="text/css"/>
-<script async src="https://widget.porterbuddy.com/v2/porterbuddy-checkout.js"></script>
+<link
+  href="https://widget.porterbuddy.com/v2/porterbuddy-checkout.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<script
+  async
+  src="https://widget.porterbuddy.com/v2/porterbuddy-checkout.js"
+></script>
 ```
 
 Configure the checkout options by defining the global variable "window.porterbuddy" in a script tag. If window.porterbuddy is not defined when the script loads it will delay execution for up to 10 seconds until it finds the configuration.
 
 ## Shipping Options
+
 The shipping options for each category are defined in the respective array property of the configuration object. A shipping option can be a simple shipping option without any further data to be selected by the recipient, a pickup point option that provides one or more pickup addresses, from which the recipient can select one, a shipping option with a dropdown for service levels with individual prices and delivery times, or Porterbuddy shipping with a list of selectable delivery windows.
 
 The shipping option type is set according to these rules:
@@ -32,106 +41,107 @@ The shipping option type is set according to these rules:
 
 ```html
 <script>
-  var hostUrl = window.location.protocol + '//' + window.location.host;
+  var hostUrl = window.location.protocol + "//" + window.location.host
 
   var deliveryWindows = [
     {
-      product: 'delivery',
-      start: '2019-03-14T17:30:00+01:00',
-      end: '2019-03-14T19:30:00+01:00',
-      expiresAt: '2019-03-14T14:30:00+01:00',
+      product: "delivery",
+      start: "2019-03-14T17:30:00+01:00",
+      end: "2019-03-14T19:30:00+01:00",
+      expiresAt: "2019-03-14T14:30:00+01:00",
       price: {
         fractionalDenomination: 14900,
-        currency: 'NOK',
+        currency: "NOK",
       },
     },
     {
-      product: 'delivery',
-      start: '2019-03-14T19:30:00+01:00',
-      end: '2019-03-14T21:30:00+01:00',
-      expiresAt: '2019-03-14T14:30:00+01:00',
+      product: "delivery",
+      start: "2019-03-14T19:30:00+01:00",
+      end: "2019-03-14T21:30:00+01:00",
+      expiresAt: "2019-03-14T14:30:00+01:00",
       price: {
         fractionalDenomination: 14900,
-        currency: 'NOK',
+        currency: "NOK",
       },
     },
     {
-      product: 'delivery',
-      start: '2019-03-14T17:30:00+01:00',
-      end: '2019-03-14T21:30:00+01:00',
-      expiresAt: '2019-03-14T14:30:00+01:00',
+      product: "delivery",
+      start: "2019-03-14T17:30:00+01:00",
+      end: "2019-03-14T21:30:00+01:00",
+      expiresAt: "2019-03-14T14:30:00+01:00",
       price: {
         fractionalDenomination: 13900,
-        currency: 'NOK',
+        currency: "NOK",
       },
     },
     // further delivery windows omitted for readability
-  ];
+  ]
 
   var exampleAvailabilityResponse = {
     deliveryWindows: createDeliveryWindows(),
     destinationResolvedAddress: {
-    streetName: null,
-    streetNumber: null,
-    postalCode: '0278',
-    city: 'Oslo',
-    country: 'Norway',
-    precision: null,
-    location: null,
-    locationTypes: [],
-  },
+      streetName: null,
+      streetNumber: null,
+      postalCode: "0278",
+      city: "Oslo",
+      country: "Norway",
+      precision: null,
+      location: null,
+      locationTypes: [],
+    },
     consolidatedWindow: null,
-  };
+  }
 
   var homeOptions = [
     {
-      id: 'porterbuddy',
-      name: 'Levert hjem',
+      id: "porterbuddy",
+      name: "Levert hjem",
       availabilityResponse: exampleAvailabilityResponse,
       discount: 5000,
       default: true,
     },
     {
-      id: 'postnord',
-      name: 'Levert hjemme',
+      id: "postnord",
+      name: "Levert hjemme",
       price: {
         fractionalDenomination: 9900,
-        currency: 'NOK',
+        currency: "NOK",
       },
-      deliveryTime: { format: 'rangeOfWeekdays', minDays: 2, maxDays: 5 },
-      logoUrl: hostUrl + '/logos/postnord.svg',
+      deliveryTime: { format: "rangeOfWeekdays", minDays: 2, maxDays: 5 },
+      logoUrl: hostUrl + "/logos/postnord.svg",
       additionalData: {
-        product: 'Standard Insured Parcel',
-      }
+        product: "Standard Insured Parcel",
+      },
     },
     {
-      id: 'postenhome',
-      name: 'Posten på døren',
-      logoUrl: hostUrl + '/logos/posten.svg',
+      id: "postenhome",
+      name: "Posten på døren",
+      logoUrl: hostUrl + "/logos/posten.svg",
       levels: [
         {
-          id: 'bedrift',
-          name: 'Posten Bedriftspakke',
-          deliveryTime: { format: 'rangeOfWeekdays', minDays: 1, maxDays: 3 },
+          id: "bedrift",
+          name: "Posten Bedriftspakke",
+          deliveryTime: { format: "rangeOfWeekdays", minDays: 1, maxDays: 3 },
           price: {
             fractionalDenomination: 29900,
-            currency: 'NOK',
+            currency: "NOK",
           },
-          description: 'Direkte til din bedrift med sporing',
+          description: "Direkte til din bedrift med sporing",
         },
         {
-          id: 'express',
-          name: 'Posten Expresspakke',
-          deliveryTime: { format: 'exactNumberOfWeekdays', days: 1 },
+          id: "express",
+          name: "Posten Expresspakke",
+          deliveryTime: { format: "exactNumberOfWeekdays", days: 1 },
           price: {
             fractionalDenomination: 49900,
-            currency: 'NOK',
+            currency: "NOK",
           },
-          description: 'Levering innen kl. 09:00 eller kl. 11:30 neste morgen, mandag til fredag'
-        }
-      ]
-    }
-  ];
+          description:
+            "Levering innen kl. 09:00 eller kl. 11:30 neste morgen, mandag til fredag",
+        },
+      ],
+    },
+  ]
 </script>
 ```
 
@@ -141,38 +151,38 @@ The shipping option type is set according to these rules:
 <script>
   var pickupOptions = [
     {
-      id: 'posten',
-      name: 'Hente på utleveringssted',
+      id: "posten",
+      name: "Hente på utleveringssted",
       price: {
         fractionalDenomination: 5900,
-        currency: 'NOK',
+        currency: "NOK",
       },
-      deliveryTime: { format: 'rangeOfWeekdays', minDays: 1, maxDays: 3 },
+      deliveryTime: { format: "rangeOfWeekdays", minDays: 1, maxDays: 3 },
       locations: [
         {
-          id: 'location_1',
-          name: 'Coop Mega Sjølyst',
-          address: 'Karenslyst Allé 58, 0277 Oslo',
-          openingHours: 'Man - Fre: 08:00 - 22:00, Lør: 08:00 - 20:00',
-          logoUrl: hostUrl + '/logos/posten.svg',
+          id: "location_1",
+          name: "Coop Mega Sjølyst",
+          address: "Karenslyst Allé 58, 0277 Oslo",
+          openingHours: "Man - Fre: 08:00 - 22:00, Lør: 08:00 - 20:00",
+          logoUrl: hostUrl + "/logos/posten.svg",
         },
         {
-          id: 'location_2',
-          name: 'Hoff Post i Butikk',
-          address: 'Hoffsveien 10 E, 0275 Oslo',
-          openingHours: 'Man - Lør: 06:00 - 23:59',
-          logoUrl: hostUrl + '/logos/posten.svg',
+          id: "location_2",
+          name: "Hoff Post i Butikk",
+          address: "Hoffsveien 10 E, 0275 Oslo",
+          openingHours: "Man - Lør: 06:00 - 23:59",
+          logoUrl: hostUrl + "/logos/posten.svg",
         },
         {
-          id: 'location_3',
-          name: 'Elisenberg postkontor',
-          address: 'Balchens Gate 7, 0265 Oslo',
-          openingHours: 'Man - Fre: 09:00 - 18:00, Lør: 10:00 - 15:00',
-          logoUrl: hostUrl + '/logos/postnord.svg',
+          id: "location_3",
+          name: "Elisenberg postkontor",
+          address: "Balchens Gate 7, 0265 Oslo",
+          openingHours: "Man - Fre: 09:00 - 18:00, Lør: 10:00 - 15:00",
+          logoUrl: hostUrl + "/logos/postnord.svg",
         },
       ],
     },
-  ];
+  ]
 </script>
 ```
 
@@ -182,20 +192,20 @@ The shipping option type is set according to these rules:
 <script>
   var storeOptions = [
     {
-      id: 'pickup',
-      name: 'Store pickup',
-      deliveryTime: { format: 'exactNumberOfWeekdays', days: 0 },
+      id: "pickup",
+      name: "Store pickup",
+      deliveryTime: { format: "exactNumberOfWeekdays", days: 0 },
       locations: [
         {
-          id: 'shop',
-          name: 'Butikken på Skøyen',
-          address: 'Karenslyst Allé 16, 0278 Oslo',
-          openingHours: 'Man - Fre: 09:00 - 17:00, Lør: stengt',
+          id: "shop",
+          name: "Butikken på Skøyen",
+          address: "Karenslyst Allé 16, 0278 Oslo",
+          openingHours: "Man - Fre: 09:00 - 17:00, Lør: stengt",
         },
       ],
-      logoUrl: hostUrl + '/logos/webshop-logo.svg',
+      logoUrl: hostUrl + "/logos/webshop-logo.svg",
     },
-  ];
+  ]
 </script>
 ```
 
@@ -207,39 +217,21 @@ Assemble the configuration object to set up the Unified Shipping Module
     homeDeliveryOptions: homeOptions,
     pickupPointOptions: pickupOptions,
     storeOptions: storeOptions,
-    language: 'NO',
-    now: '2019-03-14T12:30:00+01:00',  // only for testing!
+    language: "NO",
     recipientInfo: {
-      email: 'person@porterbuddy.com',
-      postCode: '0186',
-      streetAddress: 'Burgata 1',
+      email: "person@porterbuddy.com",
+      postCode: "0186",
+      streetAddress: "Burgata 1",
     },
     onSelectionChanged: function (type, selectedShipping) {
       // use the selection data
-    }
-    selectionPropertyChangeListeners: [
-      {
-        optionId "porterbuddy",
-        propertyPath: "data.leaveAtDoorstep",
-        onChange: function (value) {
-          // handle change of the leaveAtDoorstep checkbox of the porterbuddy option
-        }
-      },
-      {
-        optionId: "porterbuddy",
-        propertyPath: "data.comment",
-        onChange: function (value) {
-          // handle change of the comment input of the porterbuddy option
-        }
-      }
-    ]
-  };
+    },
+  }
 </script>
 ```
 
 Finally, add a div with id porterbuddy-checkout to the page at the point where the module should be inserted.
 
 ```html
-<div id="porterbuddy-checkout">
-</div>
+<div id="porterbuddy-checkout"></div>
 ```

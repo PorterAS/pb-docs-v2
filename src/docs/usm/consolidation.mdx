@@ -15,9 +15,11 @@ This page demonstrates a basic use case of the unified shipping module. Feel fre
 [INSERT USM]
 
 ## Integration
+
 General integration of the USM to use consolidation is the same as described in the sections about integrating the USM widget of this documentation. However, some specific requirements must be fulfilled in order to offer consolidation in the checkout. The consolidation option becomes available when the integration fulfills these requirements, and the consolidation feature is enabled for the store in Porterbuddy's infrastructure.
 
 ## Requirements
+
 The availability request to Porterbuddy must be made with email, post code and street address in recipient.email, destinationAddress.postalCode and destinationAddress.streetName respectively.
 
 - Using the address form in the module: Either the function `getPbAvailability` or the function `getShippingOptions` must be implemented. These will be passed recipientInfo (as an object), and are expected to return just an AvailabilityResponse (getPbAvailability), or the full set of shipping options (getShippingOptions).
@@ -31,16 +33,21 @@ The availability request to Porterbuddy must be made with email, post code and s
 
   function pickupWindows() {
     // generating pickup windows for the next week starting today, 8-22 each day
-    const pickupWindows = [];
+    const pickupWindows = []
     for (let i = 0; i < 7; i++) {
-      const start = dayjs().add(i, 'day').hour(8).minute(0).second(0).millisecond(0);
-      const end = start.hour(22).minute(0);
+      const start = dayjs()
+        .add(i, "day")
+        .hour(8)
+        .minute(0)
+        .second(0)
+        .millisecond(0)
+      const end = start.hour(22).minute(0)
       pickupWindows.push({
         start: start.toISOString(),
-        end: end.toISOString()
-      });
+        end: end.toISOString(),
+      })
     }
-    return pickupWindows;
+    return pickupWindows
   }
 
   async function fetchAvailability({ email, postCode, streetAddress }) {
@@ -51,17 +58,17 @@ The availability request to Porterbuddy must be made with email, post code and s
         streetNumber: "3",
         postalCode: "0165",
         city: "Oslo",
-        country: "Norway"
+        country: "Norway",
       },
       destinationAddress: {
         streetName: streetAddress,
         streetNumber: null,
         postalCode: postCode,
         city: null,
-        country: "Norway"
+        country: "Norway",
       },
       recipient: {
-        email
+        email,
       },
       products: ["delivery"],
       parcels: [
@@ -70,64 +77,69 @@ The availability request to Porterbuddy must be made with email, post code and s
           heightCm: 40,
           depthCm: 1,
           weightGrams: 2000,
-          description: "Awesome product"
-        }
-      ]
-    };
+          description: "Awesome product",
+        },
+      ],
+    }
     const headers = {
       "content-type": "application/json",
-      "accept": "application/json",
+      accept: "application/json",
       "x-public-token": "...", // your public token
       // Public token must be sed on frontend side, for backend integration use your api key and header
       // "x-api-key" as specified in the API documentation
     }
     // use test or production URL depending on environment
-    const response = await fetch('https://api.porterbuddy-test.com/availability', {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(availabilityRequest)
-    });
+    const response = await fetch(
+      "https://api.porterbuddy-test.com/availability",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(availabilityRequest),
+      }
+    )
     if (response.ok) {
-      return response.json();
+      return response.json()
     } else {
-      throw await response.text();
+      throw await response.text()
     }
   }
 
   async function fetchShippingOptions({ email, postCode, streetAddress }) {
-    const availabilityResponse = await fetchAvailability({ email, postCode, streetAddress });
+    const availabilityResponse = await fetchAvailability({
+      email,
+      postCode,
+      streetAddress,
+    })
     return {
       homeDeliveryOptions: [
         {
-          id: 'porterbuddy',
-          name: 'Levert hjem',
+          id: "porterbuddy",
+          name: "Levert hjem",
           availabilityResponse: availabilityResponse,
-          description: 'Kontaktløst, velg leveringsvindu'
+          description: "Kontaktløst, velg leveringsvindu",
         },
         {
-          id: 'postnord',
-          name: 'Levert hjemme',
+          id: "postnord",
+          name: "Levert hjemme",
           price: {
             fractionalDenomination: 9900,
-            currency: 'NOK',
+            currency: "NOK",
           },
-          deliveryTime: { format: 'rangeOfWeekdays', minDays: 2, maxDays: 5 },
-          logoUrl: hostUrl + '/logos/postnord.svg',
-          description: 'Pakken leveres hjem til deg.',
-        }
+          deliveryTime: { format: "rangeOfWeekdays", minDays: 2, maxDays: 5 },
+          logoUrl: hostUrl + "/logos/postnord.svg",
+          description: "Pakken leveres hjem til deg.",
+        },
       ],
       pickupPointOptions: pickupOptions, // same as in other variants
-      storeOptions: storeOptions
-    };
+      storeOptions: storeOptions,
+    }
   }
 
   window.porterbuddy = {
     getShippingOptions: fetchShippingOptions,
-    // other settings as normal:
-    language: 'NO',
     onSelectionChanged: function (category, selected) {
       // If consolidation is selected, the selection will have id 'porterbuddy-consolidation'
-    }
+    },
   }
 </script>
 ```

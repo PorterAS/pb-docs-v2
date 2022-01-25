@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useEffect } from "react"
-import { isBrowser, PBScript } from "./PBScript"
+import { isBrowser, PBScriptUSM } from "./PBScript"
 import { IPBUnifiedShippingModule } from "./types"
 
 type PBUnifiedShippingModulePropType = {
@@ -18,7 +18,7 @@ export const PBUSM = ({
   }, [])
   return (
     <div {...rest}>
-      <PBScript />
+      <PBScriptUSM />
       <div>
         <div id="porterbuddy-checkout"></div>
       </div>

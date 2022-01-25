@@ -6,20 +6,21 @@ author: "William Imoh"
 meta_description: "Configure callback functions in the Porterbuddy Unified Shipping Module"
 ---
 
-The Porterbuddy Unified Shipping Module provides callback function references to trigger actions in the widget from external sources. 
-To access the callback function references, a function is defined for the configuration option `onSetCallbacks`. This function gets called by the widget after initialization, the argument passed is an object containing references to the callback functions. 
+The Porterbuddy Unified Shipping Module provides callback function references to trigger actions in the widget from external sources.
+To access the callback function references, a function is defined for the configuration option `onSetCallbacks`. This function gets called by the widget after initialization, the argument passed is an object containing references to the callback functions.
 These references can be stored and used to trigger actions in the widget from external sources.
 
-| Function                                             | Description                                                                                                                                                                                                                                                                                 |   |
-|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| forceRefresh()                                       | Refreshes the unified shipping module with the currently specified values from the window.porterbuddy variable. Rerendering the module without refreshing the page will not reset its state, so if you actually need to clear the module state without refreshing, use this callback.       |   |
-| setRecipientInfo(recipientInfo: RecipientInfo)       | Sets the recipient info in the unified shipping module to the specified value.                                                                                                                                                                                                              |   |
-| refreshShippingOptions()                             | Refreshes the shipping options with the values currently specified in window.porterbuddy. Only the 3 arrays specifying the shipping options are read from the configuration object, all other properties will remain unchanged.                                                             |   |
-| setRecipientInfoLocked(recipientInfoLocked: boolean) | Locks the address form and prevents further editing if recipientInfoLocked is true. Call with recipientInfoLocked false to unlock the form again. Should be used in conjunction with setRecipientInfo or onRecipientInfo. If the form is locked with invalid values behaviour is undefined. |   |
+| Function                                             | Description                                                                                                                                                                                                                                                                                 |     |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| forceRefresh()                                       | Refreshes the unified shipping module with the currently specified values from the window.porterbuddy variable. Rerendering the module without refreshing the page will not reset its state, so if you actually need to clear the module state without refreshing, use this callback.       |     |
+| setRecipientInfo(recipientInfo: RecipientInfo)       | Sets the recipient info in the unified shipping module to the specified value.                                                                                                                                                                                                              |     |
+| refreshShippingOptions()                             | Refreshes the shipping options with the values currently specified in window.porterbuddy. Only the 3 arrays specifying the shipping options are read from the configuration object, all other properties will remain unchanged.                                                             |     |
+| setRecipientInfoLocked(recipientInfoLocked: boolean) | Locks the address form and prevents further editing if recipientInfoLocked is true. Call with recipientInfoLocked false to unlock the form again. Should be used in conjunction with setRecipientInfo or onRecipientInfo. If the form is locked with invalid values behaviour is undefined. |     |
 
 [INSERT USM]
 
 ## Configuration
+
 In this example, the refresh function is exposed as window.refresh, in consequence, calling window.refresh within the page will refresh the whole checkout.
 
 ```html
@@ -28,23 +29,22 @@ In this example, the refresh function is exposed as window.refresh, in consequen
     homeDeliveryOptions: [],
     pickupPointOptions: [],
     storeOptions: [],
-    language: 'NO',
-    now: dayjs().toISOString(), //todays date, can be used new Date() from js or external library
+    language: "NO",
     onRecipientInfoEntered: function ({ email, postCode, streetAddress }) {
-      document.getElementById('emailData').value = email;
-      document.getElementById('postCodeData').value = postCode;
-      document.getElementById('streetAddressData').value = streetAddress;
-      window.porterbuddy.homeDeliveryOptions = homeOptions;
-      window.porterbuddy.storeOptions = storeOptions;
-      window.porterbuddy.pickupPointOptions = pickupOptions;
-      window.refreshShippingOptions();
+      document.getElementById("emailData").value = email
+      document.getElementById("postCodeData").value = postCode
+      document.getElementById("streetAddressData").value = streetAddress
+      window.porterbuddy.homeDeliveryOptions = homeOptions
+      window.porterbuddy.storeOptions = storeOptions
+      window.porterbuddy.pickupPointOptions = pickupOptions
+      window.refreshShippingOptions()
     },
     onSetCallbacks: function (callbacks) {
-      window.refresh = callbacks.forceRefresh;
-      window.setRecipientInfo = callbacks.setRecipientInfo;
-      window.setRecipientInfoLocked = callbacks.setRecipientInfoLocked;
-      window.refreshShippingOptions = callbacks.refreshShippingOptions;
-    }
+      window.refresh = callbacks.forceRefresh
+      window.setRecipientInfo = callbacks.setRecipientInfo
+      window.setRecipientInfoLocked = callbacks.setRecipientInfoLocked
+      window.refreshShippingOptions = callbacks.refreshShippingOptions
+    },
   }
 </script>
 ```
