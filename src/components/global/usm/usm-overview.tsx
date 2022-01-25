@@ -48,6 +48,7 @@ export const USMOverview = () => {
             },
             onSelectionChanged: function (type, selectedShipping) {
               // use the selection data
+              console.log(selectedShipping, type)
             },
           }}
         />

@@ -1,4 +1,7 @@
 import { createDeliveryWindows } from "./CreateDeliveryWindows"
+import postenLogo from "../../images/usm/posten.svg"
+import postnordLogo from "../../images/usm/postnord.svg"
+import webshopLogo from "../../images/usm/webshop-logo.svg"
 import {
   IPickupShippingOption,
   IPorterbuddyShippingOption,
@@ -55,7 +58,7 @@ export const homeOptions: (
       minDays: 2,
       maxDays: 5,
     },
-    logoUrl: "/logos/postnord.svg",
+    logoUrl: postnordLogo,
     additionalData: {
       product: "Standard Insured Parcel",
     },
@@ -63,7 +66,7 @@ export const homeOptions: (
   {
     id: "postenhome",
     name: "Posten på døren",
-    logoUrl: "/logos/posten.svg",
+    logoUrl: postenLogo,
     levels: [
       {
         id: "bedrift",
@@ -105,21 +108,21 @@ export const pickupOptions: IPickupShippingOption[] = [
         name: "Coop Mega Sjølyst",
         address: "Karenslyst Allé 58, 0277 Oslo",
         openingHours: "Man - Fre: 08:00 - 22:00, Lør: 08:00 - 20:00",
-        logoUrl: "/logos/posten.svg",
+        logoUrl: postenLogo,
       },
       {
         id: "location_2",
         name: "Hoff Post i Butikk",
         address: "Hoffsveien 10 E, 0275 Oslo",
         openingHours: "Man - Lør: 06:00 - 23:59",
-        logoUrl: "/logos/posten.svg",
+        logoUrl: postenLogo,
       },
       {
         id: "location_3",
         name: "Elisenberg postkontor",
         address: "Balchens Gate 7, 0265 Oslo",
         openingHours: "Man - Fre: 09:00 - 18:00, Lør: 10:00 - 15:00",
-        logoUrl: "/logos/postnord.svg",
+        logoUrl: postnordLogo,
       },
     ],
   },
@@ -138,6 +141,6 @@ export const storeOptions: IPickupShippingOption[] = [
         openingHours: "Man - Fre: 09:00 - 17:00, Lør: stengt",
       },
     ],
-    logoUrl: "/logos/webshop-logo.svg",
+    logoUrl: webshopLogo,
   },
 ]
