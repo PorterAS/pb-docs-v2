@@ -55,6 +55,8 @@ import { CheckoutAnonConsolidation } from "../global/checkout-widget/checkout-an
 import { CheckoutConsolidationCheck } from "../global/checkout-widget/checkout-consolidation-check"
 import { PBUSM } from "../porterbuddy/PBUnifiedShippingModule"
 import { USMOverview } from "../global/usm/usm-overview"
+import { USMIntegration } from "../global/usm/usm-integration"
+import { USMCallbacks } from "../global/usm/usm-callback-functions"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -221,6 +223,8 @@ const DocsLayout = React.memo(({ children }: any) => {
     CheckoutAnonConsolidation,
     CheckoutConsolidationCheck,
     USMOverview,
+    USMIntegration,
+    USMCallbacks,
   }
 
   const iconMap: any = {

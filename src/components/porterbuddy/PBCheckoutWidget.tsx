@@ -1,10 +1,10 @@
 import * as React from "react"
 import { useEffect } from "react"
 import { isBrowser, PBScript } from "./PBScript"
-import { IPBCheckoutWidgetType } from "./types"
+import { IPBCheckoutWidget } from "./types"
 
 type PBCheckoutWidgetPropType = {
-  options: IPBCheckoutWidgetType
+  options: IPBCheckoutWidget
 }
 
 export const PBCheckoutWidget = ({

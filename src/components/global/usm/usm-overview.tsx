@@ -46,10 +46,6 @@ export const USMOverview = () => {
               postCode: "0678",
               streetAddress: "Høyenhallveien 25",
             },
-            onSelectionChanged: function (type, selectedShipping) {
-              // use the selection data
-              console.log(selectedShipping, type)
-            },
           }}
         />
       </Box>
