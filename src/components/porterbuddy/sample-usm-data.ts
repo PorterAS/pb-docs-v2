@@ -3,12 +3,13 @@ import postenLogo from "../../images/usm/posten.svg"
 import postnordLogo from "../../images/usm/postnord.svg"
 import webshopLogo from "../../images/usm/webshop-logo.svg"
 import {
+  AvailabilityResponseType,
   IPickupShippingOption,
   IPorterbuddyShippingOption,
   IServiceLevelShippingOption,
 } from "./types"
 
-export const pbAvailabilityDataUSM = {
+export const pbAvailabilityDataUSM: AvailabilityResponseType = {
   originResolvedAddress: {
     streetName: "Haraldrudveien",
     streetNumber: "11",

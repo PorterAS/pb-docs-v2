@@ -1,5 +1,5 @@
 declare global {
-  interface Window {
+  interface Window extends ICheckoutCallbacks {
     porterbuddy: any
     udpateDeliveryWindows: (
       availabilityResponse:
@@ -119,7 +119,7 @@ export interface IPBUnifiedShippingModule {
   onFirstLineEntered?: (data: { email: string; postCode: string }) => void
   onRecipientInfoEntered?: (recipientInfo: RecipientInfoType) => void
   selectionPropertyChangeListeners?: SelectionPropertyChangeListenerType[] // Deprecated
-  onSetCallbacks?: (callbacks: CheckoutCallbacksType) => void
+  onSetCallbacks?: (callbacks: ICheckoutCallbacks) => void
   padding?: "none" | undefined
 }
 
@@ -144,6 +144,7 @@ export interface IPickupShippingOption extends IShippingOption {
 
 export interface IServiceLevelShippingOption extends IShippingOption {
   levels?: ShippingServiceLevelType[]
+  availabilityResponse?: any
 }
 
 // Obsolete
@@ -212,14 +213,14 @@ type SelectionPropertyChangeListenerType = {
 }
 
 export type RecipientInfoType = {
-  email: string
+  email?: string
   postCode: string
   streetAddress: string
 }
 
-type CheckoutCallbacksType = {
-  forceRefresh?: () => Promise<void>
-  setRecipientInfo?: (recipientInfo: RecipientInfoType) => void
-  refreshShippingOptions?: () => void
-  setRecipientInfoLocked?: (recipientInfoLocked: boolean) => void
+interface ICheckoutCallbacks {
+  forceRefresh: () => Promise<void>
+  setRecipientInfo: (recipientInfo: RecipientInfoType) => void
+  refreshShippingOptions: () => void
+  setRecipientInfoLocked: (recipientInfoLocked: boolean) => void
 }

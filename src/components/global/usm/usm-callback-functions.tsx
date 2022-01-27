@@ -1,32 +1,89 @@
 import { Box, SimpleGrid, Text, Button, Input } from "@chakra-ui/react"
 import React, { useState } from "react"
+import { isBrowser } from "../../porterbuddy/PBScript"
 import { PBUSM } from "../../porterbuddy/PBUnifiedShippingModule"
 import {
-  homeOptions,
-  pickupOptions,
-  storeOptions,
+  homeOptions as sampleHomeOptions,
+  pickupOptions as samplePickupOptions,
+  storeOptions as sampleStoreOptions,
 } from "../../porterbuddy/sample-usm-data"
+import {
+  IPorterbuddyShippingOption,
+  IServiceLevelShippingOption,
+  RecipientInfoType,
+} from "../../porterbuddy/types"
 
 export const USMCallbacks = () => {
   const [email, setEmail] = useState<string | undefined>("")
-  const [postCode, setPostCode] = useState<string | undefined>("")
-  const [streetAddress, setStreetAdddress] = useState<string | undefined>("")
+  const [postCode, setPostCode] = useState<string>("")
+  const [streetAddress, setStreetAdddress] = useState<string>("")
+  const [recipientInfoLocked, setRecipientInfoLocked] = useState<boolean>(false)
+
+  // Recipient info form handling
+  const [recipientInfoFormEmail, setRecipientInfoFormEmail] = useState<
+    string | undefined
+  >("")
+  const [recipientInfoFormPostCode, setRecipientInfoFormPostCode] =
+    useState<string>("")
+  const [recipientInfoFormAddress, setRecipientInfoFormAddress] =
+    useState<string>("")
+
+  function modifyHomeOptions({
+    postCode,
+    streetAddress,
+  }: RecipientInfoType): (
+    | IPorterbuddyShippingOption
+    | IServiceLevelShippingOption
+  )[] {
+    let response = sampleHomeOptions
+    response[0].availabilityResponse.destinationResolvedAddress.postalCode =
+      postCode
+    response[0].availabilityResponse.destinationResolvedAddress.streetName =
+      streetAddress.split(" ")[0]
+    response[0].availabilityResponse.destinationResolvedAddress.streetNumber =
+      streetAddress.split(" ")[1]
+    return response
+  }
+
+  function setRecipientInfo() {
+    if (isBrowser()) {
+      window.setRecipientInfo({
+        email: recipientInfoFormEmail,
+        postCode: recipientInfoFormPostCode,
+        streetAddress: recipientInfoFormAddress,
+      })
+    }
+  }
+
+  function forceRefresh() {
+    if (isBrowser()) {
+      window.forceRefresh()
+    }
+  }
+  function refreshShippingOptions() {
+    if (isBrowser()) {
+      window.refreshShippingOptions()
+    }
+  }
+  function toggleRecipientInfoLocked() {
+    recipientInfoLocked == true
+      ? setRecipientInfoLocked(false)
+      : setRecipientInfoLocked(true)
+    if (isBrowser()) {
+      window.setRecipientInfoLocked(recipientInfoLocked)
+    }
+  }
+
   return (
     <Box>
       <SimpleGrid columns={[1, 2, 2]} spacing={5}>
         <Box>
           <PBUSM
             options={{
-              homeDeliveryOptions: homeOptions,
-              pickupPointOptions: pickupOptions,
-              storeOptions: storeOptions,
+              homeDeliveryOptions: [],
+              pickupPointOptions: [],
+              storeOptions: [],
               language: "NO",
-              // now: "2022-01-26T12:30:00+01:00", // only for testing!
-              recipientInfo: {
-                email: "person@porterbuddy.com",
-                postCode: "0678",
-                streetAddress: "Høyenhallveien 25",
-              },
               onRecipientInfoEntered: function ({
                 email,
                 postCode,
@@ -35,6 +92,25 @@ export const USMCallbacks = () => {
                 setEmail(email)
                 setPostCode(postCode)
                 setStreetAdddress(streetAddress)
+                if (isBrowser()) {
+                  window.porterbuddy.homeDeliveryOptions = modifyHomeOptions({
+                    postCode,
+                    streetAddress,
+                  })
+                  window.porterbuddy.storeOptions = sampleStoreOptions
+                  window.porterbuddy.pickupPointOptions = samplePickupOptions
+                }
+                window.refreshShippingOptions()
+              },
+              onSetCallbacks: function (callbacks) {
+                if (isBrowser()) {
+                  window.refreshShippingOptions =
+                    callbacks.refreshShippingOptions
+                  window.forceRefresh = callbacks.forceRefresh
+                  window.setRecipientInfo = callbacks.setRecipientInfo
+                  window.setRecipientInfoLocked =
+                    callbacks.setRecipientInfoLocked
+                }
               },
             }}
           />
@@ -58,22 +134,60 @@ export const USMCallbacks = () => {
           </Box>
           <Box>
             <Text fontWeight="bold">Callback triggers</Text>
-            <Button colorScheme="purple" size="sm" mb="3">
+            <Button
+              colorScheme="purple"
+              size="sm"
+              mb="3"
+              onClick={forceRefresh}
+            >
               Force refresh
             </Button>
-            <Input type="text" placeholder="Email address" mb="3" />
-            <Input type="text" placeholder="Postcode" mb="3" />
-            <Input type="text" placeholder="Street address" mb="3" />
-            <Button colorScheme="purple" size="sm" mb="3" isFullWidth>
+            <Input
+              type="text"
+              placeholder="Email address"
+              mb="3"
+              value={recipientInfoFormEmail}
+              onChange={e => setRecipientInfoFormEmail(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Postcode"
+              mb="3"
+              value={recipientInfoFormPostCode}
+              onChange={e => setRecipientInfoFormPostCode(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Street address"
+              mb="3"
+              value={recipientInfoFormAddress}
+              onChange={e => setRecipientInfoFormAddress(e.target.value)}
+            />
+            <Button
+              colorScheme="purple"
+              size="sm"
+              mb="3"
+              isFullWidth
+              onClick={setRecipientInfo}
+            >
               Set recipient info
             </Button>
             <Box>
-              <Button colorScheme="purple" size="sm" mb="3">
+              <Button
+                colorScheme="purple"
+                size="sm"
+                mb="3"
+                onClick={refreshShippingOptions}
+              >
                 Refresh shipping options
               </Button>
             </Box>
             <Box>
-              <Button colorScheme="purple" size="sm">
+              <Button
+                colorScheme="purple"
+                size="sm"
+                onClick={toggleRecipientInfoLocked}
+              >
                 Toggle recipientInfoLocked
               </Button>
             </Box>
