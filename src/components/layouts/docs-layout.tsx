@@ -57,6 +57,8 @@ import { PBUSM } from "../porterbuddy/PBUnifiedShippingModule"
 import { USMOverview } from "../global/usm/usm-overview"
 import { USMIntegration } from "../global/usm/usm-integration"
 import { USMCallbacks } from "../global/usm/usm-callback-functions"
+import { USMConsolidation } from "../global/usm/usm-consolidation"
+import { USMPeriodicUpdate } from "../global/usm/usm-periodic-update"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -225,6 +227,8 @@ const DocsLayout = React.memo(({ children }: any) => {
     USMOverview,
     USMIntegration,
     USMCallbacks,
+    USMConsolidation,
+    USMPeriodicUpdate,
   }
 
   const iconMap: any = {

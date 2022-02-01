@@ -149,7 +149,7 @@ export interface IServiceLevelShippingOption extends IShippingOption {
 
 // Obsolete
 export interface IPorterbuddyShippingOption extends IShippingOption {
-  availabilityResponse?: AvailabilityResponseType
+  availabilityResponse: AvailabilityResponseType
   discount?: number
 }
 

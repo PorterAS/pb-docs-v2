@@ -36,6 +36,7 @@ export const pbAvailabilityDataUSM: AvailabilityResponseType = {
   deliveryWindows: createDeliveryWindows(),
 }
 
+// todo fix type
 export const homeOptions: (
   | IPorterbuddyShippingOption
   | IServiceLevelShippingOption
