@@ -11,14 +11,14 @@ import {
   Text,
 } from "@chakra-ui/react"
 // @ts-ignore
-import PorterbuddyLogo from "../../images/porterbuddy-logo.png"
-import { Container } from "./container"
+import PorterbuddyLogo from "../../images/developerbuddy-logo.svg"
+import { DocsContainer } from "./container"
 import { MenuDrawer } from "./menu-drawer"
 
 const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
   return (
-    <Box as="header" backgroundColor="#661AFF" py={2} {...rest}>
-      <Container>
+    <Box as="header" backgroundColor="white" py={2} px={"1%"} {...rest} borderBottomColor={"#F7F7F7"} borderBottomWidth="1px">
+      <DocsContainer>
         <Flex
           alignItems={"center"}
           width={"100%"}
@@ -34,8 +34,7 @@ const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
                 }}
               >
                 <HStack alignItems={"center"}>
-                  <Image src={PorterbuddyLogo} my={"auto"} width={"50px"} />
-                  <Text>Developers</Text>
+                  <Image src={PorterbuddyLogo} my={"auto"} width={"200px"} />
                   <Badge ml="2">beta</Badge>
                 </HStack>
               </Link>
@@ -65,7 +64,7 @@ const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
           </Box>
           <MenuDrawer>{navComponent}</MenuDrawer>
         </Flex>
-      </Container>
+      </DocsContainer>
     </Box>
   )
 }

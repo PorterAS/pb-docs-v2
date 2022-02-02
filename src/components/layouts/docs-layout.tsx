@@ -38,7 +38,7 @@ import {
 import Logo from "../../images/porterbuddy-logo.png"
 import Header from "./header"
 import "./layout.css"
-import { Container } from "./container"
+import { Container, DocsContainer } from "./container"
 import { GrCatalog, GrIntegration } from "react-icons/gr"
 import { GiClothJar } from "react-icons/gi"
 import { Copyright, SocialMediaLinks } from "./footer"
@@ -108,7 +108,7 @@ const SidebarAccordion = ({ route, iconMap, pageURL }: SidebarType) => {
         <AccordionButton
           px={0}
           _hover={{
-            backgroundColor: "white",
+            backgroundColor: "inherit",
           }}
           justifyContent={"space-between"}
         >
@@ -178,7 +178,7 @@ const SidebarItem = ({ route, iconMap, pageURL }: SidebarType) => {
             <Box
               pl={6}
               fontSize={"14px"}
-              py={2}
+              // py={2}
               fontWeight={"500"}
               transition={"0.5s"}
               color={
@@ -275,14 +275,14 @@ const DocsLayout = React.memo(({ children }: any) => {
   const SidebarContent = React.memo((props: any) => (
     <Box
       as="nav"
-      pb={[0, 10, 10]}
+      pb={[0, 0, 0]}
       mt={[20, 0, 0]}
       overflowX="hidden"
       overflowY="auto"
-      bg={useColorModeValue("white", "gray.800")}
       w={[null, 60, 60]}
       pos={["inherit", "fixed", "fixed"]}
       height={"calc(100vh - 8.125rem)"}
+      minH= {"100vh"}
       {...props}
     >
       <Flex
@@ -327,14 +327,8 @@ const DocsLayout = React.memo(({ children }: any) => {
           navComponent={<SidebarContent />}
         />
 
-        <Box mt={"5em"}>
-          <Container>
-            {/*<Box display={["none", "block", "block"]}>*/}
-            {/*  <MenuDrawer>*/}
-            {/*    <SidebarContent w="full" borderRight="none" />*/}
-            {/*  </MenuDrawer>*/}
-            {/*</Box>*/}
-
+        <Box>
+          <DocsContainer>
             <Box as="section" pos={"relative"}>
               <Grid
                 templateRows="repeat(1, 1fr)"
@@ -345,13 +339,13 @@ const DocsLayout = React.memo(({ children }: any) => {
                 ]}
                 gap={2}
               >
-                <GridItem colSpan={1} display={["none", "block", "block"]}>
+                <GridItem colSpan={1} display={["none", "block", "block"]} bgColor="#F9F6FF" pl={"10%"} pt={"5em"} minH= {"100vh"}>
                   <Box py={5}>
                     <SidebarContent />
                   </Box>
                 </GridItem>
 
-                <GridItem colSpan={4}>
+                <GridItem colSpan={4}  pt={"5em"}>
                   <Box
                     as={"main"}
                     py={[2, 3, 3]}
@@ -395,7 +389,7 @@ const DocsLayout = React.memo(({ children }: any) => {
                 </GridItem>
               </Grid>
             </Box>
-          </Container>
+          </DocsContainer>
         </Box>
 
         <Box display={["block", "none", "none"]}>

@@ -15,6 +15,7 @@ import {
 // @ts-ignore
 import CoWorking from "../images/co-working.jpeg"
 import { InfoBanner } from "../components/global/InfoBanner"
+import { ContentCallout } from "../components/global/ContentCallout"
 
 export const query = graphql`
   query {
@@ -53,12 +54,12 @@ const IndexPage = ({}: any) => {
           efficient logistics experience with Porterbuddy
         </Text>
       </Box>
-      <InfoBanner title={"Porterbuddy Samlevert v1"}>
+      <ContentCallout title={"Porterbuddy Samlevert v1"} type="info">
         The all new Porterbuddy Samlevert product launch. Learn to upgrade your
         existing Porterbuddy integration to use Samlevert. Samlevert lets your
         customers purchase items from multiple stores and receive all the orders
         within the same delivery window.
-      </InfoBanner>
+      </ContentCallout>
 
       <SimpleGrid columns={[1, 3, 3]} spacing="10" my={"10%"}>
         <FeatureCard

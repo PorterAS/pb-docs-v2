@@ -8,15 +8,38 @@ type ContentCalloutPropType = {
   children: React.ReactNode
   bannerLink?: string | "#"
   canClose?: boolean
-  bgColor?: string
+  type?: "error" | "warning" | "info"
 }
 export const ContentCallout = ({
   title,
   children,
   canClose = false,
-  bgColor = "#661AFF",
+  type = "info",
 }: ContentCalloutPropType) => {
   const [closeBanner, setCloseBanner] = useState(false)
+
+  let bgColor
+  let emojiIcon
+
+  switch (type) {
+    case "error":
+      bgColor = "red"
+      emojiIcon = "🚨 "
+      break
+    case "warning":
+      bgColor = "main"
+      emojiIcon = "⚠️ "
+      break
+    case "info":
+      bgColor = "secondary"
+      emojiIcon = "💡 "
+      break
+    default:
+      bgColor = "secondary"
+      emojiIcon = "💡 "
+  }
+  console.log(bgColor, emojiIcon)
+
   return (
     <>
       {!closeBanner && (
@@ -24,22 +47,24 @@ export const ContentCallout = ({
           <Box
             p={3}
             minH={"10%"}
-            bgColor={bgColor}
+            bgColor={"#F9F6FF"}
             borderRadius={5}
-            color={"white"}
+            color={"#00261D"}
             my={"2%"}
-            boxShadow={"2px 2px 10px 1px gray"}
+            borderColor={"#661AFF"}
+            borderWidth={2}
           >
             <Flex justifyContent={"space-between"} width={"100%"}>
               <Box>
-                <Text fontSize={"lg"} fontWeight={"600"}>
+                <Text fontSize={"lg"} fontWeight={"600"} color="#661AFF">
+                  {emojiIcon}
                   {title}
                 </Text>
                 <Text>{children}</Text>
               </Box>
               {canClose && (
                 <Box onClick={() => setCloseBanner(true)}>
-                  <FaTimes fontSize={"20px"} />
+                  <FaTimes fontSize={"22px"} />
                 </Box>
               )}
             </Flex>
