@@ -6,11 +6,12 @@ import {
   pickupOptions,
   storeOptions,
 } from "../../porterbuddy/sample-usm-data"
+import { IPickupShippingOption } from "../../porterbuddy/types"
 
-function modifyPickupOption(): IPickupShippingOption[]{
-  let response = pickupOptions;
+function modifyPickupOption(): IPickupShippingOption[] {
+  let response = pickupOptions
   response[0].updateInterval = 60
-  return response;
+  return response
 }
 
 export const USMPeriodicUpdate = () => {

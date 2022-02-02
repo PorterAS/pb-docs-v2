@@ -59,6 +59,7 @@ import { USMIntegration } from "../global/usm/usm-integration"
 import { USMCallbacks } from "../global/usm/usm-callback-functions"
 import { USMConsolidation } from "../global/usm/usm-consolidation"
 import { USMPeriodicUpdate } from "../global/usm/usm-periodic-update"
+import { USMIframe } from "../global/usm/usm-iframe"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -229,6 +230,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     USMCallbacks,
     USMConsolidation,
     USMPeriodicUpdate,
+    USMIframe,
   }
 
   const iconMap: any = {
