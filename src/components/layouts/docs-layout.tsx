@@ -60,6 +60,7 @@ import { USMCallbacks } from "../global/usm/usm-callback-functions"
 import { USMConsolidation } from "../global/usm/usm-consolidation"
 import { USMPeriodicUpdate } from "../global/usm/usm-periodic-update"
 import { USMIframe } from "../global/usm/usm-iframe"
+import { USMHTMLDescription } from "../global/usm/usm-html-description-text"
 
 interface NavItemType extends BoxProps {
   icon: React.ReactNode | any | undefined
@@ -210,7 +211,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     setPageURL(typeof window !== "undefined" ? window.location.href : "")
   }, [])
 
-  const shortcodes: any = {
+  const shortcodes: React.ReactNode = {
     PBProductCard,
     PBCheckoutWidget,
     PBUSM,
@@ -231,6 +232,7 @@ const DocsLayout = React.memo(({ children }: any) => {
     USMConsolidation,
     USMPeriodicUpdate,
     USMIframe,
+    USMHTMLDescription,
   }
 
   const iconMap: any = {
