@@ -6,8 +6,6 @@ author: "William Imoh"
 meta_description: "Learn all you need to integrate your systems with Porterbuddy"
 ---
 
-## Overview
-
 This page covers a summary of integrating with Porterbuddy and where to find relevant documentation on each process.
 In a nutshell, technology-wise, Porterbuddy enables your business to deliver parcels quickly using the following process.
 

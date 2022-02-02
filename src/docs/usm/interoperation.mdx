@@ -1,5 +1,5 @@
 ---
-title: "Interoperability between Product Card Widget and Unified Shipping Module"
+title: "Interoperability between the Product Card Widget and the Unified Shipping Module"
 meta_title: "Porterbuddy Unified Shipping Module - Interoperability"
 publishBy: "22-12-2021"
 author: "William Imoh"
@@ -8,21 +8,19 @@ meta_description: "Interoperability between the Porterbuddy Product Card Widget 
 
 A webshop embedding both the product card widget as well as the Unified Shipping Module can benefit from interoperation between the two widgets. The product card widget can store the postcode entered in a cookie. The Unified Shipping Module can use this cookie to save the user from having to enter the postcode again.
 
-## Demo
-[INSERT USM]
+## PRODUCT CARD WIDGET
 
-## Configuration
-### PRODUCT CARD WIDGET
 The product card widget stores the entered postcode when the configuration option `allowStorage` is set to `true`. As this is the default value for this option, completely leaving out this option will also work.
 
 ## UNIFIED SHIPPING MODULE
-The unified shipping module reads/writes the postal code (and other form values) from localStorage when the configuration option "allowStorage" is set to true. As this is the default value for this option, completely leaving out this option will also work.
+
+The unified shipping module reads/writes the postal code (and other form values) from `localStorage` when the configuration option "allowStorage" is set to true. As this is the default value for this option, completely leaving out this option will also work.
 
 ```html
 <script>
   window.porterbuddy = {
     // other fields omitted
-    language: 'NO',
+    language: "NO",
     allowStorage: true,
   }
 </script>
