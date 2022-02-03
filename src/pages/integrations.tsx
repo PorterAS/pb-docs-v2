@@ -3,7 +3,6 @@ import { Box, Center, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { Link } from "gatsby"
-// @ts-ignore
 import ShopifyLogo from "../images/shopify-logo.png"
 import WooCommerceLogo from "../images/woocommerce-logo.png"
 import MagentoLogo from "../images/magento-logo.png"
@@ -41,15 +40,21 @@ type EcomIntegrationCardType = {
   logo?: string
   cardColor?: string
 }
-const EcomIntegrationCard = ({
+export const EcomIntegrationCard = ({
   title,
   link,
   logo,
-  cardColor = "purple.100",
+  cardColor = "#ffffff",
 }: EcomIntegrationCardType) => {
   return (
     <Link to={link}>
-      <Center borderRadius={7} p={[2, 4, 5]} bgColor={cardColor} minH={"100px"}>
+      <Center
+        borderRadius={7}
+        p={[2, 4, 5]}
+        bgColor={cardColor}
+        minH={"100px"}
+        boxShadow={"0px 2px 4px rgba(0, 0, 0, 0.25)"}
+      >
         <Flex alignItems={"center"}>
           <Box mr={2}>
             {logo && (
@@ -59,6 +64,9 @@ const EcomIntegrationCard = ({
           <Text fontWeight={"500"}>{title}</Text>
         </Flex>
       </Center>
+      {/* <Center>
+        <Text fontWeight={"500"}>{title}</Text>
+      </Center> */}
     </Link>
   )
 }
@@ -135,7 +143,7 @@ const IntegrationsPage = () => {
           </Box>
 
           <Box>
-            <SimpleGrid columns={[2, 3, 3]} spacing={5}>
+            <SimpleGrid columns={[2, 5, 5]} spacing={5}>
               <EcomIntegrationCard
                 title={"Shopify"}
                 link={"/integrations/shopify-integration/"}
@@ -182,30 +190,26 @@ const IntegrationsPage = () => {
           </Box>
 
           <Box>
-            <SimpleGrid columns={[2, 3, 3]} spacing={5}>
+            <SimpleGrid columns={[2, 5, 5]} spacing={5}>
               <EcomIntegrationCard
                 title={"Unifaun"}
                 link={"/integrations/unifaun"}
                 logo={UnifaunLogo}
-                cardColor={"green.100"}
               />
               <EcomIntegrationCard
                 title={"Consignor"}
                 link={"/integrations/"}
                 logo={ConsignorLogo}
-                cardColor={"green.100"}
               />
               <EcomIntegrationCard
                 title={"Ongoing"}
                 link={"/integrations/"}
                 logo={OngoingLogo}
-                cardColor={"green.100"}
               />
               <EcomIntegrationCard
                 title={"Webshipper"}
                 link={"/integrations/"}
                 logo={WebshipperLogo}
-                cardColor={"green.100"}
               />
             </SimpleGrid>
           </Box>

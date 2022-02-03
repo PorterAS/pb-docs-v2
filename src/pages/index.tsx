@@ -4,6 +4,14 @@ import { Box, Button, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import { FeatureCard } from "../components/home/feature-card"
 import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
+import ShopifyLogo from "../images/shopify-logo.png"
+import WooCommerceLogo from "../images/woocommerce-logo.png"
+import MagentoLogo from "../images/magento-logo.png"
+import WebshipperLogo from "../images/webshipper-logo.png"
+import UnifaunLogo from "../images/unifaun-logo.png"
+import OngoingLogo from "../images/ongoing-logo.svg"
+import ConsignorLogo from "../images/consignor-logo.png"
+
 import {
   FaBook,
   FaBookOpen,
@@ -16,6 +24,7 @@ import {
 import CoWorking from "../images/co-working.jpeg"
 import { ContentCallout } from "../components/global/ContentCallout"
 import { Container } from "../components/layouts/container"
+import { EcomIntegrationCard } from "./integrations"
 
 export const query = graphql`
   query {
@@ -88,7 +97,7 @@ const IndexPage = ({}: any) => {
                 <Link to={"/getting-started/"}>Get started</Link>
               </Button>
             </Box>
-            <Box>
+            <Box display={["none", "flex", "flex"]}>
               <Image
                 src={
                   "https://res.cloudinary.com/chuloo/image/upload/q_auto,f_auto,w_350/v1641985218/porterbuddy/co-working.jpg"
@@ -105,62 +114,65 @@ const IndexPage = ({}: any) => {
       </Container>
 
       <Container>
-        <SimpleGrid columns={[1, 3, 3]} spacing="10" my={"5%"}>
-          <FeatureCard
-            title={"Getting Started"}
-            content={
-              "Integrate Porterbuddy's product card widget, Checkout widget and Universal shipping module"
-            }
-            link="/getting-started/"
-            actionText="Learn more"
-            icon={<FaPlay />}
-          />
-          <FeatureCard
-            icon={<FaBook />}
-            title={"API Reference"}
-            content={
-              "Utilize the robust Porterbuddy API reference to build your own custom integration"
-            }
-            link="/api-reference/"
-            actionText="Learn more"
-          />
-          <FeatureCard
-            icon={<FaHandshake />}
-            title={"Integrations"}
-            content={
-              "Discover our library of existing integrations with musltiple systems to get started quickly"
-            }
-            link="/integrations/"
-            actionText="Learn more"
-          />
-          <FeatureCard
-            icon={<FaInfoCircle />}
-            title={"FAQs"}
-            content={
-              "Find answers to frequently asked questions regarding integrations"
-            }
-            link="/faqs/"
-            actionText="Learn more"
-          />
-          <FeatureCard
-            icon={<FaBookOpen />}
-            title={"Guides"}
-            content={
-              "Discover awesome technical content created to help you build better"
-            }
-            link="/guides/"
-            actionText="Learn more"
-          />
-          <FeatureCard
-            icon={<FaPeopleCarry />}
-            title={"Porterbuddy Community"}
-            content={
-              "Discover awesome technical content created to help you build better"
-            }
-            link="/community/"
-            actionText="Learn more"
-          />
-        </SimpleGrid>
+        <Box mb={"4em"}>
+          <Text fontSize={"xl"} fontWeight={"600"} mb={3}>
+            Integrations
+          </Text>
+          <Box mb={7}>
+            <Text fontWeight={"500"}>E-commerce Integrations</Text>
+          </Box>
+
+          <Box mb={7}>
+            <SimpleGrid columns={[2, 6, 6]} spacing={5}>
+              <EcomIntegrationCard
+                title={"Shopify"}
+                link={"/integrations/shopify-integration/"}
+                logo={ShopifyLogo}
+              />
+              <EcomIntegrationCard
+                title={"Magento"}
+                link={"/integrations/"}
+                logo={MagentoLogo}
+              />
+              <EcomIntegrationCard
+                title={"WooCommerce"}
+                link={"/integrations/woocommerce"}
+                logo={WooCommerceLogo}
+              />
+            </SimpleGrid>
+          </Box>
+
+          <Box mb={3}>
+            <Text fontWeight={"500"}>
+              Transport and Warehouse Management Systems Integrations
+            </Text>
+          </Box>
+
+          <Box>
+            <SimpleGrid columns={[2, 6, 6]} spacing={5}>
+              <EcomIntegrationCard
+                title={"Unifaun"}
+                link={"/integrations/unifaun"}
+                logo={UnifaunLogo}
+              />
+              <EcomIntegrationCard
+                title={"Consignor"}
+                link={"/integrations/"}
+                logo={ConsignorLogo}
+              />
+              <EcomIntegrationCard
+                title={"Ongoing"}
+                link={"/integrations/"}
+                logo={OngoingLogo}
+              />
+              <EcomIntegrationCard
+                title={"Webshipper"}
+                link={"/integrations/"}
+                logo={WebshipperLogo}
+              />
+            </SimpleGrid>
+          </Box>
+        </Box>
       </Container>
 
       <Container bgColor={"#F7F7F7"}>
@@ -189,7 +201,7 @@ const IndexPage = ({}: any) => {
                 <a href={"mailto:mats@porterbuddy.com"}>Speak with us</a>
               </Button>
             </Box>
-            <Box>
+            <Box display={["none", "flex", "flex"]}>
               <Image
                 src={
                   "https://res.cloudinary.com/chuloo/image/upload/q_auto,f_auto,w_350/v1641985218/porterbuddy/co-working.jpg"
@@ -206,7 +218,7 @@ const IndexPage = ({}: any) => {
       </Container>
 
       <Container>
-        <SimpleGrid columns={[1, 3, 3]} spacing="10" my={"5%"}>
+        <SimpleGrid columns={[1, 4, 4]} spacing="10" my={"5%"}>
           <FeatureCard
             icon={<FaInfoCircle />}
             title={"FAQs"}
@@ -228,9 +240,7 @@ const IndexPage = ({}: any) => {
           <FeatureCard
             icon={<FaPeopleCarry />}
             title={"Porterbuddy Community"}
-            content={
-              "Discover awesome technical content created to help you build better"
-            }
+            content={"Find and connect with others building ecommerce products"}
             link="/community/"
             actionText="Learn more"
           />
@@ -263,7 +273,7 @@ const IndexPage = ({}: any) => {
                 <a href={"mailto:dev@porterbuddy.com"}>Work with us</a>
               </Button>
             </Box>
-            <Box>
+            <Box display={["none", "flex", "flex"]}>
               <Image
                 src={
                   "https://res.cloudinary.com/chuloo/image/upload/q_auto,f_auto,w_350/v1641985218/porterbuddy/co-working.jpg"
