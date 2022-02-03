@@ -3,17 +3,21 @@ import * as React from "react"
 
 interface ContainerPropType extends BoxProps {
   children: React.ReactNode
+  bgColor?: string
 }
+
 export const Container = (props: ContainerPropType) => {
-  const { children, ...rest } = props
+  const { children, bgColor, ...rest } = props
   return (
-    <Box
-      {...rest}
-      width={{ base: "95%", md: "90%", lg: "90%" }}
-      mx={"auto"}
-      maxWidth={1700}
-    >
-      {children}
+    <Box bgColor={bgColor}>
+      <Box
+        {...rest}
+        width={{ base: "95%", md: "90%", lg: "90%" }}
+        mx={"auto"}
+        maxWidth={1700}
+      >
+        {children}
+      </Box>
     </Box>
   )
 }

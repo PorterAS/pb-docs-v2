@@ -38,9 +38,9 @@ const Layout = ({ children }: any) => {
           navComponent={<HomeNav />}
           px={0}
         />
-        <Box as="main">{children}</Box>
-        <Footer />
       </Container>
+      <Box as="main">{children}</Box>
+      <Footer />
     </Box>
   )
 }
