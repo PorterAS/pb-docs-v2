@@ -68,7 +68,7 @@ export const USMConsolidation = () => {
           <RadioGroup
             value={apiMode}
             onChange={setApiMode}
-            onClick={window ? () => window.forceRefresh() : () => {}}
+            onClick={isBrowser() ? () => window.forceRefresh() : () => {}}
           >
             <Stack direction="row">
               <Radio value="simulated">Simulated</Radio>
