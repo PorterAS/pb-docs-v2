@@ -24,7 +24,7 @@ const { children, ...rest } = props
     <Box
       {...rest}
       width={{ base: "95%", md: "100%", lg: "100%" }}
-      // mx={"auto"}
+      mx={["auto", "0", "0"]}
       maxWidth={1700}
     >
       {children}

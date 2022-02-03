@@ -16,12 +16,12 @@ export const MenuDrawer = ({ children }: any) => {
   return (
     <Box display={["block", "none", "none"]}>
       {!isOpen && (
-        <Box onClick={onOpen} color={"#ffffff"}>
+        <Box onClick={onOpen} color={"#00261D"}>
           <FiMenu fontSize={"2.5em"} />
         </Box>
       )}
       {isOpen && (
-        <Box onClick={onClose} color={"#ffffff"}>
+        <Box onClick={onClose} color={"#00261D"}>
           <IoClose fontSize={"2.5em"} />
         </Box>
       )}

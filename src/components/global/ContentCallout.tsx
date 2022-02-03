@@ -38,7 +38,6 @@ export const ContentCallout = ({
       bgColor = "secondary"
       emojiIcon = "💡 "
   }
-  console.log(bgColor, emojiIcon)
 
   return (
     <>
