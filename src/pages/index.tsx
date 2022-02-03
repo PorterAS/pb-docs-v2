@@ -1,6 +1,14 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Box, Button, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Image,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react"
 import { FeatureCard } from "../components/home/feature-card"
 import Layout from "../components/layouts/home-layout"
 import SEO from "../components/seo"
@@ -14,7 +22,6 @@ import {
 } from "react-icons/fa"
 // @ts-ignore
 import CoWorking from "../images/co-working.jpeg"
-import { InfoBanner } from "../components/global/InfoBanner"
 import { ContentCallout } from "../components/global/ContentCallout"
 
 export const query = graphql`
@@ -42,7 +49,8 @@ const IndexPage = ({}: any) => {
         title="Porterbuddy Developer Portal"
         description="Build and integrate with Porterbuddy APIs and technology"
       />
-      <Box mt={"5%"} mb={{ base: "15%", sm: "15%", md: "10%", lg: "10%" }}>
+
+      <Box mt={"3%"} mb={{ base: "5%", sm: "5%", md: "5%", lg: "5%" }}>
         <Text
           fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl" }}
           fontWeight={"600"}

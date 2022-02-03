@@ -38,7 +38,7 @@ import {
 import Logo from "../../images/porterbuddy-logo.png"
 import Header from "./header"
 import "./layout.css"
-import { Container, DocsContainer } from "./container"
+import { DocsContainer } from "./container"
 import { GrCatalog, GrIntegration } from "react-icons/gr"
 import { GiClothJar } from "react-icons/gi"
 import { Copyright, SocialMediaLinks } from "./footer"
@@ -282,7 +282,7 @@ const DocsLayout = React.memo(({ children }: any) => {
       w={[null, 60, 60]}
       pos={["inherit", "fixed", "fixed"]}
       height={"calc(100vh - 8.125rem)"}
-      minH= {"100vh"}
+      minH={"100vh"}
       {...props}
     >
       <Flex
@@ -339,13 +339,20 @@ const DocsLayout = React.memo(({ children }: any) => {
                 ]}
                 gap={2}
               >
-                <GridItem colSpan={1} display={["none", "block", "block"]} bgColor="#F9F6FF" pl={"10%"} pt={"5em"} minH= {"100vh"}>
+                <GridItem
+                  colSpan={1}
+                  display={["none", "block", "block"]}
+                  bgColor="#F9F6FF"
+                  pl={"10%"}
+                  pt={"5em"}
+                  minH={"100vh"}
+                >
                   <Box py={5}>
                     <SidebarContent />
                   </Box>
                 </GridItem>
 
-                <GridItem colSpan={4}  pt={"5em"}>
+                <GridItem colSpan={4} pt={"5em"}>
                   <Box
                     as={"main"}
                     py={[2, 3, 3]}

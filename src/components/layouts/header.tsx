@@ -17,7 +17,15 @@ import { MenuDrawer } from "./menu-drawer"
 
 const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
   return (
-    <Box as="header" backgroundColor="white" py={2} px={"1%"} {...rest} borderBottomColor={"#F7F7F7"} borderBottomWidth="1px">
+    <Box
+      as="header"
+      backgroundColor="white"
+      py={2}
+      px={"1%"}
+      {...rest}
+      borderBottomColor={"#F7F7F7"}
+      borderBottomWidth="1px"
+    >
       <DocsContainer>
         <Flex
           alignItems={"center"}
@@ -41,17 +49,18 @@ const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
             </Text>
           </Box>
           <Box
-            width={{ base: "0%", md: "0%", lg: "30%" }}
+            width={{ base: "0%", md: "0%", lg: "20%" }}
             display={{ base: "none", md: "block" }}
           >
             <Input
               placeholder={"Search docs"}
-              backgroundColor={"whiteAlpha.900"}
+              backgroundColor={"#F9F6FF"}
               focusBorderColor={"purple.50"}
-              disabled
+              color={"#661AFF"}
+              // disabled
             />
           </Box>
-          <Box
+          {/* <Box
             textColor={"white"}
             fontWeight={"500"}
             display={{ base: "none", md: "block" }}
@@ -61,7 +70,7 @@ const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
               <Link to={"/integrations/"}>Integrations</Link>
               <Link to={"/changelog/"}>Changelog</Link>
             </HStack>
-          </Box>
+          </Box> */}
           <MenuDrawer>{navComponent}</MenuDrawer>
         </Flex>
       </DocsContainer>

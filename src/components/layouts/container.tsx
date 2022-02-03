@@ -18,8 +18,8 @@ export const Container = (props: ContainerPropType) => {
   )
 }
 
-export const DocsContainer = (props: ContainerPropType)=>{
-const { children, ...rest } = props
+export const DocsContainer = (props: ContainerPropType) => {
+  const { children, ...rest } = props
   return (
     <Box
       {...rest}

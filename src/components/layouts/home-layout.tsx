@@ -32,14 +32,15 @@ const Layout = ({ children }: any) => {
 
   return (
     <Box>
-      <Header
-        siteTitle={data.site.siteMetadata?.title || `Title`}
-        navComponent={<HomeNav />}
-      />
       <Container>
+        <Header
+          siteTitle={data.site.siteMetadata?.title || `Title`}
+          navComponent={<HomeNav />}
+          px={0}
+        />
         <Box as="main">{children}</Box>
+        <Footer />
       </Container>
-      <Footer />
     </Box>
   )
 }
