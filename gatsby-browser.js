@@ -9,6 +9,15 @@ import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
 
+const colors = {
+  main: "#661AFF",
+  secondary: "#F9F6FF",
+  white: "#FFFFFF",
+  grey: "#F7F7F7",
+  black: "#00261D",
+  red: "#FF5500",
+}
+
 const MyTable = ({ children, ...rest }) => {
   return (
     <div

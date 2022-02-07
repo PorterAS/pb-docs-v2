@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Accordion, Box, Text } from "@chakra-ui/react"
-import { faqContent, FAQType } from "../faqContent"
+import { FAQCollection } from "../faqContent"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { AccordionElement } from "../components/faq/accordion"
@@ -25,13 +25,19 @@ const FAQ = ({}: any) => {
         </Box>
 
         <Box>
-          <Accordion allowMultiple>
-            {faqContent.map((item: FAQType, index: number) => (
-              <AccordionElement
-                question={item.question}
-                answer={item.answer}
-                key={index}
-              />
+          <Accordion allowMultiple borderWidth={0}>
+            {FAQCollection.map(item => (
+              <AccordionElement title={item.label} key={item.category}>
+                {item.faqs.map((faq, index) => (
+                  <AccordionElement
+                    title={faq.question}
+                    key={index}
+                    titleFontSize="sm"
+                  >
+                    {faq.answer}
+                  </AccordionElement>
+                ))}
+              </AccordionElement>
             ))}
           </Accordion>
         </Box>

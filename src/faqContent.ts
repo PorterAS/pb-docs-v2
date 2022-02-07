@@ -1,4 +1,15 @@
-export const faqContent: FAQType[] = [
+export type FAQCollectionType = {
+  category: string
+  faqs: FAQType[]
+  label: string
+}
+
+export type FAQType = {
+  question: string
+  answer: string
+}
+
+const widgetFAQs: FAQType[] = [
   {
     question:
       "How do I migrate an old Porterbuddy widget to the updated widget?",
@@ -6,79 +17,10 @@ export const faqContent: FAQType[] = [
       "The porterbuddy documentation is up to date, you can use that to update the specifications of your widgets. For specific product updates, we will provide update guides documenting how an upgrade should be done.",
   },
   {
-    question: "How do I get test credentials for the Porterbuddy API?",
-    answer:
-      "Create a test account on https://retailers.porterbuddy-test.com/CreateNewUser. Once an account is created, you can find your API credentials under your profile on retailers.porterbuddy-test.com.",
-  },
-  {
-    question: "How do I set up new accounts/users in production?",
-    answer:
-      "Your key account manager will provide you with a link to create a live Porterbuddy account. You can find your live API keys by going to your profile menu under retailers.porterbuddy.com ",
-  },
-  {
-    question: "How do we handle out of stock products?",
-    answer: "Porterbuddy deliveries can only be created for products in stock",
-  },
-  {
     question:
-      "Can we have two cut offs times (with warehouse elsewhere than Oslo-area)?",
-    answer: "Yes, if they are within Porterbuddy's delivery region",
-  },
-  {
-    question:
-      "As a retailer, what do we do if we dont have dimensions on the products?",
+      "How can we customize the widget? Can we customize its size and colour?",
     answer:
-      "We need at least product or parcel size information to create an order",
-  },
-  {
-    question: "How do we upgrade a Porterbuddy plugin?",
-    answer:
-      "This depends on the plugin type, and you can update the plugin implementation using an upgrade guide we will provide",
-  },
-  {
-    question:
-      "As a retailer, can I have two warehouses and deliver products from each warehouse with the same driver?",
-    answer: "Yes",
-  },
-  {
-    question:
-      "As a retailer, do we have to send specific opening hours for our warehouse as part of the API integration?",
-    answer:
-      "Yes you can specify pickup windows when checking for available windows, however, this is not mandatory. Cutoff times are specified in the account settings",
-  },
-  {
-    question:
-      "As a retailer, do I have to scan each parcel in connection with packing and label print in the warehouse, and why?",
-    answer:
-      "No you do not have to but its make its easier for us and you to see what has been scanned on the partner web portal.",
-  },
-  {
-    question:
-      "Why does Porterbuddy pick up at retailer warehouses only on scheduled intervals? Why doesn't Porterbuddy pick up goods when ready packed for storing in our warehouse?",
-    answer:
-      "We currently don't store goods. Our line-haul is scheduled to make pickups are intervals for efficiency. This way, the retailer collates all items on hand. And we have a mandate to deliver packages daily",
-  },
-  {
-    question: "Does Unifaun shipment work with PorterBuddy?",
-    answer:
-      "Yes it does work. However, we do not entirely recommend it due to the absence of the Samlevert delivery window",
-  },
-  {
-    question: "Does Klarna shipment Assistant + Unifaun checkout work?",
-    answer:
-      "Yes it does work. However, we do not entirely recommend it due to the awkward presentation of the delivery windows and the absence of the Samlevert window",
-  },
-  {
-    question:
-      "When should we use Unified Shipping Module (USM), which systems is it compatible with?",
-    answer:
-      "The USM can be used in 'any' checkout interface to efficiently present shipping options to a customer. The USM is optimized for conversion in checkout.",
-  },
-  {
-    question:
-      "How do I migrate an existing woocommerce plugin over to the new plugin? ",
-    answer:
-      "Uninstall the old plugin and install the new one along with its configurations. This should follow the setup guide for the WooCommerce plugin",
+      "The widget is built to be responsive and scales with the width of the bounding area on the website. Only the text and shipping options images can be customized",
   },
   {
     question:
@@ -88,9 +30,68 @@ export const faqContent: FAQType[] = [
   },
   {
     question:
-      "How can we customize the widget? Can we customize its size and colour?",
+      "When should we use Unified Shipping Module (USM), which systems is it compatible with?",
     answer:
-      "The widget is built to be responsive and scales with the width of the bounding area on the website. Only the text and shipping options images can be customized",
+      "The USM can be used in 'any' checkout interface to efficiently present shipping options to a customer. The USM is optimized for conversion in checkout.",
+  },
+]
+const apiFAQs: FAQType[] = [
+  {
+    question:
+      "As a retailer, do we have to send specific opening hours for our warehouse as part of the API integration?",
+    answer:
+      "Yes you can specify pickup windows when checking for available windows, however, this is not mandatory. Cutoff times are specified in the account settings",
+  },
+  {
+    question:
+      "As a retailer, what do we do if we dont have dimensions on the products?",
+    answer:
+      "We need at least product or parcel size information to create an order",
+  },
+  {
+    question: "How do we handle out of stock products?",
+    answer: "Porterbuddy deliveries can only be created for products in stock",
+  },
+  {
+    question: "How do I set up new accounts/users in production?",
+    answer:
+      "Your key account manager will provide you with a link to create a live Porterbuddy account. You can find your live API keys by going to your profile menu under retailers.porterbuddy.com ",
+  },
+  {
+    question: "How do I get test credentials for the Porterbuddy API?",
+    answer:
+      "Create a test account on https://retailers.porterbuddy-test.com/CreateNewUser. Once an account is created, you can find your API credentials under your profile on retailers.porterbuddy-test.com.",
+  },
+]
+const warehousingOperationsFAQs: FAQType[] = [
+  {
+    question:
+      "Why does Porterbuddy pick up at retailer warehouses only on scheduled intervals? Why doesn't Porterbuddy pick up goods when ready packed for storing in our warehouse?",
+    answer:
+      "We currently don't store goods. Our line-haul is scheduled to make pickups are intervals for efficiency. This way, the retailer collates all items on hand. And we have a mandate to deliver packages daily",
+  },
+  {
+    question:
+      "As a retailer, do I have to scan each parcel in connection with packing and label print in the warehouse, and why?",
+    answer:
+      "No you do not have to but its make its easier for us and you to see what has been scanned on the partner web portal.",
+  },
+  {
+    question:
+      "As a retailer, can I have two warehouses and deliver products from each warehouse with the same driver?",
+    answer: "Yes",
+  },
+  {
+    question:
+      "Can we have two cut offs times (with warehouse elsewhere than Oslo-area)?",
+    answer: "Yes, if they are within Porterbuddy's delivery region",
+  },
+]
+const integrationGuidesFAQs: FAQType[] = [
+  {
+    question:
+      "Which Porterbuddy product should be activated in Consignor and Unifaun (nShift)?",
+    answer: "You should activate Delivery and Samlevert",
   },
   {
     question: "How can I change the shipping price in shopify?",
@@ -99,12 +100,46 @@ export const faqContent: FAQType[] = [
   },
   {
     question:
-      "Which Porterbuddy product should be activated in Consignor and Unifaun (nShift)?",
-    answer: "You should activate Delivery and Samlevert",
+      "How do I migrate an existing woocommerce plugin over to the new plugin? ",
+    answer:
+      "Uninstall the old plugin and install the new one along with its configurations. This should follow the setup guide for the WooCommerce plugin",
+  },
+  {
+    question: "Does Klarna shipment Assistant + Unifaun checkout work?",
+    answer:
+      "Yes it does work. However, we do not entirely recommend it due to the awkward presentation of the delivery windows and the absence of the Samlevert window",
+  },
+  {
+    question: "Does Unifaun shipment work with PorterBuddy?",
+    answer:
+      "Yes it does work. However, we do not entirely recommend it due to the absence of the Samlevert delivery window",
+  },
+  {
+    question: "How do we upgrade a Porterbuddy plugin?",
+    answer:
+      "This depends on the plugin type, and you can update the plugin implementation using an upgrade guide we will provide",
   },
 ]
 
-export type FAQType = {
-  question: string
-  answer: string
-}
+export const FAQCollection: FAQCollectionType[] = [
+  {
+    category: "widgetFAQs",
+    faqs: widgetFAQs,
+    label: "Product Card, Checkout Widget and Universal Shipping Module",
+  },
+  {
+    category: "apiFAQs",
+    faqs: apiFAQs,
+    label: "Porterbuddy APIs and API Setup",
+  },
+  {
+    category: "integrationGuidesFAQs",
+    faqs: integrationGuidesFAQs,
+    label: "3rd-Party Integrations and providers",
+  },
+  {
+    category: "warehousingOperationsFAQs",
+    faqs: warehousingOperationsFAQs,
+    label: "Warehousing and Operations",
+  },
+]
