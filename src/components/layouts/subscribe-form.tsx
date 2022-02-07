@@ -19,7 +19,7 @@ export const SubscribeForm = (props: HTMLChakraProps<"form">) => {
           Get notified when we add new components or we have exciting news for
           you.
         </Text>
-        <Stack spacing="4" direction={{ base: "column", md: "row" }}>
+        <Stack spacing="0" direction={{ base: "column", md: "row" }}>
           <Input
             bg={useColorModeValue("white", "inherit")}
             placeholder="Enter your email"
@@ -31,6 +31,7 @@ export const SubscribeForm = (props: HTMLChakraProps<"form">) => {
               color: useColorModeValue("gray.500", "whiteAlpha.700"),
             }}
             disabled
+            borderEndRadius={0}
           />
           <Button
             disabled
@@ -41,6 +42,7 @@ export const SubscribeForm = (props: HTMLChakraProps<"form">) => {
             flexShrink={0}
             _hover={{ bgColor: "#661AFF", opacity: 0.8 }}
             width={{ base: "full", md: "auto" }}
+            borderStartRadius={0}
           >
             Subscribe
           </Button>

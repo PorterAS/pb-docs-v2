@@ -13,6 +13,7 @@ import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { MdCheckCircle } from "react-icons/md"
 import { FaFacebook, FaLinkedin } from "react-icons/fa"
+import { ContentCallout } from "../components/global/ContentCallout"
 
 type CommunityUpdateItemType = {
   content: string
@@ -35,7 +36,7 @@ const CommunityUpdateItem = ({ content, link }: CommunityUpdateItemType) => (
     )}
   </>
 )
-const GuidesPage = () => {
+const CommunityPage = () => {
   return (
     <Layout>
       <SEO
@@ -56,40 +57,25 @@ const GuidesPage = () => {
           </Text>
         </Box>
 
-        <Box>
-          <Box
-            p={5}
-            minH={"10%"}
-            bgColor={"#661AFF"}
-            borderRadius={5}
-            color={"white"}
-            mb={"4em"}
-            boxShadow={"2px 2px 10px 1px gray"}
-          >
-            <Flex
-              justifyContent={"space-between"}
-              width={"100%"}
-              alignItems={"center"}
-            >
-              <Box>
-                <Text fontSize={["lg", "lg", "xl"]} mb={3} fontWeight={"600"}>
-                  Porterbuddy Developers on Discord
-                </Text>
-                <Text width={"95%"}>
-                  Join our Discord community.
-                </Text>
-              </Box>
-
-              <Box>
-                <a href={"https://discord.gg/4XQfYHvQkF"} target={"_blank"}>
-                  <Button color={"purple.900"} disabled>Join us</Button>
-                </a>
-              </Box>
-            </Flex>
+        <ContentCallout type="info" title="Porterbuddy Developers on Discord">
+          <Text width={"95%"}>Join our Discord community.</Text>
+          <Box>
+            <a href={"https://discord.gg/4XQfYHvQkF"} target={"_blank"}>
+              <Button
+                bgColor={"#661AFF"}
+                _hover={{ bgColor: "#661AFF", opacity: 0.8 }}
+                color={"white"}
+                size={"md"}
+                mt={[5, 0, 0]}
+                disabled
+              >
+                Join us
+              </Button>
+            </a>
           </Box>
-        </Box>
+        </ContentCallout>
 
-        <Box mb={10}>
+        <Box mb={10} mt={5}>
           <Box mb={4}>
             <Text fontSize={"xl"} fontWeight={"600"} mb={5}>
               Community updates
@@ -102,13 +88,8 @@ const GuidesPage = () => {
           <Box>
             <List spacing={3}>
               <CommunityUpdateItem
-                content={
-                  "We're launching the Porterbuddy developer community!!"
-                }
+                content={"There are no updates at the moment :)"}
               />
-              {/* <CommunityUpdateItem
-                content={"Join us this friday for drinks at our new office!"}
-              /> */}
             </List>
           </Box>
         </Box>
@@ -135,4 +116,4 @@ const GuidesPage = () => {
     </Layout>
   )
 }
-export default GuidesPage
+export default CommunityPage

@@ -82,9 +82,9 @@ export const FooterHeading = (props: HeadingProps) => (
   />
 )
 export const Footer = ({ ...rest }: any) => (
-  <Box {...rest} backgroundColor={"white"}>
+  <Box {...rest} backgroundColor={"white"} mt={[5, 0, 0]} mb={5}>
     <Container>
-      <Box as="footer" role="contentinfo" maxW={1700} pt={[0, 10, 12]}>
+      <Box as="footer" role="contentinfo" pt={[0, 10, 12]}>
         <Stack spacing="5" divider={<StackDivider />}>
           <Stack
             direction={{ base: "column", lg: "row" }}
@@ -94,18 +94,18 @@ export const Footer = ({ ...rest }: any) => (
               direction={{ base: "column", md: "row" }}
               spacing={{ base: "10", md: "20" }}
             >
-              <LinkGrid spacing={{ base: "10", md: "20", lg: "28" }} flex="1" />
+              <LinkGrid spacing={{ base: "10", md: "20", lg: "28" }} />
               <SubscribeForm width={{ base: "full", md: "sm" }} />
             </Stack>
           </Stack>
-          <Stack
+          {/* <Stack
             direction={{ base: "column-reverse", md: "row" }}
             justifyContent="space-between"
             alignItems="center"
           >
             <Copyright />
             <SocialMediaLinks />
-          </Stack>
+          </Stack> */}
         </Stack>
       </Box>
     </Container>

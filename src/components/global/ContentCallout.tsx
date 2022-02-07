@@ -15,6 +15,7 @@ export const ContentCallout = ({
   children,
   canClose = false,
   type = "info",
+  ...rest
 }: ContentCalloutPropType) => {
   const [closeBanner, setCloseBanner] = useState(false)
 
@@ -42,7 +43,7 @@ export const ContentCallout = ({
   return (
     <>
       {!closeBanner && (
-        <Box as={"div"}>
+        <Box as={"div"} {...rest}>
           <Box
             p={3}
             minH={"10%"}

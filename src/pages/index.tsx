@@ -11,6 +11,8 @@ import WebshipperLogo from "../images/webshipper-logo.png"
 import UnifaunLogo from "../images/unifaun-logo.png"
 import OngoingLogo from "../images/ongoing-logo.svg"
 import ConsignorLogo from "../images/consignor-logo.png"
+import GetStartedImage from "../images/get-started.png"
+import BecomeAPartnerImage from "../images/become-a-partner.png"
 
 import {
   FaBook,
@@ -99,9 +101,7 @@ const IndexPage = ({}: any) => {
             </Box>
             <Box display={["none", "flex", "flex"]}>
               <Image
-                src={
-                  "https://res.cloudinary.com/chuloo/image/upload/q_auto,f_auto,w_350/v1641985218/porterbuddy/co-working.jpg"
-                }
+                src={GetStartedImage}
                 width={[350, 300, 300]}
                 borderRadius={5}
                 my={"auto"}
@@ -203,9 +203,7 @@ const IndexPage = ({}: any) => {
             </Box>
             <Box display={["none", "flex", "flex"]}>
               <Image
-                src={
-                  "https://res.cloudinary.com/chuloo/image/upload/q_auto,f_auto,w_350/v1641985218/porterbuddy/co-working.jpg"
-                }
+                src={BecomeAPartnerImage}
                 width={[350, 300, 300]}
                 borderRadius={5}
                 my={"auto"}
