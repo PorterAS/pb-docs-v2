@@ -2,7 +2,6 @@ import * as React from "react"
 import {
   Box,
   Button,
-  Flex,
   List,
   Text,
   ListItem,

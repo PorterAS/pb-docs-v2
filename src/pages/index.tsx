@@ -14,14 +14,7 @@ import ConsignorLogo from "../images/consignor-logo.png"
 import GetStartedImage from "../images/get-started.png"
 import BecomeAPartnerImage from "../images/become-a-partner.png"
 
-import {
-  FaBook,
-  FaBookOpen,
-  FaHandshake,
-  FaInfoCircle,
-  FaPeopleCarry,
-  FaPlay,
-} from "react-icons/fa"
+import { FaBookOpen, FaInfoCircle, FaPeopleCarry } from "react-icons/fa"
 // @ts-ignore
 import CoWorking from "../images/co-working.jpeg"
 import { ContentCallout } from "../components/global/ContentCallout"
@@ -58,6 +51,7 @@ const IndexPage = ({}: any) => {
           <Text
             fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl" }}
             fontWeight={"600"}
+            color="primary"
           >
             Porterbuddy Developers
           </Text>

@@ -14,8 +14,6 @@ import {
   AccordionPanel,
   Box,
   BoxProps,
-  Button,
-  Center,
   Flex,
   Grid,
   GridItem,
@@ -41,7 +39,7 @@ import "./layout.css"
 import { DocsContainer } from "./container"
 import { GrCatalog, GrIntegration } from "react-icons/gr"
 import { GiClothJar } from "react-icons/gi"
-import { Copyright, SocialMediaLinks } from "./footer"
+import { Copyright, Footer, SocialMediaLinks } from "./footer"
 import { PBProductCard } from "../porterbuddy/PBProductCardWidget"
 import { PBCheckoutWidget } from "../porterbuddy/PBCheckoutWidget"
 import { ProductCardWithRefresh } from "../global/product-card/product-callback-refresh"
@@ -365,35 +363,6 @@ const DocsLayout = React.memo(({ children }: any) => {
                   {/*  <Footer />*/}
                   {/*</Box>*/}
                 </GridItem>
-
-                <GridItem colSpan={0} display={["none", "none", "none"]}>
-                  <Box
-                    m={5}
-                    p={3}
-                    borderRadius={5}
-                    bgColor={"green.200"}
-                    color={"black"}
-                    minH={"100px"}
-                    pos={"fixed"}
-                  >
-                    <Text fontWeight={"bold"} fontSize={"md"}>
-                      Green Deliveries
-                    </Text>
-                    <Text fontSize={"sm"}>
-                      Register to get green deliveries
-                    </Text>
-                    <Center mt={"20px"} pos={"relative"}>
-                      <Button
-                        bgColor={"#661AFF"}
-                        _hover={{ bgColor: "#661AFF", opacity: 0.8 }}
-                        color={"white"}
-                        size={"md"}
-                      >
-                        <a href={"mailto:mats@porterbuddy.com"}>Try now</a>
-                      </Button>
-                    </Center>
-                  </Box>
-                </GridItem>
               </Grid>
             </Box>
           </DocsContainer>
@@ -409,6 +378,7 @@ const DocsLayout = React.memo(({ children }: any) => {
             <SocialMediaLinks />
           </Stack>
         </Box>
+        {/* <Footer /> */}
       </Box>
     </MDXProvider>
   )

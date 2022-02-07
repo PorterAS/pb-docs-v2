@@ -12,7 +12,6 @@ import {
   useColorModeValue,
   SimpleGrid,
   SimpleGridProps,
-  Image,
   ButtonGroup,
   ButtonGroupProps,
   IconButton,

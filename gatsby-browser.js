@@ -8,18 +8,6 @@
 import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
-import { extendTheme, ChakraProvider } from "@chakra-ui/react"
-
-
-const colors = {
-  main: "#661AFF",
-  secondary: "#F9F6FF",
-  white: "#FFFFFF",
-  grey: "#F7F7F7",
-  black: "#00261D",
-  red: "#FF5500",
-}
-const theme = extendTheme({colors})
 
 const MyTable = ({ children, ...rest }) => {
   return (
@@ -27,7 +15,6 @@ const MyTable = ({ children, ...rest }) => {
       style={{
         overflowX: "auto",
         borderRadius: "5px",
-        border: "1px solid rgba(102, 51, 153, 0.2)",
         marginBottom: "10px",
       }}
       {...rest}
@@ -82,5 +69,9 @@ const component = {
   th: TableHead,
 }
 export const wrapRootElement = ({ element }) => {
-  return (<ChakraProvider theme={theme}><MDXProvider components={component}>{element}</MDXProvider></ChakraProvider>)
+  return (
+    <MDXProvider components={component}>
+      <div style={{ fontFamily: "Dazzed" }}>{element}</div>
+    </MDXProvider>
+  )
 }

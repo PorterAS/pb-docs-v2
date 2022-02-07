@@ -1,41 +1,51 @@
+@font-face {
+  font-family: "Dazzed";
+  src: local("Dazzed"),
+    url(../fonts/Dazzed/TTF/Dazzed-Medium.ttf) format("truetype");
+}
+
+body {
+  font-family: Dazzed, serif;
+}
 /*Add all custom styles for the blog content here*/
 .blog-content {
-    line-height: 2;
-    font-size: 0.9rem;
+  line-height: 2;
+  font-size: 0.9rem;
+  font-family: "Dazzed";
 }
 
 .blog-content h1,
 .blog-content h2,
 .blog-content h3 {
-    font-weight: 600;
-    margin-top: 3%;
-    margin-bottom: 3%;
+  font-weight: 600;
+  margin-top: 3%;
+  margin-bottom: 3%;
 }
 
 .blog-content h1 {
-    font-size: 1.4em;
-    color: #661AFF;
+  font-size: 1.4em;
+  color: #661aff;
 }
 
 .blog-content h2 {
-    font-size: 1.2em;
-    margin-top: 5%;
-    color: #661AFF;
+  font-size: 1.2em;
+  margin-top: 5%;
+  color: #661aff;
 }
 
 .blog-content a {
-    color: #9d348a;
-    text-decoration: underline;
+  color: #9d348a;
+  text-decoration: underline;
 }
 
 .blog-content p,
 .blog-content pre {
-    margin-bottom: 3%;
+  margin-bottom: 3%;
 }
 
 .blog-content ol,
 .blog-content ul {
-    margin-left: 3%;
+  margin-left: 3%;
 }
 /*.blog-content table{*/
 /*    border: 1px solid mediumpurple;*/
@@ -43,7 +53,15 @@
 /*}*/
 
 table td {
-    /*padding: 10px;*/
-    /*display: table-cell;*/
+  /*padding: 10px;*/
+  /*display: table-cell;*/
+  min-width: 100px;
+  vertical-align: text-top;
 }
-tr:nth-child(even){background-color: rgba(102, 51, 153, 0.1)}
+table thead {
+  background-color: #f9f6ff;
+}
+tr:nth-child(even) {
+  /* background-color: rgba(102, 51, 153, 0.1); */
+  border: 1px solid #f9f6ff;
+}
