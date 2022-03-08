@@ -41,6 +41,7 @@ body {
 .blog-content p,
 .blog-content pre {
   margin-bottom: 3%;
+  font-weight: 400;
 }
 
 .blog-content ol,

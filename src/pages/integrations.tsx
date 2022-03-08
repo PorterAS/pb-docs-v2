@@ -1,5 +1,13 @@
 import * as React from "react"
-import { Box, Center, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react"
+import {
+  Box,
+  Center,
+  Flex,
+  Image,
+  SimpleGrid,
+  Text,
+  Icon,
+} from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { Link } from "gatsby"
@@ -12,61 +20,61 @@ import WebshipperLogo from "../images/webshipper-logo.png"
 import UnifaunLogo from "../images/unifaun-logo.png"
 import OngoingLogo from "../images/ongoing-logo.svg"
 import ConsignorLogo from "../images/consignor-logo.png"
+import { FaCircle, FaShoppingCart } from "react-icons/fa"
+import { GiClothJar } from "react-icons/gi"
 
 type PBIntegrationCardType = {
   title: string
   link: string
+  icon?: React.ReactNode | any
 }
 
-const PBIntegrationCard = ({ title, link }: PBIntegrationCardType) => {
+const PBIntegrationCard = ({ title, link, icon }: PBIntegrationCardType) => {
   return (
     <Link to={link}>
       <Flex
-        borderRadius={7}
+        borderRadius={4}
+        mb={3}
         p={[2, 4, 5]}
-        bgColor={"gray.100"}
         minH={"100px"}
         alignItems={"center"}
+        boxShadow={"0px 2px 4px rgba(0, 0, 0, 0.25)"}
+        justifyContent={"center"}
       >
-        <Text fontWeight={"500"}>{title}</Text>
+        <Icon as={icon} fontSize={"2em"}></Icon>
       </Flex>
+      <Text fontWeight={"500"} textAlign="center">
+        {title}
+      </Text>
     </Link>
   )
 }
 
-type EcomIntegrationCardType = {
+type IntegrationCardType = {
   title: string
   link: string
   logo?: string
-  cardColor?: string
 }
-export const EcomIntegrationCard = ({
-  title,
-  link,
-  logo,
-  cardColor = "#ffffff",
-}: EcomIntegrationCardType) => {
+export const IntegrationCard = ({ title, link, logo }: IntegrationCardType) => {
   return (
     <Link to={link}>
-      <Center
+      <Flex
+        alignItems={"center"}
+        justifyContent="center"
         borderRadius={7}
         p={[2, 4, 5]}
-        bgColor={cardColor}
+        mb={3}
         minH={"100px"}
         boxShadow={"0px 2px 4px rgba(0, 0, 0, 0.25)"}
       >
-        <Flex alignItems={"center"}>
-          <Box mr={2}>
-            {logo && (
-              <Image src={logo} width={"30px"} alt={title} my={"auto"} />
-            )}
-          </Box>
-          <Text fontWeight={"500"}>{title}</Text>
-        </Flex>
-      </Center>
-      {/* <Center>
-        <Text fontWeight={"500"}>{title}</Text>
-      </Center> */}
+        <Box mr={2}>
+          {logo && <Image src={logo} width={"55px"} alt={title} my={"auto"} />}
+        </Box>
+      </Flex>
+
+      <Text fontWeight={"500"} textAlign="center">
+        {title}
+      </Text>
     </Link>
   )
 }
@@ -109,18 +117,21 @@ const IntegrationsPage = () => {
             </Text>
           </Box>
           <Box>
-            <SimpleGrid columns={[2, 3, 3]} spacing={5}>
+            <SimpleGrid columns={[2, 5, 5]} spacing={5}>
               <PBIntegrationCard
                 link={"/product-card-widget/"}
                 title={"Product Card Widget"}
+                icon={GiClothJar}
               />
               <PBIntegrationCard
                 link={"/checkout-widget/"}
                 title={"Checkout Widget"}
+                icon={FaShoppingCart}
               />
               <PBIntegrationCard
                 link={"/usm/"}
                 title={"Unified shipping module"}
+                icon={FaCircle}
               />
             </SimpleGrid>
           </Box>
@@ -144,22 +155,22 @@ const IntegrationsPage = () => {
 
           <Box>
             <SimpleGrid columns={[2, 5, 5]} spacing={5}>
-              <EcomIntegrationCard
+              <IntegrationCard
                 title={"Shopify"}
                 link={"/integrations/shopify-integration/"}
                 logo={ShopifyLogo}
               />
-              <EcomIntegrationCard
+              {/* <IntegrationCard
                 title={"Magento"}
                 link={"/integrations/"}
                 logo={MagentoLogo}
-              />
-              <EcomIntegrationCard
+              /> */}
+              <IntegrationCard
                 title={"WooCommerce"}
                 link={"/integrations/woocommerce"}
                 logo={WooCommerceLogo}
               />
-              <EcomIntegrationCard
+              {/* <EcomIntegrationCard
                 title={"Episerver"}
                 link={"/integrations/"}
                 logo={EpiserverLogo}
@@ -168,7 +179,7 @@ const IntegrationsPage = () => {
                 title={"Dynamics 365"}
                 link={"/integrations/"}
                 logo={D365Logo}
-              />
+              /> */}
             </SimpleGrid>
           </Box>
         </Box>
@@ -191,12 +202,12 @@ const IntegrationsPage = () => {
 
           <Box>
             <SimpleGrid columns={[2, 5, 5]} spacing={5}>
-              <EcomIntegrationCard
-                title={"Unifaun"}
+              <IntegrationCard
+                title={"nShift - Unifaun"}
                 link={"/integrations/unifaun"}
                 logo={UnifaunLogo}
               />
-              <EcomIntegrationCard
+              {/* <EcomIntegrationCard
                 title={"Consignor"}
                 link={"/integrations/"}
                 logo={ConsignorLogo}
@@ -210,7 +221,7 @@ const IntegrationsPage = () => {
                 title={"Webshipper"}
                 link={"/integrations/"}
                 logo={WebshipperLogo}
-              />
+              /> */}
             </SimpleGrid>
           </Box>
         </Box>
