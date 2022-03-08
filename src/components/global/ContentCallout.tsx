@@ -54,6 +54,7 @@ export const ContentCallout = ({
             borderColor={type == "error" ? "#FF5500" : "#661AFF"}
             borderWidth={2}
             boxShadow={"0px 4px 4px rgba(0, 0, 0, 0.25)"}
+            mb={5}
           >
             <Flex justifyContent={"space-between"} width={"100%"}>
               <Box>

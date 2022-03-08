@@ -3,9 +3,8 @@ import { Box, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
 import { graphql, useStaticQuery, Link } from "gatsby"
-// @ts-ignore
 import porterbuddyImage from "../images/porterbuddy-image.png"
-import { InfoBanner } from "../components/global/InfoBanner"
+import { ContentCallout } from "../components/global/ContentCallout"
 
 const GuidesPage = (): any => {
   const {
@@ -53,22 +52,19 @@ const GuidesPage = (): any => {
         </Box>
 
         <Box mb={"4em"}>
-          <InfoBanner
-            title={"💡 Samlevert upgrade guide"}
-            bannerLink={"/guides/samlevert-upgrade-guide"}
-          >
+          <ContentCallout title={"Samlevert upgrade guide"}>
             Upgrade your existing Porterbuddy implementation to serve
             consolidated deliveries using Samlevert
-          </InfoBanner>
+          </ContentCallout>
         </Box>
 
         <Box mb={"4em"}>
-          <Box mb={"3em"}>
-            <Text fontSize={"xl"} fontWeight={"600"}>
+          <Box mb={"2em"}>
+            <Text fontSize={"xl"} fontWeight={"600"} color="#661AFF">
               Latest guides
             </Text>
           </Box>
-          <SimpleGrid columns={[1, 2, 3]} spacing={5}>
+          <SimpleGrid columns={[1, 5, 5]} spacing={5}>
             {guides &&
               guides.map(
                 (guide: {
@@ -85,14 +81,16 @@ const GuidesPage = (): any => {
                         | null
                         | undefined
                     }
-                    timeToRead: number
                   }
                 }) => (
                   <Link
                     key={guide.node.fields.slug}
                     to={guide.node.fields.slug}
                   >
-                    <Box backgroundColor={"gray.100"} borderRadius={5}>
+                    <Box
+                      borderRadius={4}
+                      boxShadow={"0px 2px 4px rgba(0, 0, 0, 0.25)"}
+                    >
                       <Box maxHeight="200px">
                         <Image
                           src={
@@ -103,28 +101,15 @@ const GuidesPage = (): any => {
                           objectFit={"cover"}
                           h={"7em"}
                           w={"full"}
+                          borderTopRadius={5}
                         />
                       </Box>
-                      <Box p={2}>
-                        <Text
-                          fontSize={"sm"}
-                          fontWeight={"600"}
-                          mb={2}
-                          textTransform={"uppercase"}
-                        >
+                      <Box p={2} textAlign="center">
+                        <Text fontSize={"md"} fontWeight={"600"} mb={2}>
                           {guide.node.frontmatter.title}
                         </Text>
-                        <Text fontSize={"sm"} mb={2}>
+                        <Text fontSize={"xs"} mb={2}>
                           {guide.node.frontmatter.meta_description}
-                        </Text>
-                        <Text
-                          fontSize={"xs"}
-                          textAlign={"right"}
-                          color={"gray.600"}
-                        >
-                          {`⏳ ${guide.node.timeToRead} ${
-                            guide.node.timeToRead <= 1 ? "min" : "mins"
-                          }`}
                         </Text>
                       </Box>
                     </Box>

@@ -57,7 +57,7 @@ const Header = ({ navComponent, siteTitle, ...rest }: HeaderProps) => {
               backgroundColor={"#F9F6FF"}
               focusBorderColor={"purple.50"}
               color={"#661AFF"}
-              // disabled
+              disabled
             />
           </Box>
           {/* <Box

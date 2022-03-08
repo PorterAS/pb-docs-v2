@@ -19,7 +19,7 @@ import { FaBookOpen, FaInfoCircle, FaPeopleCarry } from "react-icons/fa"
 import CoWorking from "../images/co-working.jpeg"
 import { ContentCallout } from "../components/global/ContentCallout"
 import { Container } from "../components/layouts/container"
-import { EcomIntegrationCard } from "./integrations"
+import { IntegrationCard } from "./integrations"
 
 export const query = graphql`
   query {
@@ -118,17 +118,17 @@ const IndexPage = ({}: any) => {
 
           <Box mb={7}>
             <SimpleGrid columns={[2, 6, 6]} spacing={5}>
-              <EcomIntegrationCard
+              <IntegrationCard
                 title={"Shopify"}
                 link={"/integrations/shopify-integration/"}
                 logo={ShopifyLogo}
               />
-              <EcomIntegrationCard
+              {/* <IntegrationCard
                 title={"Magento"}
                 link={"/integrations/"}
                 logo={MagentoLogo}
-              />
-              <EcomIntegrationCard
+              /> */}
+              <IntegrationCard
                 title={"WooCommerce"}
                 link={"/integrations/woocommerce"}
                 logo={WooCommerceLogo}
@@ -144,26 +144,26 @@ const IndexPage = ({}: any) => {
 
           <Box>
             <SimpleGrid columns={[2, 6, 6]} spacing={5}>
-              <EcomIntegrationCard
+              <IntegrationCard
                 title={"Unifaun"}
                 link={"/integrations/unifaun"}
                 logo={UnifaunLogo}
               />
-              <EcomIntegrationCard
+              {/* <IntegrationCard
                 title={"Consignor"}
                 link={"/integrations/"}
                 logo={ConsignorLogo}
               />
-              <EcomIntegrationCard
+              <IntegrationCard
                 title={"Ongoing"}
                 link={"/integrations/"}
                 logo={OngoingLogo}
               />
-              <EcomIntegrationCard
+              <IntegrationCard
                 title={"Webshipper"}
                 link={"/integrations/"}
                 logo={WebshipperLogo}
-              />
+              /> */}
             </SimpleGrid>
           </Box>
         </Box>
