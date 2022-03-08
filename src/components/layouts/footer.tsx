@@ -63,7 +63,9 @@ export const LinkGrid = (props: SimpleGridProps) => (
       <Stack>
         <Link to={"/faqs/"}>FAQs</Link>
         <Link to={"/community/"}>Porterbuddy Community</Link>
-        <Link to={"/"}>Careers</Link>
+        <a href={"https://jobb.porterbuddy.com/?lang=en"} target="_blank">
+          Careers
+        </a>
         <Link to={"/changelog/"}>Changelog</Link>
       </Stack>
     </Box>
@@ -97,14 +99,6 @@ export const Footer = ({ ...rest }: any) => (
               <SubscribeForm width={{ base: "full", md: "sm" }} />
             </Stack>
           </Stack>
-          {/* <Stack
-            direction={{ base: "column-reverse", md: "row" }}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Copyright />
-            <SocialMediaLinks />
-          </Stack> */}
         </Stack>
       </Box>
     </Container>

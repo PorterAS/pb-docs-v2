@@ -61,10 +61,10 @@ const IndexPage = ({}: any) => {
           </Text>
         </Box>
         <ContentCallout title={"Porterbuddy Samlevert v1"} type="info">
-          The all new Porterbuddy Samlevert product launch. Learn to upgrade
-          your existing Porterbuddy integration to use Samlevert. Samlevert lets
-          your customers purchase items from multiple stores and receive all the
-          orders within the same delivery window.
+          The all new Porterbuddy Samlevert product launch. Upgrade your
+          existing Porterbuddy integration to use Samlevert. Samlevert lets your
+          customers purchase items from multiple stores and receive all the
+          orders at the same time for free.
         </ContentCallout>
       </Container>
 
@@ -80,8 +80,8 @@ const IndexPage = ({}: any) => {
                 Getting started
               </Text>
               <Text width={["100%", "100%", "100%"]} mb={5}>
-                Integrate Porterbuddy's product card widget, Checkout widget and
-                Universal shipping module
+                Integrate Porterbuddy's Product Card Widget, Checkout Widget and
+                Unified Shipping Module
               </Text>
               <Button
                 bgColor={"#661AFF"}
@@ -113,7 +113,7 @@ const IndexPage = ({}: any) => {
             Integrations
           </Text>
           <Box mb={7}>
-            <Text fontWeight={"500"}>E-commerce Integrations</Text>
+            <Text fontWeight={"500"}>E-commerce Storefront Integrations</Text>
           </Box>
 
           <Box mb={7}>
@@ -182,7 +182,7 @@ const IndexPage = ({}: any) => {
               </Text>
               <Text width={["100%", "100%", "100%"]} mb={5}>
                 Looking to deliver parcels with Porterbuddy from your webshop?
-                get in touch with a sales representative to schedule a
+                Get in touch with a sales representative to schedule a
                 walkthrough
               </Text>
               <Button

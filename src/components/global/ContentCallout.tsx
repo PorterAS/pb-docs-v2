@@ -2,6 +2,7 @@ import * as React from "react"
 import { useState } from "react"
 import { Box, Flex, Text } from "@chakra-ui/react"
 import { FaTimes } from "react-icons/all"
+import { Link } from "gatsby"
 
 type ContentCalloutPropType = {
   title?: string
@@ -15,6 +16,7 @@ export const ContentCallout = ({
   children,
   canClose = false,
   type = "info",
+  bannerLink,
   ...rest
 }: ContentCalloutPropType) => {
   const [closeBanner, setCloseBanner] = useState(false)
