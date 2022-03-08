@@ -29,15 +29,18 @@
     "gatsby-source-filesystem": "^4.2.0",
     "gatsby-transformer-sharp": "^4.2.0",
     "highlight.js": "^11.1.0",
+    "lunr": "^2.3.9",
     "prism-react-renderer": "^1.2.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
+    "react-lunr": "^1.1.0",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "@types/lunr": "^2.3.4",
     "@types/mdx-js__react": "^1.5.4",
     "@types/prettier": "^2.4.2",
     "@types/prop-types": "^15.7.4",

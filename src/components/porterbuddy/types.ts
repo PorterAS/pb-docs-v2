@@ -106,7 +106,7 @@ export interface IPBUnifiedShippingModule {
   getPbAvailability?: (
     recipientInfo: RecipientInfoType
   ) => Promise<AvailabilityResponseType>
-  getShhippingOptions?: (recipientInfo: RecipientInfoType) => Promise<{
+  getShippingOptions?: (recipientInfo: RecipientInfoType) => Promise<{
     homeDeliveryOptions: IShippingOption[]
     pickupPointOptions: IShippingOption[]
     storeOptions: IShippingOption[]

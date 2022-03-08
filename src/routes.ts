@@ -143,7 +143,7 @@ export const sidebarRoutes: SidebarRouteType[] = [
     label: "Unified Shipping Module",
     parentPath: "/usm/",
     icon: "FaCircle",
-    children:[
+    children: [
       {
         routePath: "/usm/integration/",
         label: "Integration",

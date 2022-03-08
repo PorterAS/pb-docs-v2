@@ -2,13 +2,11 @@ import * as React from "react"
 import { Box, Center, Text } from "@chakra-ui/react"
 import Layout from "../components/layouts/docs-layout"
 import SEO from "../components/seo"
-import { PBProductCard } from "../components/porterbuddy/PBProductCardWidget"
+// import { PBProductCard } from "../components/porterbuddy/PBProductCardWidget"
 import { PBCheckoutWidget } from "../components/porterbuddy/PBCheckoutWidget"
 import { pbAvailabilityData } from "../components/porterbuddy/sample-data"
-import {
-  IPBWidget,
-  PBCheckoutWidgetType,
-} from "../components/porterbuddy/types"
+import { IPBWidget, IPBCheckoutWidget } from "../components/porterbuddy/types"
+import { Search } from "../components/global/Search"
 
 const SupportPage = () => {
   const pbProductCardOptions: IPBWidget = {
@@ -20,7 +18,7 @@ const SupportPage = () => {
     alternateAvailabilityView: true,
   }
 
-  const pbCheckoutWidgetOptions: PBCheckoutWidgetType = {
+  const pbCheckoutWidgetOptions: IPBCheckoutWidget = {
     token: "7cDRiTIsB89nKJzwMJfuLLqEfF9Sw9ImkJnneoAm",
     view: "checkout",
     language: "NO",
@@ -28,7 +26,7 @@ const SupportPage = () => {
     hideIfUnavailable: false,
     alternateAvailabilityView: true,
     availabilityResponse: pbAvailabilityData,
-    onSelectDeliveryWindow: window => {
+    onSelectDeliveryWindow: (window: any) => {
       console.log(window)
     },
   }
@@ -43,7 +41,8 @@ const SupportPage = () => {
           This page wil be filled with content soon.
         </Text>
         {/*<PBProductCard options={pbProductCardOptions} />*/}
-        <PBCheckoutWidget options={pbCheckoutWidgetOptions} />
+        {/* <PBCheckoutWidget options={pbCheckoutWidgetOptions} /> */}
+        <Search />
       </Box>
     </Layout>
   )

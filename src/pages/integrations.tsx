@@ -85,7 +85,7 @@ const IntegrationsPage = () => {
           <Text fontSize="2xl" fontWeight={"600"} as={"h1"} mb={5}>
             Integrations
           </Text>
-          <Text as={"h2"} lineHeight={7}>
+          <Text lineHeight={7}>
             Porterbuddy offers multiple integration options for new and existing
             e-commerce stores and order fulfillment systems.
           </Text>
@@ -98,7 +98,7 @@ const IntegrationsPage = () => {
 
         <Box mb={"4em"}>
           <Box mb={7}>
-            <Text fontSize={"xl"} fontWeight={"600"} mb={5}>
+            <Text fontSize={"xl"} fontWeight={"600"} mb={5} color="#661aff">
               Porterbuddy Direct Integrations
             </Text>
             <Text lineHeight={7}>
@@ -128,7 +128,7 @@ const IntegrationsPage = () => {
 
         <Box mb={"4em"}>
           <Box mb={7}>
-            <Text fontSize={"xl"} fontWeight={"600"} mb={5}>
+            <Text fontSize={"xl"} fontWeight={"600"} mb={5} color="#661aff">
               E-commerce Integrations
             </Text>
             <Text lineHeight={7}>
@@ -175,7 +175,7 @@ const IntegrationsPage = () => {
 
         <Box mb={"4em"}>
           <Box mb={7}>
-            <Text fontSize={"xl"} fontWeight={"600"} mb={5}>
+            <Text fontSize={"xl"} fontWeight={"600"} mb={5} color="#661aff">
               Transport and Warehouse Management Systems Integrations
             </Text>
             <Text lineHeight={7}>

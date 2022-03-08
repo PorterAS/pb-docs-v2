@@ -82,7 +82,7 @@ const NavItem = React.memo(
               : "gray.600"
           }
           role="group"
-          fontWeight="semibold"
+          fontWeight="400"
           {...rest}
         >
           {icon && <Icon mr="2" boxSize="4" as={icon} />}
@@ -102,7 +102,11 @@ type SidebarType = {
 const SidebarAccordion = ({ route, iconMap, pageURL }: SidebarType) => {
   return (
     <Accordion allowToggle allowMultiple>
-      <AccordionItem borderTopWidth={"none"} style={{ borderBottomWidth: "0" }}>
+      <AccordionItem
+        borderTopWidth={"none"}
+        style={{ borderBottomWidth: "0" }}
+        maxWidth="250px"
+      >
         <AccordionButton
           px={0}
           _hover={{
@@ -117,9 +121,11 @@ const SidebarAccordion = ({ route, iconMap, pageURL }: SidebarType) => {
             flex={1}
             pageURL={pageURL}
           >
-            <Text fontSize={"sm"}>{route.label}</Text>
+            <Text fontSize={"sm"} fontWeight="400">
+              {route.label}
+            </Text>
           </NavItem>
-          <AccordionIcon />
+          <AccordionIcon ml="-10px" />
         </AccordionButton>
         <AccordionPanel>
           {route.children &&
