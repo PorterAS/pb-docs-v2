@@ -1,6 +1,6 @@
 ---
 title: "Getting started with Porterbuddy's Integration"
-meta_title: "get started with integrating Porterbuddy"
+meta_title: "Get started with integrating Porterbuddy"
 publishBy: "02-12-2021"
 author: "William Imoh"
 meta_description: "Learn all you need to integrate your systems with Porterbuddy"
