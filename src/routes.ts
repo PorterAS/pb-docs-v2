@@ -33,6 +33,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "Update shipment information",
       },
       {
+        routePath: "/api-reference/set-parcel-details/",
+        label: "Set parcel details",
+      },
+      {
         routePath: "/api-reference/fetch-labels/",
         label: "Fetch labels",
       },

@@ -1,0 +1,53 @@
+---
+title: "Set parcel details"
+meta_title: "Update a Porterbuddy parcel's detail"
+publishBy: "02-12-2021"
+author: "William Imoh"
+meta_description: "Update the information of a parcel in a Porterbuddy order"
+---
+
+This endpoint appends information to a parcel. It will ignore missing keys and null values, and can thus only add or change information on a parcel.
+If you need to remove parcel information use `/update-shipment-details`. A prerequisite for using this endpoint is that the parcel has a `parcelShipmentIdentifier`.
+This can either be set at order creation, or using the `/update-shipment-details` endpoint.
+
+```bash
+PUT https://api.porterbuddy.com/order/<orderId>/set-parcel-details/<parcelShipmentIdentifier>
+```
+
+Example request:
+
+```shell
+curl -X PUT \
+  https://api.porterbuddy.com/order/<orderId>/set-parcel-details/<parcelShipmentIdentifier> \
+  -H 'x-api-key: <your_api_key>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "description": "Shoes",
+        "widthCm": 1,
+        "heightCm": 40,
+        "depthCm": 1,
+        "weightGrams": 2000,
+        "constraints": {
+            "temperature": {
+                "maximumCelsius": 25.0,
+                "minimumCelsius": 10.0
+            }
+        }
+    }'
+```
+
+**_Arguments_**
+
+| description | No  | String                                                                    | none | Description of the parcel and contents                                                                                  |
+| ----------- | --- | ------------------------------------------------------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------- |
+| widthCm     | No  | Int                                                                       | none | The width of the parcel in cm                                                                                           |
+| heightCm    | No  | Int                                                                       | none | The height of the parcel in cm                                                                                          |
+| depthCm     | No  | Int                                                                       | none | The depth of the parcel in cm                                                                                           |
+| weightGrams | No  | Int                                                                       | none | The weight of the package in grams                                                                                      |
+| constraints | No  | [ParcelConstraints](https://developer.porterbuddy.com/#parcelconstraints) | none | Constraints for parcel delivery. \* Make sure not to change the constraints after the labels for the order are printed. |
+
+**_Response_**
+
+200 OK if the request was successful.
+
+404 Not Found if no parcel is found for combination of orderId and parcelShipmentIdentifier.
