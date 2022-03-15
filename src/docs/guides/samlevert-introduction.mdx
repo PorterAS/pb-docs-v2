@@ -1,0 +1,35 @@
+---
+title: "Introduction to Samlevert"
+publishBy: "15-03-2022"
+author: "William Imoh"
+coverPhoto: "https://res.cloudinary.com/chuloo/image/upload/v1627831612/samlevert-logo_oi1oue.png"
+meta_description: "Learn about Porterbuddy's delivery consolidation product, Samlevert"
+---
+
+Samlevert, also known as Consolidated Delivery, is a Porterbuddy service that enables customers to receive multiple orders placed on a web store in one delivery. Customers can also place these orders [across several other supported stores](https://porterbuddy.com/samlevert), and the customer gets them in one delivery.
+Some key considerations to note are:
+
+1. The first order placed on any store is the primary order, and all other orders consolidated with it are secondary orders (or attachments)
+2. The customer only pays a delivery fee for the primary order. All the secondary orders are free for the customer.
+3. The order must be an active, accepted, and undelivered Porterbuddy order to serve as a primary order.
+4. The cutoff time to receive orders from the store where the primary order is placed must not have passed for secondary orders to be added.
+
+## Implementation considerations
+
+The following is a concise summary of what is required to activate Samlevert for a storefront:
+
+1. Porterbuddy has to activate Samlevert webstore’s account.
+2. The storefront must send the customer's email, complete address, and postcode to Porterbuddy to check if Samlevert is available for the order.
+3. Porterbuddy will return a Samlevert delivery window if consolidation is possible with a primary order, with zero shipping cost.
+4. Suppose the customer selects the Samlevert delivery window. In that case, the store places the order by sending Porterbuddy the consolidated window, including other options required to create an order.
+
+## Implementation estimate
+
+Depending on the system of the webstore, the technical implementation should take approximately one day to complete.
+You can find the [complete guide to implementing an upgrade here](/guides/samlevert-upgrade-guide/).
+
+<ContentCallout title="Available integrations">
+  Storefronts using Porterbuddy’s Shopify, WooCommerce, Magento, KSA, and nShift
+  integrations only need to request that Porterbuddy turns on Samlevert for
+  their store.
+</ContentCallout>

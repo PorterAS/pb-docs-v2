@@ -226,6 +226,10 @@ export const sidebarRoutes: SidebarRouteType[] = [
         label: "Porterbuddy Large™",
       },
       {
+        routePath: "/guides/samlevert-introduction/",
+        label: "Introduction to Samlevert",
+      },
+      {
         routePath: "/guides/samlevert-upgrade-guide/",
         label: "Samlevert upgrade guide",
       },
