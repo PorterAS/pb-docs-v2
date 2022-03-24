@@ -103,6 +103,7 @@ curl -X GET \
 | pickupTime      | DateTime                                          | The calculated date and time the order needs to be picked up to be delivered on time.                                                                                                                             |
 | statusUpdatedAt | DateTime                                          | The timestamp of the last order status change, as ISO timestamp with time zone.                                                                                                                                   |
 | orderReference  | String                                            | An order reference as specified in order request or the shipment details update                                                                                                                                   |
+| tmsReference    | String                                            | External tms reference as specified                                                                                                                                                                               |
 
 As the order status variables returned in `orderStatus` can be modified anytime, we recommend making considerations for this when building bespoke user interfaces using the status we return.
 The API response currently returns any of the following statuses:
