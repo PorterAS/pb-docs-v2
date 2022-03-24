@@ -7,6 +7,7 @@ meta_description: "Test your Porterbuddy integration to mitigate errors in produ
 ---
 
 ## Overview
+
 After integrating Porterbuddy into your e-commerce platform, it is vital to test your systems end-to-end to ensure its effectiveness.
 
 This testing process aims at mitigating any technical or process issues that could occur during a live operation of your store.
@@ -64,7 +65,7 @@ You need to place a test order with Porterbuddy shipping options in your test st
 Once you place an order, verify that the order is visible in your test Partner portal account accessible on https://retailers.porterbuddy-test.com.
 In the test partner web portal, verify that all information required is present in the order, including the recipient and parcel information, if available at the time.
 
-The parcel information is updated using the `update-shipment-details` API call during integration. https://developer.porterbuddy.com/#update-shipment-information
+The parcel information is updated using the `update-shipment-details` [API call](/api-reference/update-shipment-information/) during integration.
 
 Shipping labels are available once the parcel information is specified. This shipping label can be printed from the Partner web portal or obtained from the API response to update shipment details.
 

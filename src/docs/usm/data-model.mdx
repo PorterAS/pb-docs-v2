@@ -6,7 +6,7 @@ author: "William Imoh"
 meta_description: "The Data model of the Porterbuddy Unified Shipping Module"
 ---
 
-On this page, we outline the data model and types used in the configuration of the USM. 
+On this page, we outline the data model and types used in the configuration of the USM.
 
 Fields marked in **bold** are required (i.e. always defined for types that are output from the module).
 
@@ -15,7 +15,7 @@ Fields marked in **bold** are required (i.e. always defined for types that are o
 A ShippingOption configures the look of a user selectable simple shipping option, without a location or selectable delivery windows.
 
 | Key            | Type                                       | Allowed values | Description                                                                                                                                                                                 |
-|----------------|--------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **id**         | string                                     |                | Unique identifier for the shipping option                                                                                                                                                   |
 | **name**       | string                                     |                | Name of the shipping option to be displayed                                                                                                                                                 |
 | price          | Price                                      |                | Price for the shipping option, if not specified, free is assumed                                                                                                                            |
@@ -32,7 +32,7 @@ A ShippingOption configures the look of a user selectable simple shipping option
 This is a shipping option where the user can select a location from a list, e.g. for pickup point delivery or self-pickup at a store.
 
 | Key            | Type                                       | Allowed values | Description                                                                                                                                                                                 |
-|----------------|--------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **id**         | string                                     |                | Unique identifier for the shipping option                                                                                                                                                   |
 | **name**       | string                                     |                | Name of the shipping option to be displayed                                                                                                                                                 |
 | price          | Price                                      |                | Price for the shipping option, if not specified, free is assumed                                                                                                                            |
@@ -46,10 +46,11 @@ This is a shipping option where the user can select a location from a list, e.g.
 | locations      | ShippingLocation[]                         |                | A list of pickup locations, at least one needs to be specified. If more than one location is specified, a dropdown list is shown                                                            |
 
 ## ServiceLevelShippingOption
+
 A shipping option where users can select different levels of service with varying prices and delivery times from a list, e.g. tracked or untracked parcels, standard or premium shipping, etc.
 
 | Key            | Type                                       | Allowed values | Description                                                                                                                                                                                 |
-|----------------|--------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **id**         | string                                     |                | Unique identifier for the shipping option                                                                                                                                                   |
 | **name**       | string                                     |                | Name of the shipping option to be displayed                                                                                                                                                 |
 | price          | Price                                      |                | Will be ignored, as the price is individually specified for each service level                                                                                                              |
@@ -63,10 +64,11 @@ A shipping option where users can select different levels of service with varyin
 | levels         | ShippingServiceLevel[]                     |                | The different service levels for the delivery service to choose from                                                                                                                        |
 
 ## PorterbuddyShippingOption
+
 Porterbuddy Shipping presents a matrix where the user can select a delivery window.
 
 | Key                      | Type                                       | Allowed values | Description                                                                                                                                                                                 |
-|--------------------------|--------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------ | ------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **id**                   | string                                     |                | Unique identifier for the shipping option                                                                                                                                                   |
 | **name**                 | string                                     |                | Name of the shipping option to be displayed                                                                                                                                                 |
 | price                    | Price                                      |                | Will be ignored, as the price is individually specified for each delivery window                                                                                                            |
@@ -77,14 +79,15 @@ Porterbuddy Shipping presents a matrix where the user can select a delivery wind
 | updateInterval           | number                                     |                | Interval for periodic updates of this shipping option in seconds. Periodic updates will only be performed if an update handler function is defined as well                                  |
 | onUpdateOption           | `(callback: updatedProps => void) => void` |                | Update handler function for periodic updates. The function passed here gets called on each periodic update with a callback function to pass the updated properties of this shipping option. |
 | default                  | boolean                                    |                | Pre-select this option after initialization                                                                                                                                                 |
-| **availabilityResponse** | AvailabilityResponse                       |                | An availabilityResponse from Porterbuddy availability API. See https://developer.porterbuddy.com/#availability-check-api                                                                    |
+| **availabilityResponse** | AvailabilityResponse                       |                | An availabilityResponse from Porterbuddy availability API. See [the availability check API](/api-reference/availability-api/)                                                               |
 | discount                 | number                                     |                | Discount to be applied on all delivery window shown, specified as hundreds of a value unit (e.g. discount=5000 for a price reduction by 50 NOK)                                             |
 
 ## ShippingLocation
+
 A location for either pickup point delivery or store pickup.
 
 | Key              | Type   | Allowed values | Description                                                                                                                                                                                                                                                                              |
-|------------------|--------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **id**           | string |                | A unique id for the shipping location                                                                                                                                                                                                                                                    |
 | **name**         | string |                | Name of the location, to be displayed in the option card                                                                                                                                                                                                                                 |
 | **address**      | string |                | Address of the location, to be displayed in the option card                                                                                                                                                                                                                              |
@@ -93,10 +96,11 @@ A location for either pickup point delivery or store pickup.
 | description      | string |                | Additional description for the shipping location, will be displayed below the other fields if present                                                                                                                                                                                    |
 
 ## ShippingServiceLevel
+
 A selected service level for a shipping carrier.
 
 | Key          | Type         | Allowed values | Description                                                                                                |
-|--------------|--------------|----------------|------------------------------------------------------------------------------------------------------------|
+| ------------ | ------------ | -------------- | ---------------------------------------------------------------------------------------------------------- |
 | **id**       | string       |                | A unique id for the shipping service level                                                                 |
 | **name**     | string       |                | Name of the shipping service level, to be displayed in the option card                                     |
 | deliveryTime | DeliveryTime |                | When the order will be delivered. See the type documentation for the available formats.                    |
@@ -104,18 +108,20 @@ A selected service level for a shipping carrier.
 | description  | string       |                | Additional description for the shipping service level, will be displayed below the other fields if present |
 
 ## Price
+
 A price for a shipping option.
 
 | Key                        | Type   | Allowed values | Description                                                                                                                      |
-|----------------------------|--------|----------------|----------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | ------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | **fractionalDenomination** | number |                | The price amount on a base of 1/100 of the specified currency, e.g. a fractional denomination of 4900 describes a price of 49,00 |
 | **currency**               | string | NOK            | A currency code. Currently, only "NOK" is supported                                                                              |
 
 ## DeliveryWindow
+
 A delivery window for Porterbuddy deliveries.
 
 | Key          | Type    | Allowed values | Description                                                                            |
-|--------------|---------|----------------|----------------------------------------------------------------------------------------|
+| ------------ | ------- | -------------- | -------------------------------------------------------------------------------------- |
 | **product**  | string  | delivery       | The delivery product. Currently, only "delivery" is available                          |
 | **start**    | string  |                | Start time of the delivery window in iso format                                        |
 | **end**      | string  |                | End time of the delivery window in iso format                                          |
@@ -124,10 +130,11 @@ A delivery window for Porterbuddy deliveries.
 | consolidated | boolean |                | Indicates if this delivery window can be used to consolidate with an existing delivery |
 
 ## DeliveryTime
+
 A specification of delivery time. The value object where the "format" field is a discriminator to declare exactly what the other properties mean. The various formats (not fields) are listed below.
 
 | Key                       | Type                                                            | Allowed values | Description                                                                                     |
-|---------------------------|-----------------------------------------------------------------|----------------|-------------------------------------------------------------------------------------------------|
+| ------------------------- | --------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------- |
 | text                      | { format: 'text', line1: string, line2: string }                |                | Rendered as "${line1}, ${line2}"                                                                |
 | exactDate                 | { format: 'exactDate', date: "YYYY-MM-DD" }                     |                | Rendered as e.g. "om 4 dg, 4. okt" / "I dag, 30. sept" / "I morgen, 1. okt"                     |
 | estimatedDate             | { format: 'estimatedDate', date: "YYYY-MM-DD" }                 |                | Rendered as e.g. "ca 4 dg, forventet 4. okt" / "I dag, 30. sept" / "I morgen, forventet 1. okt" |
@@ -139,13 +146,15 @@ A specification of delivery time. The value object where the "format" field is a
 | estimatedNumberOfDays     | { format: 'estimatedNumberOfDays', days: number }               |                | Rendered as e.g. "ca 4 dg, forventet 4. okt"                                                    |
 
 ## ShippingCategory
+
 A shipping category. Supported values are "home", "pickupPoint" and "store".
 
 ## SelectedShipping
+
 Data for the currently selected shipping option.
 
 | Key            | Type                                                                  | Allowed values | Description                                                                                                                                                                                                   |
-|----------------|-----------------------------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | --------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **id**         | string                                                                |                | Unique id of the selected shipping option                                                                                                                                                                     |
 | price          | Price                                                                 |                | Price of the selected shipping option as displayed                                                                                                                                                            |
 | deliveryTime   | DeliveryTime                                                          |                | The deliveryTime specified for the option. Whatever was sent in what be what you will get out. For porterbuddy delivery the format will be exactDate. For consolidated porterbuddy delivery it will be blank. |
@@ -153,39 +162,41 @@ Data for the currently selected shipping option.
 | additionalData | any                                                                   |                | Arbitrary data that was specified in the Shipping Option definition and was passed-through as-is.                                                                                                             |
 
 ## SelectedPorterbuddyOption
+
 Additional data for a currently selected porterbuddy delivery option.
 
 | Key                     | Type           | Allowed values | Description                           |
-|-------------------------|----------------|----------------|---------------------------------------|
+| ----------------------- | -------------- | -------------- | ------------------------------------- |
 | **deliveryWindow**      | DeliveryWindow |                | The selected delivery window          |
 | **deliveryWindowIndex** | number         |                | index of the selected delivery window |
 
 ## SelectionPropertyChangeListener
+
 The definition of a listener for property changes when a shipping option is selected.
 
 | Key              | Type                   | Allowed values | Description                                |
-|------------------|------------------------|----------------|--------------------------------------------|
+| ---------------- | ---------------------- | -------------- | ------------------------------------------ |
 | **optionId**     | string                 |                | the id of the shipping option to listen to |
 | **propertyPath** | string                 |                | Path of the property to listen for changes |
 | **onChange**     | `(value: any) => void` |                | Function to be called on property changes  |
 
 ## RecipientInfo
+
 Info about the recipient of a delivery.
 
 | Key               | Type   | Allowed values | Description                     |
-|-------------------|--------|----------------|---------------------------------|
+| ----------------- | ------ | -------------- | ------------------------------- |
 | **email**         | string |                | E-Mail address of the recipient |
 | **postCode**      | string |                | Recipient's postcode            |
 | **streetAddress** | string |                | Recipient's street address      |
 
 ## CheckoutCallbacks
+
 Callback functions used to interact with the widget from external scripts.
 
 | Key                        | Type                                     | Allowed values | Description                                                                                                                                                                                                                                                                                 |
-|----------------------------|------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | ---------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **forceRefresh**           | `() => Promise<void>`                    |                | Completely refreshes the checkout with the current value of the options object. Current selections and form data will be lost. Returns a promise that will resolve when the refresh is complete.                                                                                            |
 | **setRecipientInfo**       | `(recipientInfo: RecipientInfo) => void` |                | Sets the recipient info and updates the delivery option properties from the current state of the options object                                                                                                                                                                             |
 | **refreshShippingOptions** | `() => void`                             |                | Refreshes the currently displayed shipping options with the values from the configuration object                                                                                                                                                                                            |
 | **setRecipientInfoLocked** | `(recipientInfoLocked: boolean) => void` |                | Locks the address form and prevents further editing if recipientInfoLocked is true. Call with recipientInfoLocked false to unlock the form again. Should be used in conjunction with setRecipientInfo or onRecipientInfo. If the form is locked with invalid values behaviour is undefined. |
-
-
