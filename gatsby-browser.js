@@ -8,6 +8,35 @@
 import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
+import { Link, Text } from "@chakra-ui/react"
+
+function makeId(text) {
+  // Check if data passed is a string or a an object with type - due to a parent
+  const rawText = typeof text == "string" ? text : text.props.children
+
+  let transformedText = rawText
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9 ]/g, "")
+    .trim()
+    .split(" ")
+    .filter(n => n)
+    .join("-")
+  return transformedText
+}
+
+const HeadingWithID = ({ children, ...rest }) => {
+  // Fetch the URL from the browser
+  const url = typeof window !== "undefined" ? window.location.href : ""
+  const urlWithoutParam = url.split("#")[0]
+
+  // construct the ID
+  const id = makeId(children)
+  return (
+    <a href={`${urlWithoutParam}#${id}`} style={{ textDecoration: "none" }}>
+      <h2 id={id}>{children}</h2>
+    </a>
+  )
+}
 
 const colors = {
   main: "#661AFF",
@@ -76,6 +105,7 @@ const component = {
   table: MyTable,
   td: TableData,
   th: TableHead,
+  h2: HeadingWithID,
 }
 export const wrapRootElement = ({ element }) => {
   return (
