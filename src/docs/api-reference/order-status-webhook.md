@@ -100,6 +100,7 @@ Example order request body with the webhook
   "product": "delivery",
   "courierInstructions": "Test",
   "orderReference": "order-12345",
+  "tmsReference": "order-12345",
   "statusWebhookUrl": "https://api.myshopbackend.com/statusUpdated"
 }
 ```
@@ -114,6 +115,7 @@ Example webhook payload
 "pickupTime": "2023-02-13T15:00:00+02:00",
 "statusUpdatedAt": "2021-06-08T12:16:40.32538Z",
 "orderReference": "order-12345",
+"tmsReference": "order-12345",
 }
 ```
 

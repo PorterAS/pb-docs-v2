@@ -30,14 +30,73 @@ Example Response
   "orderStatus": "ready",
   "pickupDate": "2023-02-13",
   "statusUpdatedAt": "2021-03-25T10:30:35.742857Z",
-  "orderReference": "order-#12345678"
+  "orderReference": "order-#12345678",
+  "tmsReference": "order-#12345678"
+}
+```
+
+## Fetch order status with an order reference
+
+The order status can also be retrieved using order reference. The order status contains the pickup date, which is updated in case the recipient changes the delivery day, so it should be fetched regularly.
+
+`GET https://api.porterbuddy.com/order/order-reference/<order-reference>/status`
+
+Example Request
+
+```shell
+curl -X GET \
+  https://api.porterbuddy-test.com/order/order-reference/<order-reference>/status \
+  -H 'x-api-key: <your_api_key>' \
+  -H 'Accept: application/json'
+```
+
+Example Response
+
+```json
+{
+  "orderId": "3520",
+  "orderStatus": "ready",
+  "pickupDate": "2023-02-13",
+  "pickupTime": "2023-02-13T15:00:00+02:00",
+  "statusUpdatedAt": "2021-03-25T10:30:35.742857Z",
+  "orderReference": "order-#12345678",
+  "tmsReference": "order-#12345678"
+}
+```
+
+## Fetch order status with a TMS reference
+
+The order status can also be retrieved using TMS reference. The order status contains the pickup date, which is updated in case the recipient changes the delivery day, so it should be fetched regularly.
+
+`GET https://api.porterbuddy.com/order/tms-reference/<tms-reference>/status`
+
+> Example Request
+
+```shell
+curl -X GET \
+  https://api.porterbuddy-test.com/order/tms-reference/<tms-reference>/status \
+  -H 'x-api-key: <your_api_key>' \
+  -H 'Accept: application/json'
+```
+
+> Example Response
+
+```json
+{
+  "orderId": "3520",
+  "orderStatus": "ready",
+  "pickupDate": "2023-02-13",
+  "pickupTime": "2023-02-13T15:00:00+02:00",
+  "statusUpdatedAt": "2021-03-25T10:30:35.742857Z",
+  "orderReference": "order-#12345678",
+  "tmsReference": "order-#12345678"
 }
 ```
 
 ## Response data
 
 | Parameter       | Type                                              | Description                                                                                                                                                                                                       |
-|-----------------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | orderId         | String                                            | The id of the order.                                                                                                                                                                                              |
 | orderStatus     | String Examples: [received, delivered, cancelled] | The status of the order. This list is non exhaustive so please take care to display/handle any new statuses that is introduced.                                                                                   |
 | ~~pickupDate~~  | ~~Date~~                                          | **Deprecated, use pickupTime instead!** The date when the order parcels will be picked up by Porterbuddy. Depending on the delivery area, the parcels may be picked up one or more days before the delivery date. |

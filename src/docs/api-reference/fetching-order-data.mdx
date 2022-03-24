@@ -97,6 +97,7 @@ Example response
     "confirmCustomerReceipt": false
   },
   "orderReference": "c46e068c-a3bb-4429-ac12-f81ee3ce9e86",
+  "tmsReference": "511bd245-8204-4330-98a3-5e58be8ba1eb",
   "statusUpdatedAt": "2021-05-31T07:13:41.525648Z",
   "pickupDate": "2021-06-10",
   "pickupTime": "2021-06-10T15:00:00+02:00",
@@ -139,6 +140,7 @@ Example response
 | parcels                   | List<[Parcel](https://developer.porterbuddy.com/#parcel)>               | Current parcel specification                                                                                                             |
 | verifications             | [Verifications](https://developer.porterbuddy.com/#verifications)       | Verifications to perform on delivery                                                                                                     |
 | orderReference            | String                                                                  | External order reference as specified                                                                                                    |
+| tmsReference              | String                                                                  | External tms reference as specified                                                                                                      |
 | statusUpdatedAt           | DateTime                                                                | Timestamp of the last status update                                                                                                      |
 | pickupDate (Deprecated)   | Date                                                                    | **Deprecated, use `pickupTime` instead**. Calculated pickup date, based on the specified delivery date                                   |
 | pickupTime                | DateTime                                                                | Calculated date and time the order needs to be picked up to be delivered on time.                                                        |
