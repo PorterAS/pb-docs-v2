@@ -59,14 +59,14 @@ Example response:
 
 **_Arguments_**
 
-| Parameter          | Required | Type                                                        | Default | Description                                                                                                   |
-| ------------------ | -------- | ----------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------- |
-| parcels            | Yes      | `List<[Parcel](https://developer.porterbuddy.com/#parcel)>` | none    | Information about the parcels.                                                                                |
-| shipmentIdentifier | No       | Digits[5-20]                                                | none    | Shipping identifier.                                                                                          |
-| orderReference     | No       | String                                                      | none    | Your internal order reference. If this parameter is not set, the current order reference will not be removed. |
+| Parameter          | Required | Type                                             | Default | Description                                                                                                   |
+| ------------------ | -------- | ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------- |
+| parcels            | Yes      | List<[Parcel](/api-reference/order-api/#parcel)> | none    | Information about the parcels.                                                                                |
+| shipmentIdentifier | No       | Digits[5-20]                                     | none    | Shipping identifier.                                                                                          |
+| orderReference     | No       | String                                           | none    | Your internal order reference. If this parameter is not set, the current order reference will not be removed. |
 
 **_Response_**
 
-| Parameter | Type                                                                          | Description              |
-| --------- | ----------------------------------------------------------------------------- | ------------------------ |
-| \_links   | [OrderResponseLinks](https://developer.porterbuddy.com/#order-response-links) | Links for this resource. |
+| Parameter | Type                                                                 | Description              |
+| --------- | -------------------------------------------------------------------- | ------------------------ |
+| \_links   | [OrderResponseLinks](/api-reference/order-api/#order-response-links) | Links for this resource. |

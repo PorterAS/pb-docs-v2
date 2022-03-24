@@ -6,11 +6,11 @@ author: "William Imoh"
 meta_description: "Receive a webhook from Porterbuddy when an order changes"
 ---
 
-To receive notifications when the order status or pickup date changes, a webhook URL can be specified in the order request as property `statusWebhookUrl`. This URL gets called with HTTP POST every time the status or pickup date changes, and contains the same body as the [Order Status Endpoint](https://developer.porterbuddy.com/#fetch-order-status). The target endpoint must be reachable from the internet without authentication and respond within 10 seconds. If a status outside the [200..299] range is returned, or the endpoint is unreachable, the call will be retried 2 times with a rising interval. The response body will be ignored by our backend.
+To receive notifications when the order status or pickup date changes, a webhook URL can be specified in the order request as property `statusWebhookUrl`. This URL gets called with HTTP POST every time the status or pickup date changes, and contains the same body as the [Order Status Endpoint](/api-reference/order-status/). The target endpoint must be reachable from the internet without authentication and respond within 10 seconds. If a status outside the [200..299] range is returned, or the endpoint is unreachable, the call will be retried 2 times with a rising interval. The response body will be ignored by our backend.
 
 ## Webhook call body
 
-See [Order Status](https://developer.porterbuddy.com/#order-status)
+See [Order Status](/api-reference/order-status/)
 
 Example order request body with the webhook
 
@@ -107,15 +107,15 @@ Example order request body with the webhook
 
 Example webhook payload
 
-```
+```json
 {
-"orderId": "394326",
-"orderStatus": "canceled",
-"pickupDate": "2023-02-13",
-"pickupTime": "2023-02-13T15:00:00+02:00",
-"statusUpdatedAt": "2021-06-08T12:16:40.32538Z",
-"orderReference": "order-12345",
-"tmsReference": "order-12345",
+  "orderId": "394326",
+  "orderStatus": "canceled",
+  "pickupDate": "2023-02-13",
+  "pickupTime": "2023-02-13T15:00:00+02:00",
+  "statusUpdatedAt": "2021-06-08T12:16:40.32538Z",
+  "orderReference": "order-12345",
+  "tmsReference": "order-12345"
 }
 ```
 

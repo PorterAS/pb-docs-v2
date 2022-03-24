@@ -8,7 +8,6 @@
 import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import Highlight, { defaultProps } from "prism-react-renderer"
-import { Link, Text } from "@chakra-ui/react"
 
 function makeId(text) {
   // Check if data passed is a string or a an object with type - due to a parent
@@ -27,7 +26,7 @@ function makeId(text) {
 const HeadingWithID = ({ children, ...rest }) => {
   // Fetch the URL from the browser
   const url = typeof window !== "undefined" ? window.location.href : ""
-  const urlWithoutParam = url.split("#")[0]
+  const [urlWithoutParam] = url.split("#")
 
   // construct the ID
   const id = makeId(children)
