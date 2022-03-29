@@ -6,13 +6,13 @@ author: "William Imoh"
 meta_description: "Integrate Porterbuddy in Shopify stores"
 ---
 
-The Porterbuddy integration for Shopify consists of two components. The regular [product card widget](https://widget.porterbuddy.com/availability) can be used on product pages to show availability of Porterbuddy delivery early in the shopping process. 
+The Porterbuddy integration for Shopify consists of two components. The regular [product card widget](/product-card-widget/) can be used on product pages to show availability of Porterbuddy delivery early in the shopping process.
 
 For the checkout, a Shopify App is provided that will insert Porterbuddy delivery options in the checkout and handle the creation of orders in Porterbuddy's system, when a customer chooses a Porterbuddy delivery window.
 
 ## Requirements
 
-The Porterbuddy Shopify App requires that the Shopify plan for the target shop must include the feature "Carrier Calculated Shipping" to work as intended. This feature is available per default on the Shopify Advanced and Shopify Plus plans (as shown [here](https://en.shopify.no/pricing)). It can also be enabled for other plans for an additional fee by contacting Shopify support. 
+The Porterbuddy Shopify App requires that the Shopify plan for the target shop must include the feature "Carrier Calculated Shipping" to work as intended. This feature is available per default on the Shopify Advanced and Shopify Plus plans (as shown [here](https://en.shopify.no/pricing)). It can also be enabled for other plans for an additional fee by contacting Shopify support.
 For some plans, this feature can also be added free-of-charge by switching from monthly to yearly payment, please also contact Shopify support for enquiries if this is possible.
 
 To be able to use both product card widget and the Porterbuddy app in a Shopify store, a Porterbuddy API key and an access token is required. For enquiries, please use the [contact button](https://porterbuddy.com/business) on our public website. If you already have an agreement and a sender account with Porterbuddy, you can find your API key and public token in the profile page of our partner portal by clicking the button "Hent API-Nøkler".
@@ -21,11 +21,11 @@ To be able to use both product card widget and the Porterbuddy app in a Shopify 
 
 As Shopify does not allow customization of the checkout page, the regular checkout or consolidated checkout widgets cannot be used here. The Porterbuddy Shopify app inserts Porterbuddy delivery window options into the list of shipping options shown during the checkout flow in Shopify stores. Additionally, the Shopify app configures a webhook to receive orders from the store to create Porterbuddy orders in the backend when customers chose Porterbuddy as delivery option. No manual implementation is required in the Shopify store setup to use the Porterbuddy Shopify app.
 
-![Shopify checkout example](https://widget.porterbuddy.com/page-assets/shopify-checkout.png)
+<img src="/shopify-checkout.png" width="600px" max-width="600px" />
 
 ## Installation
 
-The installation process for the Shopify app will redirect to the Shopify page to authorize the app to access the store's data via the Shopify API. After authenticating the app, it will appear in "installed apps" in the shop administration pages, clicking on the app there will open the configuration page for the app. 
+The installation process for the Shopify app will redirect to the Shopify page to authorize the app to access the store's data via the Shopify API. After authenticating the app, it will appear in "installed apps" in the shop administration pages, clicking on the app there will open the configuration page for the app.
 
 The installation is started by entering your Shopify shop name `(<your-shop>.myshopify.com)` into the input below and clicking on the "Install app" button.
 
@@ -33,7 +33,7 @@ The installation is started by entering your Shopify shop name `(<your-shop>.mys
 
 ## Product Card Widget
 
-The product card widget can be added to a Shopify store in similar fashion as in any other webshop environment. The way of integrating the product card widget is dependent on the shop's theme structure, so a step-by-step guide is not possible to provide. In general, integrating it should be adding the product card widget as described in the [documentation page](https://widget.porterbuddy.com/availability) to the template for product pages.
+The product card widget can be added to a Shopify store in similar fashion as in any other webshop environment. The way of integrating the product card widget is dependent on the shop's theme structure, so a step-by-step guide is not possible to provide. In general, integrating it should be adding the product card widget as described in the [documentation page](/product-card-widget/) to the template for product pages.
 
 ## Integration example
 
@@ -69,7 +69,7 @@ An integration based on Shopify's debut theme could look like this:
 
 ## Shipping price
 
-The Porterbuddy API returns a default shipping price (kr 149,- in the default case). To adjust this to the desired price for the Porterbuddy option, best practice is to configure a discount that will be subracted from the standard price. Detailed instructions how to configure this in both Shopify checkout and product card widget can be [found here](https://widget.porterbuddy.com/shopify-discounts).
+The Porterbuddy API returns a default shipping price (kr 149,- in the default case). To adjust this to the desired price for the Porterbuddy option, best practice is to configure a discount that will be subracted from the standard price. Detailed instructions how to configure this in both Shopify checkout and product card widget can be [found here](/integrations/shopify-integration/#adjusting-the-shipping-price-via-shopify-settings).
 
 ## Recommendations and hints
 
@@ -83,7 +83,7 @@ Some recommendations in regard to integrating the product card widget:
 - Porterbuddy requires both email address as well as a phone number. To ensure customers provide both in the checkout process, choose the option "Customers can only check out using email" in Store Settings -> Checkout -> Customer contact. The customer will be asked to add a phone number if they chose Porterbuddy delivery in the shipping options.
 - If "Samlevert" should be offered to customers, the phone number should be made mandatory in the checkout. This can be adjusted in the "form" settings for the checkout page in the Shopify shop settings page.
 - If there is a discount configured in the Shopify settings for Porterbuddy shipping as well as in the app configuration page, both discounts will be applied to the prices shown in the shipping option list.
-- If the "test mode" checkbox is enabled in the app configuration, Porterbuddy shipping options will only be offered when "pbtest" is entered into the second line of the address input in the checkout. Note that this will still create orders in the production system if a checkout is completed using that magic string. For testing the setup of a new shop before going public, this page on [widget.porterbuddy-test.com](https://widget.porterbuddy-test.com/shopify) will install a test version of the app that is connected to Porterbuddy's test enviroment. To switch to production, delete the test app from your store and install the production version app from [widget.porterbuddy.com](https://widget.porterbuddy.com/shopify), and configure it in the same way as the test app.
+- If the "test mode" checkbox is enabled in the app configuration, Porterbuddy shipping options will only be offered when "pbtest" is entered into the second line of the address input in the checkout. Note that this will still create orders in the production system if a checkout is completed using that magic string. For testing the setup of a new shop before going public, [this page](/integrations/shopify-integration/) contains a form to install a test version of the app that is connected to Porterbuddy's test enviroment. To switch to production, delete the test app from your store and install the production version app using [this form](/integrations/shopify-integration/), and configure it in the same way as the test app.
 
 # Configuring the shipping price in Shopify
 
@@ -100,7 +100,7 @@ The shipping rate adjustment is available in the store settings -> Shipping Sett
 
 The Porterbuddy Shopify app allows to configure discounts based on the shopping cart value transferred in the checkout. Multiple discounts can be added depending on value, to offer a higher shipping discount for large purchases. To configure discounts in the app, add the discounts in the app configuration page. A general discount can be added here by adding a discount for a shopping cart value of 0.
 
-![Shopify app discount configuration](https://widget.porterbuddy.com/page-assets/shopify-discounts.png)
+<img src="/shopify-discounts.png" width="700px" max-width="700px" />
 
 ## Product card widget
 
@@ -109,32 +109,33 @@ The product card widget needs to be configured separately to show the desired sh
 ```html
 <div id="porterbuddy-widget" data-border></div>
 {% raw %}
-  <script>
-    window.porterbuddy = {
-      token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-      view: 'availability',
-      discount: 5000
-    }
-  </script>
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    discount: 5000,
+  }
+</script>
 {% endraw %}
 ```
 
-For a value based discount, there are several possibilities to use the product card widget. One option is to use the multiple discount feature of the product card widget as [shown here](https://widget.porterbuddy.com/multi-discounts), to add an incentive to add products to the shopping cart.
+For a value based discount, there are several possibilities to use the product card widget. One option is to use the multiple discount feature of the product card widget as [shown here](/product-card-widget/multiple-discounts/), to add an incentive to add products to the shopping cart.
 
 ```html
 <div id="porterbuddy-widget" data-border></div>
 {% raw %}
 <script>
   window.porterbuddy = {
-    token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-    view: 'availability',
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
     discount: 5000,
     additionalDiscounts: {
-      largeOrder: 10000
+      largeOrder: 10000,
     },
     text: {
-      availabilityPostcodeSuccess: "Hjem {{delivery}} med Porterbuddy fra **{{price_lowest_price}}** eller kun **{{price_lowest_price_largeOrder}}** om du handler for over 1000,-"
-    }
+      availabilityPostcodeSuccess:
+        "Hjem {{delivery}} med Porterbuddy fra **{{price_lowest_price}}** eller kun **{{price_lowest_price_largeOrder}}** om du handler for over 1000,-",
+    },
   }
 </script>
 {% endraw %}
@@ -148,88 +149,106 @@ Another option is to take the product price and the current shopping basket valu
 </script>
 <div id="porterbuddy-widget" data-border></div>
 {% raw %}
-  <script>
-    window.porterbuddy = {
-      token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-      view: 'availability',
-      discount: discount
-    }
-  </script>
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+    discount: discount,
+  }
+</script>
 {% endraw %}
 ```
 
 If this approach is chosen, it's best to replicate the discount levels configured in the app in the template code, to provide an accurate price for what is to be expected in the checkout for Porterbuddy shipping.
 
 # Excluding Products in Shopify from Porterbuddy Shipping
+
 The Porterbuddy Shopify integration has several configuration options to not offer Porterbuddy shipping options for certain products. Products can be excluded based on inventory levels, inventory levels at a selected location, and not offering Porterbuddy shipping if the shopping cart contains products containing a tag from a list of excluded tags.
 
 ## Limit shipping to available products
 
 The Porterbuddy Shopify app can be set to only offer Porterbuddy shipping if all products in the shopping cart are in currently in stock. This is activated by checking the Checkbox "Check inventory if items are in stock" in the app configuration. Activating this option is useful when your shop offers to order products that are currently out of stock to get them when they become available again.
 
-![inventory check configuration dialog](https://widget.porterbuddy.com/page-assets/shopify-inventory-check.png)
+<img
+  src="/shopify-inventory-check.png"
+  max-width="700px"
+  alt="inventory check configuration dialog"
+/>
 
 There is also the option to limit Porterbuddy shipping to products which are in stock at a certain location by checking the checkbox for that and picking the desired location from the dropdown. This special case could be important in scenarios where inventory is stored at multiple warehouses, but only one of them is able to serve Porterbuddy deliveries.
 **Product card widget considerations:** The configuration for the Shopify app only affects the checkout, the product card widget is completely independent from it. To not falsely advertise Porterbuddy delivery when it's actually possible, the product card widget should only be shown in the page when products are actually available. A general check for availability can be done in Shopify's templates by evaluating the property "product.available" in an "if" expression.
 
 ```html
 {% if product.available %}
-  <div id="porterbuddy-widget" data-border></div>
-  {% raw %}
-    <script>
-      window.porterbuddy = {
-        token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-        view: 'availability'
-      }
-    </script>
-  {% endraw %}
-{% endif %}
+<div id="porterbuddy-widget" data-border></div>
+{% raw %}
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+  }
+</script>
+{% endraw %} {% endif %}
 ```
 
 ## Exclude products using tags
 
 Products can also be exempt from Porterbuddy shipping by assigning a special tag to all products that should not have Porterbuddy shipping as an option. A list of these tags can be entered in the Shopify app configuration in the field ", seperated by commas.
 
-
-![Exclude tag list in configuration](https://widget.porterbuddy.com/page-assets/shopify-exclude-tags.png)
-
+<img
+  src="/shopify-exclude-tags.png"
+  width="900px"
+  max-width="700px"
+  alt="Exclude tag list in configuration"
+/>
 
 If the shopping cart in checkout contains at least one product that is tagged with one of the tags from the list, Porterbuddy shipping options will not be shown in the shipping option list.
 **Product card widget considerations:** To hide the product card widget for products that are tagged not to be shipped with Porterbuddy, the product tags can be checked by evaluating "product.tags" in the Shopify theme. As this property contains a list of tags, using the "contains" function here is the easiest way to check if an excluded tag is present for the product.
 
 ```html
 {% unless product.tags contains 'nopb' %}
-  <div id="porterbuddy-widget" data-border></div>
-  {% raw %}
-    <script>
-      window.porterbuddy = {
-        token: 'y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX',
-        view: 'availability'
-      }
-    </script>
-  {% endraw %}
-{% endunless %}
+<div id="porterbuddy-widget" data-border></div>
+{% raw %}
+<script>
+  window.porterbuddy = {
+    token: "y3wt37LqBsiLo62Jkx284XEdi4LzdX6pihZFwqYX",
+    view: "availability",
+  }
+</script>
+{% endraw %} {% endunless %}
 ```
 
 **Considerations regarding tags:** As tags on products are also relevant for searches and indexing in search engines, it's best to choose a tag for this function that is not commonly searched for, so it won't affect search results.
 
 # Order handling options
+
 The Porterbuddy integration for Shopify has several features to make handling Porterbuddy orders in Shopify easier. After a Shopify order with Porterbuddy delivery chosen as shipping option. These features include
 
 - Storing the Porterbuddy order id on the Shopify order as additional info
 - Tagging Shopify orders to be shipped with Porterbuddy to allow filtering/sorting in the shop admin view
+
 ## Note
 
-To get access to these features, the Porterbuddy Shopify App needs the permission to write / update Shopify orders. As this permissions was not requested before September 23rd, 2020, these feature might not yet be active in your installation. If you cannot see a section "Order Handling" in the bottom of the app configuration page, you have to re-authenticate the app to allow the updated permissions. To do this, please use the installation link on [this page](https://widget.porterbuddy.com/shopify) with your Shopify shop domain again. This will update the permissions for the app, but keep the existing configuration.
+To get access to these features, the Porterbuddy Shopify App needs the permission to write / update Shopify orders. As this permissions was not requested before September 23rd, 2020, these feature might not yet be active in your installation. If you cannot see a section "Order Handling" in the bottom of the app configuration page, you have to re-authenticate the app to allow the updated permissions. To do this, please use the installation link on [this page](/integrations/shopify-integration/) with your Shopify shop domain again. This will update the permissions for the app, but keep the existing configuration.
 
 ## Porterbuddy Order IDs
 
 If the permission to write orders is present, this feature will always be active. Every time a Shopify order with Porterbuddy delivery is created, the Porterbuddy order id will be stored on the Shopify order as additional info.
 
-![Shopify: Display Porterbuddy-order-id](https://widget.porterbuddy.com/page-assets/shopify-order-id.png)
+<img
+  src="/shopify-order-id.png"
+  width="400px"
+  max-width="700px"
+  alt="Shopify: Display Porterbuddy-order-id"
+/>
 
 ## Tagging Orders with Porterbuddy Delivery
 
 You can configure a tag that will be added to all orders with Porterbuddy delivery selected after creating the order object in Porterbuddy's systems. To add a tag, specify the value to be added in the appropriate section of the app configuration page, and click "Configure Delivery" to save the updated configuration. If you want to disable writing a tag, delete the current value from the input field and save that, this will stop writing tags to new orders.
 
-![Shopify: Configure writing tags for Porterbuddy orders](https://widget.porterbuddy.com/page-assets/shopify-write-tag.png)
+<img
+  src="/shopify-write-tag.png"
+  width="900px"
+  max-width="700px"
+  alt="Shopify: Configure writing tags for Porterbuddy orders"
+/>
